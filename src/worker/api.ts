@@ -15,6 +15,15 @@ const newCode = () =>
   Array.from({ length: 4 }, () => CODE_ALPHABET[Math.floor(Math.random() * CODE_ALPHABET.length)]).join("");
 
 export async function handleApi(req: Request, env: ApiEnv): Promise<Response> {
+  if (!env.ROOMS) return json({ error: "Rooms are not connected on this deployment (ROOMS binding missing)." }, 503);
+  try {
+    return await route(req, env);
+  } catch (e) {
+    return json({ error: `Room service error: ${e instanceof Error ? e.message : String(e)}` }, 502);
+  }
+}
+
+async function route(req: Request, env: ApiEnv): Promise<Response> {
   const url = new URL(req.url);
   if (url.pathname === "/api/rooms" && req.method === "POST") {
     for (let i = 0; i < 6; i++) {
