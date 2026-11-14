@@ -55,9 +55,6 @@ function Header() {
             <li>
               <button onClick={() => nav("/settings")}>Settings &amp; offline</button>
             </li>
-            <li>
-              <button onClick={() => nav("/credits")}>Photo credits</button>
-            </li>
           </ul>
         </Sheet>
       )}

@@ -1,1 +1,9 @@
-[["gen","Everyday"],["food","Food"],["place","Places"],["bible","Bible"],["sport","Sport"],["ent","Music & film"],["sci","Science & history"]]
+[
+  ["gen", "Everyday"],
+  ["food", "Food"],
+  ["place", "Places"],
+  ["bible", "Bible"],
+  ["sport", "Sport"],
+  ["ent", "Music & film"],
+  ["sci", "Science & history"]
+]

@@ -9,7 +9,7 @@ import { Finish, MediaView, Turn, useKeys } from "./frame";
 export interface Field {
   key: string;
   legend: string;
-  options: { value: string | number; label: string; count?: number }[];
+  options: { value: string | number; label: string; count?: number; rule?: string }[];
   multi?: boolean;
   def: string | number | (string | number)[];
 }

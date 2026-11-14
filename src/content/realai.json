@@ -1,1 +1,38 @@
-[{"id": "lion", "name": "Lion", "src": "020 The lion king Snyggve in the Serengeti National Park Photo by Giles Laurent.jpg", "aiTool": "Figma AI (Gemini)"}, {"id": "cheetah", "name": "Cheetah", "src": "Male cheetah facing left in South Africa.jpg", "aiTool": "Figma AI (Gemini)"}, {"id": "colosseum", "name": "Colosseum", "src": "Colosseo 2020.jpg", "aiTool": "Figma AI (Gemini)"}, {"id": "croissant", "name": "Croissant", "src": "Croissant-Petr Kratochvil.jpg", "aiTool": "Figma AI (Gemini)"}, {"id": "eiffel-tower", "name": "Eiffel Tower", "src": "Tour Eiffel Wikimedia Commons (cropped).jpg", "aiTool": "Figma AI (Gemini)"}, {"id": "flamingo", "name": "Flamingo", "src": "Flamingos Laguna Colorada.jpg", "aiTool": "Figma AI (Gemini)"}, {"id": "giraffe", "name": "Giraffe", "src": "Giraffe Mikumi National Park.jpg", "aiTool": "Figma AI (Gemini)"}, {"id": "golden-retriever", "name": "Golden Retriever", "src": "Golden Retriever Dukedestiny01 drvd.jpg", "aiTool": "Figma AI (Gemini)"}, {"id": "hamburger", "name": "Hamburger", "src": "RedDot Burger.jpg", "aiTool": "Figma AI (Gemini)"}, {"id": "hippopotamus", "name": "Hippopotamus", "src": "Portrait Hippopotamus in the water.jpg", "aiTool": "Figma AI (Gemini)"}, {"id": "jollof-rice", "name": "Jollof rice", "src": "Jollof Rice with Stew.jpg", "aiTool": "Gamma"}]
+[
+  {
+    "id": "lion",
+    "name": "Lion",
+    "src": "020 The lion king Snyggve in the Serengeti National Park Photo by Giles Laurent.jpg",
+    "aiTool": "Figma AI (Gemini)"
+  },
+  {
+    "id": "cheetah",
+    "name": "Cheetah",
+    "src": "Male cheetah facing left in South Africa.jpg",
+    "aiTool": "Figma AI (Gemini)"
+  },
+  { "id": "colosseum", "name": "Colosseum", "src": "Colosseo 2020.jpg", "aiTool": "Figma AI (Gemini)" },
+  { "id": "croissant", "name": "Croissant", "src": "Croissant-Petr Kratochvil.jpg", "aiTool": "Figma AI (Gemini)" },
+  {
+    "id": "eiffel-tower",
+    "name": "Eiffel Tower",
+    "src": "Tour Eiffel Wikimedia Commons (cropped).jpg",
+    "aiTool": "Figma AI (Gemini)"
+  },
+  { "id": "flamingo", "name": "Flamingo", "src": "Flamingos Laguna Colorada.jpg", "aiTool": "Figma AI (Gemini)" },
+  { "id": "giraffe", "name": "Giraffe", "src": "Giraffe Mikumi National Park.jpg", "aiTool": "Figma AI (Gemini)" },
+  {
+    "id": "golden-retriever",
+    "name": "Golden Retriever",
+    "src": "Golden Retriever Dukedestiny01 drvd.jpg",
+    "aiTool": "Figma AI (Gemini)"
+  },
+  { "id": "hamburger", "name": "Hamburger", "src": "RedDot Burger.jpg", "aiTool": "Figma AI (Gemini)" },
+  {
+    "id": "hippopotamus",
+    "name": "Hippopotamus",
+    "src": "Portrait Hippopotamus in the water.jpg",
+    "aiTool": "Figma AI (Gemini)"
+  },
+  { "id": "jollof-rice", "name": "Jollof rice", "src": "Jollof Rice with Stew.jpg", "aiTool": "Gamma" }
+]

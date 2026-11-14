@@ -67,7 +67,7 @@ export const Icon = {
 /* ---------- Choice chips (radio or checkbox group) ---------- */
 interface ChoiceProps<T extends string | number> {
   legend: string;
-  options: { value: T; label: string; count?: number }[];
+  options: { value: T; label: string; count?: number; rule?: string }[];
   value: T | T[];
   onChange: (v: T | T[]) => void;
   multi?: boolean;
@@ -103,6 +103,11 @@ export function Choice<T extends string | number>({ legend, options, value, onCh
           </label>
         ))}
       </div>
+      {!multi && options.find((o) => o.value === value)?.rule && (
+        <p className="level-rule" aria-live="polite">
+          {options.find((o) => o.value === value)?.rule}
+        </p>
+      )}
     </fieldset>
   );
 }

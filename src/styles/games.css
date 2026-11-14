@@ -1441,3 +1441,21 @@
     border-color: var(--bulb);
   }
 }
+
+/* Setup: what each level means */
+.level-rule {
+  margin-top: var(--s2);
+  color: var(--chrome-dim);
+  font-size: var(--step--1);
+}
+.img-state .btn {
+  margin-top: var(--s3);
+}
+.frame.portrait .img {
+  max-height: min(62vh, 640px);
+}
+.tiny {
+  font-size: var(--step--1);
+  text-align: center;
+  margin-top: var(--s6);
+}

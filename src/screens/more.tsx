@@ -294,10 +294,9 @@ export function Settings() {
           <ShuffleAll />
         </div>
       </section>
-      <p className="hint">
-        Photos come from Wikimedia Commons under their own licences.{" "}
+      <p className="hint tiny">
         <button className="link" onClick={() => go("/credits")}>
-          See photo credits
+          Photo credits
         </button>
       </p>
     </div>

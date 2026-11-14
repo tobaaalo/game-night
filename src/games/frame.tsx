@@ -143,21 +143,41 @@ export function MediaView({
 
 export function Img({ src, alt, square }: { src: string; alt: string; square?: boolean }) {
   const [state, setState] = useState<"loading" | "ok" | "error">("loading");
+  const [tries, setTries] = useState(0);
+  useEffect(() => {
+    setState("loading");
+    setTries(0);
+  }, [src]);
+  const onError = () => {
+    // A slow or dropped connection often fixes itself: retry twice quietly before showing the message.
+    if (tries < 2) {
+      setTimeout(() => setTries((n) => n + 1), 700 * (tries + 1));
+    } else setState("error");
+  };
+  const url = tries ? `${src}${src.includes("?") ? "&" : "?"}r=${tries}` : src;
   return (
     <span className={clsx("img", square && "square", state)}>
       {state !== "ok" && (
         <span className="img-state" aria-hidden={state === "loading"}>
-          {state === "error" ? "Couldn't load this picture. If you're offline, it hasn't been saved yet." : ""}
+          {state === "error" && (
+            <span>
+              Couldn&rsquo;t load this picture.
+              <br />
+              <button
+                type="button"
+                className="btn quiet"
+                onClick={() => {
+                  setState("loading");
+                  setTries((n) => n + 1);
+                }}
+              >
+                Try again
+              </button>
+            </span>
+          )}
         </span>
       )}
-      <img
-        key={src}
-        src={src}
-        alt={alt}
-        onLoad={() => setState("ok")}
-        onError={() => setState("error")}
-        decoding="async"
-      />
+      <img key={url} src={url} alt={alt} onLoad={() => setState("ok")} onError={onError} decoding="async" />
     </span>
   );
 }

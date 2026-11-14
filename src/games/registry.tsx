@@ -57,12 +57,49 @@ export interface GameDef {
   buildQuestions?: (v: SetupValues) => Promise<HostQuestion[]>;
 }
 
-const levelField = (counts?: (lv: number) => number, def = 1): Field => ({
+const levelField = (counts?: (lv: number) => number, def = 1, rules?: Record<number, string>): Field => ({
   key: "level",
   legend: "Level",
-  options: LEVELS.map((l) => ({ value: l.value, label: l.label, count: counts?.(l.value) })),
+  options: LEVELS.map((l) => ({ value: l.value, label: l.label, count: counts?.(l.value), rule: rules?.[l.value] })),
   def,
 });
+const RULES = {
+  bible: {
+    1: "Stories a child learns in Sunday school.",
+    2: "Well-known people and events most churchgoers know.",
+    3: "Specific details: lesser characters, places and numbers.",
+    4: "Deep cuts: genealogies, minor figures and exact facts.",
+    0: "A mix of all four levels.",
+  },
+  trivia: {
+    1: "Everyday facts a child would know.",
+    2: "School-level general knowledge.",
+    3: "Needs some real learning: history, science, geography.",
+    4: "Specialist or surprising facts that trip up most adults.",
+    0: "A mix of all four levels.",
+  },
+  faces: {
+    1: "Global household names, among the most viewed people on Wikipedia.",
+    2: "Very well known, but you may need a second to place them.",
+    3: "Famous in their field or country, less so abroad.",
+    4: "Respected names that few people place from a photo alone.",
+    0: "A mix of all four levels.",
+  },
+  name5: {
+    1: "Broad categories with loads of possible answers.",
+    2: "Themed categories with plenty of answers.",
+    3: "Narrower categories: you'll need to dig.",
+    4: "Specific categories where five answers is a real stretch.",
+    0: "A mix of all four levels.",
+  },
+  emoji: {
+    1: "Famous films, foods and phrases with obvious emoji.",
+    2: "Common answers with a clever twist in the emoji.",
+    3: "Trickier clues: needs lateral thinking.",
+    4: "Obscure answers with abstract emoji clues.",
+    0: "A mix of all four levels.",
+  },
+};
 const countField = (def = 10): Field => ({
   key: "count",
   legend: "How many",
@@ -139,14 +176,35 @@ const WORLD_MODES = [
   { value: "mix", label: "Mix of everything" },
 ];
 
-const bibleFields = [levelField(byLevel(BIBLE, (q) => q[0])), countField()];
-const triviaFields = [levelField(byLevel(TRIVIA, (q) => q[0])), countField()];
+const bibleFields = [
+  levelField(
+    byLevel(BIBLE, (q) => q[0]),
+    1,
+    RULES.bible,
+  ),
+  countField(),
+];
+const triviaFields = [
+  levelField(
+    byLevel(TRIVIA, (q) => q[0]),
+    1,
+    RULES.trivia,
+  ),
+  countField(),
+];
 const worldFields: Field[] = [
   { key: "mode", legend: "What to decode", options: WORLD_MODES, def: "flag" },
   levelField(),
   countField(),
 ];
-const faceFields = [levelField(byLevel(FACES, (f) => f.level)), countField()];
+const faceFields = [
+  levelField(
+    byLevel(FACES, (f) => f.level),
+    1,
+    RULES.faces,
+  ),
+  countField(),
+];
 const realFields: Field[] = [
   {
     key: "mode",
@@ -470,7 +528,11 @@ export const GAMES: GameDef[] = [
             def: N5_THEMES.map((t) => t[0]),
             multi: true,
           },
-          levelField(byLevel(NAME5, (x) => x[0])),
+          levelField(
+            byLevel(NAME5, (x) => x[0]),
+            1,
+            RULES.name5,
+          ),
           {
             key: "s",
             legend: "Seconds on the clock",

@@ -1,1 +1,11 @@
-[["film","Films"],["nolly","Nollywood"],["tv","TV shows"],["bible","Bible"],["say","Sayings"],["place","Places"],["food","Food & drink"],["job","Jobs"],["sport","Sport"]]
+[
+  ["film", "Films"],
+  ["nolly", "Nollywood"],
+  ["tv", "TV shows"],
+  ["bible", "Bible"],
+  ["say", "Sayings"],
+  ["place", "Places"],
+  ["food", "Food & drink"],
+  ["job", "Jobs"],
+  ["sport", "Sport"]
+]

@@ -3,7 +3,6 @@ import clsx from "clsx";
 import { Icon } from "../components/ui";
 import { nameOf, uid, useApp, type Group } from "../lib/app";
 import { GAMES } from "../games/registry";
-import { FACES } from "../content";
 
 export function Welcome() {
   const { go, setOnboarded } = useApp();
@@ -24,7 +23,7 @@ export function Welcome() {
             <b>{GAMES.length}</b> games
           </li>
           <li>
-            <b>{FACES.length}</b> famous faces
+            <b>2</b> ways to play
           </li>
           <li>
             <b>0</b> accounts needed
