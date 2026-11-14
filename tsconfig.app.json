@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "skipLibCheck": true,
+    "types": ["vite/client", "vite-plugin-pwa/client"],
+    "composite": true,
+    "tsBuildInfoFile": "./node_modules/.tmp/app.tsbuildinfo",
+    "outDir": "./node_modules/.tmp/app"
+  },
+  "include": ["src", "src/**/*.json"],
+  "exclude": ["src/worker"]
+}

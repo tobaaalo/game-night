@@ -1,0 +1,75 @@
+// Messages shared by the room server (Cloudflare Durable Object) and the app.
+
+export type Media =
+  | { type: "image"; src: string; alt: string }
+  | { type: "pair"; a: { src?: string; text?: string }; b: { src?: string; text?: string } }
+  | { type: "flag"; code: string }
+  | { type: "shape"; d: string }
+  | { type: "big"; text: string };
+
+/** A question as the host sends it. `correct` never leaves the server before the reveal. */
+export interface HostQuestion {
+  prompt: string;
+  media?: Media;
+  options: string[];
+  correct: number;
+  seconds: number;
+  points: number;
+  label?: string;
+  explain?: string;
+  /** Labels shown under each picture after the reveal, e.g. ["AI", "Real"]. Host-only until reveal. */
+  captions?: string[];
+}
+
+/** The same question as players see it. */
+export type PublicQuestion = Omit<HostQuestion, "correct" | "explain" | "captions"> & { n: number; deadline: number };
+
+export interface PublicPlayer {
+  pid: string;
+  name: string;
+  score: number;
+  connected: boolean;
+  answered: boolean;
+}
+
+export interface RevealResult {
+  correct: number;
+  explain?: string;
+  captions?: string[];
+  picks: Record<string, { idx: number; gained: number }>;
+}
+
+export type Phase = "lobby" | "question" | "reveal" | "ended";
+
+export interface RoomState {
+  code: string;
+  game: string;
+  phase: Phase;
+  hostConnected: boolean;
+  players: PublicPlayer[];
+  question?: PublicQuestion;
+  reveal?: RevealResult;
+  total?: number;
+}
+
+export type ClientMsg =
+  | { t: "setup"; game: string; total: number }
+  | { t: "question"; q: HostQuestion }
+  | { t: "reveal" }
+  | { t: "end" }
+  | { t: "lobby" }
+  | { t: "kick"; pid: string }
+  | { t: "answer"; idx: number }
+  | { t: "ping" };
+
+export type ServerMsg =
+  | { t: "state"; state: RoomState; you?: string }
+  | { t: "error"; message: string }
+  | { t: "pong" };
+
+export const CODE_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ";
+export const normaliseCode = (s: string) =>
+  s
+    .toUpperCase()
+    .replace(/[^A-Z]/g, "")
+    .slice(0, 4);

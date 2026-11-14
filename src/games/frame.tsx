@@ -1,0 +1,169 @@
+import { useEffect, useState, type ReactNode } from "react";
+import clsx from "clsx";
+import { Icon, Scoreboard, Sheet } from "../components/ui";
+import { nameOf, useApp } from "../lib/app";
+import type { Media } from "../shared/protocol";
+
+export function GameFrame({
+  title,
+  how,
+  children,
+  now,
+  scores = true,
+  live,
+}: {
+  title: string;
+  how: string;
+  children: ReactNode;
+  now?: string;
+  scores?: boolean;
+  live?: boolean;
+}) {
+  const { back, players, resetScores } = useApp();
+  const [help, setHelp] = useState(false);
+  return (
+    <div className="screen game-screen">
+      <div className="game-head">
+        <button className="icon-btn" onClick={() => back("/games")} aria-label="Back to games">
+          <Icon.back />
+        </button>
+        <h1 className="h2 game-title" tabIndex={-1}>
+          {title}
+        </h1>
+        <button className="icon-btn" onClick={() => setHelp(true)} aria-label="How to play">
+          <Icon.help />
+        </button>
+      </div>
+      <div className={clsx("stage marquee", live && "live")}>{children}</div>
+      {scores && (
+        <div className="game-foot">
+          <Scoreboard players={players} now={now} />
+          <button className="link small" onClick={resetScores}>
+            Reset scores
+          </button>
+        </div>
+      )}
+      {help && (
+        <Sheet title="How to play" onClose={() => setHelp(false)}>
+          <p className="lede" style={{ fontSize: "var(--step-1)" }}>
+            {how}
+          </p>
+          <p className="hint">Keyboard: 1–4 picks an answer, Space or Enter goes next, Esc goes back.</p>
+          <button className="btn block" onClick={() => setHelp(false)}>
+            Got it
+          </button>
+        </Sheet>
+      )}
+    </div>
+  );
+}
+
+export function Turn({ id }: { id: string }) {
+  const { players } = useApp();
+  const i = players.findIndex((p) => p.id === id);
+  if (i < 0) return null;
+  return <p className="turn">{nameOf(players[i], i)}&rsquo;s turn</p>;
+}
+
+export function MediaView({ media, revealed, captions }: { media?: Media; revealed?: boolean; captions?: string[] }) {
+  if (!media) return null;
+  switch (media.type) {
+    case "image":
+      return (
+        <div className="frame portrait">
+          <Img src={media.src} alt={media.alt} />
+        </div>
+      );
+    case "flag":
+      return (
+        <div className="frame flagbox">
+          <Img src={`/flags/${media.code}.svg`} alt="A mystery flag" />
+        </div>
+      );
+    case "shape":
+      return (
+        <svg className="shape" viewBox="0 0 200 200" role="img" aria-label="Outline of a mystery country">
+          <path d={media.d} />
+        </svg>
+      );
+    case "big":
+      return <p className="bigtext">{media.text}</p>;
+    case "pair":
+      return (
+        <div className={clsx("pair", revealed && "revealed")}>
+          {(["a", "b"] as const).map((k, i) => {
+            const side = media[k];
+            return (
+              <figure key={k} className="pair-side">
+                {side.src ? <Img src={side.src} alt={`Picture ${i ? "B" : "A"}`} square /> : <blockquote>{side.text}</blockquote>}
+                <figcaption>
+                  {i ? "B" : "A"}
+                  {revealed && captions?.[i] && <span className={clsx("lbl", captions[i] === "AI" ? "ai" : "real")}>{captions[i]}</span>}
+                </figcaption>
+              </figure>
+            );
+          })}
+        </div>
+      );
+  }
+}
+
+export function Img({ src, alt, square }: { src: string; alt: string; square?: boolean }) {
+  const [state, setState] = useState<"loading" | "ok" | "error">("loading");
+  return (
+    <span className={clsx("img", square && "square", state)}>
+      {state !== "ok" && (
+        <span className="img-state" aria-hidden={state === "loading"}>
+          {state === "error" ? "Couldn't load this picture. If you're offline, it hasn't been saved yet." : ""}
+        </span>
+      )}
+      <img key={src} src={src} alt={alt} onLoad={() => setState("ok")} onError={() => setState("error")} decoding="async" />
+    </span>
+  );
+}
+
+export function Finish({ onAgain, label = "Play again" }: { onAgain: () => void; label?: string }) {
+  const { players, go } = useApp();
+  const ranked = players.map((p, i) => ({ ...p, n: nameOf(p, i) })).sort((a, b) => b.score - a.score);
+  const top = ranked[0];
+  const tie = ranked.length > 1 && ranked[1].score === top.score;
+  return (
+    <div className="finish stagger">
+      <p className="eyebrow">Round over</p>
+      <h2 className="h1">{top.score === 0 ? "Everyone's level" : tie ? "It's a tie at the top!" : `${top.n} takes the lead!`}</h2>
+      <ol className="podium">
+        {ranked.map((p, i) => (
+          <li key={p.id} className={clsx(i === 0 && !tie && top.score > 0 && "first")}>
+            <span className="place">{i + 1}</span>
+            <span className="nm">{p.n}</span>
+            <span className="pts">{p.score}</span>
+          </li>
+        ))}
+      </ol>
+      <div className="actions center">
+        <button className="btn" onClick={onAgain} autoFocus>
+          {label}
+        </button>
+        <button className="btn ghost" onClick={() => go("/games")}>
+          Pick another game
+        </button>
+      </div>
+    </div>
+  );
+}
+
+/** Keyboard helper: Space/Enter → next, 1–9 → option. Ignored while typing or when a sheet is open. */
+export function useKeys(handler: (k: string, e: KeyboardEvent) => void, deps: unknown[]) {
+  useEffect(() => {
+    const on = (e: KeyboardEvent) => {
+      const t = e.target as HTMLElement | null;
+      if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.tagName === "SELECT")) return;
+      if (document.querySelector(".sheet")) return;
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      handler(e.key, e);
+    };
+    document.addEventListener("keydown", on);
+    return () => document.removeEventListener("keydown", on);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, deps);
+}
