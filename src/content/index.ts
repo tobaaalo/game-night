@@ -19,7 +19,7 @@ import realai from "./realai.json";
 
 export type Level = 1 | 2 | 3 | 4;
 /** [level, question, [rightAnswer, ...wrong]] */
-export type QuizItem = [number, string, string[]];
+export type QuizItem = [number, string, string[], string?];
 export type EmojiItem = [string, number, string, string];
 export type Name5Item = [number, string, string];
 export interface Face {
@@ -55,13 +55,29 @@ export const TWOTRUTHS = twotruths as string[];
 export const CHARADES = charades as string[];
 export const TABOO = taboo as string[][];
 export const PROVERBS = proverbs as [string, string][];
-export const AITEXT = aitext as [string, string, string][];
+export const AITEXT = aitext as [string, string, string, number][];
 export const EMOJI_CATS = emojiCats as [string, string][];
 export const EMOJI = emoji as EmojiItem[];
 export const N5_THEMES = n5Themes as [string, string][];
 export const NAME5 = name5 as Name5Item[];
 export const FACES = faces as Face[];
 export const PAIRS = realai as Pair[];
+
+export const TRIVIA_CATS: [string, string][] = [
+  ["General", "General knowledge"],
+  ["Science", "Science and nature"],
+  ["History", "History"],
+  ["Geography", "Geography"],
+  ["Sport", "Sport"],
+  ["Music", "Music"],
+  ["Screen", "Film and TV"],
+  ["Arts", "Books and art"],
+  ["Animals", "Animals"],
+  ["Myth", "Mythology"],
+  ["Tech", "Tech and games"],
+  ["Maths", "Maths"],
+  ["Vehicles", "Cars and vehicles"],
+];
 
 export const LEVELS: { value: number; label: string }[] = [
   { value: 1, label: "Easy" },

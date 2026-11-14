@@ -8,13 +8,16 @@ export interface QuizSetup {
   level: number;
   count: number;
   mode?: string;
+  cats?: string[];
 }
 
 const SECONDS = 20;
 
 function fromQuizItems(key: string, bank: QuizItem[], s: QuizSetup): HostQuestion[] {
-  const pool = bank.filter((q) => !s.level || q[0] === s.level);
-  return drawMany(`${key}|lv${s.level}`, pool, s.count).map(([lv, q, opts]) => {
+  const pool = bank.filter(
+    (q) => (!s.level || q[0] === s.level) && (!s.cats?.length || s.cats.includes(q[3] ?? "General")),
+  );
+  return drawMany(key, pool, s.count).map(([lv, q, opts]) => {
     const order = shuffle(opts);
     return {
       prompt: q,
@@ -33,7 +36,7 @@ export const triviaQuestions = (s: QuizSetup) => fromQuizItems("trivia", TRIVIA,
 
 export function faceQuestions(s: QuizSetup): HostQuestion[] {
   const pool = FACES.filter((f) => !s.level || f.level === s.level);
-  return drawMany(`faces|lv${s.level}`, pool, s.count).map((f) => {
+  return drawMany("faces", pool, s.count).map((f) => {
     const same = shuffle(FACES.filter((x) => x.id !== f.id && x.level === f.level)).slice(0, 3);
     const options = shuffle([f.name, ...same.map((x) => x.name)]);
     return {
@@ -51,11 +54,11 @@ export function faceQuestions(s: QuizSetup): HostQuestion[] {
 
 export function realAiQuestions(s: QuizSetup): HostQuestion[] {
   const texts = s.mode === "text";
-  type It = { kind: "t"; t: [string, string, string] } | { kind: "p"; p: (typeof PAIRS)[number] };
+  type It = { kind: "t"; t: [string, string, string, number] } | { kind: "p"; p: (typeof PAIRS)[number] };
   const items: It[] = texts
-    ? AITEXT.map((t) => ({ kind: "t" as const, t }))
+    ? AITEXT.filter((t) => !s.level || t[3] === s.level).map((t) => ({ kind: "t" as const, t }))
     : PAIRS.map((p) => ({ kind: "p" as const, p }));
-  return drawMany(`realai|${texts ? "t" : "p"}`, items, s.count).map((it) => {
+  return drawMany(texts ? "realai-text" : "realai-pic", items, s.count).map((it) => {
     const askAI = Math.random() < 0.5;
     const aiFirst = Math.random() < 0.5;
     let a: { src?: string; text?: string };
@@ -95,7 +98,7 @@ export function worldQuestions(w: World, s: QuizSetup): HostQuestion[] {
     m === "shape" ? !!c.shape : m === "fact" ? !!w.facts[c.c] : m === "slang" ? !!w.slang[c.c] : true;
   let base = w.countries.filter((c) => (!s.level || c.lv === s.level) && (mode === "mix" || okFor(c, mode)));
   if (mode === "slang" && base.length < s.count) base = w.countries.filter((c) => okFor(c, "slang"));
-  return drawMany(`world|${mode}|${s.level}`, base, s.count).map((k) => {
+  return drawMany(`world|${mode}`, base, s.count).map((k) => {
     let m: WorldMode = mode;
     if (m === "mix") m = pick((["flag", "shape", "cap", "fact", "slang"] as WorldMode[]).filter((x) => okFor(k, x)));
     const cands = w.countries.filter((c) => c !== k && (m !== "slang" || w.slang[c.c]));

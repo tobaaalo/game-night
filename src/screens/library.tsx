@@ -5,10 +5,23 @@ import { useApp } from "../lib/app";
 import { pick } from "../lib/deck";
 import { SECTIONS, gamesFor, gameById, type GameDef, type Section } from "../games/registry";
 import { GameFrame } from "../games/frame";
+import { CUSTOM_TYPES } from "../lib/custom";
+import { getPublic, loadCommunity, saveCommunity } from "../lib/shared";
+import type { SharedGame } from "../shared/protocol";
 
 export function Library() {
   const { group, players, go, online } = useApp();
   const [spinning, setSpinning] = useState(false);
+  const [community, setCommunity] = useState<SharedGame[]>(loadCommunity);
+  useEffect(() => {
+    if (!online) return;
+    getPublic()
+      .then((l) => {
+        setCommunity(l);
+        saveCommunity(l);
+      })
+      .catch(() => undefined);
+  }, [online]);
   useEffect(() => {
     if (!group) go("/who", { replace: true });
   }, [group, go]);
@@ -23,6 +36,8 @@ export function Library() {
   const sections = (Object.keys(SECTIONS) as Section[])
     .map((s) => ({ s, list: games.filter((g) => g.section === s) }))
     .filter((x) => x.list.length);
+  const pool = games.filter((x) => x.section !== "yours");
+  const daily = pool.length ? pool[Math.floor(Date.now() / 86400000) % pool.length] : null;
   let n = 0;
   const surprise = () => {
     if (spinning) return;
@@ -53,6 +68,17 @@ export function Library() {
           </span>
           <span className="buzzer-label">Surprise us</span>
         </button>
+        {daily && (
+          <button className="roomcard" onClick={() => go(`/play/${daily.id}`)}>
+            <span className="roomcard-icon" aria-hidden="true">
+              <Icon.shuffle />
+            </span>
+            <span>
+              <span className="roomcard-title">Today&rsquo;s game: {daily.name}</span>
+              <span className="roomcard-sub">A new pick every day. Play it with your people or skip it.</span>
+            </span>
+          </button>
+        )}
         {group === "friends" && (
           <button className="roomcard" onClick={() => go("/room")} disabled={!online} aria-describedby="room-sub">
             <span className="roomcard-icon" aria-hidden="true">
@@ -90,6 +116,35 @@ export function Library() {
           </ul>
         </section>
       ))}
+
+      {community.length > 0 && (
+        <section className="lib-section" aria-labelledby="sec-community">
+          <div className="sec-sign">
+            <h2 id="sec-community" className="h3">
+              From other players
+            </h2>
+            <span className="muted small">Games made and shared by people like you.</span>
+          </div>
+          <ul className="tickets">
+            {community.map((g) => (
+              <li key={g.id}>
+                <button className="ticket" onClick={() => go(`/g/${g.id}`)}>
+                  <span className="stub" aria-hidden="true">
+                    <span className="stub-no">
+                      <Icon.people />
+                    </span>
+                  </span>
+                  <span className="ticket-body">
+                    <span className="ticket-title">{g.name}</span>
+                    <span className="ticket-blurb">{CUSTOM_TYPES[g.type].label}</span>
+                    <span className="ticket-meta">{g.author ? `By ${g.author}` : "Shared game"}</span>
+                  </span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       <section className="lib-section" aria-labelledby="sec-make">
         <div className="make-strip">

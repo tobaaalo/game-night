@@ -19,8 +19,9 @@ export function GameFrame({
   scores?: boolean;
   live?: boolean;
 }) {
-  const { back, players, resetScores } = useApp();
+  const { back, players, resetScores, markStart } = useApp();
   const [help, setHelp] = useState(false);
+  useEffect(() => markStart(), [markStart]);
   return (
     <div className="screen game-screen">
       <div className="game-head">
@@ -183,25 +184,76 @@ export function Img({ src, alt, square }: { src: string; alt: string; square?: b
 }
 
 export function Finish({ onAgain, label = "Play again" }: { onAgain: () => void; label?: string }) {
-  const { players, go } = useApp();
-  const ranked = players.map((p, i) => ({ ...p, n: nameOf(p, i) })).sort((a, b) => b.score - a.score);
+  const { players, go, baseline, games, markStart, countGame } = useApp();
+  useEffect(() => countGame(), [countGame]);
+  const ranked = players
+    .map((p, i) => ({ ...p, n: nameOf(p, i), game: p.score - (baseline[p.id] ?? 0) }))
+    .sort((a, b) => b.game - a.game || b.score - a.score);
   const top = ranked[0];
-  const tie = ranked.length > 1 && ranked[1].score === top.score;
+  const tie = ranked.length > 1 && ranked[1].game === top.game;
+  const played = Math.max(1, games);
+  const teamed = players.length > 1 && players.every((p) => p.team);
+  const teamRows = [1, 2].map((t) => ({
+    t,
+    game: ranked.filter((p) => p.team === t).reduce((a, p) => a + p.game, 0),
+    total: ranked.filter((p) => p.team === t).reduce((a, p) => a + p.score, 0),
+  }));
+  const teamTop = teamRows[0].game === teamRows[1].game ? null : teamRows[0].game > teamRows[1].game ? 1 : 2;
   return (
     <div className="finish stagger">
-      <p className="eyebrow">Round over</p>
-      <h2 className="h1">{top.score === 0 ? "Everyone's level" : tie ? "It's a tie at the top!" : `${top.n} wins!`}</h2>
-      <ol className="podium">
-        {ranked.map((p, i) => (
-          <li key={p.id} className={clsx(i === 0 && !tie && top.score > 0 && "first")}>
-            <span className="place">{i + 1}</span>
-            <span className="nm">{p.n}</span>
-            <span className="pts">{p.score}</span>
-          </li>
-        ))}
-      </ol>
+      <p className="eyebrow">Game over</p>
+      <h2 className="h1">
+        {teamed
+          ? teamTop
+            ? `Team ${teamTop} wins!`
+            : "The teams are level!"
+          : top.game <= 0
+            ? "Everyone's level"
+            : tie
+              ? "It's a tie at the top!"
+              : `${top.n} wins!`}
+      </h2>
+      <table className="podium-table">
+        <caption className="sr-only">Scores for this game and for the night so far</caption>
+        <thead>
+          <tr>
+            <th scope="col">
+              <span className="sr-only">Player</span>
+            </th>
+            <th scope="col">This game</th>
+            <th scope="col">Total after {played === 1 ? "1 game" : `${played} games`}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {ranked.map((p, i) => (
+            <tr key={p.id} className={clsx(i === 0 && !tie && top.game > 0 && "first")}>
+              <th scope="row">
+                <span className="place">{i + 1}</span> {p.n}
+              </th>
+              <td className="pts">+{p.game}</td>
+              <td className="tot">{p.score}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {teamed && (
+        <p className="team-line">
+          {teamRows.map((r) => (
+            <span key={r.t}>
+              Team {r.t}: <b>+{r.game}</b> this game, <b>{r.total}</b> total
+            </span>
+          ))}
+        </p>
+      )}
       <div className="actions center">
-        <button className="btn" onClick={onAgain} autoFocus>
+        <button
+          className="btn"
+          onClick={() => {
+            markStart();
+            onAgain();
+          }}
+          autoFocus
+        >
           {label}
         </button>
         <button className="btn ghost" onClick={() => go("/games")}>

@@ -10,50 +10,52 @@ export function shuffle<T>(a: readonly T[]): T[] {
   return r;
 }
 
-interface DeckState {
-  len: number;
-  order: number[];
-  pos: number;
-  recent: number[];
+interface Seen {
+  seen: string[];
+  recent: string[];
 }
 
-const RECENT = 5;
+const RECENT = 12;
+const hash = (s: string) => {
+  let h = 5381;
+  for (let i = 0; i < s.length; i++) h = ((h << 5) + h + s.charCodeAt(i)) | 0;
+  return (h >>> 0).toString(36);
+};
+const defaultId = (x: unknown) => hash(typeof x === "string" ? x : JSON.stringify(x));
 
 /**
- * Draw the next index from a remembered deck.
- * Guarantees: no index repeats within 5 draws; when the deck runs out it is reshuffled
- * at random; position survives reloads.
+ * Pick `n` items from `pool` that this device has not seen yet.
+ * The memory is per "bank" (not per level), so Easy then Mixed never replays the same question.
+ * Nothing repeats until every item in the pool has been used; then only that pool resets, and the
+ * last dozen items are held back so a question never comes round twice in a row.
  */
-export function drawIndex(key: string, len: number): number {
-  if (len <= 0) return -1;
-  const k = `gn.deck.${key}`;
-  let s = load<DeckState | null>(k, null);
-  if (!s || s.len !== len || !Array.isArray(s.order)) s = { len, order: [], pos: 0, recent: [] };
-  if (s.pos >= s.order.length) {
-    let o = shuffle([...Array(len).keys()]);
-    if (len > RECENT * 2) {
-      const rec = new Set(s.recent);
-      const early = o.slice(0, RECENT).filter((x) => rec.has(x));
-      o = o.filter((x) => !early.includes(x));
-      for (const x of early) o.splice(RECENT + Math.floor(Math.random() * (o.length - RECENT + 1)), 0, x);
+export function drawFresh<T>(bank: string, pool: readonly T[], n: number, id: (t: T) => string = defaultId): T[] {
+  if (!pool.length || n <= 0) return [];
+  const k = `gn.seen2.${bank}`;
+  const st = load<Seen>(k, { seen: [], recent: [] });
+  const seen = new Set(st.seen);
+  const recent = new Set(st.recent);
+  const chosen: T[] = [];
+  const chosenIds = new Set<string>();
+  const want = Math.min(n, pool.length);
+  while (chosen.length < want) {
+    let cand = pool.filter((x) => !seen.has(id(x)) && !chosenIds.has(id(x)));
+    if (!cand.length) {
+      for (const x of pool) seen.delete(id(x));
+      cand = pool.filter((x) => !chosenIds.has(id(x)));
     }
-    s.order = o;
-    s.pos = 0;
+    const fresh = cand.filter((x) => !recent.has(id(x)));
+    const x = pick(fresh.length ? fresh : cand);
+    chosen.push(x);
+    chosenIds.add(id(x));
+    seen.add(id(x));
   }
-  const idx = s.order[s.pos++];
-  s.recent = [...s.recent, idx].slice(-RECENT);
-  save(k, s);
-  return idx;
+  const recentOut = [...st.recent, ...chosen.map(id)].slice(-RECENT);
+  save(k, { seen: [...seen].slice(-6000), recent: recentOut });
+  return chosen;
 }
 
-export const draw = <T>(key: string, items: readonly T[]): T =>
-  items[drawIndex(`${key}|${items.length}`, items.length)];
-
-export function drawMany<T>(key: string, items: readonly T[], n: number): T[] {
-  const out: T[] = [];
-  const count = Math.min(n, items.length);
-  for (let i = 0; i < count; i++) out.push(draw(key, items));
-  return out;
-}
+export const draw = <T>(bank: string, items: readonly T[]): T => drawFresh(bank, items, 1)[0];
+export const drawMany = <T>(bank: string, items: readonly T[], n: number): T[] => drawFresh(bank, items, n);
 
 export const pick = <T>(a: readonly T[]): T => a[Math.floor(Math.random() * a.length)];

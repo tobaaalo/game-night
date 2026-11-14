@@ -12,6 +12,9 @@ export interface CustomGame {
   type: CustomType;
   lines: string;
   updated: number;
+  /** Set once the game has been shared: the 6-character code, and who can see it. */
+  shareId?: string;
+  scope?: "link" | "public";
 }
 
 export const CUSTOM_TYPES: Record<CustomType, { label: string; help: string; example: string }> = {
@@ -80,9 +83,28 @@ export function customToGame(c: CustomGame): GameDef {
     groups: ["couple", "friends"] as GameDef["groups"],
     stat: `${lines.length} lines`,
   };
+  const quizQuestions = () =>
+    shuffle(lines).map((l) => {
+      const [q, right, ...wrong] = l
+        .split("|")
+        .map((x) => x.trim())
+        .filter(Boolean);
+      const options = shuffle([right, ...wrong].slice(0, 4));
+      return {
+        prompt: q,
+        options,
+        correct: options.indexOf(right),
+        seconds: 20,
+        points: 1,
+        explain: `The answer is ${right}.`,
+      };
+    });
   if (c.type === "quiz")
     return {
       ...base,
+      room: true,
+      roomFields: [],
+      buildQuestions: async () => quizQuestions(),
       Play: () => (
         <Again>
           {(again, k) => (

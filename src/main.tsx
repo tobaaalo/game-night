@@ -10,8 +10,10 @@ import "./styles/games.css";
 import App from "./App";
 import { AppProvider } from "./lib/app";
 import { registerSW } from "virtual:pwa-register";
+import { applyTextSize } from "./lib/sound";
 
 registerSW({ immediate: true });
+applyTextSize();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

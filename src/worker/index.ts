@@ -1,9 +1,18 @@
 import { DurableObject } from "cloudflare:workers";
-import type { ClientMsg, HostQuestion, PublicPlayer, RoomState, ServerMsg } from "../shared/protocol";
+import type {
+  ClientMsg,
+  HostQuestion,
+  PublicPlayer,
+  RoomState,
+  ServerMsg,
+  SharedGame,
+  SharedType,
+} from "../shared/protocol";
 import { handleApi, json } from "./api";
 
 interface Env {
   ROOMS: DurableObjectNamespace<Room>;
+  LIBRARY: DurableObjectNamespace<Library>;
 }
 
 export default {
@@ -241,5 +250,92 @@ export class Room extends DurableObject<Env> {
 
   async webSocketError() {
     this.broadcast();
+  }
+}
+
+/* ---------- Shared custom games: one small library for the whole site ---------- */
+const TYPES: SharedType[] = ["cards", "quiz", "reveal", "timed"];
+const ID_CHARS = CODE_CHARS();
+function CODE_CHARS() {
+  return "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+}
+const newId = () => Array.from({ length: 6 }, () => ID_CHARS[Math.floor(Math.random() * ID_CHARS.length)]).join("");
+
+export class Library extends DurableObject<Env> {
+  async fetch(req: Request): Promise<Response> {
+    const url = new URL(req.url);
+    const store = this.ctx.storage;
+    const all = async () => [...(await store.list<SharedGame>({ prefix: "g:" })).values()];
+
+    if (url.pathname === "/create" && req.method === "POST") {
+      const ip = url.searchParams.get("ip") ?? "x";
+      const hour = Math.floor(Date.now() / 3600000);
+      const rk = `r:${hour}:${ip}`;
+      const used = (await store.get<number>(rk)) ?? 0;
+      if (used >= 10) return json({ error: "That's a lot of games for one hour. Try again later." }, 429);
+      let b: Partial<SharedGame> & { scope?: string };
+      try {
+        b = (await req.json()) as typeof b;
+      } catch {
+        return json({ error: "Bad request." }, 400);
+      }
+      const name = String(b.name ?? "")
+        .trim()
+        .slice(0, 60);
+      const lines = String(b.lines ?? "")
+        .trim()
+        .slice(0, 12000);
+      const type = b.type as SharedType;
+      const scope = b.scope === "public" ? "public" : "link";
+      if (!name || !TYPES.includes(type) || lines.split("\n").filter(Boolean).length < 2)
+        return json({ error: "A game needs a name and at least two lines." }, 400);
+      if (lines.split("\n").length > 300) return json({ error: "That's too long. Keep it under 300 lines." }, 400);
+      let id = newId();
+      while (await store.get(`g:${id}`)) id = newId();
+      const g: SharedGame = {
+        id,
+        name,
+        type,
+        lines,
+        scope,
+        status: scope === "public" ? "pending" : "link",
+        author: String(b.author ?? "")
+          .trim()
+          .slice(0, 30),
+        created: Date.now(),
+      };
+      await store.put(`g:${id}`, g);
+      await store.put(rk, used + 1);
+      return json(g);
+    }
+    if (url.pathname === "/get") {
+      const g = await store.get<SharedGame>(`g:${url.searchParams.get("id")}`);
+      if (!g || g.status === "rejected" || g.status === "pending") return json({ error: "Game not found." }, 404);
+      return json(g);
+    }
+    if (url.pathname === "/public") {
+      const list = (await all()).filter((g) => g.status === "approved").sort((a, b) => b.created - a.created);
+      return json(list.slice(0, 100));
+    }
+    if (url.pathname === "/all") {
+      const list = (await all()).sort((a, b) => b.created - a.created);
+      return json(list.slice(0, 200));
+    }
+    if (url.pathname === "/act" && req.method === "POST") {
+      const id = url.searchParams.get("id");
+      const g = await store.get<SharedGame>(`g:${id}`);
+      if (!g) return json({ error: "Not found." }, 404);
+      const { action } = (await req.json()) as { action: string };
+      if (action === "delete") {
+        await store.delete(`g:${id}`);
+        return json({ ok: true });
+      }
+      if (action === "approve") g.status = "approved";
+      else if (action === "reject") g.status = "rejected";
+      else return json({ error: "Unknown action." }, 400);
+      await store.put(`g:${id}`, g);
+      return json(g);
+    }
+    return json({ error: "Not found." }, 404);
   }
 }

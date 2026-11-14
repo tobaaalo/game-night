@@ -11,15 +11,13 @@ import {
   LEVELS,
   LIKELY,
   N5_THEMES,
+  TRIVIA_CATS,
   NAME5,
   PAIRS,
-  AITEXT,
   PROVERBS,
   TABOO,
   TWOTRUTHS,
   WYR,
-  BIBLE,
-  TRIVIA,
   levelName,
   loadWorld,
 } from "../content";
@@ -57,10 +55,10 @@ export interface GameDef {
   buildQuestions?: (v: SetupValues) => Promise<HostQuestion[]>;
 }
 
-const levelField = (counts?: (lv: number) => number, def = 1, rules?: Record<number, string>): Field => ({
+const levelField = (def = 1, rules?: Record<number, string>): Field => ({
   key: "level",
   legend: "Level",
-  options: LEVELS.map((l) => ({ value: l.value, label: l.label, count: counts?.(l.value), rule: rules?.[l.value] })),
+  options: LEVELS.map((l) => ({ value: l.value, label: l.label, rule: rules?.[l.value] })),
   def,
 });
 const RULES = {
@@ -106,10 +104,6 @@ const countField = (def = 10): Field => ({
   options: [5, 10, 15, 20].map((n) => ({ value: n, label: String(n) })),
   def,
 });
-const byLevel =
-  <T,>(arr: T[], get: (x: T) => number) =>
-  (lv: number) =>
-    arr.filter((x) => !lv || get(x) === lv).length;
 
 /** Wraps a setup → play cycle for games that build a list up front. */
 function SetupThen<T>({
@@ -176,20 +170,16 @@ const WORLD_MODES = [
   { value: "mix", label: "Mix of everything" },
 ];
 
-const bibleFields = [
-  levelField(
-    byLevel(BIBLE, (q) => q[0]),
-    1,
-    RULES.bible,
-  ),
-  countField(),
-];
+const bibleFields = [levelField(1, RULES.bible), countField()];
 const triviaFields = [
-  levelField(
-    byLevel(TRIVIA, (q) => q[0]),
-    1,
-    RULES.trivia,
-  ),
+  {
+    key: "cats",
+    legend: "Topics",
+    multi: true,
+    options: TRIVIA_CATS.map(([value, label]) => ({ value, label })),
+    def: TRIVIA_CATS.map((c) => c[0]),
+  } as Field,
+  levelField(1, RULES.trivia),
   countField(),
 ];
 const worldFields: Field[] = [
@@ -197,23 +187,31 @@ const worldFields: Field[] = [
   levelField(),
   countField(),
 ];
-const faceFields = [
-  levelField(
-    byLevel(FACES, (f) => f.level),
-    1,
-    RULES.faces,
-  ),
-  countField(),
-];
+const faceFields = [levelField(1, RULES.faces), countField()];
 const realFields: Field[] = [
   {
     key: "mode",
     legend: "Round",
     options: [
-      { value: "pic", label: `Pictures (${PAIRS.length})` },
-      { value: "text", label: `Texts (${AITEXT.length})` },
+      { value: "pic", label: "Pictures" },
+      { value: "text", label: "Texts" },
     ],
     def: "pic",
+  },
+  {
+    key: "level",
+    legend: "Text difficulty",
+    options: [
+      { value: 1, label: "Easy", rule: "The AI text sounds like a typical AI." },
+      { value: 2, label: "Hard", rule: "Both are casual and written in the same voice." },
+      {
+        value: 3,
+        label: "Extremely hard",
+        rule: "Both are polished and thoughtful. Only small habits give the AI away.",
+      },
+      { value: 0, label: "Mixed" },
+    ],
+    def: 2,
   },
   countField(PAIRS.length >= 10 ? 10 : 5),
 ];
@@ -229,7 +227,7 @@ export const GAMES: GameDef[] = [
     section: "pictures",
     groups: ["couple", "friends"],
     room: true,
-    stat: `${FACES.length} faces`,
+    stat: "Photo quiz",
     Play: () => (
       <SetupThen
         id="faces"
@@ -258,7 +256,7 @@ export const GAMES: GameDef[] = [
             <RevealRun
               onAgain={again}
               items={drawMany(
-                `faces|lv${d.level}`,
+                "faces",
                 FACES.filter((f) => !d.level || f.level === d.level),
                 d.count,
               ).map<RevealItem>((f) => ({
@@ -288,12 +286,12 @@ export const GAMES: GameDef[] = [
     section: "pictures",
     groups: ["couple", "friends"],
     room: true,
-    stat: `${PAIRS.length} pairs + ${AITEXT.length} texts`,
+    stat: "Spot the fake",
     Play: quizPlay("realai", realFields, async (v) =>
-      realAiQuestions({ level: 0, count: num(v.count), mode: v.mode as string }),
+      realAiQuestions({ level: num(v.level), count: num(v.count), mode: v.mode as string }),
     ),
     roomFields: realFields,
-    buildQuestions: async (v) => realAiQuestions({ level: 0, count: num(v.count), mode: v.mode as string }),
+    buildQuestions: async (v) => realAiQuestions({ level: num(v.level), count: num(v.count), mode: v.mode as string }),
   },
   {
     id: "world",
@@ -303,7 +301,7 @@ export const GAMES: GameDef[] = [
     section: "pictures",
     groups: ["couple", "friends"],
     room: true,
-    stat: "99 countries, 6 modes",
+    stat: "Six ways to play",
     Play: quizPlay("world", worldFields, async (v) =>
       worldQuestions(await loadWorld(), { level: num(v.level), count: num(v.count), mode: v.mode as string }),
     ),
@@ -318,7 +316,7 @@ export const GAMES: GameDef[] = [
     how: "Guess the film, show, Bible story, saying, place, food, job or sport from the emojis. First to shout the right answer gets the points; harder levels score more.",
     section: "pictures",
     groups: ["couple", "friends"],
-    stat: `${EMOJI.length} puzzles`,
+    stat: "Guess from emojis",
     Play: () => (
       <SetupThen
         id="emoji"
@@ -330,21 +328,19 @@ export const GAMES: GameDef[] = [
             def: EMOJI_CATS.map((c) => c[0]),
             multi: true,
           },
-          levelField(undefined, 0),
+          levelField(0, RULES.emoji),
           countField(),
         ]}
         build={(v) => {
           const cats = v.cats as string[];
           const pool = EMOJI.filter((e) => cats.includes(e[0]) && (!num(v.level) || e[1] === num(v.level)));
-          return drawMany(`emoji|${[...cats].sort()}|${v.level}`, pool, num(v.count)).map<RevealItem>(
-            ([cat, lv, q, a]) => ({
-              prompt: q,
-              answer: a,
-              points: lv,
-              big: true,
-              label: `${EMOJI_CATS.find((c) => c[0] === cat)?.[1] ?? ""} · ${levelName(lv)}`,
-            }),
-          );
+          return drawMany("emoji", pool, num(v.count)).map<RevealItem>(([cat, lv, q, a]) => ({
+            prompt: q,
+            answer: a,
+            points: lv,
+            big: true,
+            label: `${EMOJI_CATS.find((c) => c[0] === cat)?.[1] ?? ""} · ${levelName(lv)}`,
+          }));
         }}
         run={(items, again) => <RevealRun items={items} onAgain={again} />}
       />
@@ -358,7 +354,7 @@ export const GAMES: GameDef[] = [
     section: "quiz",
     groups: ["couple", "friends"],
     room: true,
-    stat: `${BIBLE.length} questions, 4 levels`,
+    stat: "Easy to extremely hard",
     Play: quizPlay("bible", bibleFields, async (v) => bibleQuestions({ level: num(v.level), count: num(v.count) })),
     roomFields: bibleFields,
     buildQuestions: async (v) => bibleQuestions({ level: num(v.level), count: num(v.count) }),
@@ -371,10 +367,13 @@ export const GAMES: GameDef[] = [
     section: "quiz",
     groups: ["couple", "friends"],
     room: true,
-    stat: `${TRIVIA.length} questions, 4 levels`,
-    Play: quizPlay("trivia", triviaFields, async (v) => triviaQuestions({ level: num(v.level), count: num(v.count) })),
+    stat: "Easy to extremely hard",
+    Play: quizPlay("trivia", triviaFields, async (v) =>
+      triviaQuestions({ level: num(v.level), count: num(v.count), cats: v.cats as string[] }),
+    ),
     roomFields: triviaFields,
-    buildQuestions: async (v) => triviaQuestions({ level: num(v.level), count: num(v.count) }),
+    buildQuestions: async (v) =>
+      triviaQuestions({ level: num(v.level), count: num(v.count), cats: v.cats as string[] }),
   },
   {
     id: "proverbs",
@@ -383,7 +382,7 @@ export const GAMES: GameDef[] = [
     how: "Read the first half aloud. Whoever finishes it correctly first gets the point.",
     section: "quiz",
     groups: ["couple", "friends"],
-    stat: `${PROVERBS.length} proverbs`,
+    stat: "Finish the saying",
     Play: () => {
       const [k, setK] = useState(0);
       return (
@@ -403,7 +402,7 @@ export const GAMES: GameDef[] = [
     section: "talk",
     groups: ["couple", "friends"],
     minPlayers: 2,
-    stat: `${KNOWME.length} questions`,
+    stat: "Test each other",
     Play: () => <KnowMe questions={KNOWME} />,
   },
   {
@@ -414,7 +413,7 @@ export const GAMES: GameDef[] = [
     section: "talk",
     groups: ["couple"],
     scores: false,
-    stat: `${COUPLE.length} cards`,
+    stat: "Conversation cards",
     Play: () => <CardDeck id="couple" items={COUPLE} />,
   },
   {
@@ -425,7 +424,7 @@ export const GAMES: GameDef[] = [
     section: "talk",
     groups: ["couple", "friends"],
     scores: false,
-    stat: `${WYR.length} cards`,
+    stat: "Pick a side",
     Play: () => <CardDeck id="wyr" items={WYR} format={(x) => "Would you rather " + x[0].toLowerCase() + x.slice(1)} />,
   },
   {
@@ -437,7 +436,7 @@ export const GAMES: GameDef[] = [
     groups: ["friends"],
     minPlayers: 3,
     scores: false,
-    stat: `${LIKELY.length} cards`,
+    stat: "Point and vote",
     Play: () => <CardDeck id="likely" items={LIKELY} format={(x) => `Who's most likely to ${x}?`} />,
   },
   {
@@ -448,7 +447,7 @@ export const GAMES: GameDef[] = [
     section: "talk",
     groups: ["friends"],
     scores: false,
-    stat: `${HOTSEAT.length} cards`,
+    stat: "Spotlight cards",
     Play: () => <CardDeck id="hotseat" items={HOTSEAT} />,
   },
   {
@@ -459,7 +458,7 @@ export const GAMES: GameDef[] = [
     section: "talk",
     groups: ["couple", "friends"],
     scores: false,
-    stat: `${TWOTRUTHS.length} topics`,
+    stat: "Spot the lie",
     Play: () => <CardDeck id="twotruths" items={TWOTRUTHS} format={(x) => `Topic: ${x}`} />,
   },
   {
@@ -470,7 +469,7 @@ export const GAMES: GameDef[] = [
     section: "party",
     groups: ["friends"],
     minPlayers: 2,
-    stat: `${CHARADES.length} words`,
+    stat: "Act it out",
     Play: () => (
       <TimedRun
         id="charades"
@@ -489,7 +488,7 @@ export const GAMES: GameDef[] = [
     section: "party",
     groups: ["friends"],
     minPlayers: 2,
-    stat: `${TABOO.length} words`,
+    stat: "Describe without saying",
     Play: () => (
       <TimedRun
         id="taboo"
@@ -516,7 +515,7 @@ export const GAMES: GameDef[] = [
     how: "You get a category and a few seconds to name five things in it out loud. Manage it and you score; harder levels score more.",
     section: "party",
     groups: ["couple", "friends"],
-    stat: `${NAME5.length} categories`,
+    stat: "Beat the clock",
     Play: () => (
       <SetupThen
         id="name5"
@@ -528,11 +527,7 @@ export const GAMES: GameDef[] = [
             def: N5_THEMES.map((t) => t[0]),
             multi: true,
           },
-          levelField(
-            byLevel(NAME5, (x) => x[0]),
-            1,
-            RULES.name5,
-          ),
+          levelField(1, RULES.name5),
           {
             key: "s",
             legend: "Seconds on the clock",
@@ -543,7 +538,7 @@ export const GAMES: GameDef[] = [
         build={(v) => {
           const th = v.th as string[];
           const pool = NAME5.filter((x) => th.includes(x[1]) && (!num(v.level) || x[0] === num(v.level)));
-          return pool.length ? { pool, s: num(v.s), key: `name5|${[...th].sort()}|${v.level}` } : [];
+          return pool.length ? { pool, s: num(v.s), key: "name5" } : [];
         }}
         run={(d) =>
           Array.isArray(d) ? null : (

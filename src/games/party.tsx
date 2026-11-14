@@ -4,6 +4,7 @@ import { TimerDial, WhoGotIt, useCountdown } from "../components/ui";
 import { nameOf, useApp } from "../lib/app";
 import { draw } from "../lib/deck";
 import { Finish, Img, Turn, useKeys } from "./frame";
+import { keep } from "../lib/scrapbook";
 
 /* ---------- Reveal rounds: show a prompt, reveal, award whoever got it first ---------- */
 export interface RevealItem {
@@ -131,8 +132,9 @@ export function CardDeck({
 
 /* ---------- How Well Do You Know Me? ---------- */
 export function KnowMe({ questions }: { questions: string[] }) {
-  const { players, award, go } = useApp();
+  const { players, award, go, toast } = useApp();
   const [seat, setSeat] = useState(0);
+  const [kept, setKept] = useState(false);
   const [round, setRound] = useState(1);
   const [step, setStep] = useState<"type" | "guess" | "reveal">("type");
   const [ans, setAns] = useState("");
@@ -154,6 +156,7 @@ export function KnowMe({ questions }: { questions: string[] }) {
     setAns("");
     setStep("type");
     setPeek(false);
+    setKept(false);
     setSeat((s) => (s + 1) % players.length);
     setRound((r) => r + 1);
   };
@@ -212,6 +215,21 @@ export function KnowMe({ questions }: { questions: string[] }) {
               <div className="flip-back">{ans.trim() || `${name}, say it out loud!`}</div>
             </div>
           </div>
+          {ans.trim() && (
+            <div className="actions center">
+              <button
+                className="btn ghost small"
+                disabled={kept}
+                onClick={() => {
+                  keep({ q, a: ans.trim(), who: name });
+                  setKept(true);
+                  toast("Saved to your keepsakes.");
+                }}
+              >
+                {kept ? "Kept ✓" : "Keep this moment"}
+              </button>
+            </div>
+          )}
           <WhoGotIt label="Who guessed right?" points={1} multi exclude={hot.id} onDone={nextRound} />
         </div>
       )}

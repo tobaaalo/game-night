@@ -4,7 +4,7 @@ import QRCode from "qrcode";
 import { Flaps, Icon } from "../components/ui";
 import { useApp } from "../lib/app";
 import { load, save } from "../lib/store";
-import { GAMES, type GameDef } from "../games/registry";
+import { gamesFor, type GameDef } from "../games/registry";
 import { MediaView, useKeys } from "../games/frame";
 import { Setup } from "../games/quiz";
 import { normaliseCode, type ClientMsg, type HostQuestion, type RoomState, type ServerMsg } from "../shared/protocol";
@@ -23,6 +23,7 @@ function useRoomSocket(url: string | null, onError: (m: string) => void) {
   useEffect(() => {
     if (!url) return;
     let stop = false;
+    let final = false;
     let ping: ReturnType<typeof setInterval>;
     let timer: ReturnType<typeof setTimeout>;
     const open = () => {
@@ -45,11 +46,13 @@ function useRoomSocket(url: string | null, onError: (m: string) => void) {
         clearInterval(ping);
         if (stop) return;
         if (e.code === 4000) {
+          final = true;
           setConn("closed");
           errRef.current("The host removed you from the room.");
           return;
         }
         if (e.code === 1000 && e.reason === "Room closed") {
+          final = true;
           setConn("closed");
           errRef.current("This room has closed.");
           return;
@@ -65,7 +68,19 @@ function useRoomSocket(url: string | null, onError: (m: string) => void) {
       };
     };
     open();
+    // A locked or sleeping phone drops its connection. Rejoin the moment it wakes, without waiting for the back-off.
+    const wake = () => {
+      if (stop || final || document.visibilityState === "hidden") return;
+      if (ws.current && ws.current.readyState <= 1) return;
+      clearTimeout(timer);
+      tries.current = 0;
+      open();
+    };
+    document.addEventListener("visibilitychange", wake);
+    window.addEventListener("online", wake);
     return () => {
+      document.removeEventListener("visibilitychange", wake);
+      window.removeEventListener("online", wake);
       stop = true;
       clearTimeout(timer);
       clearInterval(ping);
@@ -81,7 +96,7 @@ function useRoomSocket(url: string | null, onError: (m: string) => void) {
 const wsUrl = (code: string, q: Record<string, string>) =>
   `${location.protocol === "https:" ? "wss" : "ws"}://${location.host}/api/rooms/${code}/ws?${new URLSearchParams(q)}`;
 
-const ROOM_GAMES = () => GAMES.filter((g) => g.room);
+const ROOM_GAMES = () => gamesFor(null).filter((g) => g.room);
 
 function ConnBanner({ conn }: { conn: Conn }) {
   if (conn === "open") return null;

@@ -787,3 +787,20 @@ textarea.input {
     border-color: var(--chrome-faint);
   }
 }
+
+/* Comfort settings */
+html[data-text="large"] {
+  font-size: 118%;
+}
+.switch {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  min-height: 44px;
+  cursor: pointer;
+}
+.switch input {
+  width: 1.5rem;
+  height: 1.5rem;
+  accent-color: var(--buzzer);
+}

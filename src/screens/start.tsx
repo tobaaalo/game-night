@@ -106,7 +106,11 @@ export function Names() {
   const add = () => {
     const id = uid();
     lastAdded.current = id;
-    setPlayers((ps) => [...ps, { id, name: "", score: 0 }]);
+    setPlayers((ps) => {
+      const on = ps.some((p) => p.team);
+      const ones = ps.filter((p) => p.team === 1).length;
+      return [...ps, { id, name: "", score: 0, team: on ? (ones <= ps.length - ones ? 1 : 2) : undefined }];
+    });
   };
   const removeP = (id: string) => {
     const snapshot = players;
@@ -114,6 +118,11 @@ export function Names() {
     setPlayers((ps) => ps.filter((p) => p.id !== id));
     toast(`Removed ${nameOf(players[i], i)}.`, () => setPlayers(snapshot));
   };
+  const teamsOn = players.some((p) => p.team);
+  const setTeams = (on: boolean) =>
+    setPlayers((ps) => ps.map((p, i) => ({ ...p, team: on ? (((i % 2) + 1) as 1 | 2) : undefined })));
+  const flipTeam = (id: string) =>
+    setPlayers((ps) => ps.map((p) => (p.id === id ? { ...p, team: p.team === 1 ? 2 : 1 } : p)));
   const submit = () => {
     const names = players.map((p, i) => nameOf(p, i).toLowerCase());
     const dup = names.find((n, i) => names.indexOf(n) !== i);
@@ -136,6 +145,12 @@ export function Names() {
         </h1>
         <p className="lede">{couple ? "Names go on the scoreboard." : "Add everyone, or play in teams. Up to 12."}</p>
       </div>
+      {!couple && (
+        <label className="switch">
+          <input type="checkbox" checked={teamsOn} onChange={(e) => setTeams(e.target.checked)} />
+          <span>Play in two teams</span>
+        </label>
+      )}
       <ol className="namelist">
         {players.map((p, i) => (
           <li key={p.id} className="namerow">
@@ -155,6 +170,16 @@ export function Names() {
               autoComplete="off"
               enterKeyHint={i === players.length - 1 ? "done" : "next"}
             />
+            {!couple && p.team && (
+              <button
+                type="button"
+                className="btn ghost small team-btn"
+                onClick={() => flipTeam(p.id)}
+                aria-label={`${nameOf(p, i)} is on team ${p.team}. Tap to switch team.`}
+              >
+                Team {p.team}
+              </button>
+            )}
             {!couple && players.length > 2 && (
               <button
                 type="button"

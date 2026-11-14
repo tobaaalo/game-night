@@ -73,3 +73,18 @@ export const normaliseCode = (s: string) =>
     .toUpperCase()
     .replace(/[^A-Z]/g, "")
     .slice(0, 4);
+
+/* ---------- Shared custom games ---------- */
+export type SharedType = "cards" | "quiz" | "reveal" | "timed";
+export type ShareScope = "link" | "public";
+export type ShareStatus = "link" | "pending" | "approved" | "rejected";
+export interface SharedGame {
+  id: string;
+  name: string;
+  type: SharedType;
+  lines: string;
+  scope: ShareScope;
+  status: ShareStatus;
+  author: string;
+  created: number;
+}

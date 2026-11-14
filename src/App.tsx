@@ -2,7 +2,8 @@ import { useState } from "react";
 import { Icon, Sheet, Toasts } from "./components/ui";
 import { useApp } from "./lib/app";
 import { Library, PlayRoute } from "./screens/library";
-import { Credits, Make, Settings } from "./screens/more";
+import { Credits, Keepsakes, Make, Settings } from "./screens/more";
+import { GameImport, Review } from "./screens/share";
 import { RoomHost, RoomJoin } from "./screens/room";
 import { Names, Welcome, Who } from "./screens/start";
 
@@ -53,6 +54,9 @@ function Header() {
               <button onClick={() => nav("/join")}>Join a friend&rsquo;s room</button>
             </li>
             <li>
+              <button onClick={() => nav("/keepsakes")}>Keepsakes</button>
+            </li>
+            <li>
               <button onClick={() => nav("/settings")}>Settings &amp; offline</button>
             </li>
           </ul>
@@ -84,6 +88,12 @@ function Route() {
       return <Settings />;
     case "credits":
       return <Credits />;
+    case "keepsakes":
+      return <Keepsakes />;
+    case "g":
+      return <GameImport key={parts[1]} id={parts[1] ?? ""} />;
+    case "review":
+      return <Review />;
     case "room":
       return <RoomHost />;
     case "join":

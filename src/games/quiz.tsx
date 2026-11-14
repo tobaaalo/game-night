@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import clsx from "clsx";
 import { Choice } from "../components/ui";
 import { nameOf, useApp } from "../lib/app";
+import { shuffle } from "../lib/deck";
+import { canSpeak, sfx, speak, speakAuto, stopSpeaking } from "../lib/sound";
 import { load, save } from "../lib/store";
 import type { HostQuestion } from "../shared/protocol";
 import { Finish, MediaView, Turn, useKeys } from "./frame";
@@ -9,7 +11,7 @@ import { Finish, MediaView, Turn, useKeys } from "./frame";
 export interface Field {
   key: string;
   legend: string;
-  options: { value: string | number; label: string; count?: number; rule?: string }[];
+  options: { value: string | number; label: string; rule?: string }[];
   multi?: boolean;
   def: string | number | (string | number)[];
 }
@@ -87,17 +89,54 @@ export function QuizRun({ questions, onAgain }: { questions: HostQuestion[]; onA
   const [i, setI] = useState(0);
   const [turn, setTurn] = useState(0);
   const [picked, setPicked] = useState<number | null>(null);
+  const [streakNote, setStreakNote] = useState("");
+  const [removed, setRemoved] = useState<number[]>([]);
+  const streaks = useRef<Record<string, number>>({});
+  const hinted = useRef<Set<string>>(new Set());
   const q = questions[i];
   const current = players[turn % players.length];
+  const leader = Math.max(...players.map((p) => p.score));
+  const canHint =
+    picked == null &&
+    !!q &&
+    q.options.length >= 4 &&
+    q.media?.type !== "pair" &&
+    !hinted.current.has(current.id) &&
+    leader - current.score >= 2;
 
   const choose = (idx: number) => {
-    if (picked != null || !q) return;
+    if (picked != null || !q || removed.includes(idx)) return;
     setPicked(idx);
-    if (idx === q.correct) award(current.id, q.points);
+    stopSpeaking();
+    if (idx === q.correct) {
+      const run = (streaks.current[current.id] ?? 0) + 1;
+      streaks.current[current.id] = run;
+      award(current.id, q.points);
+      if (run >= 3) {
+        award(current.id, 1);
+        setStreakNote(`${run} in a row! +1 bonus.`);
+        sfx("streak");
+      } else {
+        setStreakNote("");
+        sfx("right");
+      }
+    } else {
+      streaks.current[current.id] = 0;
+      setStreakNote("");
+      sfx("wrong");
+    }
+  };
+  const useHint = () => {
+    if (!q) return;
+    hinted.current.add(current.id);
+    const wrong = shuffle(q.options.map((_, k) => k).filter((k) => k !== q.correct)).slice(0, 2);
+    setRemoved(wrong);
   };
   const next = () => {
     if (picked == null) return;
     setPicked(null);
+    setRemoved([]);
+    setStreakNote("");
     setTurn((t) => (t + 1) % players.length);
     setI((x) => x + 1);
   };
@@ -114,6 +153,10 @@ export function QuizRun({ questions, onAgain }: { questions: HostQuestion[]; onA
   useEffect(() => {
     if (picked != null) document.getElementById("next-btn")?.focus();
   }, [picked]);
+  useEffect(() => {
+    if (q && speakAuto()) speak(q.prompt + ". " + q.options.join(". "));
+    return stopSpeaking;
+  }, [i]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!q) return <Finish onAgain={onAgain} />;
   const right = picked === q.correct;
@@ -127,6 +170,15 @@ export function QuizRun({ questions, onAgain }: { questions: HostQuestion[]; onA
         </p>
       </div>
       <h2 className="qprompt">{q.prompt}</h2>
+      {canSpeak() && (
+        <button
+          className="link small"
+          onClick={() => speak(q.prompt + ". " + q.options.join(". "))}
+          aria-label="Read the question aloud"
+        >
+          Read aloud
+        </button>
+      )}
       <MediaView
         media={q.media}
         revealed={picked != null}
@@ -151,18 +203,26 @@ export function QuizRun({ questions, onAgain }: { questions: HostQuestion[]; onA
               picked === idx && idx !== q.correct && "wrong",
             )}
             onClick={() => choose(idx)}
-            aria-disabled={picked != null}
+            aria-disabled={picked != null || removed.includes(idx)}
+            hidden={removed.includes(idx)}
           >
             <kbd>{idx + 1}</kbd>
             <span>{o}</span>
           </button>
         ))}
       </div>
+      {canHint && (
+        <button className="btn ghost small" onClick={useHint}>
+          Catch-up hint: remove two wrong answers
+        </button>
+      )}
       <div aria-live="polite" className="reveal-line">
         {picked != null && (
           <>
             <p className={clsx("verdict", right ? "good" : "bad")}>
-              {right ? `Correct! +${q.points} for ${nameOf(current, turn % players.length)}.` : "Not quite."}{" "}
+              {right
+                ? `Correct! +${q.points} for ${nameOf(current, turn % players.length)}. ${streakNote}`
+                : "Not quite."}{" "}
               {q.explain}
             </p>
             <button id="next-btn" className="btn" onClick={next}>

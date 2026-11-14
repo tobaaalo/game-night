@@ -6,6 +6,8 @@ export interface Player {
   id: string;
   name: string;
   score: number;
+  /** 1 or 2 when playing in teams. */
+  team?: 1 | 2;
 }
 export interface Toast {
   id: number;
@@ -23,6 +25,11 @@ interface AppCtx {
   setPlayers: (p: Player[] | ((p: Player[]) => Player[])) => void;
   award: (playerId: string, pts: number) => void;
   resetScores: () => void;
+  /** Score per player when the current game started, and how many games have finished since the last reset. */
+  baseline: Record<string, number>;
+  markStart: () => void;
+  games: number;
+  countGame: () => void;
   onboarded: boolean;
   setOnboarded: () => void;
   toast: (text: string, undo?: () => void) => void;
@@ -57,6 +64,19 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [group, setGroupState] = useState<Group | null>(() => load<Group | null>("gn.group", null));
   const [players, setPlayersState] = useState<Player[]>(() => load<Player[]>("gn.players", []));
   const [onboarded, setOnb] = useState(() => load("gn.onboarded", false));
+  const [baseline, setBaseline] = useState<Record<string, number>>({});
+  const [games, setGames] = useState(() => load<number>("gn.games", 0));
+  const pRef = useRef(players);
+  pRef.current = players;
+  const markStart = useCallback(() => setBaseline(Object.fromEntries(pRef.current.map((p) => [p.id, p.score]))), []);
+  const countGame = useCallback(
+    () =>
+      setGames((g) => {
+        save("gn.games", g + 1);
+        return g + 1;
+      }),
+    [],
+  );
   const [toasts, setToasts] = useState<Toast[]>([]);
   const [online, setOnline] = useState(() => navigator.onLine);
   const tid = useRef(0);
@@ -135,12 +155,20 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   const resetScores = useCallback(() => {
     let snapshot: Player[] = [];
+    const gamesBefore = games;
     setPlayers((ps) => {
       snapshot = ps;
       return ps.map((p) => ({ ...p, score: 0 }));
     });
-    toast("Scores reset to zero.", () => setPlayers(snapshot));
-  }, [setPlayers, toast]);
+    setGames(0);
+    save("gn.games", 0);
+    setBaseline({});
+    toast("Scores reset to zero.", () => {
+      setPlayers(snapshot);
+      setGames(gamesBefore);
+      save("gn.games", gamesBefore);
+    });
+  }, [setPlayers, toast, games]);
 
   const setOnboarded = useCallback(() => {
     setOnb(true);
@@ -158,6 +186,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
       setPlayers,
       award,
       resetScores,
+      baseline,
+      markStart,
+      games,
+      countGame,
       onboarded,
       setOnboarded,
       toast,
@@ -175,6 +207,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
       setPlayers,
       award,
       resetScores,
+      baseline,
+      markStart,
+      games,
+      countGame,
       onboarded,
       setOnboarded,
       toast,

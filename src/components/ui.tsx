@@ -67,7 +67,7 @@ export const Icon = {
 /* ---------- Choice chips (radio or checkbox group) ---------- */
 interface ChoiceProps<T extends string | number> {
   legend: string;
-  options: { value: T; label: string; count?: number; rule?: string }[];
+  options: { value: T; label: string; rule?: string }[];
   value: T | T[];
   onChange: (v: T | T[]) => void;
   multi?: boolean;
@@ -99,7 +99,6 @@ export function Choice<T extends string | number>({ legend, options, value, onCh
               }}
             />
             {o.label}
-            {o.count != null && <span className="count">{o.count}</span>}
           </label>
         ))}
       </div>
