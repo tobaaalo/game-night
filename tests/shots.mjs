@@ -18,14 +18,18 @@ async function shot(page, w, name) {
   // layout checks: horizontal overflow and tiny tap targets
   const issues = await page.evaluate(() => {
     const out = [];
-    if (document.documentElement.scrollWidth > innerWidth + 1) out.push(`horizontal scroll ${document.documentElement.scrollWidth}>${innerWidth}`);
+    if (document.documentElement.scrollWidth > innerWidth + 1)
+      out.push(`horizontal scroll ${document.documentElement.scrollWidth}>${innerWidth}`);
     for (const el of document.querySelectorAll("button, a, input, [role=button]")) {
       const r = el.getBoundingClientRect();
       if (r.width === 0 || r.height === 0) continue;
       const cs = getComputedStyle(el);
       if (cs.visibility === "hidden" || el.closest(".sr-only") || el.classList.contains("skip")) continue;
       if (el.tagName === "INPUT" && (el.type === "radio" || el.type === "checkbox")) continue;
-      if (r.height < 43.5 || r.width < 43.5) out.push(`small target ${el.tagName} "${(el.textContent || el.getAttribute("aria-label") || "").trim().slice(0, 30)}" ${Math.round(r.width)}x${Math.round(r.height)}`);
+      if (r.height < 43.5 || r.width < 43.5)
+        out.push(
+          `small target ${el.tagName} "${(el.textContent || el.getAttribute("aria-label") || "").trim().slice(0, 30)}" ${Math.round(r.width)}x${Math.round(r.height)}`,
+        );
     }
     return out;
   });
@@ -35,7 +39,11 @@ async function shot(page, w, name) {
 const click = (page, text) => page.getByRole("button", { name: text, exact: false }).first().click();
 
 for (const w of WIDTHS) {
-  const ctx = await browser.newContext({ viewport: { width: w, height: w < 500 ? 812 : w < 1000 ? 1024 : 900 }, deviceScaleFactor: 1, reducedMotion: "reduce" });
+  const ctx = await browser.newContext({
+    viewport: { width: w, height: w < 500 ? 812 : w < 1000 ? 1024 : 900 },
+    deviceScaleFactor: 1,
+    reducedMotion: "reduce",
+  });
   const page = await ctx.newPage();
   const errors = [];
   page.on("pageerror", (e) => errors.push(e.message));
@@ -74,6 +82,8 @@ for (const w of WIDTHS) {
     await page.goto(BASE + "/play/world");
     await click(page, "Start");
     await page.locator(".flagbox img").waitFor();
+    const board = await page.locator(".board").first().innerText();
+    if (!/\d/.test(board)) problems.push(`${w} scoreboard digits missing: ${JSON.stringify(board)}`);
   });
   await step("13-world-shape", async () => {
     await page.goto(BASE + "/play/world");
@@ -85,7 +95,7 @@ for (const w of WIDTHS) {
     await click(page, "Start");
     await page.locator(".pair img").first().waitFor();
   });
-  await step("15-realai-answered", async () => page.locator(".option").nth(1).click());
+  await step("15-realai-answered", async () => page.locator(".pair-side.pickable").nth(1).click());
   await step("16-emoji", async () => {
     await page.goto(BASE + "/play/emoji");
     await click(page, "Start");
@@ -140,7 +150,11 @@ for (const w of WIDTHS) {
     await click(page, "Open a room");
     await page.locator(".room-code").waitFor();
   });
-  const code = (await page.locator(".room-code").textContent().catch(() => "")) ?? "";
+  const code =
+    (await page
+      .locator(".room-code")
+      .textContent()
+      .catch(() => "")) ?? "";
   const pctx = await browser.newContext({ viewport: { width: 375, height: 812 }, reducedMotion: "reduce" });
   const p2 = await pctx.newPage();
   try {
@@ -169,18 +183,30 @@ for (const w of WIDTHS) {
   } catch (e) {
     problems.push(`${w} player answer FAILED ${e.message.split("\n")[0]}`);
   }
-  await step("39-room-reveal", async () => page.getByRole("button", { name: /Next question|See final/ }).waitFor({ timeout: 8000 }));
+  await step("39-room-reveal", async () =>
+    page.getByRole("button", { name: /Next question|See final/ }).waitFor({ timeout: 8000 }),
+  );
   await step("40-room-final", async () => {
     for (let i = 0; i < 6; i++) {
       const b = page.getByRole("button", { name: /Next question|See final|Reveal now/ }).first();
-      if (await page.getByText("Final scores").or(page.getByText("wins!")).isVisible().catch(() => false)) break;
+      if (
+        await page
+          .getByText("Final scores")
+          .or(page.getByText("wins!"))
+          .isVisible()
+          .catch(() => false)
+      )
+        break;
       await b.click({ timeout: 8000 }).catch(() => {});
       await page.waitForTimeout(400);
-      await page.getByRole("button", { name: "Reveal now" }).click({ timeout: 1500 }).catch(() => {});
+      await page
+        .getByRole("button", { name: "Reveal now" })
+        .click({ timeout: 1500 })
+        .catch(() => {});
       await page.waitForTimeout(400);
     }
   });
-  await step("41-room-close", async () => page.getByRole("button", { name: "Close room" }).first().click());
+  await step("41-room-close", async () => page.getByRole("button", { name: "End the game for everyone" }).first().click());
   await pctx.close();
   for (const e of errors) problems.push(`${w} console: ${e.slice(0, 160)}`);
   await ctx.close();

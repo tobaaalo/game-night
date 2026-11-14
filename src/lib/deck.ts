@@ -46,7 +46,8 @@ export function drawIndex(key: string, len: number): number {
   return idx;
 }
 
-export const draw = <T>(key: string, items: readonly T[]): T => items[drawIndex(`${key}|${items.length}`, items.length)];
+export const draw = <T>(key: string, items: readonly T[]): T =>
+  items[drawIndex(`${key}|${items.length}`, items.length)];
 
 export function drawMany<T>(key: string, items: readonly T[], n: number): T[] {
   const out: T[] = [];

@@ -16,7 +16,9 @@ export function Welcome() {
             Game<span>Night</span>
           </h1>
         </div>
-        <p className="lede welcome-lede">Party games for the two of you, or the whole crew. One phone passed round, or everyone on their own.</p>
+        <p className="lede welcome-lede">
+          Party games for the two of you, or the whole crew. One phone passed round, or everyone on their own.
+        </p>
         <ul className="welcome-points" aria-label="What's inside">
           <li>
             <b>{GAMES.length}</b> games
@@ -25,7 +27,7 @@ export function Welcome() {
             <b>{FACES.length}</b> famous faces
           </li>
           <li>
-            <b>0</b> sign-ups
+            <b>0</b> accounts needed
           </li>
         </ul>
       </div>
@@ -77,7 +79,9 @@ export function Who() {
             <Icon.people />
           </span>
           <span className="door-title">Friends are here</span>
-          <span className="door-sub">Charades, quizzes on everyone&rsquo;s phones, and who&rsquo;s-most-likely-to.</span>
+          <span className="door-sub">
+            Charades, quizzes on everyone&rsquo;s phones, and who&rsquo;s-most-likely-to.
+          </span>
         </button>
       </div>
     </div>
@@ -153,7 +157,12 @@ export function Names() {
               enterKeyHint={i === players.length - 1 ? "done" : "next"}
             />
             {!couple && players.length > 2 && (
-              <button type="button" className="icon-btn" onClick={() => removeP(p.id)} aria-label={`Remove ${nameOf(p, i)}`}>
+              <button
+                type="button"
+                className="icon-btn"
+                onClick={() => removeP(p.id)}
+                aria-label={`Remove ${nameOf(p, i)}`}
+              >
                 <Icon.trash />
               </button>
             )}

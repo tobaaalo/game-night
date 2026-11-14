@@ -3,7 +3,13 @@ import clsx from "clsx";
 import { nameOf, useApp, type Player } from "../lib/app";
 
 /* ---------- Icons (inline, 24px grid, stroke) ---------- */
-const P = { fill: "none", stroke: "currentColor", strokeWidth: 2.2, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
+const P = {
+  fill: "none",
+  stroke: "currentColor",
+  strokeWidth: 2.2,
+  strokeLinecap: "round" as const,
+  strokeLinejoin: "round" as const,
+};
 export const Icon = {
   back: () => (
     <svg viewBox="0 0 24 24" aria-hidden="true" {...P}>
@@ -69,14 +75,14 @@ interface ChoiceProps<T extends string | number> {
 export function Choice<T extends string | number>({ legend, options, value, onChange, multi }: ChoiceProps<T>) {
   const name = useId();
   const arr = Array.isArray(value) ? value : [value];
-  const all = multi && arr.length === options.length;
+  const all = !!multi && arr.length === options.length;
   return (
     <fieldset className="choice">
       <legend>{legend}</legend>
       <div className="chips">
         {multi && (
           <label className="chip">
-            <input type="checkbox" checked={all} onChange={() => onChange(all ? [] : options.map((o) => o.value))} />
+            <input type="checkbox" checked={all} onChange={() => onChange(options.map((o) => o.value))} />
             All
           </label>
         )}
@@ -85,9 +91,10 @@ export function Choice<T extends string | number>({ legend, options, value, onCh
             <input
               type={multi ? "checkbox" : "radio"}
               name={name}
-              checked={arr.includes(o.value)}
+              checked={multi && all ? false : arr.includes(o.value)}
               onChange={() => {
                 if (!multi) return onChange(o.value);
+                if (all) return onChange([o.value]);
                 onChange(arr.includes(o.value) ? arr.filter((x) => x !== o.value) : [...arr, o.value]);
               }}
             />
@@ -128,7 +135,12 @@ export function Scoreboard({ players, now, compact }: { players: Player[]; now?:
   return (
     <div className="board" role="list" aria-label="Scores">
       {players.map((p, i) => (
-        <div role="listitem" key={p.id} className={clsx("board-seat", now === p.id && "now")} aria-label={`${nameOf(p, i)}: ${p.score} points`}>
+        <div
+          role="listitem"
+          key={p.id}
+          className={clsx("board-seat", now === p.id && "now")}
+          aria-label={`${nameOf(p, i)}: ${p.score} points`}
+        >
           <span className="nm">{nameOf(p, i)}</span>
           <Flaps value={p.score} min={compact ? 1 : 2} />
         </div>
@@ -147,7 +159,9 @@ export function Sheet({ title, onClose, children }: { title: string; onClose: ()
     const key = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
       if (e.key === "Tab" && ref.current) {
-        const f = [...ref.current.querySelectorAll<HTMLElement>("button, a, input, select, textarea")].filter((x) => !x.hasAttribute("disabled"));
+        const f = [...ref.current.querySelectorAll<HTMLElement>("button, a, input, select, textarea")].filter(
+          (x) => !x.hasAttribute("disabled"),
+        );
         if (!f.length) return;
         const first = f[0];
         const last = f[f.length - 1];
@@ -236,7 +250,12 @@ export function useCountdown(seconds: number, running: boolean, onEnd: () => voi
 export function TimerDial({ left, total }: { left: number; total: number }) {
   const pct = total ? left / total : 0;
   return (
-    <div className={clsx("dial", left <= 5 && "low")} role="timer" aria-live={left <= 5 ? "assertive" : "off"} aria-label={`${left} seconds left`}>
+    <div
+      className={clsx("dial", left <= 5 && "low")}
+      role="timer"
+      aria-live={left <= 5 ? "assertive" : "off"}
+      aria-label={`${left} seconds left`}
+    >
       <svg viewBox="0 0 100 100" aria-hidden="true">
         <circle cx="50" cy="50" r="44" className="dial-track" />
         <circle cx="50" cy="50" r="44" className="dial-fill" style={{ strokeDashoffset: 276.5 * (1 - pct) }} />
@@ -265,30 +284,36 @@ export function WhoGotIt({
   const list = players.filter((p) => p.id !== exclude);
   return (
     <div className="whogot">
-      <p className="h3">
-        {label} <span className="pts">+{points}</span>
-      </p>
-      <div className="chips" role="group" aria-label={label}>
+      <p className="h3">{label}</p>
+      <div className="givers" role="group" aria-label={label}>
         {list.map((p) => {
           const i = players.indexOf(p);
           const on = sel.includes(p.id);
-          return (
+          return multi ? (
             <button
               key={p.id}
-              className={clsx("chip", on && "on")}
+              className={clsx("giver", on && "on")}
               aria-pressed={on}
-              onClick={() => setSel((s) => (on ? s.filter((x) => x !== p.id) : multi ? [...s, p.id] : [p.id]))}
+              onClick={() => setSel((s) => (on ? s.filter((x) => x !== p.id) : [...s, p.id]))}
             >
-              {nameOf(p, i)}
+              {nameOf(p, i)} <span className="pts">+{points}</span>
+            </button>
+          ) : (
+            <button key={p.id} className="giver" onClick={() => onDone([p.id])}>
+              {nameOf(p, i)} <span className="pts">+{points}</span>
             </button>
           );
         })}
       </div>
-      <div className="actions center">
+      {multi && sel.length > 0 ? (
         <button className="btn" onClick={() => onDone(sel)}>
-          {sel.length ? "Give points & next" : "Nobody, next"}
+          Give the points
         </button>
-      </div>
+      ) : (
+        <button className="link" onClick={() => onDone([])}>
+          Nobody got it, next
+        </button>
+      )}
     </div>
   );
 }

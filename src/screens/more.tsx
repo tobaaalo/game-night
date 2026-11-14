@@ -1,7 +1,15 @@
 import { useState } from "react";
 import { Choice, Icon } from "../components/ui";
 import { useApp } from "../lib/app";
-import { CUSTOM_TYPES, loadCustom, parseLines, saveCustom, validate, type CustomGame, type CustomType } from "../lib/custom";
+import {
+  CUSTOM_TYPES,
+  loadCustom,
+  parseLines,
+  saveCustom,
+  validate,
+  type CustomGame,
+  type CustomType,
+} from "../lib/custom";
 import { FACES, PAIRS } from "../content";
 import { remove } from "../lib/store";
 
@@ -24,10 +32,22 @@ export function Make() {
     setErr("");
   };
   const submit = () => {
-    if (!name.trim()) return setErr("Give your game a name first.");
+    if (!name.trim()) {
+      setErr("name:Give your game a name first.");
+      return document.getElementById("mk-name")?.focus();
+    }
     const problem = validate(type, parseLines(lines));
-    if (problem) return setErr(problem);
-    const g: CustomGame = { id: editing ?? Math.random().toString(36).slice(2, 8), name: name.trim(), type, lines, updated: Date.now() };
+    if (problem) {
+      setErr("lines:" + problem);
+      return document.getElementById("mk-lines")?.focus();
+    }
+    const g: CustomGame = {
+      id: editing ?? Math.random().toString(36).slice(2, 8),
+      name: name.trim(),
+      type,
+      lines,
+      updated: Date.now(),
+    };
     persist(editing ? list.map((x) => (x.id === editing ? g : x)) : [g, ...list]);
     toast(`Saved "${g.name}". It's in your library under Your own games.`);
     reset();
@@ -48,7 +68,9 @@ export function Make() {
         <h1 className="h1" tabIndex={-1}>
           {editing ? "Edit your game" : "Make your own game"}
         </h1>
-        <p className="lede">Type your own questions and the app turns them into a game. It stays on this phone and works offline.</p>
+        <p className="lede">
+          Type your own questions and the app turns them into a game. It stays on this phone and works offline.
+        </p>
       </div>
       <form
         className="panel stack"
@@ -59,7 +81,21 @@ export function Make() {
       >
         <div className="field">
           <label htmlFor="mk-name">Game name</label>
-          <input id="mk-name" className="input" value={name} maxLength={40} onChange={(e) => (setName(e.target.value), setErr(""))} placeholder="e.g. Our Wedding Quiz" />
+          <input
+            id="mk-name"
+            className="input"
+            aria-invalid={err.startsWith("name:")}
+            aria-describedby={err.startsWith("name:") ? "mk-name-err" : undefined}
+            value={name}
+            maxLength={40}
+            onChange={(e) => (setName(e.target.value), setErr(""))}
+            placeholder="e.g. Our Wedding Quiz"
+          />
+          {err.startsWith("name:") && (
+            <p className="error-text" id="mk-name-err" role="alert">
+              {err.slice(5)}
+            </p>
+          )}
         </div>
         <Choice<CustomType>
           legend="Kind of game"
@@ -72,7 +108,15 @@ export function Make() {
           <p className="hint" id="mk-help">
             {t.help}
           </p>
-          <textarea id="mk-lines" className="input mono" aria-describedby="mk-help" value={lines} onChange={(e) => (setLines(e.target.value), setErr(""))} placeholder={t.example} />
+          <textarea
+            id="mk-lines"
+            className="input mono"
+            aria-describedby={err.startsWith("lines:") ? "mk-help mk-lines-err" : "mk-help"}
+            aria-invalid={err.startsWith("lines:")}
+            value={lines}
+            onChange={(e) => (setLines(e.target.value), setErr(""))}
+            placeholder={t.example}
+          />
           <div className="actions" style={{ justifyContent: "space-between" }}>
             <span className="hint">
               {count} {count === 1 ? "line" : "lines"}
@@ -82,9 +126,9 @@ export function Make() {
             </button>
           </div>
         </div>
-        {err && (
-          <p className="error-text" role="alert">
-            {err}
+        {err.startsWith("lines:") && (
+          <p className="error-text" id="mk-lines-err" role="alert">
+            {err.slice(6)}
           </p>
         )}
         <div className="actions">
@@ -108,7 +152,7 @@ export function Make() {
             <p className="muted">Your first game takes about a minute. Try a quiz about the two of you.</p>
           </div>
         ) : (
-          <ul className="mine">
+          <ul className="my-games">
             {list.map((g) => (
               <li key={g.id} className="mine-row">
                 <span>
@@ -149,9 +193,16 @@ export function Make() {
 
 export function Settings() {
   const { go, resetScores, online } = useApp();
-  const [save, setSave] = useState<{ done: number; total: number; state: "idle" | "busy" | "done" | "error" }>({ done: 0, total: 0, state: "idle" });
+  const [save, setSave] = useState<{ done: number; total: number; state: "idle" | "busy" | "done" | "error" }>({
+    done: 0,
+    total: 0,
+    state: "idle",
+  });
   const saveAll = async () => {
-    const urls = [...FACES.map((f) => `/faces/${f.id}.jpg`), ...PAIRS.flatMap((p) => [`/realai/${p.id}-real.jpg`, `/realai/${p.id}-ai.jpg`])];
+    const urls = [
+      ...FACES.map((f) => `/faces/${f.id}.jpg`),
+      ...PAIRS.flatMap((p) => [`/realai/${p.id}-real.jpg`, `/realai/${p.id}-ai.jpg`]),
+    ];
     setSave({ done: 0, total: urls.length, state: "busy" });
     let done = 0;
     let failed = 0;
@@ -188,18 +239,26 @@ export function Settings() {
           Play offline
         </h2>
         <p className="muted">
-          Everything except the photos is already saved on this device. Save the photos too (about 26 MB) so Famous Faces and Real or AI work with no
-          signal.
+          Everything except the photos is already saved on this device. Save the photos too (about 26 MB) so Famous
+          Faces and Real or AI work with no signal.
         </p>
         {save.state === "busy" && (
-          <div className="progress" role="progressbar" aria-valuenow={pct} aria-valuemin={0} aria-valuemax={100} aria-label="Saving photos">
+          <div
+            className="progress"
+            role="progressbar"
+            aria-valuenow={pct}
+            aria-valuemin={0}
+            aria-valuemax={100}
+            aria-label="Saving photos"
+          >
             <span style={{ width: `${pct}%` }} />
           </div>
         )}
         <p aria-live="polite" className="small">
           {save.state === "busy" && `Saving… ${save.done} of ${save.total}`}
           {save.state === "done" && "All photos saved. You can play anywhere now."}
-          {save.state === "error" && "Some photos didn't save. Check your connection and tap Save again; it picks up where it left off."}
+          {save.state === "error" &&
+            "Some photos didn't save. Check your connection and tap Save again; it picks up where it left off."}
         </p>
         <div>
           <button className="btn" onClick={saveAll} disabled={!online || save.state === "busy"}>
@@ -228,7 +287,9 @@ export function Settings() {
         <h2 className="h3" id="fresh">
           Fresh decks
         </h2>
-        <p className="muted">Cards never repeat within five draws and the app remembers where you were. Start every pile from scratch here.</p>
+        <p className="muted">
+          Cards never repeat within five draws and the app remembers where you were. Start every pile from scratch here.
+        </p>
         <div>
           <ShuffleAll />
         </div>
@@ -279,13 +340,19 @@ export function Credits() {
           Photo credits
         </h1>
         <p className="lede">
-          Photos of people and the real photos in Real or AI come from Wikimedia Commons. Each link shows the photographer and licence. AI pictures were
-          made with Figma AI and Gamma.
+          Photos of people and the real photos in Real or AI come from Wikimedia Commons. Each link shows the
+          photographer and licence. AI pictures were made with Figma AI and Gamma.
         </p>
       </div>
       <div className="field">
         <label htmlFor="cq">Find a name</label>
-        <input id="cq" className="input" value={q} onChange={(e) => setQ(e.target.value)} placeholder="e.g. Burna Boy" />
+        <input
+          id="cq"
+          className="input"
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+          placeholder="e.g. Burna Boy"
+        />
       </div>
       <h2 className="h3">Real or AI?</h2>
       <ul className="credits">

@@ -9,8 +9,9 @@
   margin-inline: auto;
 }
 .mono {
-  font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
-  letter-spacing: 0;
+  font-family: var(--font-body);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
 }
 .tag {
   display: inline-block;
@@ -130,7 +131,10 @@
   color: var(--chrome);
   cursor: pointer;
   overflow: hidden;
-  transition: transform var(--t-med) var(--ease-out), border-color var(--t-fast), box-shadow var(--t-fast);
+  transition:
+    transform var(--t-med) var(--ease-out),
+    border-color var(--t-fast),
+    box-shadow var(--t-fast);
 }
 .door::after {
   content: "";
@@ -138,10 +142,6 @@
   inset: 0;
   background: repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.025) 0 2px, transparent 2px 22px);
   pointer-events: none;
-}
-.door:hover {
-  transform: translateY(-3px);
-  border-color: var(--bulb);
 }
 .door:active {
   transform: translateY(3px);
@@ -159,12 +159,16 @@
   place-items: center;
   background: var(--buzzer);
   color: var(--buzzer-ink);
-  box-shadow: 0 5px 0 #8a2e00, inset 0 -6px 0 rgba(0, 0, 0, 0.15);
+  box-shadow:
+    0 5px 0 #8a2e00,
+    inset 0 -6px 0 rgba(0, 0, 0, 0.15);
   font-size: 34px;
 }
 .door.friends .door-art {
   background: var(--bulb);
-  box-shadow: 0 5px 0 #8a6a12, inset 0 -6px 0 rgba(0, 0, 0, 0.12);
+  box-shadow:
+    0 5px 0 #8a6a12,
+    inset 0 -6px 0 rgba(0, 0, 0, 0.12);
 }
 .door-art svg {
   width: 36px;
@@ -277,20 +281,24 @@
   place-items: center;
   background: radial-gradient(circle at 35% 30%, var(--buzzer-hot), var(--buzzer) 55%, #c74300);
   color: var(--buzzer-ink);
-  box-shadow: 0 6px 0 #7a2900, 0 0 0 4px var(--velvet-deep);
-  transition: transform var(--t-fast) var(--ease-out), box-shadow var(--t-fast);
+  box-shadow:
+    0 6px 0 #7a2900,
+    0 0 0 4px var(--velvet-deep);
+  transition:
+    transform var(--t-fast) var(--ease-out),
+    box-shadow var(--t-fast);
 }
 .buzzer-cap svg {
   width: 28px;
   height: 28px;
 }
-.buzzer:hover .buzzer-cap {
-  transform: translateY(-2px);
-}
 .buzzer:active .buzzer-cap,
 .buzzer.pressed .buzzer-cap {
   transform: translateY(5px);
-  box-shadow: 0 1px 0 #7a2900, 0 0 0 4px var(--velvet-deep), 0 0 30px 6px rgba(255, 107, 26, 0.6);
+  box-shadow:
+    0 1px 0 #7a2900,
+    0 0 0 4px var(--velvet-deep),
+    0 0 30px 6px rgba(255, 107, 26, 0.6);
 }
 .buzzer.pressed .buzzer-cap svg {
   animation: spin 650ms var(--ease-out);
@@ -316,10 +324,9 @@
   color: var(--chrome);
   cursor: pointer;
   min-height: 84px;
-  transition: transform var(--t-fast), box-shadow var(--t-fast);
-}
-.roomcard:hover {
-  box-shadow: 0 0 24px -6px rgba(255, 209, 102, 0.6);
+  transition:
+    transform var(--t-fast),
+    box-shadow var(--t-fast);
 }
 .roomcard:disabled {
   border-color: var(--velvet);
@@ -386,10 +393,9 @@
   cursor: pointer;
   border-radius: var(--r-card);
   filter: drop-shadow(0 4px 0 var(--velvet-deep));
-  transition: transform var(--t-med) var(--ease-out), filter var(--t-fast);
-}
-.ticket:hover {
-  transform: translateX(4px);
+  transition:
+    transform var(--t-med) var(--ease-out),
+    filter var(--t-fast);
 }
 .ticket:active {
   transform: translateY(2px);
@@ -425,10 +431,6 @@
   border: 2px solid var(--velvet);
   border-left: 2px dashed var(--chrome-faint);
   border-radius: 0 var(--r-card) var(--r-card) 0;
-}
-.ticket:hover .ticket-body {
-  border-color: var(--bulb);
-  border-left-color: var(--chrome-faint);
 }
 .ticket-title {
   font-family: var(--font-display);
@@ -486,7 +488,8 @@
 }
 .stage {
   border-radius: var(--r-card);
-  background: radial-gradient(90% 60% at 50% 0%, rgba(255, 107, 26, 0.1), transparent 70%), linear-gradient(180deg, var(--stage-3), var(--stage-2) 70%);
+  background: radial-gradient(90% 60% at 50% 0%, rgba(255, 107, 26, 0.1), transparent 70%),
+    linear-gradient(180deg, var(--stage-3), var(--stage-2) 70%);
   border: 2px solid var(--velvet);
   padding: var(--s5) var(--s4);
   min-height: 52vh;
@@ -571,7 +574,9 @@
   border-radius: var(--r-card);
   overflow: hidden;
   border: 3px solid var(--chrome);
-  box-shadow: 0 0 0 5px var(--velvet-deep), 0 16px 40px -12px rgba(0, 0, 0, 0.8);
+  box-shadow:
+    0 0 0 5px var(--velvet-deep),
+    0 16px 40px -12px rgba(0, 0, 0, 0.8);
   background: var(--velvet-deep);
 }
 .frame.portrait .img {
@@ -580,7 +585,9 @@
 .frame.flagbox {
   width: min(320px, 82%);
   border-width: 0;
-  box-shadow: 0 0 0 5px var(--velvet-deep), 0 12px 30px -10px rgba(0, 0, 0, 0.7);
+  box-shadow:
+    0 0 0 5px var(--velvet-deep),
+    0 12px 30px -10px rgba(0, 0, 0, 0.7);
 }
 .frame.flagbox .img {
   aspect-ratio: 4 / 3;
@@ -706,11 +713,12 @@
   font-size: var(--step-1);
   text-align: left;
   cursor: pointer;
-  transition: transform var(--t-fast), border-color var(--t-fast), background var(--t-med), color var(--t-med);
+  transition:
+    transform var(--t-fast),
+    border-color var(--t-fast),
+    background var(--t-med),
+    color var(--t-med);
   box-shadow: var(--lip-sm);
-}
-.option:hover:not([aria-disabled="true"]) {
-  border-color: var(--bulb);
 }
 .option:active:not([aria-disabled="true"]) {
   transform: translateY(2px);
@@ -756,7 +764,12 @@
   color: var(--wrong-ink);
 }
 .option.dim {
-  opacity: 0.5;
+  color: var(--chrome-dim);
+  border-color: var(--stage-3);
+  box-shadow: none;
+}
+.option.dim kbd {
+  color: var(--chrome-dim);
 }
 .option.static {
   cursor: default;
@@ -880,7 +893,9 @@
   border-radius: var(--r-card);
   background: var(--chrome);
   color: var(--stage);
-  box-shadow: 8px 8px 0 var(--velvet), 16px 16px 0 var(--velvet-deep);
+  box-shadow:
+    8px 8px 0 var(--velvet),
+    16px 16px 0 var(--velvet-deep);
   margin-right: 16px;
   min-height: 200px;
   display: grid;
@@ -1047,7 +1062,7 @@
 }
 
 /* Make your own / settings */
-.mine {
+.my-games {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -1207,6 +1222,7 @@
   text-align: center;
   max-width: 340px;
   min-height: 80px;
+  padding-left: 0.4em;
 }
 .join .field {
   max-width: 420px;
@@ -1229,4 +1245,199 @@
 .pair-side figcaption .lbl.real {
   background: var(--right);
   color: var(--right-ink);
+}
+
+/* ---------- Review fixes ---------- */
+.ticket.selected .ticket-body {
+  border-color: var(--buzzer);
+  background: linear-gradient(180deg, #4a1426, var(--stage-2));
+}
+.ticket.selected .stub {
+  background: var(--buzzer);
+}
+.room-end {
+  margin-top: var(--s3);
+}
+.givers {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--s3);
+}
+.giver {
+  min-height: 56px;
+  min-width: 120px;
+  padding: 10px 20px;
+  border-radius: var(--r-pill);
+  border: 0;
+  background: var(--chrome);
+  color: var(--stage);
+  font-weight: 800;
+  font-size: var(--step-1);
+  cursor: pointer;
+  box-shadow: 0 4px 0 var(--chrome-faint);
+  transition:
+    transform var(--t-fast),
+    box-shadow var(--t-fast),
+    background var(--t-fast);
+}
+.giver .pts {
+  color: #a33a00;
+  margin-left: 4px;
+}
+.giver:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 var(--chrome-faint);
+}
+.giver.on {
+  background: var(--right);
+  color: var(--right-ink);
+  box-shadow: 0 4px 0 #0d7a45;
+}
+.giver.on .pts {
+  color: var(--right-ink);
+}
+/* Pictures you can tap */
+.pair-side.pickable {
+  padding: 0;
+  cursor: pointer;
+  text-align: inherit;
+  font: inherit;
+  transition:
+    transform var(--t-fast),
+    border-color var(--t-fast),
+    box-shadow var(--t-med);
+}
+.pair-side.pickable:active:not([aria-disabled="true"]) {
+  transform: scale(0.98);
+}
+.pair-side.pickable[aria-disabled="true"] {
+  cursor: default;
+}
+.pair-cap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  padding: 8px;
+  background: var(--chrome);
+  color: var(--stage);
+  min-height: 44px;
+}
+.pair-cap kbd {
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--r-chip);
+  background: var(--stage);
+  color: var(--bulb);
+}
+.pair-side .lbl {
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  padding: 2px 8px;
+  border-radius: var(--r-chip);
+}
+.pair-side .lbl.ai {
+  background: var(--wrong);
+  color: var(--wrong-ink);
+}
+.pair-side .lbl.real {
+  background: var(--right);
+  color: var(--right-ink);
+}
+.pair-side.right {
+  border-color: var(--right);
+  box-shadow:
+    0 0 0 4px var(--right),
+    0 0 30px -4px rgba(56, 224, 140, 0.6);
+}
+.pair-side.wrong {
+  border-color: var(--wrong);
+  box-shadow: 0 0 0 4px var(--wrong);
+}
+.pair-side.mine {
+  border-color: var(--bulb);
+  box-shadow: 0 0 0 4px var(--bulb);
+}
+@media (max-width: 479px) {
+  .pair {
+    grid-template-columns: 1fr;
+  }
+  .pair .img.square {
+    aspect-ratio: 4 / 3;
+  }
+}
+/* The host screen doubles as the TV */
+@media (min-width: 1024px) {
+  .room .qprompt {
+    font-size: var(--step-6);
+  }
+  .room .room-clock {
+    font-size: var(--step-6);
+    width: 120px;
+    height: 120px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    border: 6px solid var(--bulb);
+    text-align: center;
+  }
+  .room .room-clock.low {
+    border-color: var(--wrong);
+  }
+  .room-code span {
+    width: clamp(64px, 6vw, 96px);
+    height: clamp(80px, 7.5vw, 120px);
+    font-size: var(--step-6);
+  }
+  .qr {
+    width: 240px;
+    height: 240px;
+  }
+  .room .option {
+    min-height: 84px;
+    font-size: var(--step-3);
+  }
+  .room .bigtext {
+    font-size: var(--step-6);
+  }
+  .room .frame.portrait {
+    width: 360px;
+  }
+}
+/* Who's playing on big screens: less empty space */
+@media (min-width: 720px) {
+  .door {
+    min-height: 260px;
+    align-content: center;
+    padding: var(--s7) var(--s6);
+  }
+}
+
+@media (hover: hover) {
+  .door:hover {
+    transform: translateY(-3px);
+    border-color: var(--bulb);
+  }
+  .buzzer:hover .buzzer-cap {
+    transform: translateY(-2px);
+  }
+  .roomcard:hover {
+    box-shadow: 0 0 24px -6px rgba(255, 209, 102, 0.6);
+  }
+  .ticket:hover {
+    transform: translateX(4px);
+  }
+  .ticket:hover .ticket-body {
+    border-color: var(--bulb);
+    border-left-color: var(--chrome-faint);
+  }
+  .option:hover:not([aria-disabled="true"]) {
+    border-color: var(--bulb);
+  }
 }

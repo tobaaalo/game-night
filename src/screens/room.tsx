@@ -87,7 +87,11 @@ function ConnBanner({ conn }: { conn: Conn }) {
   if (conn === "open") return null;
   return (
     <p className="banner" role="status">
-      {conn === "connecting" ? "Connecting to the room…" : conn === "retrying" ? "Reconnecting… hang tight." : "Disconnected."}
+      {conn === "connecting"
+        ? "Connecting to the room…"
+        : conn === "retrying"
+          ? "Reconnecting… hang tight."
+          : "Disconnected."}
     </p>
   );
 }
@@ -125,7 +129,11 @@ export function RoomHost() {
       save("gn.hostroom", rm);
       setRoom(rm);
     } catch (e) {
-      setErr(e instanceof Error && e.message !== "Failed to fetch" ? e.message : "Couldn't reach the room server. Check you're online, then try again.");
+      setErr(
+        e instanceof Error && e.message !== "Failed to fetch"
+          ? e.message
+          : "Couldn't reach the room server. Check you're online, then try again.",
+      );
     } finally {
       setCreating(false);
     }
@@ -142,7 +150,10 @@ export function RoomHost() {
           <h1 className="h1" tabIndex={-1}>
             Play on everyone&rsquo;s phones
           </h1>
-          <p className="lede">You get a 4-letter code. Friends open this site, type it in, and answer on their own phones. This screen shows the questions.</p>
+          <p className="lede">
+            You get a 4-letter code. Friends open this site, type it in, and answer on their own phones. This screen
+            shows the questions.
+          </p>
         </div>
         <ol className="how-steps stagger">
           <li>
@@ -168,10 +179,27 @@ export function RoomHost() {
         </div>
       </div>
     );
-  return <HostLive room={room} game={game} setGame={setGame} onClose={() => (save("gn.hostroom", null), setRoom(null), go("/games"))} />;
+  return (
+    <HostLive
+      room={room}
+      game={game}
+      setGame={setGame}
+      onClose={() => (save("gn.hostroom", null), setRoom(null), go("/games"))}
+    />
+  );
 }
 
-function HostLive({ room, game, setGame, onClose }: { room: { code: string; hostKey: string }; game: GameDef | null; setGame: (g: GameDef | null) => void; onClose: () => void }) {
+function HostLive({
+  room,
+  game,
+  setGame,
+  onClose,
+}: {
+  room: { code: string; hostKey: string };
+  game: GameDef | null;
+  setGame: (g: GameDef | null) => void;
+  onClose: () => void;
+}) {
   const { toast } = useApp();
   const [error, setError] = useState("");
   const url = useMemo(() => wsUrl(room.code, { role: "host", key: room.hostKey }), [room]);
@@ -181,7 +209,9 @@ function HostLive({ room, game, setGame, onClose }: { room: { code: string; host
   const [qr, setQr] = useState("");
   const joinUrl = `${location.origin}/join/${room.code}`;
   useEffect(() => {
-    QRCode.toDataURL(joinUrl, { margin: 1, width: 360, color: { dark: "#1c0610", light: "#efe6d8" } }).then(setQr, () => setQr(""));
+    QRCode.toDataURL(joinUrl, { margin: 1, width: 360, color: { dark: "#1c0610", light: "#efe6d8" } }).then(setQr, () =>
+      setQr(""),
+    );
   }, [joinUrl]);
 
   // Auto-reveal when time runs out
@@ -222,6 +252,15 @@ function HostLive({ room, game, setGame, onClose }: { room: { code: string; host
     );
   const players = state?.players ?? [];
   const phase = state?.phase ?? "lobby";
+  const endRoom = () => {
+    let undone = false;
+    toast("Ending the game for everyone…", () => (undone = true));
+    setTimeout(() => {
+      if (undone) return;
+      send({ t: "end" });
+      onClose();
+    }, 6000);
+  };
   const copy = async () => {
     try {
       await navigator.clipboard.writeText(joinUrl);
@@ -243,15 +282,16 @@ function HostLive({ room, game, setGame, onClose }: { room: { code: string; host
             ))}
           </p>
         </div>
-        <button className="btn ghost small" onClick={() => (send({ t: "end" }), onClose())}>
-          Close room
-        </button>
       </div>
 
       {phase === "lobby" && (
         <div className="room-lobby">
           <div className="panel join-panel">
-            {qr ? <img src={qr} alt={`QR code to join room ${room.code}`} width={180} height={180} className="qr" /> : <div className="qr skeleton" />}
+            {qr ? (
+              <img src={qr} alt={`QR code to join room ${room.code}`} width={180} height={180} className="qr" />
+            ) : (
+              <div className="qr skeleton" />
+            )}
             <div className="stack">
               <p className="h3">Friends: open this site and tap &ldquo;Join a room&rdquo;, or scan.</p>
               <p className="mono small">{joinUrl.replace(/^https?:\/\//, "")}</p>
@@ -267,14 +307,20 @@ function HostLive({ room, game, setGame, onClose }: { room: { code: string; host
               {players.length ? `${players.length} in the room` : "Waiting for players…"}
             </h2>
             {players.length === 0 ? (
-              <p className="muted">Names appear here as people join. Want to play too? Join from your own phone with the same code.</p>
+              <p className="muted">
+                Names appear here as people join. Want to play too? Join from your own phone with the same code.
+              </p>
             ) : (
               <ul className="joined">
                 {players.map((p) => (
                   <li key={p.pid} className={clsx(!p.connected && "away")}>
                     <span>{p.name}</span>
                     {!p.connected && <span className="small muted">reconnecting…</span>}
-                    <button className="icon-btn" aria-label={`Remove ${p.name}`} onClick={() => send({ t: "kick", pid: p.pid })}>
+                    <button
+                      className="icon-btn"
+                      aria-label={`Remove ${p.name}`}
+                      onClick={() => send({ t: "kick", pid: p.pid })}
+                    >
                       <Icon.close />
                     </button>
                   </li>
@@ -282,36 +328,47 @@ function HostLive({ room, game, setGame, onClose }: { room: { code: string; host
               </ul>
             )}
           </section>
-          {!game ? (
-            <section aria-labelledby="pickg" className="stack">
-              <h2 className="h3" id="pickg">
-                Pick a game
-              </h2>
-              <div className="room-games">
-                {ROOM_GAMES().map((g) => (
-                  <button key={g.id} className="ticket mini" onClick={() => setGame(g)}>
-                    <span className="ticket-body">
-                      <span className="ticket-title">{g.name}</span>
-                      <span className="ticket-blurb">{g.blurb}</span>
-                    </span>
-                  </button>
-                ))}
-              </div>
-            </section>
-          ) : (
-            <section className="stack" aria-labelledby="gset">
-              <div className="actions" style={{ justifyContent: "space-between" }}>
-                <h2 className="h3" id="gset">
-                  {game.name}
-                </h2>
-                <button className="link" onClick={() => setGame(null)}>
-                  Change game
+          <section aria-labelledby="pickg" className="stack">
+            <h2 className="h3" id="pickg">
+              Pick a game
+            </h2>
+            <div className="room-games" role="radiogroup" aria-labelledby="pickg">
+              {ROOM_GAMES().map((g, i) => (
+                <button
+                  key={g.id}
+                  className={clsx("ticket", game?.id === g.id && "selected")}
+                  role="radio"
+                  aria-checked={game?.id === g.id}
+                  onClick={() => setGame(g)}
+                >
+                  <span className="stub" aria-hidden="true">
+                    <span className="stub-no">{String(i + 1).padStart(2, "0")}</span>
+                  </span>
+                  <span className="ticket-body">
+                    <span className="ticket-title">{g.name}</span>
+                    <span className="ticket-blurb">{g.blurb}</span>
+                  </span>
                 </button>
-              </div>
+              ))}
+            </div>
+          </section>
+          {!game ? (
+            <div className="dock">
+              <button className="btn block" disabled>
+                Pick a game to start
+              </button>
+            </div>
+          ) : (
+            <section className="stack" aria-label={`${game.name} settings`}>
               <Setup
                 id={`room-${game.id}`}
                 fields={game.roomFields ?? []}
-                startLabel={players.length ? `Start with ${players.length} ${players.length === 1 ? "player" : "players"}` : "Waiting for players…"}
+                disabled={!players.length}
+                startLabel={
+                  players.length
+                    ? `Start with ${players.length} ${players.length === 1 ? "player" : "players"}`
+                    : "Waiting for someone to join…"
+                }
                 onStart={async (v) => {
                   if (!players.length) return;
                   const list = (await game.buildQuestions?.(v)) ?? [];
@@ -327,8 +384,20 @@ function HostLive({ room, game, setGame, onClose }: { room: { code: string; host
       )}
 
       {(phase === "question" || phase === "reveal") && state?.question && (
-        <HostQuestionView state={state} q={qs[qi]} onReveal={() => send({ t: "reveal" })} onNext={() => ask(qi + 1)} last={qi + 1 >= qs.length} />
+        <HostQuestionView
+          state={state}
+          q={qs[qi]}
+          onReveal={() => send({ t: "reveal" })}
+          onNext={() => ask(qi + 1)}
+          last={qi + 1 >= qs.length}
+        />
       )}
+
+      <div className="actions center room-end">
+        <button className="link" onClick={endRoom}>
+          End the game for everyone
+        </button>
+      </div>
 
       {phase === "ended" && (
         <div className="stack">
@@ -337,8 +406,8 @@ function HostLive({ room, game, setGame, onClose }: { room: { code: string; host
             <button className="btn" onClick={() => (send({ t: "lobby" }), setGame(null))}>
               Play another game
             </button>
-            <button className="btn ghost" onClick={() => (send({ t: "end" }), onClose())}>
-              Close room
+            <button className="btn ghost" onClick={endRoom}>
+              Close the room
             </button>
           </div>
         </div>
@@ -347,7 +416,19 @@ function HostLive({ room, game, setGame, onClose }: { room: { code: string; host
   );
 }
 
-function HostQuestionView({ state, q, onReveal, onNext, last }: { state: RoomState; q?: HostQuestion; onReveal: () => void; onNext: () => void; last: boolean }) {
+function HostQuestionView({
+  state,
+  q,
+  onReveal,
+  onNext,
+  last,
+}: {
+  state: RoomState;
+  q?: HostQuestion;
+  onReveal: () => void;
+  onNext: () => void;
+  last: boolean;
+}) {
   const pq = state.question!;
   const revealed = state.phase === "reveal";
   const answered = state.players.filter((p) => p.answered).length;
@@ -367,7 +448,14 @@ function HostQuestionView({ state, q, onReveal, onNext, last }: { state: RoomSta
           {pq.options.map((o, i) => {
             const count = revealed ? Object.values(state.reveal?.picks ?? {}).filter((p) => p.idx === i).length : 0;
             return (
-              <div key={i} className={clsx("option static", revealed && i === correct && "right", revealed && i !== correct && "dim")}>
+              <div
+                key={i}
+                className={clsx(
+                  "option static",
+                  revealed && i === correct && "right",
+                  revealed && i !== correct && "dim",
+                )}
+              >
                 <kbd>{i + 1}</kbd>
                 <span>{o}</span>
                 {revealed && <span className="votes">{count}</span>}
@@ -400,7 +488,17 @@ function HostQuestionView({ state, q, onReveal, onNext, last }: { state: RoomSta
   );
 }
 
-function Leaderboard({ state, title, compact, you }: { state: RoomState; title?: string; compact?: boolean; you?: string }) {
+function Leaderboard({
+  state,
+  title,
+  compact,
+  you,
+}: {
+  state: RoomState;
+  title?: string;
+  compact?: boolean;
+  you?: string;
+}) {
   const ranked = [...state.players].sort((a, b) => b.score - a.score);
   return (
     <div className="stack">
@@ -415,7 +513,9 @@ function Leaderboard({ state, title, compact, you }: { state: RoomState; title?:
                 {p.name}
                 {p.pid === you && " (you)"}
               </span>
-              {compact && g != null && <span className={clsx("gain", g > 0 ? "good" : "bad")}>{g > 0 ? `+${g}` : "✗"}</span>}
+              {compact && g != null && (
+                <span className={clsx("gain", g > 0 ? "good" : "bad")}>{g > 0 ? `+${g}` : "✗"}</span>
+              )}
               <span className="pts">
                 <Flaps value={p.score} min={1} />
               </span>
@@ -448,7 +548,11 @@ export function RoomJoin({ initial }: { initial?: string }) {
       save("gn.joinname", name.trim());
       setJoined({ code, name: name.trim() });
     } catch (e) {
-      setErr(e instanceof Error && e.message !== "Failed to fetch" ? e.message : "Couldn't reach the room. Check you're online, then try again.");
+      setErr(
+        e instanceof Error && e.message !== "Failed to fetch"
+          ? e.message
+          : "Couldn't reach the room. Check you're online, then try again.",
+      );
     } finally {
       setBusy(false);
     }
@@ -490,7 +594,15 @@ export function RoomJoin({ initial }: { initial?: string }) {
       </div>
       <div className="field">
         <label htmlFor="jname">Your name</label>
-        <input id="jname" className="input" value={name} maxLength={20} onChange={(e) => (setName(e.target.value), setErr(""))} autoComplete="given-name" autoFocus={!!initial} />
+        <input
+          id="jname"
+          className="input"
+          value={name}
+          maxLength={20}
+          onChange={(e) => (setName(e.target.value), setErr(""))}
+          autoComplete="given-name"
+          autoFocus={!!initial}
+        />
       </div>
       {err && (
         <p className="error-text" role="alert">
@@ -571,7 +683,9 @@ function PlayerLive({ code, name, onLeave }: { code: string; name: string; onLea
           <h1 className="h1" tabIndex={-1}>
             Waiting for the host to start
           </h1>
-          <p className="muted">{state.players.length} in the room: {state.players.map((p) => p.name).join(", ")}</p>
+          <p className="muted">
+            {state.players.length} in the room: {state.players.map((p) => p.name).join(", ")}
+          </p>
           <button className="link" onClick={onLeave}>
             Leave room
           </button>
@@ -586,8 +700,27 @@ function PlayerLive({ code, name, onLeave }: { code: string; name: string; onLea
             {state.phase === "question" && <Countdown deadline={q.deadline} />}
           </div>
           <h2 className="qprompt">{q.prompt}</h2>
-          <MediaView media={q.media} revealed={state.phase === "reveal"} captions={state.reveal?.captions} />
-          <div className={clsx("options", q.options.length === 2 && "two", "big-tap")}>
+          <MediaView
+            media={q.media}
+            revealed={state.phase === "reveal"}
+            captions={state.reveal?.captions}
+            onPick={q.media?.type === "pair" ? answer : undefined}
+            states={q.options.map((_, i) =>
+              state.phase === "reveal"
+                ? i === state.reveal?.correct
+                  ? "right"
+                  : myPick === i
+                    ? "wrong"
+                    : undefined
+                : myPick === i
+                  ? "mine"
+                  : undefined,
+            )}
+          />
+          <div
+            className={clsx("options", q.options.length === 2 && "two", "big-tap")}
+            hidden={q.media?.type === "pair"}
+          >
             {q.options.map((o, i) => {
               const corr = state.reveal?.correct;
               return (
@@ -611,7 +744,10 @@ function PlayerLive({ code, name, onLeave }: { code: string; name: string; onLea
           </div>
           <p className="verdict center-text" aria-live="polite">
             {state.phase === "question" && (myPick != null ? "Locked in! Waiting for the others…" : "Tap your answer.")}
-            {state.phase === "reveal" && (gained ? `Nice! +${gained}` : myPick == null ? "Too slow this time." : "Not this one.")}
+            {state.phase === "reveal" &&
+              (gained
+                ? `Nice! +${gained}`
+                : `${myPick == null ? "Too slow this time." : "Not this time."} It was ${q.options[state.reveal?.correct ?? 0]}.`)}
           </p>
         </div>
       )}

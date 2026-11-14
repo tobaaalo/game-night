@@ -65,7 +65,19 @@ export function Turn({ id }: { id: string }) {
   return <p className="turn">{nameOf(players[i], i)}&rsquo;s turn</p>;
 }
 
-export function MediaView({ media, revealed, captions }: { media?: Media; revealed?: boolean; captions?: string[] }) {
+export function MediaView({
+  media,
+  revealed,
+  captions,
+  onPick,
+  states,
+}: {
+  media?: Media;
+  revealed?: boolean;
+  captions?: string[];
+  onPick?: (i: number) => void;
+  states?: (string | false | undefined)[];
+}) {
   if (!media) return null;
   switch (media.type) {
     case "image":
@@ -93,13 +105,34 @@ export function MediaView({ media, revealed, captions }: { media?: Media; reveal
         <div className={clsx("pair", revealed && "revealed")}>
           {(["a", "b"] as const).map((k, i) => {
             const side = media[k];
-            return (
-              <figure key={k} className="pair-side">
-                {side.src ? <Img src={side.src} alt={`Picture ${i ? "B" : "A"}`} square /> : <blockquote>{side.text}</blockquote>}
-                <figcaption>
-                  {i ? "B" : "A"}
-                  {revealed && captions?.[i] && <span className={clsx("lbl", captions[i] === "AI" ? "ai" : "real")}>{captions[i]}</span>}
-                </figcaption>
+            const inner = (
+              <>
+                {side.src ? (
+                  <Img src={side.src} alt={`Picture ${i ? "B" : "A"}`} square />
+                ) : (
+                  <blockquote>{side.text}</blockquote>
+                )}
+                <span className="pair-cap">
+                  <kbd>{i + 1}</kbd> {i ? "B" : "A"}
+                  {revealed && captions?.[i] && (
+                    <span className={clsx("lbl", captions[i] === "AI" ? "ai" : "real")}>{captions[i]}</span>
+                  )}
+                </span>
+              </>
+            );
+            return onPick ? (
+              <button
+                key={k}
+                className={clsx("pair-side pickable", states?.[i])}
+                onClick={() => onPick(i)}
+                aria-disabled={revealed}
+                aria-label={`Pick ${i ? "B" : "A"}`}
+              >
+                {inner}
+              </button>
+            ) : (
+              <figure key={k} className={clsx("pair-side", states?.[i])}>
+                {inner}
               </figure>
             );
           })}
@@ -117,7 +150,14 @@ export function Img({ src, alt, square }: { src: string; alt: string; square?: b
           {state === "error" ? "Couldn't load this picture. If you're offline, it hasn't been saved yet." : ""}
         </span>
       )}
-      <img key={src} src={src} alt={alt} onLoad={() => setState("ok")} onError={() => setState("error")} decoding="async" />
+      <img
+        key={src}
+        src={src}
+        alt={alt}
+        onLoad={() => setState("ok")}
+        onError={() => setState("error")}
+        decoding="async"
+      />
     </span>
   );
 }
@@ -130,7 +170,7 @@ export function Finish({ onAgain, label = "Play again" }: { onAgain: () => void;
   return (
     <div className="finish stagger">
       <p className="eyebrow">Round over</p>
-      <h2 className="h1">{top.score === 0 ? "Everyone's level" : tie ? "It's a tie at the top!" : `${top.n} takes the lead!`}</h2>
+      <h2 className="h1">{top.score === 0 ? "Everyone's level" : tie ? "It's a tie at the top!" : `${top.n} wins!`}</h2>
       <ol className="podium">
         {ranked.map((p, i) => (
           <li key={p.id} className={clsx(i === 0 && !tie && top.score > 0 && "first")}>

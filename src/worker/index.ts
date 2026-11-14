@@ -8,9 +8,13 @@ interface Env {
 }
 
 const json = (data: unknown, status = 200) =>
-  new Response(JSON.stringify(data), { status, headers: { "content-type": "application/json", "cache-control": "no-store" } });
+  new Response(JSON.stringify(data), {
+    status,
+    headers: { "content-type": "application/json", "cache-control": "no-store" },
+  });
 
-const newCode = () => Array.from({ length: 4 }, () => CODE_ALPHABET[Math.floor(Math.random() * CODE_ALPHABET.length)]).join("");
+const newCode = () =>
+  Array.from({ length: 4 }, () => CODE_ALPHABET[Math.floor(Math.random() * CODE_ALPHABET.length)]).join("");
 
 export default {
   async fetch(req: Request, env: Env): Promise<Response> {
@@ -89,12 +93,22 @@ export class Room extends DurableObject<Env> {
     if (url.pathname === "/claim") {
       if (this.s) return json({ error: "taken" }, 409);
       const hostKey = crypto.randomUUID();
-      this.s = { code: url.searchParams.get("code") ?? "", hostKey, game: "", total: 0, phase: "lobby", players: [], answers: {}, n: 0 };
+      this.s = {
+        code: url.searchParams.get("code") ?? "",
+        hostKey,
+        game: "",
+        total: 0,
+        phase: "lobby",
+        players: [],
+        answers: {},
+        n: 0,
+      };
       await this.save();
       return json({ hostKey });
     }
     if (!this.s) return json({ error: "No room with that code. Check the letters with the host." }, 404);
-    if (url.pathname === "/info") return json({ code: this.s.code, game: this.s.game, phase: this.s.phase, players: this.s.players.length });
+    if (url.pathname === "/info")
+      return json({ code: this.s.code, game: this.s.game, phase: this.s.phase, players: this.s.players.length });
     if (url.pathname === "/ws") {
       if (req.headers.get("Upgrade") !== "websocket") return json({ error: "Expected a WebSocket" }, 426);
       const role = url.searchParams.get("role");

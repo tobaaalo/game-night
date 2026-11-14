@@ -56,7 +56,9 @@ export function RevealRun({ items, onAgain }: { items: RevealItem[]; onAgain: ()
       {it.image && <h2 className="qprompt">{it.prompt}</h2>}
       <div className={clsx("flipcard", shown && "flipped")} aria-live="polite">
         <div className="flip-inner">
-          <div className="flip-front">{hint && it.hint ? <span className="hinttext">Hint: {it.hint}</span> : <span aria-hidden="true">?</span>}</div>
+          <div className="flip-front">
+            {hint && it.hint ? <span className="hinttext">Hint: {it.hint}</span> : <span aria-hidden="true">?</span>}
+          </div>
           <div className="flip-back">{shown ? it.answer : ""}</div>
         </div>
       </div>
@@ -79,7 +81,15 @@ export function RevealRun({ items, onAgain }: { items: RevealItem[]; onAgain: ()
 }
 
 /* ---------- Card decks: endless, no repeats within 5 ---------- */
-export function CardDeck({ id, items, format = (s) => s }: { id: string; items: string[]; format?: (s: string) => string }) {
+export function CardDeck({
+  id,
+  items,
+  format = (s) => s,
+}: {
+  id: string;
+  items: string[];
+  format?: (s: string) => string;
+}) {
   const [hist, setHist] = useState<string[]>(() => [draw(id, items)]);
   const [pos, setPos] = useState(0);
   const next = () => {
@@ -112,7 +122,9 @@ export function CardDeck({ id, items, format = (s) => s }: { id: string; items: 
           Next card
         </button>
       </div>
-      <p className="hint center-text">Cards don&rsquo;t repeat within five, and the pile reshuffles when it runs out.</p>
+      <p className="hint center-text">
+        Cards don&rsquo;t repeat within five, and the pile reshuffles when it runs out.
+      </p>
     </div>
   );
 }
@@ -359,7 +371,11 @@ export function NPAT() {
       {phase === "score" && (
         <>
           <p className="lede center-text">Pens down! Read your answers out. Unique answers score 10, shared ones 5.</p>
-          <WhoGotIt label="Who had the best sheet?" points={10} onDone={(ids) => (ids.forEach((id) => award(id, 10)), newLetter())} />
+          <WhoGotIt
+            label="Who had the best sheet?"
+            points={10}
+            onDone={(ids) => (ids.forEach((id) => award(id, 10)), newLetter())}
+          />
         </>
       )}
     </div>

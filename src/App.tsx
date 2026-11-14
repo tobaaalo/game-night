@@ -22,11 +22,14 @@ function Header() {
         </button>
         <span className="spacer" />
         {!minimal && group && (
-          <button className="who-pill" onClick={() => go("/names")} aria-label={`${players.length} players. Change who's playing`}>
+          <button
+            className="who-pill"
+            onClick={() => go("/names")}
+            aria-label={`${players.length} players. Change who's playing`}
+          >
             <Icon.people />
             <span>
-              {players.length}
-              <span className="who-label"> · {group === "couple" ? "Couple" : "Friends"}</span>
+              {players.length} · {group === "couple" ? "Couple" : "Friends"}
             </span>
           </button>
         )}

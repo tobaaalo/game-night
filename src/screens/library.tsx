@@ -12,9 +12,17 @@ export function Library() {
   useEffect(() => {
     if (!group) go("/who", { replace: true });
   }, [group, go]);
-  const games = useMemo(() => gamesFor(group).filter((g) => !g.minPlayers || players.length >= g.minPlayers || g.section === "yours"), [group, players.length]);
-  const hidden = useMemo(() => gamesFor(group).filter((g) => g.minPlayers && players.length < g.minPlayers), [group, players.length]);
-  const sections = (Object.keys(SECTIONS) as Section[]).map((s) => ({ s, list: games.filter((g) => g.section === s) })).filter((x) => x.list.length);
+  const games = useMemo(
+    () => gamesFor(group).filter((g) => !g.minPlayers || players.length >= g.minPlayers || g.section === "yours"),
+    [group, players.length],
+  );
+  const hidden = useMemo(
+    () => gamesFor(group).filter((g) => g.minPlayers && players.length < g.minPlayers),
+    [group, players.length],
+  );
+  const sections = (Object.keys(SECTIONS) as Section[])
+    .map((s) => ({ s, list: games.filter((g) => g.section === s) }))
+    .filter((x) => x.list.length);
   let n = 0;
   const surprise = () => {
     if (spinning) return;
@@ -35,7 +43,11 @@ export function Library() {
       </div>
 
       <div className="lib-feature stagger">
-        <button className={clsx("buzzer", spinning && "pressed")} onClick={surprise} aria-label="Surprise us: pick a random game">
+        <button
+          className={clsx("buzzer", spinning && "pressed")}
+          onClick={surprise}
+          aria-label="Surprise us: pick a random game"
+        >
           <span className="buzzer-cap">
             <Icon.shuffle />
           </span>
@@ -49,7 +61,9 @@ export function Library() {
             <span>
               <span className="roomcard-title">Play on everyone&rsquo;s phones</span>
               <span className="roomcard-sub" id="room-sub">
-                {online ? "Friends join with a 4-letter code and answer on their own phone." : "Needs internet. Pass-the-phone games still work offline."}
+                {online
+                  ? "Friends join with a 4-letter code and answer on their own phone."
+                  : "Needs internet. Pass-the-phone games still work offline."}
               </span>
             </span>
           </button>
@@ -69,7 +83,7 @@ export function Library() {
               n += 1;
               return (
                 <li key={g.id}>
-                  <Ticket g={g} n={n} onOpen={() => go(`/play/${g.id}`)} />
+                  <Ticket g={g} n={n} showRoom={group === "friends"} onOpen={() => go(`/play/${g.id}`)} />
                 </li>
               );
             })}
@@ -92,7 +106,8 @@ export function Library() {
       </section>
       {hidden.length > 0 && (
         <p className="hint center-text">
-          {hidden.map((g) => g.name).join(", ")} need{hidden.length === 1 ? "s" : ""} at least {Math.min(...hidden.map((g) => g.minPlayers ?? 3))} players.{" "}
+          {hidden.map((g) => g.name).join(", ")} need{hidden.length === 1 ? "s" : ""} at least{" "}
+          {Math.min(...hidden.map((g) => g.minPlayers ?? 3))} players.{" "}
           <button className="link" onClick={() => go("/names")}>
             Add players
           </button>
@@ -102,7 +117,7 @@ export function Library() {
   );
 }
 
-function Ticket({ g, n, onOpen }: { g: GameDef; n: number; onOpen: () => void }) {
+function Ticket({ g, n, onOpen, showRoom }: { g: GameDef; n: number; onOpen: () => void; showRoom: boolean }) {
   return (
     <button className="ticket" onClick={onOpen}>
       <span className="stub" aria-hidden="true">
@@ -113,7 +128,7 @@ function Ticket({ g, n, onOpen }: { g: GameDef; n: number; onOpen: () => void })
         <span className="ticket-blurb">{g.blurb}</span>
         <span className="ticket-meta">
           {g.stat}
-          {g.room && <span className="tag">Room mode</span>}
+          {g.room && showRoom && <span className="tag">Plays on phones</span>}
         </span>
       </span>
     </button>

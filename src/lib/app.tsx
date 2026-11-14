@@ -107,7 +107,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
       save("gn.group", g);
       setPlayers((prev) => {
         const named = prev.filter((p) => p.name.trim());
-        if (g === "couple") return named.length >= 2 ? named.slice(0, 2) : defaultPlayers(g).map((d, i) => named[i] ?? d);
+        if (g === "couple")
+          return named.length >= 2 ? named.slice(0, 2) : defaultPlayers(g).map((d, i) => named[i] ?? d);
         const base = named.length ? named : [];
         while (base.length < 3) base.push({ id: uid(), name: "", score: 0 });
         return base;
@@ -117,7 +118,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
   );
 
   const award = useCallback(
-    (playerId: string, pts: number) => setPlayers((ps) => ps.map((p) => (p.id === playerId ? { ...p, score: Math.max(0, p.score + pts) } : p))),
+    (playerId: string, pts: number) =>
+      setPlayers((ps) => ps.map((p) => (p.id === playerId ? { ...p, score: Math.max(0, p.score + pts) } : p))),
     [setPlayers],
   );
 
@@ -146,8 +148,40 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const value = useMemo<AppCtx>(
-    () => ({ path, go, back, group, setGroup, players, setPlayers, award, resetScores, onboarded, setOnboarded, toast, toasts, dismiss, online }),
-    [path, go, back, group, setGroup, players, setPlayers, award, resetScores, onboarded, setOnboarded, toast, toasts, dismiss, online],
+    () => ({
+      path,
+      go,
+      back,
+      group,
+      setGroup,
+      players,
+      setPlayers,
+      award,
+      resetScores,
+      onboarded,
+      setOnboarded,
+      toast,
+      toasts,
+      dismiss,
+      online,
+    }),
+    [
+      path,
+      go,
+      back,
+      group,
+      setGroup,
+      players,
+      setPlayers,
+      award,
+      resetScores,
+      onboarded,
+      setOnboarded,
+      toast,
+      toasts,
+      dismiss,
+      online,
+    ],
   );
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }

@@ -12,7 +12,8 @@ html {
 body {
   margin: 0;
   min-height: 100%;
-  background: radial-gradient(120% 80% at 50% -10%, var(--stage-3) 0%, var(--stage) 55%, var(--velvet-deep) 100%) fixed,
+  background:
+    radial-gradient(120% 80% at 50% -10%, var(--stage-3) 0%, var(--stage) 55%, var(--velvet-deep) 100%) fixed,
     var(--stage);
   color: var(--chrome);
   font-family: var(--font-body);
@@ -61,6 +62,9 @@ textarea {
   outline: 3px solid var(--buzzer);
   outline-offset: 3px;
   border-radius: var(--r-chip);
+}
+[hidden] {
+  display: none !important;
 }
 .sr-only {
   position: absolute !important;
@@ -196,9 +200,6 @@ main {
   white-space: nowrap;
   transition: border-color var(--t-fast);
 }
-.who-pill:hover {
-  border-color: var(--chrome-faint);
-}
 .icon-btn {
   width: 44px;
   height: 44px;
@@ -208,11 +209,10 @@ main {
   border: 2px solid var(--velvet);
   background: var(--stage-2);
   cursor: pointer;
-  transition: border-color var(--t-fast), transform var(--t-fast);
+  transition:
+    border-color var(--t-fast),
+    transform var(--t-fast);
   flex: none;
-}
-.icon-btn:hover {
-  border-color: var(--chrome-faint);
 }
 .icon-btn:active {
   transform: scale(0.94);
@@ -288,18 +288,22 @@ p {
   font-size: var(--step-1);
   letter-spacing: 0.04em;
   cursor: pointer;
-  box-shadow: 0 5px 0 #8a2e00, 0 12px 28px -10px rgba(255, 107, 26, 0.6);
-  transition: transform var(--t-fast) var(--ease-out), box-shadow var(--t-fast), background var(--t-fast);
+  box-shadow:
+    0 5px 0 #8a2e00,
+    0 12px 28px -10px rgba(255, 107, 26, 0.6);
+  transition:
+    transform var(--t-fast) var(--ease-out),
+    box-shadow var(--t-fast),
+    background var(--t-fast);
   text-decoration: none;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
 }
-.btn:hover {
-  background: var(--buzzer-hot);
-}
 .btn:active {
   transform: translateY(4px);
-  box-shadow: 0 1px 0 #8a2e00, 0 4px 12px -6px rgba(255, 107, 26, 0.6);
+  box-shadow:
+    0 1px 0 #8a2e00,
+    0 4px 12px -6px rgba(255, 107, 26, 0.6);
 }
 .btn:disabled {
   opacity: 0.45;
@@ -319,10 +323,6 @@ p {
   letter-spacing: 0;
   min-height: 48px;
 }
-.btn.ghost:hover {
-  border-color: var(--chrome-faint);
-  background: rgba(255, 255, 255, 0.03);
-}
 .btn.quiet {
   --bg: var(--stage-2);
   --ink: var(--chrome);
@@ -331,9 +331,6 @@ p {
   font-weight: 700;
   letter-spacing: 0;
   min-height: 48px;
-}
-.btn.quiet:hover {
-  background: var(--stage-3);
 }
 .btn.right {
   --bg: var(--right);
@@ -411,11 +408,12 @@ fieldset.choice legend {
   background: var(--stage-2);
   font-weight: 600;
   cursor: pointer;
-  transition: background var(--t-fast), border-color var(--t-fast), color var(--t-fast), transform var(--t-fast);
+  transition:
+    background var(--t-fast),
+    border-color var(--t-fast),
+    color var(--t-fast),
+    transform var(--t-fast);
   user-select: none;
-}
-.chip:hover {
-  border-color: var(--chrome-faint);
 }
 .chip:active {
   transform: scale(0.97);
@@ -467,7 +465,9 @@ fieldset.choice legend {
   color: var(--chrome);
   font-size: var(--step-1);
   width: 100%;
-  transition: border-color var(--t-fast), box-shadow var(--t-fast);
+  transition:
+    border-color var(--t-fast),
+    box-shadow var(--t-fast);
 }
 .input::placeholder {
   color: var(--chrome-faint);
@@ -503,11 +503,16 @@ textarea.input {
   inset: -10px;
   border-radius: calc(var(--r-card) + 10px);
   padding: 7px;
-  background: radial-gradient(circle at center, var(--bulb) 0 2.6px, transparent 3.2px) 0 0 / 14px 14px,
+  background:
+    radial-gradient(circle at center, var(--bulb) 0 2.6px, transparent 3.2px) 0 0 / 14px 14px,
     radial-gradient(circle at center, var(--bulb-dim) 0 2.6px, transparent 3.2px) 7px 7px / 14px 14px;
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
-  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  mask:
+    linear-gradient(#000 0 0) content-box exclude,
+    linear-gradient(#000 0 0);
   filter: drop-shadow(0 0 4px rgba(255, 209, 102, 0.55));
   z-index: -1;
   pointer-events: none;
@@ -539,7 +544,9 @@ textarea.input {
   font-size: clamp(3rem, 15vw, 6.5rem);
   line-height: 0.9;
   color: var(--bulb);
-  text-shadow: 0 0 30px rgba(255, 209, 102, 0.35), 0 6px 0 #6b2a00;
+  text-shadow:
+    0 0 30px rgba(255, 209, 102, 0.35),
+    0 6px 0 #6b2a00;
 }
 .logo-word span {
   display: block;
@@ -561,7 +568,9 @@ textarea.input {
   background: var(--velvet-deep);
   border: 2px solid var(--velvet);
   min-height: 48px;
-  transition: border-color var(--t-med), box-shadow var(--t-med);
+  transition:
+    border-color var(--t-med),
+    box-shadow var(--t-med);
 }
 .board-seat.now {
   border-color: var(--bulb);
@@ -754,5 +763,27 @@ textarea.input {
   }
   .marquee.live::before {
     animation: none;
+  }
+}
+
+@media (hover: hover) {
+  .who-pill:hover {
+    border-color: var(--chrome-faint);
+  }
+  .icon-btn:hover {
+    border-color: var(--chrome-faint);
+  }
+  .btn:hover {
+    background: var(--buzzer-hot);
+  }
+  .btn.ghost:hover {
+    border-color: var(--chrome-faint);
+    background: rgba(255, 255, 255, 0.03);
+  }
+  .btn.quiet:hover {
+    background: var(--stage-3);
+  }
+  .chip:hover {
+    border-color: var(--chrome-faint);
   }
 }

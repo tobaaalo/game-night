@@ -52,7 +52,9 @@ export function faceQuestions(s: QuizSetup): HostQuestion[] {
 export function realAiQuestions(s: QuizSetup): HostQuestion[] {
   const texts = s.mode === "text";
   type It = { kind: "t"; t: [string, string, string] } | { kind: "p"; p: (typeof PAIRS)[number] };
-  const items: It[] = texts ? AITEXT.map((t) => ({ kind: "t" as const, t })) : PAIRS.map((p) => ({ kind: "p" as const, p }));
+  const items: It[] = texts
+    ? AITEXT.map((t) => ({ kind: "t" as const, t }))
+    : PAIRS.map((p) => ({ kind: "p" as const, p }));
   return drawMany(`realai|${texts ? "t" : "p"}`, items, s.count).map((it) => {
     const askAI = Math.random() < 0.5;
     const aiFirst = Math.random() < 0.5;
@@ -112,11 +114,26 @@ export function worldQuestions(w: World, s: QuizSetup): HostQuestion[] {
     const tail = `Capital: ${k.cap}.`;
     switch (m) {
       case "shape":
-        return { ...base, prompt: "Which country has this shape?", media: { type: "shape", d: k.shape ?? "" }, explain: `It's ${k.n}. ${tail}` };
+        return {
+          ...base,
+          prompt: "Which country has this shape?",
+          media: { type: "shape", d: k.shape ?? "" },
+          explain: `It's ${k.n}. ${tail}`,
+        };
       case "cap":
-        return { ...base, prompt: "Which country has this capital city?", media: { type: "big", text: k.cap }, explain: `It's ${k.n}. ${fact ?? ""}` };
+        return {
+          ...base,
+          prompt: "Which country has this capital city?",
+          media: { type: "big", text: k.cap },
+          explain: `It's ${k.n}. ${fact ?? ""}`,
+        };
       case "fact":
-        return { ...base, prompt: "Which country is this?", media: { type: "big", text: fact ?? "" }, explain: `It's ${k.n}. ${tail}` };
+        return {
+          ...base,
+          prompt: "Which country is this?",
+          media: { type: "big", text: fact ?? "" },
+          explain: `It's ${k.n}. ${tail}`,
+        };
       case "slang":
         return {
           ...base,
@@ -125,7 +142,12 @@ export function worldQuestions(w: World, s: QuizSetup): HostQuestion[] {
           explain: `It's ${k.n}. “${sl?.[0]}” means ${sl?.[1]}.`,
         };
       default:
-        return { ...base, prompt: "Which country's flag is this?", media: { type: "flag", code: k.c }, explain: `It's ${k.n}. ${tail} ${fact ?? ""}` };
+        return {
+          ...base,
+          prompt: "Which country's flag is this?",
+          media: { type: "flag", code: k.c },
+          explain: `It's ${k.n}. ${tail} ${fact ?? ""}`,
+        };
     }
   });
 }

@@ -23,7 +23,9 @@ export function Setup({
   startLabel = "Start",
   note,
   error,
+  disabled,
 }: {
+  disabled?: boolean;
   id: string;
   fields: Field[];
   onStart: (v: SetupValues) => void;
@@ -36,7 +38,9 @@ export function Setup({
     const out: SetupValues = {};
     for (const f of fields) {
       const s = saved[f.key];
-      const valid = Array.isArray(s) ? s.every((x) => f.options.some((o) => o.value === x)) : f.options.some((o) => o.value === s);
+      const valid = Array.isArray(s)
+        ? s.every((x) => f.options.some((o) => o.value === x))
+        : f.options.some((o) => o.value === s);
       out[f.key] = s !== undefined && valid ? s : f.def;
     }
     return out;
@@ -53,7 +57,14 @@ export function Setup({
       }}
     >
       {fields.map((f) => (
-        <Choice key={f.key} legend={f.legend} options={f.options} value={v[f.key] as never} multi={f.multi} onChange={(x) => setV((p) => ({ ...p, [f.key]: x as never }))} />
+        <Choice
+          key={f.key}
+          legend={f.legend}
+          options={f.options}
+          value={v[f.key] as never}
+          multi={f.multi}
+          onChange={(x) => setV((p) => ({ ...p, [f.key]: x as never }))}
+        />
       ))}
       {note && <p className="hint">{note}</p>}
       {(empty || error) && (
@@ -62,7 +73,7 @@ export function Setup({
         </p>
       )}
       <div className="dock">
-        <button className="btn block" type="submit" disabled={empty}>
+        <button className="btn block" type="submit" disabled={empty || disabled}>
           {startLabel}
         </button>
       </div>
@@ -116,12 +127,29 @@ export function QuizRun({ questions, onAgain }: { questions: HostQuestion[]; onA
         </p>
       </div>
       <h2 className="qprompt">{q.prompt}</h2>
-      <MediaView media={q.media} revealed={picked != null} captions={q.captions} />
-      <div className={clsx("options", q.options.length === 2 && "two")} role="group" aria-label="Answers">
+      <MediaView
+        media={q.media}
+        revealed={picked != null}
+        captions={q.captions}
+        onPick={q.media?.type === "pair" ? choose : undefined}
+        states={q.options.map(
+          (_, idx) => picked != null && (idx === q.correct ? "right" : picked === idx ? "wrong" : undefined),
+        )}
+      />
+      <div
+        className={clsx("options", q.options.length === 2 && "two")}
+        role="group"
+        aria-label="Answers"
+        hidden={q.media?.type === "pair"}
+      >
         {q.options.map((o, idx) => (
           <button
             key={o + idx}
-            className={clsx("option", picked != null && idx === q.correct && "right", picked === idx && idx !== q.correct && "wrong")}
+            className={clsx(
+              "option",
+              picked != null && idx === q.correct && "right",
+              picked === idx && idx !== q.correct && "wrong",
+            )}
             onClick={() => choose(idx)}
             aria-disabled={picked != null}
           >
@@ -134,7 +162,8 @@ export function QuizRun({ questions, onAgain }: { questions: HostQuestion[]; onA
         {picked != null && (
           <>
             <p className={clsx("verdict", right ? "good" : "bad")}>
-              {right ? `Correct! +${q.points} for ${nameOf(current, turn % players.length)}.` : "Not quite."} {q.explain}
+              {right ? `Correct! +${q.points} for ${nameOf(current, turn % players.length)}.` : "Not quite."}{" "}
+              {q.explain}
             </p>
             <button id="next-btn" className="btn" onClick={next}>
               {i + 1 < questions.length ? "Next question" : "See the scores"}
