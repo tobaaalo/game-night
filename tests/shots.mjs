@@ -134,6 +134,25 @@ for (const w of WIDTHS) {
     await page.goto(BASE + "/play/charades");
     await click(page, "Start 60 seconds");
   });
+  await step("27b-new-games-setup", async () => {
+    for (const g of ["sports", "hol", "oddone", "years", "nhie", "bingo", "wordchain", "match", "draw", "bucket"]) {
+      await page.goto(BASE + "/play/" + g);
+      await page.waitForTimeout(300);
+      await shot(page, w, "27b-" + g + "-setup");
+    }
+  });
+  await step("27c-new-games-play", async () => {
+    for (const g of ["sports", "hol", "oddone", "years", "bingo", "wordchain", "match", "draw"]) {
+      await page.goto(BASE + "/play/" + g);
+      await click(page, "Start");
+      await shot(page, w, "27c-" + g + "-play");
+    }
+    await page.goto(BASE + "/play/bucket");
+    await click(page, "New round");
+    await shot(page, w, "27c-bucket-play");
+    await page.goto(BASE + "/play/nhie");
+    await shot(page, w, "27c-nhie-play");
+  });
   await step("28-name5-setup", async () => page.goto(BASE + "/play/name5"));
   await step("29-offline", async () => {
     await ctx.setOffline(true);
@@ -206,7 +225,9 @@ for (const w of WIDTHS) {
       await page.waitForTimeout(400);
     }
   });
-  await step("41-room-close", async () => page.getByRole("button", { name: "End the game for everyone" }).first().click());
+  await step("41-room-close", async () =>
+    page.getByRole("button", { name: "End the game for everyone" }).first().click(),
+  );
   await pctx.close();
   for (const e of errors) problems.push(`${w} console: ${e.slice(0, 160)}`);
   await ctx.close();
