@@ -228,9 +228,44 @@ const sportFields: Field[] = [
     })),
     def: SPORT_LIST.filter(([v]) => ATHLETES.some((a) => a.sports.includes(v))).map(([v]) => v),
   },
+  {
+    key: "leagues",
+    legend: "Football leagues",
+    multi: true,
+    options: [
+      ["EPL", "Premier League"],
+      ["LaLiga", "La Liga"],
+      ["SerieA", "Serie A"],
+      ["Bundesliga", "Bundesliga"],
+      ["Ligue1", "Ligue 1"],
+      ["Africa", "Africa"],
+      ["Women", "Women's"],
+      ["Other", "Other"],
+    ].map(([value, label]) => ({ value, label })),
+    def: ["EPL", "LaLiga", "SerieA", "Bundesliga", "Ligue1", "Africa", "Women", "Other"],
+  },
+  {
+    key: "eras",
+    legend: "Era",
+    multi: true,
+    options: [
+      ["90s", "1990s"],
+      ["00s", "2000s"],
+      ["10s", "2010s"],
+      ["now", "Now"],
+    ].map(([value, label]) => ({ value, label })),
+    def: ["90s", "00s", "10s", "now"],
+  },
   levelField(1, RULES.sports),
   countField(),
 ];
+const sportSetup = (v: SetupValues) => ({
+  level: num(v.level),
+  count: num(v.count),
+  cats: v.cats as string[],
+  leagues: v.leagues as string[],
+  eras: v.eras as string[],
+});
 const realFields: Field[] = [
   {
     key: "mode",
@@ -347,13 +382,8 @@ export const GAMES: GameDef[] = [
         ]}
         build={(v) => ({
           mode: v.mode as string,
-          qs:
-            v.mode === "pick"
-              ? athleteQuestions({ level: num(v.level), count: num(v.count), cats: v.cats as string[] })
-              : [],
-          level: num(v.level),
-          count: num(v.count),
-          cats: v.cats as string[],
+          qs: v.mode === "pick" ? athleteQuestions(sportSetup(v)) : [],
+          ...sportSetup(v),
         })}
         run={(d, again) =>
           d.mode === "pick" ? (
@@ -361,25 +391,26 @@ export const GAMES: GameDef[] = [
           ) : (
             <RevealRun
               onAgain={again}
-              items={drawMany("sports", athletePool(d.level, d.cats), d.count).map<RevealItem>((f) => ({
-                prompt: "Who is this?",
-                answer: f.name,
-                points: Math.max(1, f.level),
-                label: levelName(f.level),
-                image: { src: `/faces/${f.id}.jpg`, alt: "A sports star" },
-                hint: f.name
-                  .split(/\s+/)
-                  .map((w) => w[0] + ".")
-                  .join(" "),
-              }))}
+              items={drawMany("sports", athletePool(d.level, d.cats, d.leagues, d.eras), d.count).map<RevealItem>(
+                (f) => ({
+                  prompt: "Who is this?",
+                  answer: f.name,
+                  points: Math.max(1, f.level),
+                  label: levelName(f.level),
+                  image: { src: `/faces/${f.id}.jpg`, alt: "A sports star" },
+                  hint: f.name
+                    .split(/\s+/)
+                    .map((w) => w[0] + ".")
+                    .join(" "),
+                }),
+              )}
             />
           )
         }
       />
     ),
     roomFields: sportFields,
-    buildQuestions: async (v) =>
-      athleteQuestions({ level: num(v.level), count: num(v.count), cats: v.cats as string[] }),
+    buildQuestions: async (v) => athleteQuestions(sportSetup(v)),
   },
   {
     id: "realai",

@@ -9,6 +9,8 @@ export interface QuizSetup {
   count: number;
   mode?: string;
   cats?: string[];
+  leagues?: string[];
+  eras?: string[];
 }
 
 const SECONDS = 20;
@@ -51,8 +53,15 @@ export function facePool(level: number, cats?: string[]) {
   return poolFor(inCats.length >= 8 ? inCats : FACES, level);
 }
 
-export function athletePool(level: number, sports?: string[]) {
-  const inSport = ATHLETES.filter((a) => !sports || a.sports.some((x) => sports.includes(x)));
+export function athletePool(level: number, sports?: string[], leagues?: string[], eras?: string[]) {
+  const ok = (a: (typeof ATHLETES)[number]) => {
+    if (sports && !a.sports.some((x) => sports.includes(x))) return false;
+    if (leagues && a.sports.includes("football") && a.leagues.length && !a.leagues.some((l) => leagues.includes(l)))
+      return false;
+    if (eras && a.eras.length && !a.eras.some((e) => eras.includes(e))) return false;
+    return true;
+  };
+  const inSport = ATHLETES.filter(ok);
   return poolFor(inSport.length >= 8 ? inSport : ATHLETES, level);
 }
 
@@ -94,7 +103,7 @@ export function faceQuestions(s: QuizSetup): HostQuestion[] {
 }
 
 export function athleteQuestions(s: QuizSetup): HostQuestion[] {
-  return drawMany("sports", athletePool(s.level, s.cats), s.count).map((f) =>
+  return drawMany("sports", athletePool(s.level, s.cats, s.leagues, s.eras), s.count).map((f) =>
     personQuestion(f, ATHLETES, (x) => x.sports[0], "A sports star"),
   );
 }
