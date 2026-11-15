@@ -1,5 +1,5 @@
 import type { HostQuestion } from "../shared/protocol";
-import { AITEXT, BIBLE, FACES, PAIRS, TRIVIA, levelName, type QuizItem, type World } from "../content";
+import { AITEXT, ATHLETES, BIBLE, FACES, PAIRS, TRIVIA, levelName, type QuizItem, type World } from "../content";
 import { draw, drawMany, pick, shuffle } from "../lib/deck";
 
 export type WorldMode = "flag" | "shape" | "cap" | "fact" | "slang" | "mix";
@@ -34,33 +34,69 @@ function fromQuizItems(key: string, bank: QuizItem[], s: QuizSetup): HostQuestio
 export const bibleQuestions = (s: QuizSetup) => fromQuizItems("bible", BIBLE, s);
 export const triviaQuestions = (s: QuizSetup) => fromQuizItems("trivia", TRIVIA, s);
 
+interface Person {
+  id: string;
+  name: string;
+  level: number;
+  g: "m" | "f" | "x";
+}
+
+function poolFor<T extends Person>(all: T[], level: number): T[] {
+  const pool = all.filter((f) => !level || f.level === level);
+  return pool.length >= 8 ? pool : all;
+}
+
 export function facePool(level: number, cats?: string[]) {
   const inCats = FACES.filter((f) => !cats || cats.includes(f.cat));
-  const base = inCats.length >= 8 ? inCats : FACES;
-  const pool = base.filter((f) => !level || f.level === level);
-  return pool.length >= 8 ? pool : base;
+  return poolFor(inCats.length >= 8 ? inCats : FACES, level);
+}
+
+export function athletePool(level: number, sports?: string[]) {
+  const inSport = ATHLETES.filter((a) => !sports || a.sports.some((x) => sports.includes(x)));
+  return poolFor(inSport.length >= 8 ? inSport : ATHLETES, level);
+}
+
+/** Wrong answers that can't be ruled out: same gender, same field, similar fame. */
+export function lookalikes<T extends Person>(f: T, all: T[], group: (x: T) => string, n = 3): T[] {
+  const rest = all.filter((x) => x.id !== f.id);
+  const sex = rest.filter((x) => x.g === f.g || x.g === "x" || f.g === "x");
+  const near = (x: T) => Math.abs(x.level - f.level) <= 1;
+  const tiers = [
+    sex.filter((x) => group(x) === group(f) && near(x)),
+    sex.filter((x) => group(x) === group(f)),
+    sex.filter(near),
+    sex,
+  ];
+  const out: T[] = [];
+  for (const t of tiers) for (const x of shuffle(t)) if (out.length < n && !out.includes(x)) out.push(x);
+  return out;
+}
+
+function personQuestion<T extends Person>(f: T, all: T[], group: (x: T) => string, alt: string): HostQuestion {
+  const same = lookalikes(f, all, group);
+  const options = shuffle([f.name, ...same.map((x) => x.name)]);
+  return {
+    prompt: "Who is this?",
+    media: { type: "image", src: `/faces/${f.id}.jpg`, alt },
+    options,
+    correct: options.indexOf(f.name),
+    seconds: 15,
+    points: Math.max(1, f.level),
+    label: levelName(f.level),
+    explain: `That's ${f.name}.`,
+  };
 }
 
 export function faceQuestions(s: QuizSetup): HostQuestion[] {
-  const pool = facePool(s.level, s.cats);
-  return drawMany("faces", pool, s.count).map((f) => {
-    const near = pool.filter((x) => x.id !== f.id && x.cat === f.cat);
-    const others = FACES.filter((x) => x.id !== f.id && x.level === f.level && x.cat === f.cat);
-    const same = shuffle(
-      near.length >= 3 ? near : others.length >= 3 ? others : FACES.filter((x) => x.id !== f.id),
-    ).slice(0, 3);
-    const options = shuffle([f.name, ...same.map((x) => x.name)]);
-    return {
-      prompt: "Who is this?",
-      media: { type: "image", src: `/faces/${f.id}.jpg`, alt: "A famous face" },
-      options,
-      correct: options.indexOf(f.name),
-      seconds: 15,
-      points: Math.max(1, f.level),
-      label: levelName(f.level),
-      explain: `That's ${f.name}.`,
-    };
-  });
+  return drawMany("faces", facePool(s.level, s.cats), s.count).map((f) =>
+    personQuestion(f, FACES, (x) => x.cat, "A famous face"),
+  );
+}
+
+export function athleteQuestions(s: QuizSetup): HostQuestion[] {
+  return drawMany("sports", athletePool(s.level, s.cats), s.count).map((f) =>
+    personQuestion(f, ATHLETES, (x) => x.sports[0], "A sports star"),
+  );
 }
 
 export function realAiQuestions(s: QuizSetup): HostQuestion[] {

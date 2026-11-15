@@ -5,7 +5,9 @@ import {
   COUPLE,
   EMOJI,
   EMOJI_CATS,
+  ATHLETES,
   FACE_CATS,
+  SPORT_LIST,
   FACE_CATS_DEFAULT,
   HOTSEAT,
   KNOWME,
@@ -31,6 +33,8 @@ import {
   realAiQuestions,
   triviaQuestions,
   worldQuestions,
+  athletePool,
+  athleteQuestions,
 } from "./generators";
 import { QuizRun, Setup, type Field, type SetupValues } from "./quiz";
 import { CardDeck, KnowMe, NPAT, RevealRun, TimedRun, type RevealItem } from "./party";
@@ -82,6 +86,13 @@ const RULES = {
     2: "School-level general knowledge.",
     3: "Needs some real learning: history, science, geography.",
     4: "Specialist or surprising facts that trip up most adults.",
+    0: "A mix of all four levels.",
+  },
+  sports: {
+    1: "The biggest names in world sport.",
+    2: "Stars most sports fans can place.",
+    3: "Famous in their sport or country, less so elsewhere.",
+    4: "Legends and cult heroes that only real fans place from a photo.",
     0: "A mix of all four levels.",
   },
   faces: {
@@ -206,6 +217,20 @@ const faceFields: Field[] = [
   levelField(1, RULES.faces),
   countField(),
 ];
+const sportFields: Field[] = [
+  {
+    key: "cats",
+    legend: "Which sports",
+    multi: true,
+    options: SPORT_LIST.filter(([v]) => ATHLETES.some((a) => a.sports.includes(v))).map(([value, label]) => ({
+      value,
+      label,
+    })),
+    def: SPORT_LIST.filter(([v]) => ATHLETES.some((a) => a.sports.includes(v))).map(([v]) => v),
+  },
+  levelField(1, RULES.sports),
+  countField(),
+];
 const realFields: Field[] = [
   {
     key: "mode",
@@ -240,7 +265,7 @@ export const GAMES: GameDef[] = [
   {
     id: "faces",
     name: "Famous Faces",
-    blurb: "Who's this? Sports stars, leaders, actors, singers.",
+    blurb: "Who's this? Leaders, actors, singers and thinkers.",
     how: "A famous face appears. In 'Shout it out', whoever names them first gets the points. On Medium and harder you can show their initials for one point less. In 'Pick from four', players take turns choosing the right name. Less famous people are worth more.",
     section: "pictures",
     groups: ["couple", "friends"],
@@ -295,6 +320,66 @@ export const GAMES: GameDef[] = [
     ),
     roomFields: faceFields,
     buildQuestions: async (v) => faceQuestions({ level: num(v.level), count: num(v.count), cats: v.cats as string[] }),
+  },
+  {
+    id: "sports",
+    name: "Sports Stars",
+    blurb: "Name the footballer, boxer, sprinter or driver.",
+    how: "A sports star appears. In 'Shout it out', whoever names them first gets the points. On Medium and harder you can show their initials for one point less. In 'Pick from four', players take turns choosing the right name. Less famous people are worth more.",
+    section: "pictures",
+    groups: ["couple", "friends"],
+    room: true,
+    stat: "Sports photos",
+    Play: () => (
+      <SetupThen
+        id="sports"
+        fields={[
+          {
+            key: "mode",
+            legend: "How to play",
+            options: [
+              { value: "shout", label: "Shout it out" },
+              { value: "pick", label: "Pick from four" },
+            ],
+            def: "shout",
+          },
+          ...sportFields,
+        ]}
+        build={(v) => ({
+          mode: v.mode as string,
+          qs:
+            v.mode === "pick"
+              ? athleteQuestions({ level: num(v.level), count: num(v.count), cats: v.cats as string[] })
+              : [],
+          level: num(v.level),
+          count: num(v.count),
+          cats: v.cats as string[],
+        })}
+        run={(d, again) =>
+          d.mode === "pick" ? (
+            <QuizRun questions={d.qs} onAgain={again} />
+          ) : (
+            <RevealRun
+              onAgain={again}
+              items={drawMany("sports", athletePool(d.level, d.cats), d.count).map<RevealItem>((f) => ({
+                prompt: "Who is this?",
+                answer: f.name,
+                points: Math.max(1, f.level),
+                label: levelName(f.level),
+                image: { src: `/faces/${f.id}.jpg`, alt: "A sports star" },
+                hint: f.name
+                  .split(/\s+/)
+                  .map((w) => w[0] + ".")
+                  .join(" "),
+              }))}
+            />
+          )
+        }
+      />
+    ),
+    roomFields: sportFields,
+    buildQuestions: async (v) =>
+      athleteQuestions({ level: num(v.level), count: num(v.count), cats: v.cats as string[] }),
   },
   {
     id: "realai",

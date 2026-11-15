@@ -14,6 +14,7 @@ import emojiCats from "./emojiCats.json";
 import emoji from "./emoji.json";
 import n5Themes from "./n5Themes.json";
 import name5 from "./name5.json";
+import sports from "./sports.json";
 import faces from "./faces.json";
 import realai from "./realai.json";
 
@@ -30,6 +31,7 @@ export interface Face {
   h: number;
   src: string;
   cat: string;
+  g: "m" | "f" | "x";
 }
 export interface Pair {
   id: string;
@@ -62,11 +64,42 @@ export const EMOJI = emoji as EmojiItem[];
 export const N5_THEMES = n5Themes as [string, string][];
 export const NAME5 = name5 as Name5Item[];
 export const FACES = faces as Face[];
+export interface Athlete {
+  id: string;
+  name: string;
+  level: number;
+  w: number;
+  h: number;
+  g: "m" | "f" | "x";
+  sports: string[];
+  leagues: string[];
+  eras: string[];
+}
+export const ATHLETES = sports as Athlete[];
+export const SPORT_LIST: [string, string][] = [
+  ["football", "Football"],
+  ["basketball", "Basketball"],
+  ["tennis", "Tennis"],
+  ["athletics", "Athletics"],
+  ["boxing", "Boxing"],
+  ["mma", "MMA"],
+  ["f1", "Formula 1"],
+  ["cricket", "Cricket"],
+  ["rugby", "Rugby"],
+  ["golf", "Golf"],
+  ["nfl", "NFL"],
+  ["baseball", "Baseball"],
+  ["hockey", "Hockey"],
+  ["wrestling", "Wrestling"],
+  ["swimming", "Swimming"],
+  ["cycling", "Cycling"],
+  ["gymnastics", "Gymnastics"],
+  ["olympics", "Olympics"],
+];
 export const PAIRS = realai as Pair[];
 
 export const FACE_CATS: [string, string][] = [
   ["General", "Science and business"],
-  ["Sports", "Sports"],
   ["Screen", "Movies and TV"],
   ["Music", "Music"],
   ["Leaders", "Leaders and history"],
