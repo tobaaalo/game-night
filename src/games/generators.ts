@@ -9,7 +9,6 @@ export interface QuizSetup {
   count: number;
   mode?: string;
   cats?: string[];
-  leagues?: string[];
   eras?: string[];
 }
 
@@ -53,11 +52,9 @@ export function facePool(level: number, cats?: string[]) {
   return poolFor(inCats.length >= 8 ? inCats : FACES, level);
 }
 
-export function athletePool(level: number, sports?: string[], leagues?: string[], eras?: string[]) {
+export function athletePool(level: number, sports?: string[], eras?: string[]) {
   const ok = (a: (typeof ATHLETES)[number]) => {
     if (sports && !a.sports.some((x) => sports.includes(x))) return false;
-    if (leagues && a.sports.includes("football") && a.leagues.length && !a.leagues.some((l) => leagues.includes(l)))
-      return false;
     if (eras && a.eras.length && !a.eras.some((e) => eras.includes(e))) return false;
     return true;
   };
@@ -66,8 +63,15 @@ export function athletePool(level: number, sports?: string[], leagues?: string[]
 }
 
 /** Wrong answers that can't be ruled out: same gender, same field, similar fame. */
-export function lookalikes<T extends Person>(f: T, all: T[], group: (x: T) => string, n = 3): T[] {
-  const rest = all.filter((x) => x.id !== f.id);
+export function lookalikes<T extends Person>(
+  f: T,
+  all: T[],
+  group: (x: T) => string,
+  n = 3,
+  used: Set<string> = new Set(),
+): T[] {
+  const fresh = all.filter((x) => x.id !== f.id && !used.has(x.name));
+  const rest = fresh.length >= n * 4 ? fresh : all.filter((x) => x.id !== f.id);
   const sex = rest.filter((x) => x.g === f.g || x.g === "x" || f.g === "x");
   const near = (x: T) => Math.abs(x.level - f.level) <= 1;
   const tiers = [
@@ -81,8 +85,15 @@ export function lookalikes<T extends Person>(f: T, all: T[], group: (x: T) => st
   return out;
 }
 
-function personQuestion<T extends Person>(f: T, all: T[], group: (x: T) => string, alt: string): HostQuestion {
-  const same = lookalikes(f, all, group);
+function personQuestion<T extends Person>(
+  f: T,
+  all: T[],
+  group: (x: T) => string,
+  alt: string,
+  used: Set<string>,
+): HostQuestion {
+  const same = lookalikes(f, all, group, 3, used);
+  same.forEach((x) => used.add(x.name));
   const options = shuffle([f.name, ...same.map((x) => x.name)]);
   return {
     prompt: "Who is this?",
@@ -97,15 +108,15 @@ function personQuestion<T extends Person>(f: T, all: T[], group: (x: T) => strin
 }
 
 export function faceQuestions(s: QuizSetup): HostQuestion[] {
-  return drawMany("faces", facePool(s.level, s.cats), s.count).map((f) =>
-    personQuestion(f, FACES, (x) => x.cat, "A famous face"),
-  );
+  const picked = drawMany("faces", facePool(s.level, s.cats), s.count);
+  const used = new Set(picked.map((f) => f.name));
+  return picked.map((f) => personQuestion(f, FACES, (x) => x.cat, "A famous face", used));
 }
 
 export function athleteQuestions(s: QuizSetup): HostQuestion[] {
-  return drawMany("sports", athletePool(s.level, s.cats, s.leagues, s.eras), s.count).map((f) =>
-    personQuestion(f, ATHLETES, (x) => x.sports[0], "A sports star"),
-  );
+  const picked = drawMany("sports", athletePool(s.level, s.cats, s.eras), s.count);
+  const used = new Set(picked.map((f) => f.name));
+  return picked.map((f) => personQuestion(f, ATHLETES, (x) => x.sports[0], "A sports star", used));
 }
 
 export function realAiQuestions(s: QuizSetup): HostQuestion[] {
