@@ -66,7 +66,7 @@ for (const w of WIDTHS) {
     await inputs.nth(1).fill("Mimi");
   });
   await step("04-library-couple", async () => click(page, "Pick a game"));
-  await step("05-setup-faces", async () => page.locator(".ticket", { hasText: "Famous Faces" }).click());
+  await step("05-setup-faces", async () => page.locator(".ticket, .tile", { hasText: "Famous Faces" }).click());
   await step("06-faces-play", async () => {
     await click(page, "Start");
     await page.locator(".frame img").waitFor();
@@ -169,7 +169,7 @@ for (const w of WIDTHS) {
   }
   await step("35-room-pickgame", async () => page.locator(".joined li").first().waitFor({ timeout: 8000 }));
   await step("36-room-question", async () => {
-    await page.locator(".ticket", { hasText: "Bible Trivia" }).click();
+    await page.locator(".ticket, .tile", { hasText: "Bible Trivia" }).click();
     await page.getByText("5", { exact: true }).click();
     await page.getByRole("button", { name: /Start with/ }).click();
     await page.locator(".room-clock").waitFor({ timeout: 8000 });
