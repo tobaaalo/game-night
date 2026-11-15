@@ -1,6 +1,19 @@
 import type { HostQuestion } from "../shared/protocol";
-import { AITEXT, ATHLETES, BIBLE, FACES, PAIRS, TRIVIA, levelName, type QuizItem, type World } from "../content";
-import { draw, drawMany, pick, shuffle } from "../lib/deck";
+import {
+  AITEXT,
+  ATHLETES,
+  BIBLE,
+  FACES,
+  HOLDATA,
+  ODDONE,
+  PAIRS,
+  TRIVIA,
+  YEARS,
+  levelName,
+  type QuizItem,
+  type World,
+} from "../content";
+import { draw, drawFresh, drawMany, pick, shuffle } from "../lib/deck";
 
 export type WorldMode = "flag" | "shape" | "cap" | "fact" | "slang" | "mix";
 
@@ -225,3 +238,87 @@ export function worldQuestions(w: World, s: QuizSetup): HostQuestion[] {
 /** Quick check used by tests and the library: pools per level. */
 export const countBy = (bank: QuizItem[], level: number) => bank.filter((q) => !level || q[0] === level).length;
 export { draw };
+
+const fmt = (n: number) => (n >= 100 ? Math.round(n).toLocaleString("en-GB") : String(n));
+
+/** Higher or Lower: harder levels compare numbers that are closer together. */
+export function higherLowerQuestions(s: QuizSetup): HostQuestion[] {
+  type P = { cat: string; a: [string, number]; b: [string, number]; lv: number };
+  const all: P[] = [];
+  for (const [cat, items] of Object.entries(HOLDATA))
+    for (const a of items)
+      for (const b of items) {
+        if (a === b || a[1] === b[1]) continue;
+        const r = Math.max(a[1], b[1]) / Math.min(a[1], b[1]);
+        const lv = r >= 4 ? 1 : r >= 2 ? 2 : r >= 1.35 ? 3 : 4;
+        all.push({ cat, a, b, lv });
+      }
+  let pool = all.filter((p) => !s.level || p.lv === s.level);
+  if (pool.length < 20) pool = all;
+  const seen = new Set<string>();
+  const picked: P[] = [];
+  for (const p of drawFresh("hol", pool, Math.min(pool.length, s.count * 6), (x) => `${x.a[0]}|${x.b[0]}`)) {
+    if (picked.length >= s.count) break;
+    if (seen.has(p.a[0]) || seen.has(p.b[0])) continue;
+    seen.add(p.a[0]);
+    seen.add(p.b[0]);
+    picked.push(p);
+  }
+  return picked.map((p) => {
+    const higher = p.b[1] > p.a[1];
+    return {
+      prompt: `${p.cat}. Is ${p.b[0]} higher or lower?`,
+      media: { type: "big" as const, text: `${p.a[0]}: ${fmt(p.a[1])}` },
+      options: ["Higher", "Lower"],
+      correct: higher ? 0 : 1,
+      seconds: 15,
+      points: p.lv,
+      label: levelName(p.lv),
+      explain: `${p.b[0]} is ${fmt(p.b[1])}, so ${higher ? "higher" : "lower"}.`,
+    };
+  });
+}
+
+export function oddOneQuestions(s: QuizSetup): HostQuestion[] {
+  let pool = ODDONE.filter((o) => !s.level || o[0] === s.level);
+  if (pool.length < 8) pool = ODDONE;
+  return drawMany("oddone", pool, s.count).map(([lv, opts, odd, why]) => {
+    const order = shuffle(opts);
+    return {
+      prompt: "Which one is the odd one out?",
+      options: order,
+      correct: order.indexOf(odd),
+      seconds: 20,
+      points: lv,
+      label: levelName(lv),
+      explain: `${odd}. ${why}`,
+    };
+  });
+}
+
+export function yearQuestions(s: QuizSetup): HostQuestion[] {
+  const now = new Date().getFullYear();
+  let pool = YEARS.filter((y) => !s.level || y[0] === s.level);
+  if (pool.length < 8) pool = YEARS;
+  return drawMany("years", pool, s.count).map(([lv, text, year]) => {
+    const frac = [0, 0.3, 0.2, 0.12, 0.06][lv] ?? 0.15;
+    const span = Math.max(3, Math.round((now - year) * frac));
+    const yrs = new Set<number>([year]);
+    let guard = 0;
+    while (yrs.size < 4 && guard++ < 200) {
+      const off = Math.max(1, Math.round(span * (0.35 + Math.random() * 0.65)));
+      const y = year + (Math.random() < 0.5 ? -off : off);
+      if (y > 0 && y <= now) yrs.add(y);
+    }
+    const options = shuffle([...yrs].map(String));
+    return {
+      prompt: `In which year: ${text}?`,
+      options,
+      correct: options.indexOf(String(year)),
+      seconds: 20,
+      points: lv,
+      label: levelName(lv),
+      explain: `${text} in ${year}.`,
+    };
+  });
+}

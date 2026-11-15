@@ -17,6 +17,10 @@ import name5 from "./name5.json";
 import sports from "./sports.json";
 import faces from "./faces.json";
 import realai from "./realai.json";
+import higherlower from "./higherlower.json";
+import oddone from "./oddone.json";
+import years from "./years.json";
+import nhie from "./nhie.json";
 
 export type Level = 1 | 2 | 3 | 4;
 /** [level, question, [rightAnswer, ...wrong]] */
@@ -146,3 +150,10 @@ export async function loadWorld() {
   };
 }
 export type World = Awaited<ReturnType<typeof loadWorld>>;
+
+export const HOLDATA = higherlower as unknown as Record<string, [string, number][]>;
+/** [level, four options, odd one, reason] */
+export const ODDONE = oddone as [number, string[], string, string][];
+/** [level, event, year] */
+export const YEARS = years as [number, string, number][];
+export const NHIE = nhie as string[];

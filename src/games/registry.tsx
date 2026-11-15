@@ -10,6 +10,7 @@ import {
   SPORT_LIST,
   FACE_CATS_DEFAULT,
   HOTSEAT,
+  NHIE,
   KNOWME,
   LEVELS,
   LIKELY,
@@ -35,6 +36,9 @@ import {
   worldQuestions,
   athletePool,
   athleteQuestions,
+  higherLowerQuestions,
+  oddOneQuestions,
+  yearQuestions,
 } from "./generators";
 import { QuizRun, Setup, type Field, type SetupValues } from "./quiz";
 import { CardDeck, KnowMe, NPAT, RevealRun, TimedRun, type RevealItem } from "./party";
@@ -279,6 +283,30 @@ const realFields: Field[] = [
 
 const num = (v: unknown) => Number(v);
 
+const simpleFields = (rules: Record<number, string>): Field[] => [levelField(1, rules), countField()];
+const quizSetup = (v: SetupValues) => ({ level: num(v.level), count: num(v.count) });
+const HOL_RULES = {
+  1: "The two numbers are miles apart, so it's an easy call.",
+  2: "One is at least double the other.",
+  3: "They are fairly close. Trust your gut.",
+  4: "Nearly neck and neck. Only a real know-it-all gets these.",
+  0: "A mix of all four levels.",
+};
+const ODD_RULES = {
+  1: "Spot the one that doesn't belong. Obvious to a child.",
+  2: "Needs a little general knowledge.",
+  3: "The link is less obvious. Think about geography, music, science and the Bible.",
+  4: "A clever hidden link, like botany or science technicalities.",
+  0: "A mix of all four levels.",
+};
+const YEAR_RULES = {
+  1: "Huge events and the wrong years are far apart.",
+  2: "Well-known events. The options are a decade or so apart.",
+  3: "Historic moments. The options are only a few years apart.",
+  4: "Older history. The options are close together.",
+  0: "A mix of all four levels.",
+};
+
 export const GAMES: GameDef[] = [
   {
     id: "faces",
@@ -489,6 +517,56 @@ export const GAMES: GameDef[] = [
     roomFields: triviaFields,
     buildQuestions: async (v) =>
       triviaQuestions({ level: num(v.level), count: num(v.count), cats: v.cats as string[] }),
+  },
+  {
+    id: "hol",
+    name: "Higher or Lower",
+    blurb: "Is the next number bigger or smaller?",
+    how: "You see one number, like a mountain's height. Say whether the next one is higher or lower. Harder levels compare numbers that are close together.",
+    section: "quiz",
+    groups: ["couple", "friends"],
+    room: true,
+    stat: "Higher or lower",
+    Play: quizPlay("hol", simpleFields(HOL_RULES), async (v) => higherLowerQuestions(quizSetup(v))),
+    roomFields: simpleFields(HOL_RULES),
+    buildQuestions: async (v) => higherLowerQuestions(quizSetup(v)),
+  },
+  {
+    id: "oddone",
+    name: "Odd One Out",
+    blurb: "Four things. One doesn't belong.",
+    how: "Read the four options and name the one that doesn't fit. Harder levels hide the link better.",
+    section: "quiz",
+    groups: ["couple", "friends"],
+    room: true,
+    stat: "Spot the outsider",
+    Play: quizPlay("oddone", simpleFields(ODD_RULES), async (v) => oddOneQuestions(quizSetup(v))),
+    roomFields: simpleFields(ODD_RULES),
+    buildQuestions: async (v) => oddOneQuestions(quizSetup(v)),
+  },
+  {
+    id: "years",
+    name: "Guess the Year",
+    blurb: "When did it happen?",
+    how: "An event appears with four possible years. Pick the right one. Harder levels put the years closer together.",
+    section: "quiz",
+    groups: ["couple", "friends"],
+    room: true,
+    stat: "Date the moment",
+    Play: quizPlay("years", simpleFields(YEAR_RULES), async (v) => yearQuestions(quizSetup(v))),
+    roomFields: simpleFields(YEAR_RULES),
+    buildQuestions: async (v) => yearQuestions(quizSetup(v)),
+  },
+  {
+    id: "nhie",
+    name: "Never Have I Ever",
+    blurb: "Clean confessions. Keep a finger down.",
+    how: "Read the card. Anyone who HAS done it puts a finger down, or takes a point if you are keeping score. Everyone with fingers left at the end wins.",
+    section: "talk",
+    groups: ["couple", "friends"],
+    scores: false,
+    stat: "Fingers down",
+    Play: () => <CardDeck id="nhie" items={NHIE} format={(x) => "Never have I ever " + x} />,
   },
   {
     id: "proverbs",
