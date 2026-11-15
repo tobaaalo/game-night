@@ -461,7 +461,8 @@ export function Credits() {
         </h1>
         <p className="lede">
           Photos of people and the real photos in Real or AI come from Wikimedia Commons. Each link shows the
-          photographer and licence. AI pictures were made with Figma AI and Gamma. Many trivia questions come from the Open Trivia Database (opentdb.com), licensed CC BY-SA 4.0.
+          photographer and licence. AI pictures were made with Figma AI and Gamma. Many trivia questions come from the
+          Open Trivia Database (opentdb.com), licensed CC BY-SA 4.0.
         </p>
       </div>
       <div className="field">

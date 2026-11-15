@@ -403,7 +403,7 @@
 }
 .stub {
   flex: none;
-  width: 64px;
+  width: 44px;
   display: grid;
   place-items: center;
   background: var(--chrome);
@@ -415,10 +415,8 @@
 }
 .stub-no {
   font-family: var(--font-display);
-  font-size: var(--step-3);
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
-  letter-spacing: 0.06em;
+  font-size: var(--step-1);
+  letter-spacing: 0.02em;
 }
 .ticket-body {
   flex: 1;
@@ -1535,4 +1533,167 @@
 }
 .team-line b {
   color: var(--bulb);
+}
+
+/* ---------- Games screen, compact ---------- */
+.view-toggle {
+  display: inline-flex;
+  align-self: flex-start;
+  border: 2px solid var(--velvet);
+  border-radius: var(--r-pill);
+  overflow: hidden;
+}
+.view-toggle button {
+  min-height: 44px;
+  padding: 0 18px;
+  background: none;
+  border: 0;
+  color: var(--chrome-dim);
+  font-weight: 700;
+  cursor: pointer;
+}
+.view-toggle button[aria-pressed="true"] {
+  background: var(--bulb);
+  color: var(--stage);
+}
+.buzzer {
+  min-height: 52px;
+  padding: 6px 18px 6px 6px;
+  gap: var(--s3);
+}
+.buzzer-cap {
+  width: 40px;
+  height: 40px;
+  box-shadow:
+    0 4px 0 #7a2900,
+    0 0 0 3px var(--velvet-deep);
+}
+.buzzer-cap svg {
+  width: 20px;
+  height: 20px;
+}
+.buzzer-label {
+  font-size: var(--step-0);
+}
+.roomcard {
+  min-height: 52px;
+  padding: var(--s2) var(--s4);
+  gap: var(--s3);
+}
+.roomcard-icon svg {
+  width: 26px;
+  height: 26px;
+}
+.roomcard-title {
+  font-size: var(--step-0);
+}
+.roomcard-sub {
+  font-size: var(--step--1);
+  margin-top: 0;
+}
+.lib-feature {
+  gap: var(--s3);
+}
+.sec-sign {
+  margin: 0;
+  padding: 0;
+}
+.sec-toggle {
+  width: 100%;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  background: none;
+  border: 0;
+  color: var(--bulb);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.sec-count {
+  color: var(--chrome-faint);
+  font-size: var(--step--1);
+}
+.sec-chev {
+  margin-left: auto;
+  display: grid;
+  transition: transform var(--t-fast);
+}
+.sec-chev svg {
+  width: 22px;
+  height: 22px;
+}
+.sec-chev.shut {
+  transform: rotate(-90deg);
+}
+.tickets[hidden] {
+  display: none;
+}
+.ticket-body {
+  padding: var(--s3) var(--s3) var(--s3) var(--s4);
+  gap: 2px;
+}
+.ticket-title {
+  font-size: var(--step-1);
+}
+.ticket-blurb {
+  font-size: var(--step--1);
+}
+.tickets.grid {
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s2);
+}
+@media (min-width: 760px) {
+  .tickets.grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+.tile {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 76px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  text-align: left;
+  padding: var(--s3) var(--s4);
+  border-radius: var(--r-card);
+  border: 2px solid var(--velvet);
+  background: linear-gradient(180deg, var(--stage-3), var(--stage-2));
+  color: var(--chrome);
+  cursor: pointer;
+}
+.tile:active {
+  transform: translateY(2px);
+}
+.tile-title {
+  font-family: var(--font-display);
+  font-size: var(--step-0);
+  line-height: 1.1;
+  padding-right: 18px;
+}
+.tile-stat {
+  color: var(--chrome-faint);
+  font-size: var(--step--1);
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+.tile-room {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  color: var(--bulb);
+}
+.tile-room svg {
+  width: 16px;
+  height: 16px;
+}
+@media (hover: hover) {
+  .tile:hover {
+    border-color: var(--bulb);
+  }
 }

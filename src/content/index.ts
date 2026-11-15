@@ -29,6 +29,7 @@ export interface Face {
   w: number;
   h: number;
   src: string;
+  cat: string;
 }
 export interface Pair {
   id: string;
@@ -62,6 +63,16 @@ export const N5_THEMES = n5Themes as [string, string][];
 export const NAME5 = name5 as Name5Item[];
 export const FACES = faces as Face[];
 export const PAIRS = realai as Pair[];
+
+export const FACE_CATS: [string, string][] = [
+  ["General", "Science and business"],
+  ["Sports", "Sports"],
+  ["Screen", "Movies and TV"],
+  ["Music", "Music"],
+  ["Leaders", "Leaders and history"],
+  ["Faith", "Faith and culture"],
+];
+export const FACE_CATS_DEFAULT = FACE_CATS.map((c) => c[0]).filter((c) => c !== "Leaders");
 
 export const TRIVIA_CATS: [string, string][] = [
   ["General", "General knowledge"],

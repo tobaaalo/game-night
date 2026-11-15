@@ -6,12 +6,27 @@ import { pick } from "../lib/deck";
 import { SECTIONS, gamesFor, gameById, type GameDef, type Section } from "../games/registry";
 import { GameFrame } from "../games/frame";
 import { CUSTOM_TYPES } from "../lib/custom";
+import { load, save } from "../lib/store";
 import { getPublic, loadCommunity, saveCommunity } from "../lib/shared";
 import type { SharedGame } from "../shared/protocol";
 
 export function Library() {
   const { group, players, go, online } = useApp();
   const [spinning, setSpinning] = useState(false);
+  const [view, setViewState] = useState<"list" | "grid">(() =>
+    load<"list" | "grid">("gn.libview", matchMedia("(max-width: 600px)").matches ? "grid" : "list"),
+  );
+  const [shut, setShut] = useState<string[]>(() => load<string[]>("gn.libshut", []));
+  const setView = (v: "list" | "grid") => {
+    setViewState(v);
+    save("gn.libview", v);
+  };
+  const toggle = (id: string) =>
+    setShut((a) => {
+      const n = a.includes(id) ? a.filter((x) => x !== id) : [...a, id];
+      save("gn.libshut", n);
+      return n;
+    });
   const [community, setCommunity] = useState<SharedGame[]>(loadCommunity);
   useEffect(() => {
     if (!online) return;
@@ -57,6 +72,15 @@ export function Library() {
         <Scoreboard players={players} compact />
       </div>
 
+      <div className="view-toggle" role="group" aria-label="How to show games">
+        <button aria-pressed={view === "grid"} onClick={() => setView("grid")}>
+          Grid
+        </button>
+        <button aria-pressed={view === "list"} onClick={() => setView("list")}>
+          List
+        </button>
+      </div>
+
       <div className="lib-feature stagger">
         <button
           className={clsx("buzzer", spinning && "pressed")}
@@ -75,7 +99,7 @@ export function Library() {
             </span>
             <span>
               <span className="roomcard-title">Today&rsquo;s game: {daily.name}</span>
-              <span className="roomcard-sub">A new pick every day. Play it with your people or skip it.</span>
+              <span className="roomcard-sub">A new pick every day.</span>
             </span>
           </button>
         )}
@@ -88,7 +112,7 @@ export function Library() {
               <span className="roomcard-title">Play on everyone&rsquo;s phones</span>
               <span className="roomcard-sub" id="room-sub">
                 {online
-                  ? "Friends join with a 4-letter code and answer on their own phone."
+                  ? "Friends join with a 4-letter code."
                   : "Needs internet. Pass-the-phone games still work offline."}
               </span>
             </span>
@@ -98,18 +122,26 @@ export function Library() {
 
       {sections.map(({ s, list }) => (
         <section key={s} className="lib-section" aria-labelledby={`sec-${s}`}>
-          <div className="sec-sign">
-            <h2 id={`sec-${s}`} className="h3">
-              {SECTIONS[s].title}
-            </h2>
-            <span className="muted small">{SECTIONS[s].blurb}</span>
-          </div>
-          <ul className="tickets">
+          <h2 id={`sec-${s}`} className="sec-sign h3">
+            <button
+              className="sec-toggle"
+              aria-expanded={!shut.includes(s)}
+              aria-controls={`list-${s}`}
+              onClick={() => toggle(s)}
+            >
+              <span>{SECTIONS[s].title}</span>
+              <span className="sec-count">{list.length}</span>
+              <span className={clsx("sec-chev", shut.includes(s) && "shut")}>
+                <Icon.chevron />
+              </span>
+            </button>
+          </h2>
+          <ul id={`list-${s}`} className={clsx("tickets", view)} hidden={shut.includes(s)}>
             {list.map((g) => {
               n += 1;
               return (
                 <li key={g.id}>
-                  <Ticket g={g} n={n} showRoom={group === "friends"} onOpen={() => go(`/play/${g.id}`)} />
+                  <Ticket g={g} n={n} view={view} showRoom={group === "friends"} onOpen={() => go(`/play/${g.id}`)} />
                 </li>
               );
             })}
@@ -119,13 +151,21 @@ export function Library() {
 
       {community.length > 0 && (
         <section className="lib-section" aria-labelledby="sec-community">
-          <div className="sec-sign">
-            <h2 id="sec-community" className="h3">
-              From other players
-            </h2>
-            <span className="muted small">Games made and shared by people like you.</span>
-          </div>
-          <ul className="tickets">
+          <h2 id="sec-community" className="sec-sign h3">
+            <button
+              className="sec-toggle"
+              aria-expanded={!shut.includes("community")}
+              aria-controls="list-community"
+              onClick={() => toggle("community")}
+            >
+              <span>From other players</span>
+              <span className="sec-count">{community.length}</span>
+              <span className={clsx("sec-chev", shut.includes("community") && "shut")}>
+                <Icon.chevron />
+              </span>
+            </button>
+          </h2>
+          <ul id="list-community" className={clsx("tickets", view)} hidden={shut.includes("community")}>
             {community.map((g) => (
               <li key={g.id}>
                 <button className="ticket" onClick={() => go(`/g/${g.id}`)}>
@@ -172,7 +212,32 @@ export function Library() {
   );
 }
 
-function Ticket({ g, n, onOpen, showRoom }: { g: GameDef; n: number; onOpen: () => void; showRoom: boolean }) {
+function Ticket({
+  g,
+  n,
+  view,
+  onOpen,
+  showRoom,
+}: {
+  g: GameDef;
+  n: number;
+  view: "list" | "grid";
+  onOpen: () => void;
+  showRoom: boolean;
+}) {
+  const room = g.room && showRoom;
+  if (view === "grid")
+    return (
+      <button className="tile" onClick={onOpen}>
+        <span className="tile-title">{g.name}</span>
+        <span className="tile-stat">{g.stat}</span>
+        {room && (
+          <span className="tile-room" role="img" aria-label="Can also be played on everyone's phones">
+            <Icon.phones />
+          </span>
+        )}
+      </button>
+    );
   return (
     <button className="ticket" onClick={onOpen}>
       <span className="stub" aria-hidden="true">
@@ -183,7 +248,7 @@ function Ticket({ g, n, onOpen, showRoom }: { g: GameDef; n: number; onOpen: () 
         <span className="ticket-blurb">{g.blurb}</span>
         <span className="ticket-meta">
           {g.stat}
-          {g.room && showRoom && <span className="tag">Plays on phones</span>}
+          {room && <span className="tag">Room play</span>}
         </span>
       </span>
     </button>

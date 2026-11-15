@@ -34,10 +34,21 @@ function fromQuizItems(key: string, bank: QuizItem[], s: QuizSetup): HostQuestio
 export const bibleQuestions = (s: QuizSetup) => fromQuizItems("bible", BIBLE, s);
 export const triviaQuestions = (s: QuizSetup) => fromQuizItems("trivia", TRIVIA, s);
 
+export function facePool(level: number, cats?: string[]) {
+  const inCats = FACES.filter((f) => !cats || cats.includes(f.cat));
+  const base = inCats.length >= 8 ? inCats : FACES;
+  const pool = base.filter((f) => !level || f.level === level);
+  return pool.length >= 8 ? pool : base;
+}
+
 export function faceQuestions(s: QuizSetup): HostQuestion[] {
-  const pool = FACES.filter((f) => !s.level || f.level === s.level);
+  const pool = facePool(s.level, s.cats);
   return drawMany("faces", pool, s.count).map((f) => {
-    const same = shuffle(FACES.filter((x) => x.id !== f.id && x.level === f.level)).slice(0, 3);
+    const near = pool.filter((x) => x.id !== f.id && x.cat === f.cat);
+    const others = FACES.filter((x) => x.id !== f.id && x.level === f.level && x.cat === f.cat);
+    const same = shuffle(
+      near.length >= 3 ? near : others.length >= 3 ? others : FACES.filter((x) => x.id !== f.id),
+    ).slice(0, 3);
     const options = shuffle([f.name, ...same.map((x) => x.name)]);
     return {
       prompt: "Who is this?",

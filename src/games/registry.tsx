@@ -5,7 +5,8 @@ import {
   COUPLE,
   EMOJI,
   EMOJI_CATS,
-  FACES,
+  FACE_CATS,
+  FACE_CATS_DEFAULT,
   HOTSEAT,
   KNOWME,
   LEVELS,
@@ -23,7 +24,14 @@ import {
 } from "../content";
 import type { Group } from "../lib/app";
 import { drawMany, shuffle } from "../lib/deck";
-import { bibleQuestions, faceQuestions, realAiQuestions, triviaQuestions, worldQuestions } from "./generators";
+import {
+  bibleQuestions,
+  faceQuestions,
+  facePool,
+  realAiQuestions,
+  triviaQuestions,
+  worldQuestions,
+} from "./generators";
 import { QuizRun, Setup, type Field, type SetupValues } from "./quiz";
 import { CardDeck, KnowMe, NPAT, RevealRun, TimedRun, type RevealItem } from "./party";
 import { loadCustom, customToGame } from "../lib/custom";
@@ -187,7 +195,17 @@ const worldFields: Field[] = [
   levelField(),
   countField(),
 ];
-const faceFields = [levelField(1, RULES.faces), countField()];
+const faceFields: Field[] = [
+  {
+    key: "cats",
+    legend: "Who to include",
+    multi: true,
+    options: FACE_CATS.map(([value, label]) => ({ value, label })),
+    def: FACE_CATS_DEFAULT,
+  },
+  levelField(1, RULES.faces),
+  countField(),
+];
 const realFields: Field[] = [
   {
     key: "mode",
@@ -245,9 +263,13 @@ export const GAMES: GameDef[] = [
         ]}
         build={(v) => ({
           mode: v.mode as string,
-          qs: v.mode === "pick" ? faceQuestions({ level: num(v.level), count: num(v.count) }) : [],
+          qs:
+            v.mode === "pick"
+              ? faceQuestions({ level: num(v.level), count: num(v.count), cats: v.cats as string[] })
+              : [],
           level: num(v.level),
           count: num(v.count),
+          cats: v.cats as string[],
         })}
         run={(d, again) =>
           d.mode === "pick" ? (
@@ -255,11 +277,7 @@ export const GAMES: GameDef[] = [
           ) : (
             <RevealRun
               onAgain={again}
-              items={drawMany(
-                "faces",
-                FACES.filter((f) => !d.level || f.level === d.level),
-                d.count,
-              ).map<RevealItem>((f) => ({
+              items={drawMany("faces", facePool(d.level, d.cats), d.count).map<RevealItem>((f) => ({
                 prompt: "Who is this?",
                 answer: f.name,
                 points: Math.max(1, f.level),
@@ -276,7 +294,7 @@ export const GAMES: GameDef[] = [
       />
     ),
     roomFields: faceFields,
-    buildQuestions: async (v) => faceQuestions({ level: num(v.level), count: num(v.count) }),
+    buildQuestions: async (v) => faceQuestions({ level: num(v.level), count: num(v.count), cats: v.cats as string[] }),
   },
   {
     id: "realai",

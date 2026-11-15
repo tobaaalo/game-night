@@ -5,7 +5,8 @@
     "level": 1,
     "w": 466,
     "h": 600,
-    "src": "Abraham_Lincoln_O-77_matte_collodion_print.jpg"
+    "src": "Abraham_Lincoln_O-77_matte_collodion_print.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "agatha-christie",
@@ -13,16 +14,26 @@
     "level": 1,
     "w": 423,
     "h": 600,
-    "src": "Agatha_Christie_in_Nederland_(detectiveschrijfster),_bij_aankomst_op_Schiphol_me,_Bestanddeelnr_916-8898_(cropped).jpg"
+    "src": "Agatha_Christie_in_Nederland_(detectiveschrijfster),_bij_aankomst_op_Schiphol_me,_Bestanddeelnr_916-8898_(cropped).jpg",
+    "cat": "Faith"
   },
-  { "id": "alan-turing", "name": "Alan Turing", "level": 1, "w": 450, "h": 600, "src": "Alan_turing_header.jpg" },
+  {
+    "id": "alan-turing",
+    "name": "Alan Turing",
+    "level": 1,
+    "w": 450,
+    "h": 600,
+    "src": "Alan_turing_header.jpg",
+    "cat": "General"
+  },
   {
     "id": "albert-einstein",
     "name": "Albert Einstein",
     "level": 1,
     "w": 480,
     "h": 594,
-    "src": "Albert_Einstein_Head_cleaned.jpg"
+    "src": "Albert_Einstein_Head_cleaned.jpg",
+    "cat": "General"
   },
   {
     "id": "alexandria-ocasio-cortez",
@@ -30,7 +41,8 @@
     "level": 1,
     "w": 480,
     "h": 600,
-    "src": "Alexandria_Ocasio-Cortez_Official_Portrait.jpg"
+    "src": "Alexandria_Ocasio-Cortez_Official_Portrait.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "angelina-jolie",
@@ -38,7 +50,8 @@
     "level": 1,
     "w": 448,
     "h": 600,
-    "src": "Angelina_Jolie-643531_(cropped).jpg"
+    "src": "Angelina_Jolie-643531_(cropped).jpg",
+    "cat": "Screen"
   },
   {
     "id": "anthony-joshua",
@@ -46,7 +59,8 @@
     "level": 1,
     "w": 480,
     "h": 568,
-    "src": "Anthony_Joshua_Press_Conference_(cropped).jpg"
+    "src": "Anthony_Joshua_Press_Conference_(cropped).jpg",
+    "cat": "Sports"
   },
   {
     "id": "ariana-grande",
@@ -54,7 +68,8 @@
     "level": 1,
     "w": 442,
     "h": 600,
-    "src": "Ariana_Grande_promoting_Wicked_(2024).jpg"
+    "src": "Ariana_Grande_promoting_Wicked_(2024).jpg",
+    "cat": "Music"
   },
   {
     "id": "arnold-schwarzenegger",
@@ -62,16 +77,26 @@
     "level": 1,
     "w": 330,
     "h": 440,
-    "src": "Arnold_Schwarzenegger_-_Austrian_World_Summit_2026_BHO-2906.jpg"
+    "src": "Arnold_Schwarzenegger_-_Austrian_World_Summit_2026_BHO-2906.jpg",
+    "cat": "Screen"
   },
-  { "id": "barack-obama", "name": "Barack Obama", "level": 1, "w": 441, "h": 600, "src": "President_Barack_Obama.jpg" },
+  {
+    "id": "barack-obama",
+    "name": "Barack Obama",
+    "level": 1,
+    "w": 441,
+    "h": 600,
+    "src": "President_Barack_Obama.jpg",
+    "cat": "Leaders"
+  },
   {
     "id": "benjamin-netanyahu",
     "name": "Benjamin Netanyahu",
     "level": 1,
     "w": 412,
     "h": 600,
-    "src": "Benjamin_Netanyahu,_February_2023.jpg"
+    "src": "Benjamin_Netanyahu,_February_2023.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "beyonce",
@@ -79,16 +104,26 @@
     "level": 1,
     "w": 450,
     "h": 600,
-    "src": "Beyoncé_-_Tottenham_Hotspur_Stadium_-_1st_June_2023_(10_of_118)_(52946364598)_(best_crop).jpg"
+    "src": "Beyoncé_-_Tottenham_Hotspur_Stadium_-_1st_June_2023_(10_of_118)_(52946364598)_(best_crop).jpg",
+    "cat": "Music"
   },
-  { "id": "bill-clinton", "name": "Bill Clinton", "level": 1, "w": 460, "h": 600, "src": "Bill_Clinton.jpg" },
+  {
+    "id": "bill-clinton",
+    "name": "Bill Clinton",
+    "level": 1,
+    "w": 460,
+    "h": 600,
+    "src": "Bill_Clinton.jpg",
+    "cat": "Leaders"
+  },
   {
     "id": "bill-gates",
     "name": "Bill Gates",
     "level": 1,
     "w": 450,
     "h": 600,
-    "src": "Bill_Gates_at_the_European_Commission_-_P067383-987995_(cropped)_5.jpg"
+    "src": "Bill_Gates_at_the_European_Commission_-_P067383-987995_(cropped)_5.jpg",
+    "cat": "General"
   },
   {
     "id": "billie-eilish",
@@ -96,7 +131,8 @@
     "level": 1,
     "w": 450,
     "h": 600,
-    "src": "BillieEilishO2140725-39_-_54665577407_(cropped).jpg"
+    "src": "BillieEilishO2140725-39_-_54665577407_(cropped).jpg",
+    "cat": "Music"
   },
   {
     "id": "bono",
@@ -104,16 +140,26 @@
     "level": 1,
     "w": 480,
     "h": 509,
-    "src": "Bono_singing_in_Indianapolis_on_Joshua_Tree_Tour_2017_9-10-17.jpg"
+    "src": "Bono_singing_in_Indianapolis_on_Joshua_Tree_Tour_2017_9-10-17.jpg",
+    "cat": "Music"
   },
-  { "id": "brad-pitt", "name": "Brad Pitt", "level": 1, "w": 450, "h": 600, "src": "Brad_Pitt-69858.jpg" },
+  {
+    "id": "brad-pitt",
+    "name": "Brad Pitt",
+    "level": 1,
+    "w": 450,
+    "h": 600,
+    "src": "Brad_Pitt-69858.jpg",
+    "cat": "Screen"
+  },
   {
     "id": "bruce-lee",
     "name": "Bruce Lee",
     "level": 1,
     "w": 480,
     "h": 599,
-    "src": "Bruce_Lee_as_Chen_Zhen_(4x5_cropped).jpg"
+    "src": "Bruce_Lee_as_Chen_Zhen_(4x5_cropped).jpg",
+    "cat": "Screen"
   },
   {
     "id": "bruno-mars",
@@ -121,16 +167,26 @@
     "level": 1,
     "w": 439,
     "h": 600,
-    "src": "BrunoMars24KMagicWorldTourLive_(cropped).jpg"
+    "src": "BrunoMars24KMagicWorldTourLive_(cropped).jpg",
+    "cat": "Music"
   },
-  { "id": "celine-dion", "name": "Celine Dion", "level": 1, "w": 424, "h": 600, "src": "Céline_Dion_2012.jpg" },
+  {
+    "id": "celine-dion",
+    "name": "Celine Dion",
+    "level": 1,
+    "w": 424,
+    "h": 600,
+    "src": "Céline_Dion_2012.jpg",
+    "cat": "Music"
+  },
   {
     "id": "chadwick-boseman",
     "name": "Chadwick Boseman",
     "level": 1,
     "w": 453,
     "h": 600,
-    "src": "Chadwick_Boseman_by_Gage_Skidmore_July_2017_(cropped).jpg"
+    "src": "Chadwick_Boseman_by_Gage_Skidmore_July_2017_(cropped).jpg",
+    "cat": "Screen"
   },
   {
     "id": "charlie-chaplin",
@@ -138,7 +194,8 @@
     "level": 1,
     "w": 421,
     "h": 600,
-    "src": "Charlie_Chaplin_portrait_Getty_1739411952.jpg"
+    "src": "Charlie_Chaplin_portrait_Getty_1739411952.jpg",
+    "cat": "Screen"
   },
   {
     "id": "che-guevara",
@@ -146,7 +203,8 @@
     "level": 1,
     "w": 480,
     "h": 556,
-    "src": "Che_Guevara_-_Guerrillero_Heroico_by_Alberto_Korda.jpg"
+    "src": "Che_Guevara_-_Guerrillero_Heroico_by_Alberto_Korda.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "chris-hemsworth",
@@ -154,16 +212,26 @@
     "level": 1,
     "w": 480,
     "h": 600,
-    "src": "Chris_Hemsworth_-_Crime_101.jpg"
+    "src": "Chris_Hemsworth_-_Crime_101.jpg",
+    "cat": "Screen"
   },
-  { "id": "coco-gauff", "name": "Coco Gauff", "level": 1, "w": 330, "h": 440, "src": "Coco_Gauff_Miami_Open.jpg" },
+  {
+    "id": "coco-gauff",
+    "name": "Coco Gauff",
+    "level": 1,
+    "w": 330,
+    "h": 440,
+    "src": "Coco_Gauff_Miami_Open.jpg",
+    "cat": "Sports"
+  },
   {
     "id": "cristiano-ronaldo",
     "name": "Cristiano Ronaldo",
     "level": 1,
     "w": 401,
     "h": 600,
-    "src": "Cristiano_Ronaldo_Croatia_v_Portugal_2_July_2026-075_(cropped).jpg"
+    "src": "Cristiano_Ronaldo_Croatia_v_Portugal_2_July_2026-075_(cropped).jpg",
+    "cat": "Sports"
   },
   {
     "id": "daniel-radcliffe",
@@ -171,7 +239,8 @@
     "level": 1,
     "w": 399,
     "h": 600,
-    "src": "DanielRadcliffe-byPhilipRomano.jpg"
+    "src": "DanielRadcliffe-byPhilipRomano.jpg",
+    "cat": "Screen"
   },
   {
     "id": "david-attenborough",
@@ -179,7 +248,8 @@
     "level": 1,
     "w": 450,
     "h": 600,
-    "src": "David_Attenborough_in_2025.jpg"
+    "src": "David_Attenborough_in_2025.jpg",
+    "cat": "Screen"
   },
   {
     "id": "david-bowie",
@@ -187,7 +257,8 @@
     "level": 1,
     "w": 480,
     "h": 562,
-    "src": "David-Bowie_Chicago_2002-08-08_photoby_Adam-Bielawski-cropped.jpg"
+    "src": "David-Bowie_Chicago_2002-08-08_photoby_Adam-Bielawski-cropped.jpg",
+    "cat": "Music"
   },
   {
     "id": "denzel-washington",
@@ -195,7 +266,8 @@
     "level": 1,
     "w": 429,
     "h": 600,
-    "src": "Denzel_Washington_at_the_2025_Cannes_Film_Festival.jpg"
+    "src": "Denzel_Washington_at_the_2025_Cannes_Film_Festival.jpg",
+    "cat": "Screen"
   },
   {
     "id": "diana-ross",
@@ -203,7 +275,8 @@
     "level": 1,
     "w": 480,
     "h": 583,
-    "src": "DRossLongleat010722_(9_of_43)_(52189231585)_(cropped).jpg"
+    "src": "DRossLongleat010722_(9_of_43)_(52189231585)_(cropped).jpg",
+    "cat": "Music"
   },
   {
     "id": "diana-princess-of-wales",
@@ -211,7 +284,8 @@
     "level": 1,
     "w": 448,
     "h": 600,
-    "src": "Diana,_Princess_of_Wales_1997_(2).jpg"
+    "src": "Diana,_Princess_of_Wales_1997_(2).jpg",
+    "cat": "Leaders"
   },
   {
     "id": "donald-trump",
@@ -219,7 +293,8 @@
     "level": 1,
     "w": 464,
     "h": 600,
-    "src": "Official_Presidential_Portrait_of_President_Donald_J._Trump_(2025).jpg"
+    "src": "Official_Presidential_Portrait_of_President_Donald_J._Trump_(2025).jpg",
+    "cat": "Leaders"
   },
   {
     "id": "drake",
@@ -227,25 +302,44 @@
     "level": 1,
     "w": 433,
     "h": 600,
-    "src": "Drake_at_The_Carter_Effect_2017_(36818935200)_(cropped).jpg"
+    "src": "Drake_at_The_Carter_Effect_2017_(36818935200)_(cropped).jpg",
+    "cat": "Music"
   },
-  { "id": "dua-lipa", "name": "Dua Lipa", "level": 1, "w": 330, "h": 507, "src": "Dua_Lipa-69798_(cropped).jpg" },
+  {
+    "id": "dua-lipa",
+    "name": "Dua Lipa",
+    "level": 1,
+    "w": 330,
+    "h": 507,
+    "src": "Dua_Lipa-69798_(cropped).jpg",
+    "cat": "Music"
+  },
   {
     "id": "dwayne-johnson",
     "name": "Dwayne Johnson",
     "level": 1,
     "w": 480,
     "h": 600,
-    "src": "Dwayne_Johnson-1764_(4x5_cropped_with_moderate_headroom).jpg"
+    "src": "Dwayne_Johnson-1764_(4x5_cropped_with_moderate_headroom).jpg",
+    "cat": "Screen"
   },
-  { "id": "ed-sheeran", "name": "Ed Sheeran", "level": 1, "w": 475, "h": 600, "src": "Ed_Sheeran-6886_(cropped).jpg" },
+  {
+    "id": "ed-sheeran",
+    "name": "Ed Sheeran",
+    "level": 1,
+    "w": 475,
+    "h": 600,
+    "src": "Ed_Sheeran-6886_(cropped).jpg",
+    "cat": "Music"
+  },
   {
     "id": "elon-musk",
     "name": "Elon Musk",
     "level": 1,
     "w": 457,
     "h": 600,
-    "src": "Elon_Musk_-_54820081119_(cropped).jpg"
+    "src": "Elon_Musk_-_54820081119_(cropped).jpg",
+    "cat": "General"
   },
   {
     "id": "elton-john",
@@ -253,7 +347,8 @@
     "level": 1,
     "w": 450,
     "h": 600,
-    "src": "EltonDocBFILFF101024_(4_of_17)_(cropped).jpg"
+    "src": "EltonDocBFILFF101024_(4_of_17)_(cropped).jpg",
+    "cat": "Music"
   },
   {
     "id": "elvis-presley",
@@ -261,7 +356,8 @@
     "level": 1,
     "w": 465,
     "h": 600,
-    "src": "Elvis_Presley_promoting_Jailhouse_Rock.jpg"
+    "src": "Elvis_Presley_promoting_Jailhouse_Rock.jpg",
+    "cat": "Music"
   },
   {
     "id": "emeli-sande",
@@ -269,17 +365,35 @@
     "level": 1,
     "w": 409,
     "h": 600,
-    "src": "Emeli_Sandé_September_2014.jpg"
+    "src": "Emeli_Sandé_September_2014.jpg",
+    "cat": "Music"
   },
-  { "id": "eminem", "name": "Eminem", "level": 1, "w": 454, "h": 600, "src": "Eminem_2021_Color_Corrected.jpg" },
-  { "id": "emma-watson", "name": "Emma Watson", "level": 1, "w": 447, "h": 600, "src": "Emma_Watson_2013.jpg" },
+  {
+    "id": "eminem",
+    "name": "Eminem",
+    "level": 1,
+    "w": 454,
+    "h": 600,
+    "src": "Eminem_2021_Color_Corrected.jpg",
+    "cat": "Music"
+  },
+  {
+    "id": "emma-watson",
+    "name": "Emma Watson",
+    "level": 1,
+    "w": 447,
+    "h": 600,
+    "src": "Emma_Watson_2013.jpg",
+    "cat": "Screen"
+  },
   {
     "id": "emmanuel-macron",
     "name": "Emmanuel Macron",
     "level": 1,
     "w": 434,
     "h": 600,
-    "src": "Emmanuel_Macron_2025_(cropped).jpg"
+    "src": "Emmanuel_Macron_2025_(cropped).jpg",
+    "cat": "Leaders"
   },
   {
     "id": "erling-haaland",
@@ -287,7 +401,8 @@
     "level": 1,
     "w": 400,
     "h": 600,
-    "src": "Erling_Haaland_Morocco_v_Norway_7_June_2026-51.jpg"
+    "src": "Erling_Haaland_Morocco_v_Norway_7_June_2026-51.jpg",
+    "cat": "Sports"
   },
   {
     "id": "ernest-hemingway",
@@ -295,25 +410,44 @@
     "level": 1,
     "w": 480,
     "h": 599,
-    "src": "ErnestHemingway.jpg"
+    "src": "ErnestHemingway.jpg",
+    "cat": "Faith"
   },
-  { "id": "frank-lampard", "name": "Frank Lampard", "level": 1, "w": 418, "h": 600, "src": "Frank_Lampard_2019.jpg" },
+  {
+    "id": "frank-lampard",
+    "name": "Frank Lampard",
+    "level": 1,
+    "w": 418,
+    "h": 600,
+    "src": "Frank_Lampard_2019.jpg",
+    "cat": "Sports"
+  },
   {
     "id": "freddie-mercury",
     "name": "Freddie Mercury",
     "level": 1,
     "w": 404,
     "h": 600,
-    "src": "Freddie_Mercury_performing_in_New_Haven,_CT,_November_1977.jpg"
+    "src": "Freddie_Mercury_performing_in_New_Haven,_CT,_November_1977.jpg",
+    "cat": "Music"
   },
-  { "id": "george-w-bush", "name": "George W. Bush", "level": 1, "w": 453, "h": 600, "src": "George-W-Bush.jpeg" },
+  {
+    "id": "george-w-bush",
+    "name": "George W. Bush",
+    "level": 1,
+    "w": 453,
+    "h": 600,
+    "src": "George-W-Bush.jpeg",
+    "cat": "Leaders"
+  },
   {
     "id": "george-washington",
     "name": "George Washington",
     "level": 1,
     "w": 480,
     "h": 583,
-    "src": "Gilbert_Stuart_Williamstown_Portrait_of_George_Washington.jpg"
+    "src": "Gilbert_Stuart_Williamstown_Portrait_of_George_Washington.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "giorgia-meloni",
@@ -321,7 +455,8 @@
     "level": 1,
     "w": 455,
     "h": 600,
-    "src": "Giorgia_Meloni_Official_2024_(cropped).jpg"
+    "src": "Giorgia_Meloni_Official_2024_(cropped).jpg",
+    "cat": "Leaders"
   },
   {
     "id": "harry-kane",
@@ -329,7 +464,8 @@
     "level": 1,
     "w": 400,
     "h": 600,
-    "src": "Harry_Kane_England_v_Ghana_23_June_2026-219_(cropped).jpg"
+    "src": "Harry_Kane_England_v_Ghana_23_June_2026-219_(cropped).jpg",
+    "cat": "Sports"
   },
   {
     "id": "harry-styles",
@@ -337,7 +473,8 @@
     "level": 1,
     "w": 450,
     "h": 600,
-    "src": "HarryStylesWembley170623_(65_of_93)_(52982678051)_(cropped_2).jpg"
+    "src": "HarryStylesWembley170623_(65_of_93)_(52982678051)_(cropped_2).jpg",
+    "cat": "Music"
   },
   {
     "id": "hugh-jackman",
@@ -345,7 +482,8 @@
     "level": 1,
     "w": 450,
     "h": 600,
-    "src": "Hugh_Jackman_Is_This_Thing_On-68_(cropped).jpg"
+    "src": "Hugh_Jackman_Is_This_Thing_On-68_(cropped).jpg",
+    "cat": "Screen"
   },
   {
     "id": "imran-khan",
@@ -353,7 +491,8 @@
     "level": 1,
     "w": 462,
     "h": 600,
-    "src": "Prime_Minister_Imran_Khan_Adresses_the_Forum_01.jpg"
+    "src": "Prime_Minister_Imran_Khan_Adresses_the_Forum_01.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "isaac-newton",
@@ -361,16 +500,26 @@
     "level": 1,
     "w": 480,
     "h": 578,
-    "src": "Portrait_of_Sir_Isaac_Newton,_1689_(brightened).jpg"
+    "src": "Portrait_of_Sir_Isaac_Newton,_1689_(brightened).jpg",
+    "cat": "General"
   },
-  { "id": "j-k-rowling", "name": "J. K. Rowling", "level": 1, "w": 480, "h": 592, "src": "J._K._Rowling_2010.jpg" },
+  {
+    "id": "j-k-rowling",
+    "name": "J. K. Rowling",
+    "level": 1,
+    "w": 480,
+    "h": 592,
+    "src": "J._K._Rowling_2010.jpg",
+    "cat": "Faith"
+  },
   {
     "id": "j-robert-oppenheimer",
     "name": "J. Robert Oppenheimer",
     "level": 1,
     "w": 412,
     "h": 600,
-    "src": "Oppenheimer_(cropped).jpg"
+    "src": "Oppenheimer_(cropped).jpg",
+    "cat": "General"
   },
   {
     "id": "jd-vance",
@@ -378,7 +527,8 @@
     "level": 1,
     "w": 480,
     "h": 599,
-    "src": "March_2026_Official_Vice_Presidential_Portrait_of_JD_Vance_(medium_crop)_(2).jpg"
+    "src": "March_2026_Official_Vice_Presidential_Portrait_of_JD_Vance_(medium_crop)_(2).jpg",
+    "cat": "Leaders"
   },
   {
     "id": "jane-austen",
@@ -386,7 +536,8 @@
     "level": 1,
     "w": 465,
     "h": 600,
-    "src": "CassandraAusten-JaneAusten(c.1810)_hires.jpg"
+    "src": "CassandraAusten-JaneAusten(c.1810)_hires.jpg",
+    "cat": "Faith"
   },
   {
     "id": "jeff-bezos",
@@ -394,7 +545,8 @@
     "level": 1,
     "w": 450,
     "h": 600,
-    "src": "260202-D-PM193-2205_SECWAR_Arsenal_of_Freedom_Tour_-_Florida_(3x4_cropped_on_Bezos_and_rotated).jpg"
+    "src": "260202-D-PM193-2205_SECWAR_Arsenal_of_Freedom_Tour_-_Florida_(3x4_cropped_on_Bezos_and_rotated).jpg",
+    "cat": "General"
   },
   {
     "id": "jennifer-lopez",
@@ -402,16 +554,26 @@
     "level": 1,
     "w": 467,
     "h": 600,
-    "src": "Jennifer_Lopez_at_the_2025_Sundance_Film_Festival_(cropped_3).jpg"
+    "src": "Jennifer_Lopez_at_the_2025_Sundance_Film_Festival_(cropped_3).jpg",
+    "cat": "Music"
   },
-  { "id": "jensen-huang", "name": "Jensen Huang", "level": 1, "w": 462, "h": 600, "src": "Jen-Hsun_Huang_2025.jpg" },
+  {
+    "id": "jensen-huang",
+    "name": "Jensen Huang",
+    "level": 1,
+    "w": 462,
+    "h": 600,
+    "src": "Jen-Hsun_Huang_2025.jpg",
+    "cat": "General"
+  },
   {
     "id": "joe-biden",
     "name": "Joe Biden",
     "level": 1,
     "w": 480,
     "h": 600,
-    "src": "Joe_Biden_presidential_portrait.jpg"
+    "src": "Joe_Biden_presidential_portrait.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "john-f-kennedy",
@@ -419,7 +581,8 @@
     "level": 1,
     "w": 463,
     "h": 600,
-    "src": "John_F._Kennedy,_White_House_color_photo_portrait.jpg"
+    "src": "John_F._Kennedy,_White_House_color_photo_portrait.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "john-lennon",
@@ -427,16 +590,26 @@
     "level": 1,
     "w": 450,
     "h": 600,
-    "src": "John_Lennon_\"Walls_and_Bridges\"_1974_press_photo_2_(color)_(cropped).jpg"
+    "src": "John_Lennon_\"Walls_and_Bridges\"_1974_press_photo_2_(color)_(cropped).jpg",
+    "cat": "Music"
   },
-  { "id": "johnny-depp", "name": "Johnny Depp", "level": 1, "w": 437, "h": 600, "src": "Johnny_Depp_2020.jpg" },
+  {
+    "id": "johnny-depp",
+    "name": "Johnny Depp",
+    "level": 1,
+    "w": 437,
+    "h": 600,
+    "src": "Johnny_Depp_2020.jpg",
+    "cat": "Screen"
+  },
   {
     "id": "jose-mourinho",
     "name": "José Mourinho",
     "level": 1,
     "w": 478,
     "h": 600,
-    "src": "José_Mourinho_20250206_(1).jpg"
+    "src": "José_Mourinho_20250206_(1).jpg",
+    "cat": "Sports"
   },
   {
     "id": "jude-bellingham",
@@ -444,7 +617,8 @@
     "level": 1,
     "w": 400,
     "h": 600,
-    "src": "Jude_Bellingham_England_v_Ghana_23_June_2026-061_(cropped).jpg"
+    "src": "Jude_Bellingham_England_v_Ghana_23_June_2026-061_(cropped).jpg",
+    "cat": "Sports"
   },
   {
     "id": "justin-bieber",
@@ -452,7 +626,8 @@
     "level": 1,
     "w": 371,
     "h": 600,
-    "src": "P20260719DT-1213_President_Donald_J._Trump_and_First_Lady_Melania_Trump_attend_the_FIFA_World_Cup_Final_(cropped_2).jpg"
+    "src": "P20260719DT-1213_President_Donald_J._Trump_and_First_Lady_Melania_Trump_attend_the_FIFA_World_Cup_Final_(cropped_2).jpg",
+    "cat": "Music"
   },
   {
     "id": "jurgen-klopp",
@@ -460,7 +635,8 @@
     "level": 1,
     "w": 330,
     "h": 524,
-    "src": "2022-07-21_Fußball,_Männer,Freundschaftsspiel,_RB_Leipzig_-_FC_Liverpool_1DX_2243_by_Stepro_(cropped)_(cropped).jpg"
+    "src": "2022-07-21_Fußball,_Männer,Freundschaftsspiel,_RB_Leipzig_-_FC_Liverpool_1DX_2243_by_Stepro_(cropped)_(cropped).jpg",
+    "cat": "Sports"
   },
   {
     "id": "kanye-west",
@@ -468,7 +644,8 @@
     "level": 1,
     "w": 450,
     "h": 600,
-    "src": "Kanye_West_at_the_2009_Tribeca_Film_Festival_(crop_2).jpg"
+    "src": "Kanye_West_at_the_2009_Tribeca_Film_Festival_(crop_2).jpg",
+    "cat": "Music"
   },
   {
     "id": "karl-marx",
@@ -476,7 +653,8 @@
     "level": 1,
     "w": 405,
     "h": 600,
-    "src": "Karl_Marx_by_John_Jabez_Edwin_Mayall_1875_-_Restored.png"
+    "src": "Karl_Marx_by_John_Jabez_Edwin_Mayall_1875_-_Restored.png",
+    "cat": "General"
   },
   {
     "id": "keanu-reeves",
@@ -484,7 +662,8 @@
     "level": 1,
     "w": 450,
     "h": 600,
-    "src": "Keanu_Reeves_at_TIFF_2025_02_(Cropped).jpg"
+    "src": "Keanu_Reeves_at_TIFF_2025_02_(Cropped).jpg",
+    "cat": "Screen"
   },
   {
     "id": "keir-starmer",
@@ -492,7 +671,8 @@
     "level": 1,
     "w": 330,
     "h": 461,
-    "src": "Prime_Minister_Keir_Starmer_Portrait_(cropped).jpg"
+    "src": "Prime_Minister_Keir_Starmer_Portrait_(cropped).jpg",
+    "cat": "Leaders"
   },
   {
     "id": "kim-kardashian",
@@ -500,7 +680,8 @@
     "level": 1,
     "w": 400,
     "h": 600,
-    "src": "Kim_Kardashian_West_2014.jpg"
+    "src": "Kim_Kardashian_West_2014.jpg",
+    "cat": "Screen"
   },
   {
     "id": "king-charles-iii",
@@ -508,16 +689,26 @@
     "level": 1,
     "w": 480,
     "h": 502,
-    "src": "King_Charles_III_(July_2023).jpg"
+    "src": "King_Charles_III_(July_2023).jpg",
+    "cat": "Leaders"
   },
-  { "id": "kobe-bryant", "name": "Kobe Bryant", "level": 1, "w": 480, "h": 457, "src": "Kobe_Bryant_Dec_2014.jpg" },
+  {
+    "id": "kobe-bryant",
+    "name": "Kobe Bryant",
+    "level": 1,
+    "w": 480,
+    "h": 457,
+    "src": "Kobe_Bryant_Dec_2014.jpg",
+    "cat": "Sports"
+  },
   {
     "id": "kylian-mbappe",
     "name": "Kylian Mbappé",
     "level": 1,
     "w": 400,
     "h": 600,
-    "src": "Kylian_Mbappe_France_v_Senegal_16_June_2026-391_(cropped).jpg"
+    "src": "Kylian_Mbappe_France_v_Senegal_16_June_2026-391_(cropped).jpg",
+    "cat": "Sports"
   },
   {
     "id": "lady-gaga",
@@ -525,7 +716,8 @@
     "level": 1,
     "w": 409,
     "h": 600,
-    "src": "Lady_Gaga_at_Joe_Biden's_inauguration_(cropped_5).jpg"
+    "src": "Lady_Gaga_at_Joe_Biden's_inauguration_(cropped_5).jpg",
+    "cat": "Music"
   },
   {
     "id": "lebron-james",
@@ -533,7 +725,8 @@
     "level": 1,
     "w": 480,
     "h": 556,
-    "src": "LeBron_James_(51959977144)_(cropped2).jpg"
+    "src": "LeBron_James_(51959977144)_(cropped2).jpg",
+    "cat": "Sports"
   },
   {
     "id": "leonardo-dicaprio",
@@ -541,7 +734,8 @@
     "level": 1,
     "w": 432,
     "h": 600,
-    "src": "LeoPTABFI191125-28_(cropped).jpg"
+    "src": "LeoPTABFI191125-28_(cropped).jpg",
+    "cat": "Screen"
   },
   {
     "id": "leonardo-da-vinci",
@@ -549,7 +743,8 @@
     "level": 1,
     "w": 419,
     "h": 600,
-    "src": "Francesco_Melzi_-_Portrait_of_Leonardo_(colour_correction).png"
+    "src": "Francesco_Melzi_-_Portrait_of_Leonardo_(colour_correction).png",
+    "cat": "Faith"
   },
   {
     "id": "lewis-hamilton",
@@ -557,7 +752,8 @@
     "level": 1,
     "w": 450,
     "h": 600,
-    "src": "Prime_Minister_Keir_Starmer_meets_Sir_Lewis_Hamilton_(54566928382)_(cropped).jpg"
+    "src": "Prime_Minister_Keir_Starmer_meets_Sir_Lewis_Hamilton_(54566928382)_(cropped).jpg",
+    "cat": "Sports"
   },
   {
     "id": "lionel-messi",
@@ -565,7 +761,8 @@
     "level": 1,
     "w": 400,
     "h": 600,
-    "src": "Leo_Messi_Argentina_v_Egypt_7_July_2026-1.jpg"
+    "src": "Leo_Messi_Argentina_v_Egypt_7_July_2026-1.jpg",
+    "cat": "Sports"
   },
   {
     "id": "mahatma-gandhi",
@@ -573,7 +770,8 @@
     "level": 1,
     "w": 480,
     "h": 599,
-    "src": "Mahatma-Gandhi,_studio,_1931.jpg"
+    "src": "Mahatma-Gandhi,_studio,_1931.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "malala-yousafzai",
@@ -581,7 +779,8 @@
     "level": 1,
     "w": 400,
     "h": 600,
-    "src": "Malala_Yousafzai_2023_portrait_2x3.jpg"
+    "src": "Malala_Yousafzai_2023_portrait_2x3.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "malcolm-x",
@@ -589,7 +788,8 @@
     "level": 1,
     "w": 450,
     "h": 600,
-    "src": "Malcolm_X_1964_press_photo_(cropped)_(lighting_diff).jpg"
+    "src": "Malcolm_X_1964_press_photo_(cropped)_(lighting_diff).jpg",
+    "cat": "Leaders"
   },
   {
     "id": "margaret-thatcher",
@@ -597,7 +797,8 @@
     "level": 1,
     "w": 431,
     "h": 600,
-    "src": "Margaret_Thatcher_stock_portrait_(cropped).jpg"
+    "src": "Margaret_Thatcher_stock_portrait_(cropped).jpg",
+    "cat": "Leaders"
   },
   {
     "id": "mariah-carey",
@@ -605,16 +806,26 @@
     "level": 1,
     "w": 457,
     "h": 600,
-    "src": "Mariah_Carey_Library_of_Congress_2023_1_Cropped_3.png"
+    "src": "Mariah_Carey_Library_of_Congress_2023_1_Cropped_3.png",
+    "cat": "Music"
   },
-  { "id": "marilyn-monroe", "name": "Marilyn Monroe", "level": 1, "w": 408, "h": 600, "src": "Monroecirca1953.jpg" },
+  {
+    "id": "marilyn-monroe",
+    "name": "Marilyn Monroe",
+    "level": 1,
+    "w": 408,
+    "h": 600,
+    "src": "Monroecirca1953.jpg",
+    "cat": "Screen"
+  },
   {
     "id": "mark-zuckerberg",
     "name": "Mark Zuckerberg",
     "level": 1,
     "w": 443,
     "h": 591,
-    "src": "P20260929DT-1655_(55561811540)_(cropped).jpg"
+    "src": "P20260929DT-1655_(55561811540)_(cropped).jpg",
+    "cat": "General"
   },
   {
     "id": "meryl-streep",
@@ -622,7 +833,8 @@
     "level": 1,
     "w": 450,
     "h": 600,
-    "src": "Meryl_Streep-_Press_conference_for_the_film_\"The_Devil_Wears_Prada_2\"_-_55194765350_(cropped1).jpg"
+    "src": "Meryl_Streep-_Press_conference_for_the_film_\"The_Devil_Wears_Prada_2\"_-_55194765350_(cropped1).jpg",
+    "cat": "Screen"
   },
   {
     "id": "michael-jackson",
@@ -630,7 +842,8 @@
     "level": 1,
     "w": 451,
     "h": 600,
-    "src": "Michael_Jackson_1983_(3x4_cropped)_(contrast).jpg"
+    "src": "Michael_Jackson_1983_(3x4_cropped)_(contrast).jpg",
+    "cat": "Music"
   },
   {
     "id": "michael-jordan",
@@ -638,7 +851,8 @@
     "level": 1,
     "w": 450,
     "h": 600,
-    "src": "Michael_jordan_admad_rashad_(51276390562)_(cropped).jpg"
+    "src": "Michael_jordan_admad_rashad_(51276390562)_(cropped).jpg",
+    "cat": "Sports"
   },
   {
     "id": "michael-schumacher",
@@ -646,7 +860,8 @@
     "level": 1,
     "w": 438,
     "h": 600,
-    "src": "Michael_Schumacher,_September_2005.jpg"
+    "src": "Michael_Schumacher,_September_2005.jpg",
+    "cat": "Sports"
   },
   {
     "id": "mike-tyson",
@@ -654,7 +869,8 @@
     "level": 1,
     "w": 450,
     "h": 600,
-    "src": "Mike_Tyson_Photo_Op_GalaxyCon_Austin_2023.jpg"
+    "src": "Mike_Tyson_Photo_Op_GalaxyCon_Austin_2023.jpg",
+    "cat": "Sports"
   },
   {
     "id": "morgan-freeman",
@@ -662,25 +878,44 @@
     "level": 1,
     "w": 450,
     "h": 600,
-    "src": "Morgan_Freeman_at_The_Pentagon_on_2_August_2023_-_230802-D-PM193-3363_(cropped).jpg"
+    "src": "Morgan_Freeman_at_The_Pentagon_on_2_August_2023_-_230802-D-PM193-3363_(cropped).jpg",
+    "cat": "Screen"
   },
-  { "id": "mother-teresa", "name": "Mother Teresa", "level": 1, "w": 435, "h": 600, "src": "Mother_Teresa_1.jpg" },
+  {
+    "id": "mother-teresa",
+    "name": "Mother Teresa",
+    "level": 1,
+    "w": 435,
+    "h": 600,
+    "src": "Mother_Teresa_1.jpg",
+    "cat": "Faith"
+  },
   {
     "id": "muammar-gaddafi",
     "name": "Muammar Gaddafi",
     "level": 1,
     "w": 399,
     "h": 600,
-    "src": "Muammar_al-Gaddafi_at_the_AU_summit.jpg"
+    "src": "Muammar_al-Gaddafi_at_the_AU_summit.jpg",
+    "cat": "Leaders"
   },
-  { "id": "muhammad-ali", "name": "Muhammad Ali", "level": 1, "w": 479, "h": 600, "src": "Muhammad_Ali_NYWTS.jpg" },
+  {
+    "id": "muhammad-ali",
+    "name": "Muhammad Ali",
+    "level": 1,
+    "w": 479,
+    "h": 600,
+    "src": "Muhammad_Ali_NYWTS.jpg",
+    "cat": "Sports"
+  },
   {
     "id": "naomi-osaka",
     "name": "Naomi Osaka",
     "level": 1,
     "w": 450,
     "h": 600,
-    "src": "NaomiOsaka-smile-2020_(cropped_tight).png"
+    "src": "NaomiOsaka-smile-2020_(cropped_tight).png",
+    "cat": "Sports"
   },
   {
     "id": "napoleon",
@@ -688,7 +923,8 @@
     "level": 1,
     "w": 360,
     "h": 600,
-    "src": "Jacques-Louis_David_-_The_Emperor_Napoleon_in_His_Study_at_the_Tuileries_-_Google_Art_Project.jpg"
+    "src": "Jacques-Louis_David_-_The_Emperor_Napoleon_in_His_Study_at_the_Tuileries_-_Google_Art_Project.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "narendra-modi",
@@ -696,7 +932,8 @@
     "level": 1,
     "w": 330,
     "h": 412,
-    "src": "The_official_portrait_of_Shri_Narendra_Modi,_the_Prime_Minister_of_the_Republic_of_India.jpg"
+    "src": "The_official_portrait_of_Shri_Narendra_Modi,_the_Prime_Minister_of_the_Republic_of_India.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "neil-armstrong",
@@ -704,7 +941,8 @@
     "level": 1,
     "w": 480,
     "h": 600,
-    "src": "Neil_Armstrong_pose.jpg"
+    "src": "Neil_Armstrong_pose.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "neymar",
@@ -712,7 +950,8 @@
     "level": 1,
     "w": 400,
     "h": 600,
-    "src": "Neymar_Junior_Brazil_V_Morocco_13_June_2026-40.jpg"
+    "src": "Neymar_Junior_Brazil_V_Morocco_13_June_2026-40.jpg",
+    "cat": "Sports"
   },
   {
     "id": "nigel-farage",
@@ -720,16 +959,26 @@
     "level": 1,
     "w": 449,
     "h": 600,
-    "src": "Official_portrait_of_Nigel_Farage_MP_(3x4_cropped).jpg"
+    "src": "Official_portrait_of_Nigel_Farage_MP_(3x4_cropped).jpg",
+    "cat": "Leaders"
   },
-  { "id": "nikola-tesla", "name": "Nikola Tesla", "level": 1, "w": 448, "h": 600, "src": "Tesla_circa_1890.jpeg" },
+  {
+    "id": "nikola-tesla",
+    "name": "Nikola Tesla",
+    "level": 1,
+    "w": 448,
+    "h": 600,
+    "src": "Tesla_circa_1890.jpeg",
+    "cat": "General"
+  },
   {
     "id": "novak-djokovic",
     "name": "Novak Djokovic",
     "level": 1,
     "w": 450,
     "h": 600,
-    "src": "Novak_Djokovic_Paris_2024_Olympic_Games_(cropped).jpg"
+    "src": "Novak_Djokovic_Paris_2024_Olympic_Games_(cropped).jpg",
+    "cat": "Sports"
   },
   {
     "id": "patrick-mahomes",
@@ -737,7 +986,8 @@
     "level": 1,
     "w": 400,
     "h": 600,
-    "src": "Patrick_Mahomes_(51615475056).jpg"
+    "src": "Patrick_Mahomes_(51615475056).jpg",
+    "cat": "Sports"
   },
   {
     "id": "paul-mccartney",
@@ -745,7 +995,8 @@
     "level": 1,
     "w": 450,
     "h": 600,
-    "src": "MaccaLyricsRFH051121_(15_of_18)_(updated)_(cropped).jpg"
+    "src": "MaccaLyricsRFH051121_(15_of_18)_(updated)_(cropped).jpg",
+    "cat": "Music"
   },
   {
     "id": "pep-guardiola",
@@ -753,7 +1004,8 @@
     "level": 1,
     "w": 464,
     "h": 600,
-    "src": "Josep_Guardiola_2023-10-04_Fußball,_Männer,_UEFA_Champions_League,_RB_Leipzig_-_Manchester_City_FC_1DX_2797_(cropped).jpg"
+    "src": "Josep_Guardiola_2023-10-04_Fußball,_Männer,_UEFA_Champions_League,_RB_Leipzig_-_Manchester_City_FC_1DX_2797_(cropped).jpg",
+    "cat": "Sports"
   },
   {
     "id": "pope-leo-xiv",
@@ -761,7 +1013,8 @@
     "level": 1,
     "w": 450,
     "h": 600,
-    "src": "Pope_Leo_XIV_3_(3x4_cropped).png"
+    "src": "Pope_Leo_XIV_3_(3x4_cropped).png",
+    "cat": "Faith"
   },
   {
     "id": "prince-william",
@@ -769,7 +1022,8 @@
     "level": 1,
     "w": 450,
     "h": 600,
-    "src": "Prince_of_Wales_at_State_Banquet_2025-09-17_(0.75_crop).jpg"
+    "src": "Prince_of_Wales_at_State_Banquet_2025-09-17_(0.75_crop).jpg",
+    "cat": "Leaders"
   },
   {
     "id": "prince",
@@ -777,7 +1031,8 @@
     "level": 1,
     "w": 470,
     "h": 600,
-    "src": "Prince_promo_picture_(1988;_cropped_and_retouched).png"
+    "src": "Prince_promo_picture_(1988;_cropped_and_retouched).png",
+    "cat": "Music"
   },
   {
     "id": "queen-elizabeth-ii",
@@ -785,7 +1040,8 @@
     "level": 1,
     "w": 450,
     "h": 600,
-    "src": "Queen_Elizabeth_II_official_portrait_for_1959_tour_(retouched)_(cropped)_(3-to-4_aspect_ratio).jpg"
+    "src": "Queen_Elizabeth_II_official_portrait_for_1959_tour_(retouched)_(cropped)_(3-to-4_aspect_ratio).jpg",
+    "cat": "Leaders"
   },
   {
     "id": "rafael-nadal",
@@ -793,7 +1049,8 @@
     "level": 1,
     "w": 446,
     "h": 600,
-    "src": "Rafael_Nadal_en_2024_(cropped).jpg"
+    "src": "Rafael_Nadal_en_2024_(cropped).jpg",
+    "cat": "Sports"
   },
   {
     "id": "raheem-sterling",
@@ -801,7 +1058,8 @@
     "level": 1,
     "w": 400,
     "h": 600,
-    "src": "Raheem_Sterling_2018.jpg"
+    "src": "Raheem_Sterling_2018.jpg",
+    "cat": "Sports"
   },
   {
     "id": "richard-branson",
@@ -809,16 +1067,26 @@
     "level": 1,
     "w": 469,
     "h": 600,
-    "src": "Richard_Branson_Addresses_the_Our_Ocean_Conference_2015_in_Valparaíso_(21783214958)_(cropped).jpg"
+    "src": "Richard_Branson_Addresses_the_Our_Ocean_Conference_2015_in_Valparaíso_(21783214958)_(cropped).jpg",
+    "cat": "General"
   },
-  { "id": "rihanna", "name": "Rihanna", "level": 1, "w": 450, "h": 600, "src": "Rihanna_Fenty_2018.png" },
+  {
+    "id": "rihanna",
+    "name": "Rihanna",
+    "level": 1,
+    "w": 450,
+    "h": 600,
+    "src": "Rihanna_Fenty_2018.png",
+    "cat": "Music"
+  },
   {
     "id": "robert-downey-jr",
     "name": "Robert Downey Jr.",
     "level": 1,
     "w": 400,
     "h": 600,
-    "src": "RobertDowneyJr-byPhilipRomano7_(cropped).jpg"
+    "src": "RobertDowneyJr-byPhilipRomano7_(cropped).jpg",
+    "cat": "Screen"
   },
   {
     "id": "roger-federer",
@@ -826,7 +1094,8 @@
     "level": 1,
     "w": 434,
     "h": 600,
-    "src": "Roger_Federer_2015_(cropped).jpg"
+    "src": "Roger_Federer_2015_(cropped).jpg",
+    "cat": "Sports"
   },
   {
     "id": "ronald-reagan",
@@ -834,7 +1103,8 @@
     "level": 1,
     "w": 330,
     "h": 413,
-    "src": "Official_Portrait_of_President_Reagan_1981.jpg"
+    "src": "Official_Portrait_of_President_Reagan_1981.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "rowan-atkinson",
@@ -842,7 +1112,8 @@
     "level": 1,
     "w": 480,
     "h": 584,
-    "src": "Rowan_Atkinson,_2011.jpg"
+    "src": "Rowan_Atkinson,_2011.jpg",
+    "cat": "Screen"
   },
   {
     "id": "sam-altman",
@@ -850,7 +1121,8 @@
     "level": 1,
     "w": 450,
     "h": 600,
-    "src": "Meeting_with_Masayoshi_Son_and_Sam_Altman_(February_3,_2025)_(3x4_cropped_on_Altman).jpg"
+    "src": "Meeting_with_Masayoshi_Son_and_Sam_Altman_(February_3,_2025)_(3x4_cropped_on_Altman).jpg",
+    "cat": "General"
   },
   {
     "id": "samuel-l-jackson",
@@ -858,7 +1130,8 @@
     "level": 1,
     "w": 330,
     "h": 418,
-    "src": "Samuel_L._Jackson_attending_the_World_premier_of_\"Argylle\"_in_London_,_January_2024_(cropped2).jpg"
+    "src": "Samuel_L._Jackson_attending_the_World_premier_of_\"Argylle\"_in_London_,_January_2024_(cropped2).jpg",
+    "cat": "Screen"
   },
   {
     "id": "serena-williams",
@@ -866,7 +1139,8 @@
     "level": 1,
     "w": 480,
     "h": 574,
-    "src": "Serena-Smiling-2020.png"
+    "src": "Serena-Smiling-2020.png",
+    "cat": "Sports"
   },
   {
     "id": "shaquille-o-neal",
@@ -874,7 +1148,8 @@
     "level": 1,
     "w": 453,
     "h": 600,
-    "src": "TechCrunch_Disrupt_2023_-_Day_1_(cropped).jpg"
+    "src": "TechCrunch_Disrupt_2023_-_Day_1_(cropped).jpg",
+    "cat": "Sports"
   },
   {
     "id": "snoop-dogg",
@@ -882,7 +1157,8 @@
     "level": 1,
     "w": 467,
     "h": 600,
-    "src": "Snoop_Dogg,_WrestleMania_XL_(cropped)_(cropped).jpg"
+    "src": "Snoop_Dogg,_WrestleMania_XL_(cropped)_(cropped).jpg",
+    "cat": "Music"
   },
   {
     "id": "stephen-hawking",
@@ -890,7 +1166,8 @@
     "level": 1,
     "w": 418,
     "h": 600,
-    "src": "Stephen_Hawking.StarChild.jpg"
+    "src": "Stephen_Hawking.StarChild.jpg",
+    "cat": "General"
   },
   {
     "id": "steve-jobs",
@@ -898,7 +1175,8 @@
     "level": 1,
     "w": 450,
     "h": 600,
-    "src": "Steve_Jobs_Headshot_2010_(cropped_4).jpg"
+    "src": "Steve_Jobs_Headshot_2010_(cropped_4).jpg",
+    "cat": "General"
   },
   {
     "id": "stevie-wonder",
@@ -906,7 +1184,8 @@
     "level": 1,
     "w": 450,
     "h": 600,
-    "src": "SWonderBSTHyde060719-72_(cropped).jpg"
+    "src": "SWonderBSTHyde060719-72_(cropped).jpg",
+    "cat": "Music"
   },
   {
     "id": "taylor-swift",
@@ -914,7 +1193,8 @@
     "level": 1,
     "w": 422,
     "h": 600,
-    "src": "Taylor_Swift_at_the_2023_MTV_Video_Music_Awards_(3).png"
+    "src": "Taylor_Swift_at_the_2023_MTV_Video_Music_Awards_(3).png",
+    "cat": "Music"
   },
   {
     "id": "tiger-woods",
@@ -922,7 +1202,8 @@
     "level": 1,
     "w": 429,
     "h": 600,
-    "src": "President_Donald_Trump_hosts_a_reception_honoring_Black_History_Month_(54341713089)_(cropped).jpg"
+    "src": "President_Donald_Trump_hosts_a_reception_honoring_Black_History_Month_(54341713089)_(cropped).jpg",
+    "cat": "Sports"
   },
   {
     "id": "tim-cook",
@@ -930,7 +1211,8 @@
     "level": 1,
     "w": 402,
     "h": 600,
-    "src": "Tim_Cook_in_New_York_City_-_2026_(cropped).jpg"
+    "src": "Tim_Cook_in_New_York_City_-_2026_(cropped).jpg",
+    "cat": "General"
   },
   {
     "id": "tom-brady",
@@ -938,7 +1220,8 @@
     "level": 1,
     "w": 330,
     "h": 441,
-    "src": "25th_Laureus_World_Sports_Awards_-_Red_Carpet_-_Tom_Brady_-_240422_191334_(cropped)_(cropped).jpg"
+    "src": "25th_Laureus_World_Sports_Awards_-_Red_Carpet_-_Tom_Brady_-_240422_191334_(cropped)_(cropped).jpg",
+    "cat": "Sports"
   },
   {
     "id": "tom-cruise",
@@ -946,7 +1229,8 @@
     "level": 1,
     "w": 480,
     "h": 600,
-    "src": "Tom_Cruise_at_53rd_Saturn_Awards_2026-01.jpg"
+    "src": "Tom_Cruise_at_53rd_Saturn_Awards_2026-01.jpg",
+    "cat": "Screen"
   },
   {
     "id": "tom-hanks",
@@ -954,7 +1238,8 @@
     "level": 1,
     "w": 330,
     "h": 458,
-    "src": "TomHanksPrincEdw031223_(11_of_41)_(cropped).jpg"
+    "src": "TomHanksPrincEdw031223_(11_of_41)_(cropped).jpg",
+    "cat": "Screen"
   },
   {
     "id": "tyler-perry",
@@ -962,7 +1247,8 @@
     "level": 1,
     "w": 330,
     "h": 496,
-    "src": "TylerPerry-byPhilipRomano.jpg"
+    "src": "TylerPerry-byPhilipRomano.jpg",
+    "cat": "Screen"
   },
   {
     "id": "tyson-fury",
@@ -970,7 +1256,8 @@
     "level": 1,
     "w": 480,
     "h": 581,
-    "src": "Tyson_Fury_at_Place_Bell,_Laval_Quebec,_Canada_-_Dec_16_2017_(cropped).jpg"
+    "src": "Tyson_Fury_at_Place_Bell,_Laval_Quebec,_Canada_-_Dec_16_2017_(cropped).jpg",
+    "cat": "Sports"
   },
   {
     "id": "venus-williams",
@@ -978,7 +1265,8 @@
     "level": 1,
     "w": 480,
     "h": 528,
-    "src": "Venus_Williams_(2025_DC_Open)_crop.jpg"
+    "src": "Venus_Williams_(2025_DC_Open)_crop.jpg",
+    "cat": "Sports"
   },
   {
     "id": "vladimir-putin",
@@ -986,7 +1274,8 @@
     "level": 1,
     "w": 400,
     "h": 600,
-    "src": "Владимир_Путин_(08-03-2024)_(cropped)_(higher_res)_2.jpg"
+    "src": "Владимир_Путин_(08-03-2024)_(cropped)_(higher_res)_2.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "wayne-rooney",
@@ -994,7 +1283,8 @@
     "level": 1,
     "w": 394,
     "h": 600,
-    "src": "Wayne_Rooney_(50121495731)_(cropped).jpg"
+    "src": "Wayne_Rooney_(50121495731)_(cropped).jpg",
+    "cat": "Sports"
   },
   {
     "id": "whitney-houston",
@@ -1002,7 +1292,8 @@
     "level": 1,
     "w": 423,
     "h": 600,
-    "src": "Whitney_Houston_(cropped3).JPEG"
+    "src": "Whitney_Houston_(cropped3).JPEG",
+    "cat": "Music"
   },
   {
     "id": "will-smith",
@@ -1010,7 +1301,8 @@
     "level": 1,
     "w": 444,
     "h": 600,
-    "src": "TechCrunch_Disrupt_San_Francisco_2019_-_Day_1_(48834070763)_(cropped).jpg"
+    "src": "TechCrunch_Disrupt_San_Francisco_2019_-_Day_1_(48834070763)_(cropped).jpg",
+    "cat": "Screen"
   },
   {
     "id": "william-shakespeare",
@@ -1018,7 +1310,8 @@
     "level": 1,
     "w": 471,
     "h": 600,
-    "src": "William_Shakespeare_by_John_Taylor,_edited.jpg"
+    "src": "William_Shakespeare_by_John_Taylor,_edited.jpg",
+    "cat": "Faith"
   },
   {
     "id": "winston-churchill",
@@ -1026,7 +1319,8 @@
     "level": 1,
     "w": 480,
     "h": 597,
-    "src": "Sir_Winston_Churchill_-_19086236948_(restored).jpg"
+    "src": "Sir_Winston_Churchill_-_19086236948_(restored).jpg",
+    "cat": "Leaders"
   },
   {
     "id": "xi-jinping",
@@ -1034,16 +1328,26 @@
     "level": 1,
     "w": 450,
     "h": 600,
-    "src": "Prime_Minister_Keir_Starmer_visits_China_(55066713683)_(cropped+angle).jpg"
+    "src": "Prime_Minister_Keir_Starmer_visits_China_(55066713683)_(cropped+angle).jpg",
+    "cat": "Leaders"
   },
-  { "id": "zendaya", "name": "Zendaya", "level": 1, "w": 399, "h": 600, "src": "Zendaya-byPhilipRomano.jpg" },
+  {
+    "id": "zendaya",
+    "name": "Zendaya",
+    "level": 1,
+    "w": 399,
+    "h": 600,
+    "src": "Zendaya-byPhilipRomano.jpg",
+    "cat": "Screen"
+  },
   {
     "id": "zinedine-zidane",
     "name": "Zinedine Zidane",
     "level": 1,
     "w": 452,
     "h": 600,
-    "src": "Zinedine_Zidane_by_Tasnim_03.jpg"
+    "src": "Zinedine_Zidane_by_Tasnim_03.jpg",
+    "cat": "Sports"
   },
   {
     "id": "ada-lovelace",
@@ -1051,7 +1355,8 @@
     "level": 2,
     "w": 464,
     "h": 600,
-    "src": "Ada_Lovelace_daguerreotype_by_Antoine_Claudet_1843_-_cropped.png"
+    "src": "Ada_Lovelace_daguerreotype_by_Antoine_Claudet_1843_-_cropped.png",
+    "cat": "General"
   },
   {
     "id": "adele",
@@ -1059,18 +1364,44 @@
     "level": 2,
     "w": 452,
     "h": 600,
-    "src": "Adeleinmunich_bystevendecuba_(cropped).jpg"
+    "src": "Adeleinmunich_bystevendecuba_(cropped).jpg",
+    "cat": "Music"
   },
-  { "id": "alan-shearer", "name": "Alan Shearer", "level": 2, "w": 432, "h": 600, "src": "Alan_Shearer_2008.jpg" },
-  { "id": "alex-ferguson", "name": "Alex Ferguson", "level": 2, "w": 330, "h": 433, "src": "Alex_Ferguson_2012.jpg" },
-  { "id": "alicia-keys", "name": "Alicia Keys", "level": 2, "w": 450, "h": 600, "src": "Alicia_Keys_(2025).jpg" },
+  {
+    "id": "alan-shearer",
+    "name": "Alan Shearer",
+    "level": 2,
+    "w": 432,
+    "h": 600,
+    "src": "Alan_Shearer_2008.jpg",
+    "cat": "Sports"
+  },
+  {
+    "id": "alex-ferguson",
+    "name": "Alex Ferguson",
+    "level": 2,
+    "w": 330,
+    "h": 433,
+    "src": "Alex_Ferguson_2012.jpg",
+    "cat": "Sports"
+  },
+  {
+    "id": "alicia-keys",
+    "name": "Alicia Keys",
+    "level": 2,
+    "w": 450,
+    "h": 600,
+    "src": "Alicia_Keys_(2025).jpg",
+    "cat": "Music"
+  },
   {
     "id": "aliko-dangote",
     "name": "Aliko Dangote",
     "level": 2,
     "w": 330,
     "h": 441,
-    "src": "Al_Shabani_at_the_acquisition_of_Dangote_Cement_by_ICD_in_2014_(cropped).jpg"
+    "src": "Al_Shabani_at_the_acquisition_of_Dangote_Cement_by_ICD_in_2014_(cropped).jpg",
+    "cat": "General"
   },
   {
     "id": "andy-murray",
@@ -1078,7 +1409,8 @@
     "level": 2,
     "w": 480,
     "h": 597,
-    "src": "2015_Australian_Open_-_Andy_Murray_12_(cropped).jpg"
+    "src": "2015_Australian_Open_-_Andy_Murray_12_(cropped).jpg",
+    "cat": "Sports"
   },
   {
     "id": "angela-merkel",
@@ -1086,7 +1418,8 @@
     "level": 2,
     "w": 429,
     "h": 600,
-    "src": "Angela_Merkel_2019_cropped.jpg"
+    "src": "Angela_Merkel_2019_cropped.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "anne-frank",
@@ -1094,7 +1427,8 @@
     "level": 2,
     "w": 480,
     "h": 542,
-    "src": "Anne_Frank_passport_photo,_May_1942_(cropped).jpg"
+    "src": "Anne_Frank_passport_photo,_May_1942_(cropped).jpg",
+    "cat": "Leaders"
   },
   {
     "id": "aretha-franklin",
@@ -1102,16 +1436,26 @@
     "level": 2,
     "w": 480,
     "h": 565,
-    "src": "Aretha_Franklin_1968.jpg"
+    "src": "Aretha_Franklin_1968.jpg",
+    "cat": "Music"
   },
-  { "id": "aristotle", "name": "Aristotle", "level": 2, "w": 448, "h": 600, "src": "Aristotle_Altemps_Inv8575.jpg" },
+  {
+    "id": "aristotle",
+    "name": "Aristotle",
+    "level": 2,
+    "w": 448,
+    "h": 600,
+    "src": "Aristotle_Altemps_Inv8575.jpg",
+    "cat": "General"
+  },
   {
     "id": "ayrton-senna",
     "name": "Ayrton Senna",
     "level": 2,
     "w": 471,
     "h": 600,
-    "src": "Ayrton_Senna_Pesawat_RC_Cropped.jpg"
+    "src": "Ayrton_Senna_Pesawat_RC_Cropped.jpg",
+    "cat": "Sports"
   },
   {
     "id": "bernie-sanders",
@@ -1119,7 +1463,8 @@
     "level": 2,
     "w": 450,
     "h": 600,
-    "src": "Bernie_Sanders_February_2026_(cropped).jpg"
+    "src": "Bernie_Sanders_February_2026_(cropped).jpg",
+    "cat": "Leaders"
   },
   {
     "id": "bob-marley",
@@ -1127,7 +1472,8 @@
     "level": 2,
     "w": 450,
     "h": 600,
-    "src": "Bob_Marley_circa_1976_(cropped).jpg"
+    "src": "Bob_Marley_circa_1976_(cropped).jpg",
+    "cat": "Music"
   },
   {
     "id": "boris-johnson",
@@ -1135,7 +1481,8 @@
     "level": 2,
     "w": 427,
     "h": 600,
-    "src": "Boris_Johnson_official_portrait_(cropped).jpg"
+    "src": "Boris_Johnson_official_portrait_(cropped).jpg",
+    "cat": "Leaders"
   },
   {
     "id": "boris-yeltsin",
@@ -1143,7 +1490,8 @@
     "level": 2,
     "w": 450,
     "h": 600,
-    "src": "Boris_Yeltsin_(3x4_cropped).jpg"
+    "src": "Boris_Yeltsin_(3x4_cropped).jpg",
+    "cat": "Leaders"
   },
   {
     "id": "brian-clough",
@@ -1151,7 +1499,8 @@
     "level": 2,
     "w": 398,
     "h": 600,
-    "src": "Aankomst_Nottingham_Forrest_op_Schiphol,_Ajax_1_tegenstanders_voor_de_Europa_Cup,_Bestanddeelnr_930-7831.jpg"
+    "src": "Aankomst_Nottingham_Forrest_op_Schiphol,_Ajax_1_tegenstanders_voor_de_Europa_Cup,_Bestanddeelnr_930-7831.jpg",
+    "cat": "Sports"
   },
   {
     "id": "bukayo-saka",
@@ -1159,16 +1508,26 @@
     "level": 2,
     "w": 400,
     "h": 600,
-    "src": "Bukayo_Saka_England_v_Ghana_23_June_2026-057_(cropped).jpg"
+    "src": "Bukayo_Saka_England_v_Ghana_23_June_2026-057_(cropped).jpg",
+    "cat": "Sports"
   },
-  { "id": "buzz-aldrin", "name": "Buzz Aldrin", "level": 2, "w": 480, "h": 600, "src": "Buzz_Aldrin.jpg" },
+  {
+    "id": "buzz-aldrin",
+    "name": "Buzz Aldrin",
+    "level": 2,
+    "w": 480,
+    "h": 600,
+    "src": "Buzz_Aldrin.jpg",
+    "cat": "Leaders"
+  },
   {
     "id": "c-s-lewis",
     "name": "C. S. Lewis",
     "level": 2,
     "w": 480,
     "h": 588,
-    "src": "CS_Lewis_photo_on_dust_jacket.jpg"
+    "src": "CS_Lewis_photo_on_dust_jacket.jpg",
+    "cat": "Faith"
   },
   {
     "id": "cardi-b",
@@ -1176,7 +1535,8 @@
     "level": 2,
     "w": 442,
     "h": 600,
-    "src": "Cardi_B_at_2026_Essence_Festival_of_Culture_02_(cropped)_(cropped).jpg"
+    "src": "Cardi_B_at_2026_Essence_Festival_of_Culture_02_(cropped)_(cropped).jpg",
+    "cat": "Music"
   },
   {
     "id": "charles-darwin",
@@ -1184,7 +1544,8 @@
     "level": 2,
     "w": 456,
     "h": 600,
-    "src": "Charles_Darwin_seated_crop.jpg"
+    "src": "Charles_Darwin_seated_crop.jpg",
+    "cat": "General"
   },
   {
     "id": "charles-dickens",
@@ -1192,7 +1553,8 @@
     "level": 2,
     "w": 410,
     "h": 600,
-    "src": "Dickens_Gurney_head.jpg"
+    "src": "Dickens_Gurney_head.jpg",
+    "cat": "Faith"
   },
   {
     "id": "chiwetel-ejiofor",
@@ -1200,16 +1562,26 @@
     "level": 2,
     "w": 425,
     "h": 600,
-    "src": "Chiwetel_Ejiofor_at_the_2024_Toronto_International_Film_Festival_(cropped).jpg"
+    "src": "Chiwetel_Ejiofor_at_the_2024_Toronto_International_Film_Festival_(cropped).jpg",
+    "cat": "Screen"
   },
-  { "id": "chris-brown", "name": "Chris Brown", "level": 2, "w": 469, "h": 600, "src": "A1_Chris_Brown_2025.jpg" },
+  {
+    "id": "chris-brown",
+    "name": "Chris Brown",
+    "level": 2,
+    "w": 469,
+    "h": 600,
+    "src": "A1_Chris_Brown_2025.jpg",
+    "cat": "Music"
+  },
   {
     "id": "colin-powell",
     "name": "Colin Powell",
     "level": 2,
     "w": 480,
     "h": 600,
-    "src": "Colin_Powell_official_Secretary_of_State_photo.jpg"
+    "src": "Colin_Powell_official_Secretary_of_State_photo.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "condoleezza-rice",
@@ -1217,7 +1589,8 @@
     "level": 2,
     "w": 454,
     "h": 600,
-    "src": "Condoleezza_Rice_cropped.jpg"
+    "src": "Condoleezza_Rice_cropped.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "confucius",
@@ -1225,7 +1598,8 @@
     "level": 2,
     "w": 480,
     "h": 448,
-    "src": "Confucius,_fresco_from_a_Western_Han_tomb_of_Dongping_County,_Shandong_province,_China_(cropped).jpg"
+    "src": "Confucius,_fresco_from_a_Western_Han_tomb_of_Dongping_County,_Shandong_province,_China_(cropped).jpg",
+    "cat": "Faith"
   },
   {
     "id": "conor-mcgregor",
@@ -1233,7 +1607,8 @@
     "level": 2,
     "w": 420,
     "h": 600,
-    "src": "Conor_McGregor_2025.jpeg"
+    "src": "Conor_McGregor_2025.jpeg",
+    "cat": "Sports"
   },
   {
     "id": "cynthia-erivo",
@@ -1241,7 +1616,8 @@
     "level": 2,
     "w": 476,
     "h": 600,
-    "src": "Cynthia_Erivo_-_Wicked-FYC-2_(cropped).jpg"
+    "src": "Cynthia_Erivo_-_Wicked-FYC-2_(cropped).jpg",
+    "cat": "Screen"
   },
   {
     "id": "daniel-kaluuya",
@@ -1249,7 +1625,8 @@
     "level": 2,
     "w": 450,
     "h": 600,
-    "src": "Daniel_Kaluuya_in_2026_(cropped).jpg"
+    "src": "Daniel_Kaluuya_in_2026_(cropped).jpg",
+    "cat": "Screen"
   },
   {
     "id": "david-beckham",
@@ -1257,7 +1634,8 @@
     "level": 2,
     "w": 444,
     "h": 600,
-    "src": "David_Beckham_UNICEF_(cropped2).jpg"
+    "src": "David_Beckham_UNICEF_(cropped2).jpg",
+    "cat": "Sports"
   },
   {
     "id": "david-cameron",
@@ -1265,7 +1643,8 @@
     "level": 2,
     "w": 450,
     "h": 600,
-    "src": "David_Cameron_Official_Portrait_2023_(cropped).jpg"
+    "src": "David_Cameron_Official_Portrait_2023_(cropped).jpg",
+    "cat": "Leaders"
   },
   {
     "id": "david-oyelowo",
@@ -1273,7 +1652,8 @@
     "level": 2,
     "w": 429,
     "h": 600,
-    "src": "David_Oyelowo_Golden_Globes.jpg"
+    "src": "David_Oyelowo_Golden_Globes.jpg",
+    "cat": "Screen"
   },
   {
     "id": "didier-drogba",
@@ -1281,7 +1661,8 @@
     "level": 2,
     "w": 465,
     "h": 600,
-    "src": "Didier_Drogba_(2019)_(cropped2).jpg"
+    "src": "Didier_Drogba_(2019)_(cropped2).jpg",
+    "cat": "Sports"
   },
   {
     "id": "diego-maradona",
@@ -1289,16 +1670,26 @@
     "level": 2,
     "w": 383,
     "h": 600,
-    "src": "Argentina_celebrando_copa_(cropped).jpg"
+    "src": "Argentina_celebrando_copa_(cropped).jpg",
+    "cat": "Sports"
   },
-  { "id": "doja-cat", "name": "Doja Cat", "level": 2, "w": 452, "h": 600, "src": "Doja_Cat_x_Amazon1.1_(cropped).jpg" },
+  {
+    "id": "doja-cat",
+    "name": "Doja Cat",
+    "level": 2,
+    "w": 452,
+    "h": 600,
+    "src": "Doja_Cat_x_Amazon1.1_(cropped).jpg",
+    "cat": "Music"
+  },
   {
     "id": "eddie-murphy",
     "name": "Eddie Murphy",
     "level": 2,
     "w": 414,
     "h": 600,
-    "src": "Eddie_Murphy_by_David_Shankbone.jpg"
+    "src": "Eddie_Murphy_by_David_Shankbone.jpg",
+    "cat": "Screen"
   },
   {
     "id": "ellen-degeneres",
@@ -1306,7 +1697,8 @@
     "level": 2,
     "w": 402,
     "h": 600,
-    "src": "Ellen_DeGeneres_2011.jpg"
+    "src": "Ellen_DeGeneres_2011.jpg",
+    "cat": "Screen"
   },
   {
     "id": "emma-raducanu",
@@ -1314,7 +1706,8 @@
     "level": 2,
     "w": 480,
     "h": 575,
-    "src": "Transylvania_Open_2026_-_Emma_Raducanu_vs_Greet_Minnen_6-0,_6-4_-_01.02.2026_(55076013277)_(cropped).jpg"
+    "src": "Transylvania_Open_2026_-_Emma_Raducanu_vs_Greet_Minnen_6-0,_6-4_-_01.02.2026_(55076013277)_(cropped).jpg",
+    "cat": "Sports"
   },
   {
     "id": "fidel-castro",
@@ -1322,7 +1715,8 @@
     "level": 2,
     "w": 450,
     "h": 600,
-    "src": "Fidel_Castro,_Prime_Minister_of_Cuba._Castro_at_the_United_Nations,_New_York_(3x4_cropped).jpg"
+    "src": "Fidel_Castro,_Prime_Minister_of_Cuba._Castro_at_the_United_Nations,_New_York_(3x4_cropped).jpg",
+    "cat": "Leaders"
   },
   {
     "id": "florence-griffith-joyner",
@@ -1330,7 +1724,8 @@
     "level": 2,
     "w": 458,
     "h": 600,
-    "src": "Florence_Griffith_Joyner2.jpg"
+    "src": "Florence_Griffith_Joyner2.jpg",
+    "cat": "Sports"
   },
   {
     "id": "florence-nightingale",
@@ -1338,7 +1733,8 @@
     "level": 2,
     "w": 432,
     "h": 600,
-    "src": "Florence_Nightingale_(H_Hering_NPG_x82368).jpg"
+    "src": "Florence_Nightingale_(H_Hering_NPG_x82368).jpg",
+    "cat": "Leaders"
   },
   {
     "id": "floyd-mayweather",
@@ -1346,7 +1742,8 @@
     "level": 2,
     "w": 450,
     "h": 600,
-    "src": "Floyd_Mayweather_Jr_2011.jpg"
+    "src": "Floyd_Mayweather_Jr_2011.jpg",
+    "cat": "Sports"
   },
   {
     "id": "francis-ngannou",
@@ -1354,7 +1751,8 @@
     "level": 2,
     "w": 480,
     "h": 540,
-    "src": "Francis_Ngannou_2023_(cropped).png"
+    "src": "Francis_Ngannou_2023_(cropped).png",
+    "cat": "Sports"
   },
   {
     "id": "frederick-douglass",
@@ -1362,7 +1760,8 @@
     "level": 2,
     "w": 450,
     "h": 600,
-    "src": "Frederick_Douglass_(circa_1879)_(cropped).jpg"
+    "src": "Frederick_Douglass_(circa_1879)_(cropped).jpg",
+    "cat": "Leaders"
   },
   {
     "id": "friedrich-nietzsche",
@@ -1370,7 +1769,8 @@
     "level": 2,
     "w": 442,
     "h": 600,
-    "src": "Nietzsche187a.jpg"
+    "src": "Nietzsche187a.jpg",
+    "cat": "General"
   },
   {
     "id": "gareth-bale",
@@ -1378,7 +1778,8 @@
     "level": 2,
     "w": 428,
     "h": 600,
-    "src": "2022_FIFA_World_Cup_United_States_1–1_Wales_-_(32)_2.png"
+    "src": "2022_FIFA_World_Cup_United_States_1–1_Wales_-_(32)_2.png",
+    "cat": "Sports"
   },
   {
     "id": "gary-lineker",
@@ -1386,7 +1787,8 @@
     "level": 2,
     "w": 450,
     "h": 600,
-    "src": "Prime_Minister_Keir_Starmer_hosts_St_George's_Day_Reception_(54470857860)_(cropped).jpg"
+    "src": "Prime_Minister_Keir_Starmer_hosts_St_George's_Day_Reception_(54470857860)_(cropped).jpg",
+    "cat": "Sports"
   },
   {
     "id": "giannis-antetokounmpo",
@@ -1394,7 +1796,8 @@
     "level": 2,
     "w": 453,
     "h": 600,
-    "src": "Giannis_Antetokounmpo_(51915153421)_(cropped).jpg"
+    "src": "Giannis_Antetokounmpo_(51915153421)_(cropped).jpg",
+    "cat": "Sports"
   },
   {
     "id": "gordon-ramsay",
@@ -1402,7 +1805,8 @@
     "level": 2,
     "w": 391,
     "h": 600,
-    "src": "Gordon_Ramsay_(cropped).jpg"
+    "src": "Gordon_Ramsay_(cropped).jpg",
+    "cat": "Screen"
   },
   {
     "id": "haile-selassie",
@@ -1410,16 +1814,26 @@
     "level": 2,
     "w": 450,
     "h": 600,
-    "src": "Haile_Selassie_in_full_dress_(3x4_cropped).jpg"
+    "src": "Haile_Selassie_in_full_dress_(3x4_cropped).jpg",
+    "cat": "Leaders"
   },
-  { "id": "halle-berry", "name": "Halle Berry", "level": 2, "w": 450, "h": 600, "src": "Halle_Berry-1910.jpg" },
+  {
+    "id": "halle-berry",
+    "name": "Halle Berry",
+    "level": 2,
+    "w": 450,
+    "h": 600,
+    "src": "Halle_Berry-1910.jpg",
+    "cat": "Screen"
+  },
   {
     "id": "harriet-tubman",
     "name": "Harriet Tubman",
     "level": 2,
     "w": 450,
     "h": 600,
-    "src": "Carte-de-visite_portrait_of_Harriet_Tubman_(cropped).jpg"
+    "src": "Carte-de-visite_portrait_of_Harriet_Tubman_(cropped).jpg",
+    "cat": "Leaders"
   },
   {
     "id": "hillary-clinton",
@@ -1427,7 +1841,8 @@
     "level": 2,
     "w": 330,
     "h": 439,
-    "src": "Former_United_States_Secretary_of_State_Hillary_Rodham_Clinton_at_the_U.S._Department_of_State_on_September_26,_2023_in_Washington,_D.C._14_(cropped).jpg"
+    "src": "Former_United_States_Secretary_of_State_Hillary_Rodham_Clinton_at_the_U.S._Department_of_State_on_September_26,_2023_in_Washington,_D.C._14_(cropped).jpg",
+    "cat": "Leaders"
   },
   {
     "id": "ian-wright",
@@ -1435,7 +1850,8 @@
     "level": 2,
     "w": 450,
     "h": 600,
-    "src": "Ian_Wright_at_SXSW_London_June_2025_(cropped).jpg"
+    "src": "Ian_Wright_at_SXSW_London_June_2025_(cropped).jpg",
+    "cat": "Sports"
   },
   {
     "id": "idris-elba",
@@ -1443,7 +1859,8 @@
     "level": 2,
     "w": 450,
     "h": 600,
-    "src": "Idris_Elba_A_House_of_Dynamite-21_(cropped).jpg"
+    "src": "Idris_Elba_A_House_of_Dynamite-21_(cropped).jpg",
+    "cat": "Screen"
   },
   {
     "id": "immanuel-kant",
@@ -1451,7 +1868,8 @@
     "level": 2,
     "w": 459,
     "h": 600,
-    "src": "Immanuel_Kant_-_Gemaelde_1.jpg"
+    "src": "Immanuel_Kant_-_Gemaelde_1.jpg",
+    "cat": "General"
   },
   {
     "id": "indira-gandhi",
@@ -1459,7 +1877,8 @@
     "level": 2,
     "w": 405,
     "h": 600,
-    "src": "Indira_Gandhi_official_portrait.png"
+    "src": "Indira_Gandhi_official_portrait.png",
+    "cat": "Leaders"
   },
   {
     "id": "j-cole",
@@ -1467,25 +1886,44 @@
     "level": 2,
     "w": 480,
     "h": 480,
-    "src": "HOTSPOTATL_-_21_Savage_&_J.Cole_Light_Birthday_Bash_ATL_2023_On_FIRE_(xu6HKf40MX0_-_2m38s)_(cropped).jpg"
+    "src": "HOTSPOTATL_-_21_Savage_&_J.Cole_Light_Birthday_Bash_ATL_2023_On_FIRE_(xu6HKf40MX0_-_2m38s)_(cropped).jpg",
+    "cat": "Music"
   },
-  { "id": "jackie-chan", "name": "Jackie Chan", "level": 2, "w": 463, "h": 600, "src": "Jackie_Chan.jpg" },
+  {
+    "id": "jackie-chan",
+    "name": "Jackie Chan",
+    "level": 2,
+    "w": 463,
+    "h": 600,
+    "src": "Jackie_Chan.jpg",
+    "cat": "Screen"
+  },
   {
     "id": "james-baldwin",
     "name": "James Baldwin",
     "level": 2,
     "w": 448,
     "h": 600,
-    "src": "James_Baldwin_37_Allan_Warren_(cropped).jpg"
+    "src": "James_Baldwin_37_Allan_Warren_(cropped).jpg",
+    "cat": "Faith"
   },
-  { "id": "james-brown", "name": "James Brown", "level": 2, "w": 421, "h": 600, "src": "James_Brown_1996_(HQ).jpg" },
+  {
+    "id": "james-brown",
+    "name": "James Brown",
+    "level": 2,
+    "w": 421,
+    "h": 600,
+    "src": "James_Brown_1996_(HQ).jpg",
+    "cat": "Music"
+  },
   {
     "id": "jamie-foxx",
     "name": "Jamie Foxx",
     "level": 2,
     "w": 452,
     "h": 600,
-    "src": "TIFF_2019_jamie_foxx_(cropped).jpg"
+    "src": "TIFF_2019_jamie_foxx_(cropped).jpg",
+    "cat": "Screen"
   },
   {
     "id": "jawaharlal-nehru",
@@ -1493,26 +1931,53 @@
     "level": 2,
     "w": 462,
     "h": 600,
-    "src": "Nehru_in_the_Netherlands,_1957.jpg"
+    "src": "Nehru_in_the_Netherlands,_1957.jpg",
+    "cat": "Leaders"
   },
-  { "id": "joe-root", "name": "Joe Root", "level": 2, "w": 480, "h": 552, "src": "2_05_Root_hundred.jpg" },
-  { "id": "johan-cruyff", "name": "Johan Cruyff", "level": 2, "w": 330, "h": 440, "src": "Johan_Cruijff_(1974).jpg" },
+  {
+    "id": "joe-root",
+    "name": "Joe Root",
+    "level": 2,
+    "w": 480,
+    "h": 552,
+    "src": "2_05_Root_hundred.jpg",
+    "cat": "Sports"
+  },
+  {
+    "id": "johan-cruyff",
+    "name": "Johan Cruyff",
+    "level": 2,
+    "w": 330,
+    "h": 440,
+    "src": "Johan_Cruijff_(1974).jpg",
+    "cat": "Sports"
+  },
   {
     "id": "justin-trudeau",
     "name": "Justin Trudeau",
     "level": 2,
     "w": 330,
     "h": 440,
-    "src": "Prime_Minister_Trudeau's_message_on_Christmas_2023_(0m29s)_(cropped).jpg"
+    "src": "Prime_Minister_Trudeau's_message_on_Christmas_2023_(0m29s)_(cropped).jpg",
+    "cat": "Leaders"
   },
-  { "id": "kaka", "name": "Kaká", "level": 2, "w": 400, "h": 600, "src": "Kaká_visited_Stadium_St._Petersburg.jpg" },
+  {
+    "id": "kaka",
+    "name": "Kaká",
+    "level": 2,
+    "w": 400,
+    "h": 600,
+    "src": "Kaká_visited_Stadium_St._Petersburg.jpg",
+    "cat": "Sports"
+  },
   {
     "id": "kamala-harris",
     "name": "Kamala Harris",
     "level": 2,
     "w": 480,
     "h": 600,
-    "src": "Kamala_Harris_Vice_Presidential_Portrait.jpg"
+    "src": "Kamala_Harris_Vice_Presidential_Portrait.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "kareem-abdul-jabbar",
@@ -1520,16 +1985,26 @@
     "level": 2,
     "w": 433,
     "h": 600,
-    "src": "Kareem_Abdul-Jabbar_May_2014.jpg"
+    "src": "Kareem_Abdul-Jabbar_May_2014.jpg",
+    "cat": "Sports"
   },
-  { "id": "karim-benzema", "name": "Karim Benzema", "level": 2, "w": 480, "h": 483, "src": "Karim_Benzema_Pick.jpg" },
+  {
+    "id": "karim-benzema",
+    "name": "Karim Benzema",
+    "level": 2,
+    "w": 480,
+    "h": 483,
+    "src": "Karim_Benzema_Pick.jpg",
+    "cat": "Sports"
+  },
   {
     "id": "kate-middleton",
     "name": "Kate Middleton",
     "level": 2,
     "w": 450,
     "h": 600,
-    "src": "Princess_of_Wales_at_State_Banquet_2025-09-17_(0.75_crop).jpg"
+    "src": "Princess_of_Wales_at_State_Banquet_2025-09-17_(0.75_crop).jpg",
+    "cat": "Leaders"
   },
   {
     "id": "kemi-badenoch",
@@ -1537,7 +2012,8 @@
     "level": 2,
     "w": 450,
     "h": 600,
-    "src": "Official_portrait_of_Kemi_Badenoch_MP,_2024_(3x4_cropped).jpg"
+    "src": "Official_portrait_of_Kemi_Badenoch_MP,_2024_(3x4_cropped).jpg",
+    "cat": "Leaders"
   },
   {
     "id": "kendrick-lamar",
@@ -1545,7 +2021,8 @@
     "level": 2,
     "w": 330,
     "h": 461,
-    "src": "KendrickSZASPurs230725-144_(cropped)_desaturated.jpg"
+    "src": "KendrickSZASPurs230725-144_(cropped)_desaturated.jpg",
+    "cat": "Music"
   },
   {
     "id": "kerry-washington",
@@ -1553,7 +2030,8 @@
     "level": 2,
     "w": 330,
     "h": 496,
-    "src": "KerryWashington-byPhilipRomano.jpg"
+    "src": "KerryWashington-byPhilipRomano.jpg",
+    "cat": "Screen"
   },
   {
     "id": "kevin-de-bruyne",
@@ -1561,7 +2039,8 @@
     "level": 2,
     "w": 450,
     "h": 600,
-    "src": "Kevin_De_Bruyne_USMNT_v_Belgium_Mar_28_2026-64_(cropped).jpg"
+    "src": "Kevin_De_Bruyne_USMNT_v_Belgium_Mar_28_2026-64_(cropped).jpg",
+    "cat": "Sports"
   },
   {
     "id": "kevin-hart",
@@ -1569,7 +2048,8 @@
     "level": 2,
     "w": 444,
     "h": 600,
-    "src": "Kevin_Hart_2014_(cropped_2).jpg"
+    "src": "Kevin_Hart_2014_(cropped_2).jpg",
+    "cat": "Screen"
   },
   {
     "id": "kim-jong-un",
@@ -1577,7 +2057,8 @@
     "level": 2,
     "w": 450,
     "h": 600,
-    "src": "Kim_Jong-un_and_Vladimir_Putin_(2023-09-13)_12_(cropped_2).jpg"
+    "src": "Kim_Jong-un_and_Vladimir_Putin_(2023-09-13)_12_(cropped_2).jpg",
+    "cat": "Leaders"
   },
   {
     "id": "larry-page",
@@ -1585,7 +2066,8 @@
     "level": 2,
     "w": 450,
     "h": 600,
-    "src": "Larry_Page_in_the_European_Parliament,_17.06.2009_(cropped_2).jpg"
+    "src": "Larry_Page_in_the_European_Parliament,_17.06.2009_(cropped_2).jpg",
+    "cat": "General"
   },
   {
     "id": "lauryn-hill",
@@ -1593,7 +2075,8 @@
     "level": 2,
     "w": 480,
     "h": 548,
-    "src": "Lauryn_Hill_Kongsberg_Jazzfestival_2019_(221758)_(cropped).jpg"
+    "src": "Lauryn_Hill_Kongsberg_Jazzfestival_2019_(221758)_(cropped).jpg",
+    "cat": "Music"
   },
   {
     "id": "lennox-lewis",
@@ -1601,7 +2084,8 @@
     "level": 2,
     "w": 480,
     "h": 584,
-    "src": "Lenox_Lewis_2010_cropped.jpg"
+    "src": "Lenox_Lewis_2010_cropped.jpg",
+    "cat": "Sports"
   },
   {
     "id": "lewis-capaldi",
@@ -1609,16 +2093,26 @@
     "level": 2,
     "w": 480,
     "h": 568,
-    "src": "Glasto2025-41_(cropped).jpg"
+    "src": "Glasto2025-41_(cropped).jpg",
+    "cat": "Music"
   },
-  { "id": "lil-wayne", "name": "Lil Wayne", "level": 2, "w": 450, "h": 600, "src": "Lil_Wayne_(23513397583).jpg" },
+  {
+    "id": "lil-wayne",
+    "name": "Lil Wayne",
+    "level": 2,
+    "w": 450,
+    "h": 600,
+    "src": "Lil_Wayne_(23513397583).jpg",
+    "cat": "Music"
+  },
   {
     "id": "lionel-richie",
     "name": "Lionel Richie",
     "level": 2,
     "w": 450,
     "h": 600,
-    "src": "Lionel_Richie_2022_(51930307118)_(cropped).jpg"
+    "src": "Lionel_Richie_2022_(51930307118)_(cropped).jpg",
+    "cat": "Music"
   },
   {
     "id": "liz-truss",
@@ -1626,7 +2120,8 @@
     "level": 2,
     "w": 450,
     "h": 600,
-    "src": "Official_portrait_of_Liz_Truss_(3x4_cropped_b).jpg"
+    "src": "Official_portrait_of_Liz_Truss_(3x4_cropped_b).jpg",
+    "cat": "Leaders"
   },
   {
     "id": "luka-modric",
@@ -1634,7 +2129,8 @@
     "level": 2,
     "w": 400,
     "h": 600,
-    "src": "Luka_Modric_Croatia_v_Portugal_2_July_2026-055.jpg"
+    "src": "Luka_Modric_Croatia_v_Portugal_2_July_2026-055.jpg",
+    "cat": "Sports"
   },
   {
     "id": "lupita-nyong-o",
@@ -1642,7 +2138,8 @@
     "level": 2,
     "w": 399,
     "h": 600,
-    "src": "LupitaNyongo-byPhilipRomano3.jpg"
+    "src": "LupitaNyongo-byPhilipRomano3.jpg",
+    "cat": "Screen"
   },
   {
     "id": "luther-vandross",
@@ -1650,7 +2147,8 @@
     "level": 2,
     "w": 450,
     "h": 600,
-    "src": "Luther_Vandross_1985b.jpg"
+    "src": "Luther_Vandross_1985b.jpg",
+    "cat": "Music"
   },
   {
     "id": "magic-johnson",
@@ -1658,7 +2156,8 @@
     "level": 2,
     "w": 330,
     "h": 440,
-    "src": "Magic_Johnson_at_SXSW_2022_(51958828669)_(cropped).jpg"
+    "src": "Magic_Johnson_at_SXSW_2022_(51958828669)_(cropped).jpg",
+    "cat": "Sports"
   },
   {
     "id": "marcus-rashford",
@@ -1666,16 +2165,26 @@
     "level": 2,
     "w": 475,
     "h": 600,
-    "src": "Marcus_Rashford_England_v_Ghana_23_June_2026-073.jpg"
+    "src": "Marcus_Rashford_England_v_Ghana_23_June_2026-073.jpg",
+    "cat": "Sports"
   },
-  { "id": "marie-curie", "name": "Marie Curie", "level": 2, "w": 442, "h": 600, "src": "Marie_Curie_c._1920s.jpg" },
+  {
+    "id": "marie-curie",
+    "name": "Marie Curie",
+    "level": 2,
+    "w": 442,
+    "h": 600,
+    "src": "Marie_Curie_c._1920s.jpg",
+    "cat": "General"
+  },
   {
     "id": "mark-twain",
     "name": "Mark Twain",
     "level": 2,
     "w": 450,
     "h": 600,
-    "src": "Mark_Twain_by_AF_Bradley_(cropped_2).jpg"
+    "src": "Mark_Twain_by_AF_Bradley_(cropped_2).jpg",
+    "cat": "Faith"
   },
   {
     "id": "martin-luther-king-jr",
@@ -1683,7 +2192,8 @@
     "level": 2,
     "w": 450,
     "h": 600,
-    "src": "Martin_Luther_King,_Jr._and_Lyndon_Johnson_(cropped).jpg"
+    "src": "Martin_Luther_King,_Jr._and_Lyndon_Johnson_(cropped).jpg",
+    "cat": "Leaders"
   },
   {
     "id": "martin-luther",
@@ -1691,17 +2201,35 @@
     "level": 2,
     "w": 379,
     "h": 600,
-    "src": "Lucas_Cranach_d.Ä._-_Martin_Luther,_1528_(Veste_Coburg).jpg"
+    "src": "Lucas_Cranach_d.Ä._-_Martin_Luther,_1528_(Veste_Coburg).jpg",
+    "cat": "Faith"
   },
-  { "id": "marvin-gaye", "name": "Marvin Gaye", "level": 2, "w": 450, "h": 600, "src": "Marvin_Gaye_in_1973.jpg" },
-  { "id": "mary-j-blige", "name": "Mary J. Blige", "level": 2, "w": 340, "h": 438, "src": "Mary_J_Blige_in_2022.png" },
+  {
+    "id": "marvin-gaye",
+    "name": "Marvin Gaye",
+    "level": 2,
+    "w": 450,
+    "h": 600,
+    "src": "Marvin_Gaye_in_1973.jpg",
+    "cat": "Music"
+  },
+  {
+    "id": "mary-j-blige",
+    "name": "Mary J. Blige",
+    "level": 2,
+    "w": 340,
+    "h": 438,
+    "src": "Mary_J_Blige_in_2022.png",
+    "cat": "Music"
+  },
   {
     "id": "max-verstappen",
     "name": "Max Verstappen",
     "level": 2,
     "w": 455,
     "h": 600,
-    "src": "2024-08-25_Motorsport,_Formel_1,_Großer_Preis_der_Niederlande_2024_STP_3973_by_Stepro_(medium_crop).jpg"
+    "src": "2024-08-25_Motorsport,_Formel_1,_Großer_Preis_der_Niederlande_2024_STP_3973_by_Stepro_(medium_crop).jpg",
+    "cat": "Sports"
   },
   {
     "id": "maya-angelou",
@@ -1709,7 +2237,8 @@
     "level": 2,
     "w": 442,
     "h": 600,
-    "src": "Angelou_at_Clinton_inauguration_(cropped_2).jpg"
+    "src": "Angelou_at_Clinton_inauguration_(cropped_2).jpg",
+    "cat": "Faith"
   },
   {
     "id": "megan-thee-stallion",
@@ -1717,7 +2246,8 @@
     "level": 2,
     "w": 480,
     "h": 600,
-    "src": "Megan_Thee_Stallion_Adweek_pose.jpg"
+    "src": "Megan_Thee_Stallion_Adweek_pose.jpg",
+    "cat": "Music"
   },
   {
     "id": "michael-b-jordan",
@@ -1725,7 +2255,8 @@
     "level": 2,
     "w": 450,
     "h": 600,
-    "src": "Michael_B_Jordan_-_Sinners_(cropped).jpg"
+    "src": "Michael_B_Jordan_-_Sinners_(cropped).jpg",
+    "cat": "Screen"
   },
   {
     "id": "michael-phelps",
@@ -1733,7 +2264,8 @@
     "level": 2,
     "w": 454,
     "h": 600,
-    "src": "Michael_Phelps_Rio_Olympics_2016.jpg"
+    "src": "Michael_Phelps_Rio_Olympics_2016.jpg",
+    "cat": "Sports"
   },
   {
     "id": "michelle-obama",
@@ -1741,7 +2273,8 @@
     "level": 2,
     "w": 399,
     "h": 600,
-    "src": "Michelle_Obama_2013_official_portrait.jpg"
+    "src": "Michelle_Obama_2013_official_portrait.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "mick-jagger",
@@ -1749,7 +2282,8 @@
     "level": 2,
     "w": 450,
     "h": 600,
-    "src": "RStonesHydePark030722_(49_of_125)_(52193656268)_(cropped).jpg"
+    "src": "RStonesHydePark030722_(49_of_125)_(52193656268)_(cropped).jpg",
+    "cat": "Music"
   },
   {
     "id": "mike-pence",
@@ -1757,7 +2291,8 @@
     "level": 2,
     "w": 480,
     "h": 600,
-    "src": "Mike_Pence_official_Vice_Presidential_portrait.jpg"
+    "src": "Mike_Pence_official_Vice_Presidential_portrait.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "mikhail-gorbachev",
@@ -1765,7 +2300,8 @@
     "level": 2,
     "w": 450,
     "h": 600,
-    "src": "RIAN_archive_850809_General_Secretary_of_the_CPSU_CC_M._Gorbachev_(crop).jpg"
+    "src": "RIAN_archive_850809_General_Secretary_of_the_CPSU_CC_M._Gorbachev_(crop).jpg",
+    "cat": "Leaders"
   },
   {
     "id": "mohamed-salah",
@@ -1773,7 +2309,8 @@
     "level": 2,
     "w": 414,
     "h": 600,
-    "src": "Mohamed_Salah_Argentina_v_Egypt_7_July_2026-163_(cropped).jpg"
+    "src": "Mohamed_Salah_Argentina_v_Egypt_7_July_2026-163_(cropped).jpg",
+    "cat": "Sports"
   },
   {
     "id": "n-golo-kante",
@@ -1781,7 +2318,8 @@
     "level": 2,
     "w": 400,
     "h": 600,
-    "src": "N'Golo_Kante_France_v_Senegal_16_June_2026-397.jpg"
+    "src": "N'Golo_Kante_France_v_Senegal_16_June_2026-397.jpg",
+    "cat": "Sports"
   },
   {
     "id": "nancy-pelosi",
@@ -1789,7 +2327,8 @@
     "level": 2,
     "w": 480,
     "h": 600,
-    "src": "Official_photo_of_Speaker_Nancy_Pelosi_in_2019.jpg"
+    "src": "Official_photo_of_Speaker_Nancy_Pelosi_in_2019.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "nelson-mandela",
@@ -1797,7 +2336,8 @@
     "level": 2,
     "w": 429,
     "h": 600,
-    "src": "Nelson_Mandela_1994.jpg"
+    "src": "Nelson_Mandela_1994.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "nick-cannon",
@@ -1805,7 +2345,8 @@
     "level": 2,
     "w": 408,
     "h": 600,
-    "src": "Nick_Cannon_and_Courtney_Bee_at_Essence_Fest_2025_(3)_(cropped).jpg"
+    "src": "Nick_Cannon_and_Courtney_Bee_at_Essence_Fest_2025_(3)_(cropped).jpg",
+    "cat": "Screen"
   },
   {
     "id": "nicki-minaj",
@@ -1813,7 +2354,8 @@
     "level": 2,
     "w": 451,
     "h": 600,
-    "src": "Nicki_Minaj_2025_(3x4_cropped).jpg"
+    "src": "Nicki_Minaj_2025_(3x4_cropped).jpg",
+    "cat": "Music"
   },
   {
     "id": "octavia-spencer",
@@ -1821,7 +2363,8 @@
     "level": 2,
     "w": 462,
     "h": 600,
-    "src": "\"Hidden_Figures\"_Screening_at_the_White_House_(NHQ201612150008)_(cropped).jpg"
+    "src": "\"Hidden_Figures\"_Screening_at_the_White_House_(NHQ201612150008)_(cropped).jpg",
+    "cat": "Screen"
   },
   {
     "id": "oleksandr-usyk",
@@ -1829,17 +2372,35 @@
     "level": 2,
     "w": 450,
     "h": 600,
-    "src": "2022_-_Centre_Stage_EN1_4500_(52471602047)_(cropped).jpg"
+    "src": "2022_-_Centre_Stage_EN1_4500_(52471602047)_(cropped).jpg",
+    "cat": "Sports"
   },
-  { "id": "oprah-winfrey", "name": "Oprah Winfrey", "level": 2, "w": 414, "h": 600, "src": "Oprah_Winfrey_2016.jpg" },
-  { "id": "pablo-picasso", "name": "Pablo Picasso", "level": 2, "w": 480, "h": 561, "src": "Pablo_picasso_1.jpg" },
+  {
+    "id": "oprah-winfrey",
+    "name": "Oprah Winfrey",
+    "level": 2,
+    "w": 414,
+    "h": 600,
+    "src": "Oprah_Winfrey_2016.jpg",
+    "cat": "Screen"
+  },
+  {
+    "id": "pablo-picasso",
+    "name": "Pablo Picasso",
+    "level": 2,
+    "w": 480,
+    "h": 561,
+    "src": "Pablo_picasso_1.jpg",
+    "cat": "Faith"
+  },
   {
     "id": "paolo-maldini",
     "name": "Paolo Maldini",
     "level": 2,
     "w": 480,
     "h": 493,
-    "src": "Paolo_Maldini_AC_Milan_Technical_director_2018.jpg"
+    "src": "Paolo_Maldini_AC_Milan_Technical_director_2018.jpg",
+    "cat": "Sports"
   },
   {
     "id": "patrick-vieira",
@@ -1847,17 +2408,35 @@
     "level": 2,
     "w": 429,
     "h": 600,
-    "src": "Patrick_Vieira_NYCFC_(cropped).JPG"
+    "src": "Patrick_Vieira_NYCFC_(cropped).JPG",
+    "cat": "Sports"
   },
-  { "id": "paul-pogba", "name": "Paul Pogba", "level": 2, "w": 475, "h": 600, "src": "Paul_Pogba_Cannes_2025.jpg" },
-  { "id": "pele", "name": "Pelé", "level": 2, "w": 442, "h": 600, "src": "Pele_con_brasil_(cropped).jpg" },
+  {
+    "id": "paul-pogba",
+    "name": "Paul Pogba",
+    "level": 2,
+    "w": 475,
+    "h": 600,
+    "src": "Paul_Pogba_Cannes_2025.jpg",
+    "cat": "Sports"
+  },
+  {
+    "id": "pele",
+    "name": "Pelé",
+    "level": 2,
+    "w": 442,
+    "h": 600,
+    "src": "Pele_con_brasil_(cropped).jpg",
+    "cat": "Sports"
+  },
   {
     "id": "pete-buttigieg",
     "name": "Pete Buttigieg",
     "level": 2,
     "w": 480,
     "h": 600,
-    "src": "Pete_Buttigieg,_Secretary_of_Transportation.jpg"
+    "src": "Pete_Buttigieg,_Secretary_of_Transportation.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "plato",
@@ -1865,7 +2444,8 @@
     "level": 2,
     "w": 400,
     "h": 600,
-    "src": "Plato_Silanion_Musei_Capitolini_MC1377.png"
+    "src": "Plato_Silanion_Musei_Capitolini_MC1377.png",
+    "cat": "General"
   },
   {
     "id": "pope-benedict-xvi",
@@ -1873,7 +2453,8 @@
     "level": 2,
     "w": 445,
     "h": 600,
-    "src": "Benedykt_XVI_(2010-10-17)_2.jpg"
+    "src": "Benedykt_XVI_(2010-10-17)_2.jpg",
+    "cat": "Faith"
   },
   {
     "id": "pope-francis",
@@ -1881,7 +2462,8 @@
     "level": 2,
     "w": 478,
     "h": 600,
-    "src": "Pope_Francis_Korea_Haemi_Castle_19_(4x5_cropped).jpg"
+    "src": "Pope_Francis_Korea_Haemi_Castle_19_(4x5_cropped).jpg",
+    "cat": "Faith"
   },
   {
     "id": "pope-john-paul-ii",
@@ -1889,7 +2471,8 @@
     "level": 2,
     "w": 480,
     "h": 560,
-    "src": "ADAMELLO_-_PAPA_-_Giovanni_Paolo_II_-_panoramio_(cropped).jpg"
+    "src": "ADAMELLO_-_PAPA_-_Giovanni_Paolo_II_-_panoramio_(cropped).jpg",
+    "cat": "Faith"
   },
   {
     "id": "ray-charles",
@@ -1897,16 +2480,18 @@
     "level": 2,
     "w": 480,
     "h": 565,
-    "src": "Ray_Charles_classic_piano_pose.jpg"
+    "src": "Ray_Charles_classic_piano_pose.jpg",
+    "cat": "Music"
   },
-  { "id": "raye", "name": "Raye", "level": 2, "w": 480, "h": 556, "src": "Raye8888.jpg" },
+  { "id": "raye", "name": "Raye", "level": 2, "w": 480, "h": 556, "src": "Raye8888.jpg", "cat": "Music" },
   {
     "id": "recep-tayyip-erdogan",
     "name": "Recep Tayyip Erdoğan",
     "level": 2,
     "w": 464,
     "h": 600,
-    "src": "Turkish_President_Recep_Tayyip_Erdoğan_in_January_2024_(cropped).jpg"
+    "src": "Turkish_President_Recep_Tayyip_Erdoğan_in_January_2024_(cropped).jpg",
+    "cat": "Leaders"
   },
   {
     "id": "regina-king",
@@ -1914,7 +2499,8 @@
     "level": 2,
     "w": 426,
     "h": 600,
-    "src": "Regina_King_by_Gage_Skidmore.jpg"
+    "src": "Regina_King_by_Gage_Skidmore.jpg",
+    "cat": "Screen"
   },
   {
     "id": "rene-descartes",
@@ -1922,7 +2508,8 @@
     "level": 2,
     "w": 480,
     "h": 588,
-    "src": "Frans_Hals_-_Portret_van_René_Descartes.jpg"
+    "src": "Frans_Hals_-_Portret_van_René_Descartes.jpg",
+    "cat": "General"
   },
   {
     "id": "rishi-sunak",
@@ -1930,7 +2517,8 @@
     "level": 2,
     "w": 330,
     "h": 446,
-    "src": "Portrait_of_Prime_Minister_Rishi_Sunak_(cropped).jpg"
+    "src": "Portrait_of_Prime_Minister_Rishi_Sunak_(cropped).jpg",
+    "cat": "Leaders"
   },
   {
     "id": "robert-lewandowski",
@@ -1938,16 +2526,26 @@
     "level": 2,
     "w": 433,
     "h": 600,
-    "src": "2019147183134_2019-05-27_Fussball_1.FC_Kaiserslautern_vs_FC_Bayern_München_-_Sven_-_1D_X_MK_II_-_0228_-_B70I8527_(cropped).jpg"
+    "src": "2019147183134_2019-05-27_Fussball_1.FC_Kaiserslautern_vs_FC_Bayern_München_-_Sven_-_1D_X_MK_II_-_0228_-_B70I8527_(cropped).jpg",
+    "cat": "Sports"
   },
-  { "id": "ronaldinho", "name": "Ronaldinho", "level": 2, "w": 330, "h": 440, "src": "Ronaldinho_in_2019.jpg" },
+  {
+    "id": "ronaldinho",
+    "name": "Ronaldinho",
+    "level": 2,
+    "w": 330,
+    "h": 440,
+    "src": "Ronaldinho_in_2019.jpg",
+    "cat": "Sports"
+  },
   {
     "id": "ronaldo-nazario",
     "name": "Ronaldo Nazario",
     "level": 2,
     "w": 416,
     "h": 600,
-    "src": "12.12.2025_–_Cerimônia_de_lançamento_do_SBT_News_-_54980664160_(cropped2).jpg"
+    "src": "12.12.2025_–_Cerimônia_de_lançamento_do_SBT_News_-_54980664160_(cropped2).jpg",
+    "cat": "Sports"
   },
   {
     "id": "rosa-parks",
@@ -1955,16 +2553,26 @@
     "level": 2,
     "w": 396,
     "h": 600,
-    "src": "Rosa_Parks,_November_1956_(cropped).jpg"
+    "src": "Rosa_Parks,_November_1956_(cropped).jpg",
+    "cat": "Leaders"
   },
-  { "id": "roy-keane", "name": "Roy Keane", "level": 2, "w": 450, "h": 600, "src": "Roy_keane_2014.jpg" },
+  {
+    "id": "roy-keane",
+    "name": "Roy Keane",
+    "level": 2,
+    "w": 450,
+    "h": 600,
+    "src": "Roy_keane_2014.jpg",
+    "cat": "Sports"
+  },
   {
     "id": "rupert-murdoch",
     "name": "Rupert Murdoch",
     "level": 2,
     "w": 450,
     "h": 600,
-    "src": "Rupert_Murdoch_-_Flickr_-_Eva_Rinaldi_Celebrity_and_Live_Music_Photographer.jpg"
+    "src": "Rupert_Murdoch_-_Flickr_-_Eva_Rinaldi_Celebrity_and_Live_Music_Photographer.jpg",
+    "cat": "General"
   },
   {
     "id": "sza",
@@ -1972,7 +2580,8 @@
     "level": 2,
     "w": 401,
     "h": 600,
-    "src": "KendrickSZASPurs230725-19_-_54683179509_(cropped)_(cropped).jpg"
+    "src": "KendrickSZASPurs230725-19_-_54683179509_(cropped)_(cropped).jpg",
+    "cat": "Music"
   },
   {
     "id": "sachin-tendulkar",
@@ -1980,27 +2589,62 @@
     "level": 2,
     "w": 400,
     "h": 600,
-    "src": "The_cricket_legend_Sachin_Tendulkar_at_the_Oval_Maidan_in_Mumbai_During_the_Duke_and_Duchess_of_Cambridge_Visit(26271019082).jpg"
+    "src": "The_cricket_legend_Sachin_Tendulkar_at_the_Oval_Maidan_in_Mumbai_During_the_Duke_and_Duchess_of_Cambridge_Visit(26271019082).jpg",
+    "cat": "Sports"
   },
-  { "id": "sade-adu", "name": "Sade Adu", "level": 2, "w": 451, "h": 600, "src": "Sade_Adu_1_(cropped).jpg" },
+  {
+    "id": "sade-adu",
+    "name": "Sade Adu",
+    "level": 2,
+    "w": 451,
+    "h": 600,
+    "src": "Sade_Adu_1_(cropped).jpg",
+    "cat": "Music"
+  },
   {
     "id": "sadio-mane",
     "name": "Sadio Mané",
     "level": 2,
     "w": 400,
     "h": 600,
-    "src": "Sadio_Mane_France_v_Senegal_16_June_2026-450.jpg"
+    "src": "Sadio_Mane_France_v_Senegal_16_June_2026-450.jpg",
+    "cat": "Sports"
   },
-  { "id": "sadiq-khan", "name": "Sadiq Khan", "level": 2, "w": 480, "h": 512, "src": "Sadiq_Khan_2025.jpg" },
-  { "id": "sam-smith", "name": "Sam Smith", "level": 2, "w": 399, "h": 600, "src": "SamSmith-byPhilipRomano.jpg" },
-  { "id": "samuel-eto-o", "name": "Samuel Eto'o", "level": 2, "w": 400, "h": 600, "src": "Sammuel_Eto'o_Fils_02.jpg" },
+  {
+    "id": "sadiq-khan",
+    "name": "Sadiq Khan",
+    "level": 2,
+    "w": 480,
+    "h": 512,
+    "src": "Sadiq_Khan_2025.jpg",
+    "cat": "Leaders"
+  },
+  {
+    "id": "sam-smith",
+    "name": "Sam Smith",
+    "level": 2,
+    "w": 399,
+    "h": 600,
+    "src": "SamSmith-byPhilipRomano.jpg",
+    "cat": "Music"
+  },
+  {
+    "id": "samuel-eto-o",
+    "name": "Samuel Eto'o",
+    "level": 2,
+    "w": 400,
+    "h": 600,
+    "src": "Sammuel_Eto'o_Fils_02.jpg",
+    "cat": "Sports"
+  },
   {
     "id": "satya-nadella",
     "name": "Satya Nadella",
     "level": 2,
     "w": 469,
     "h": 600,
-    "src": "MS-Exec-Nadella-Satya-2017-08-31-22_(cropped).jpg"
+    "src": "MS-Exec-Nadella-Satya-2017-08-31-22_(cropped).jpg",
+    "cat": "General"
   },
   {
     "id": "sergey-brin",
@@ -2008,7 +2652,8 @@
     "level": 2,
     "w": 413,
     "h": 600,
-    "src": "Sergey_Brin_Ted_2010_(cropped).jpg"
+    "src": "Sergey_Brin_Ted_2010_(cropped).jpg",
+    "cat": "General"
   },
   {
     "id": "sergio-ramos",
@@ -2016,7 +2661,8 @@
     "level": 2,
     "w": 445,
     "h": 600,
-    "src": "Sergio_Ramos_Interview_2021_(cropped).jpg"
+    "src": "Sergio_Ramos_Interview_2021_(cropped).jpg",
+    "cat": "Sports"
   },
   {
     "id": "sigmund-freud",
@@ -2024,7 +2670,8 @@
     "level": 2,
     "w": 441,
     "h": 600,
-    "src": "Sigmund_Freud,_by_Max_Halberstadt_(cropped).jpg"
+    "src": "Sigmund_Freud,_by_Max_Halberstadt_(cropped).jpg",
+    "cat": "General"
   },
   {
     "id": "silvio-berlusconi",
@@ -2032,7 +2679,8 @@
     "level": 2,
     "w": 441,
     "h": 600,
-    "src": "Silvio_Berlusconi_(2010)_cropped.jpg"
+    "src": "Silvio_Berlusconi_(2010)_cropped.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "simon-cowell",
@@ -2040,7 +2688,8 @@
     "level": 2,
     "w": 452,
     "h": 600,
-    "src": "Simon_Cowell_at_Greater_Together_LA_2026_(cropped)_2.jpg"
+    "src": "Simon_Cowell_at_Greater_Together_LA_2026_(cropped)_2.jpg",
+    "cat": "Screen"
   },
   {
     "id": "simone-biles",
@@ -2048,16 +2697,26 @@
     "level": 2,
     "w": 416,
     "h": 600,
-    "src": "Simone_Biles_National_Team_2024.jpg"
+    "src": "Simone_Biles_National_Team_2024.jpg",
+    "cat": "Sports"
   },
-  { "id": "socrates", "name": "Socrates", "level": 2, "w": 450, "h": 600, "src": "Socrates_Louvre.jpg" },
+  {
+    "id": "socrates",
+    "name": "Socrates",
+    "level": 2,
+    "w": 450,
+    "h": 600,
+    "src": "Socrates_Louvre.jpg",
+    "cat": "General"
+  },
   {
     "id": "son-heung-min",
     "name": "Son Heung-min",
     "level": 2,
     "w": 443,
     "h": 600,
-    "src": "BFA_2023_-2_Heung-Min_Son_(cropped).jpg"
+    "src": "BFA_2023_-2_Heung-Min_Son_(cropped).jpg",
+    "cat": "Sports"
   },
   {
     "id": "srinivasa-ramanujan",
@@ -2065,7 +2724,8 @@
     "level": 2,
     "w": 450,
     "h": 600,
-    "src": "Srinivasa_Ramanujan-Add._MS_a94_version2_(cropped).jpg"
+    "src": "Srinivasa_Ramanujan-Add._MS_a94_version2_(cropped).jpg",
+    "cat": "General"
   },
   {
     "id": "stephen-curry",
@@ -2073,7 +2733,8 @@
     "level": 2,
     "w": 450,
     "h": 600,
-    "src": "Stephen_Curry,_Olympic_Games_2024_(cropped).jpg"
+    "src": "Stephen_Curry,_Olympic_Games_2024_(cropped).jpg",
+    "cat": "Sports"
   },
   {
     "id": "stephen-fry",
@@ -2081,7 +2742,8 @@
     "level": 2,
     "w": 452,
     "h": 600,
-    "src": "Stephen_Fry_at_Berlinale_2024_Ausschnitt.jpg"
+    "src": "Stephen_Fry_at_Berlinale_2024_Ausschnitt.jpg",
+    "cat": "Screen"
   },
   {
     "id": "steve-harvey",
@@ -2089,7 +2751,8 @@
     "level": 2,
     "w": 330,
     "h": 479,
-    "src": "SteveHarveyHWOFMay2013_(cropped).jpg"
+    "src": "SteveHarveyHWOFMay2013_(cropped).jpg",
+    "cat": "Screen"
   },
   {
     "id": "steven-gerrard",
@@ -2097,7 +2760,8 @@
     "level": 2,
     "w": 399,
     "h": 600,
-    "src": "Steven_Gerrard_2018.jpg"
+    "src": "Steven_Gerrard_2018.jpg",
+    "cat": "Sports"
   },
   {
     "id": "suella-braverman",
@@ -2105,7 +2769,8 @@
     "level": 2,
     "w": 450,
     "h": 600,
-    "src": "Official_portrait_of_Suella_Braverman_MP_crop_2,_2024.jpg"
+    "src": "Official_portrait_of_Suella_Braverman_MP_crop_2,_2024.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "sundar-pichai",
@@ -2113,7 +2778,8 @@
     "level": 2,
     "w": 400,
     "h": 600,
-    "src": "Sundar_Pichai_-_2023_(cropped).jpg"
+    "src": "Sundar_Pichai_-_2023_(cropped).jpg",
+    "cat": "General"
   },
   {
     "id": "taraji-p-henson",
@@ -2121,7 +2787,8 @@
     "level": 2,
     "w": 399,
     "h": 600,
-    "src": "TarajiPHenson-byPhilipRomano.jpg"
+    "src": "TarajiPHenson-byPhilipRomano.jpg",
+    "cat": "Screen"
   },
   {
     "id": "thandiwe-newton",
@@ -2129,7 +2796,8 @@
     "level": 2,
     "w": 480,
     "h": 583,
-    "src": "Thandiwe_Newton_Peabody_Awards,_June_2021.png"
+    "src": "Thandiwe_Newton_Peabody_Awards,_June_2021.png",
+    "cat": "Screen"
   },
   {
     "id": "the-weeknd",
@@ -2137,7 +2805,8 @@
     "level": 2,
     "w": 401,
     "h": 600,
-    "src": "The_Weeknd_Portrait_by_Brian_Ziff.jpg"
+    "src": "The_Weeknd_Portrait_by_Brian_Ziff.jpg",
+    "cat": "Music"
   },
   {
     "id": "thierry-henry",
@@ -2145,16 +2814,26 @@
     "level": 2,
     "w": 330,
     "h": 440,
-    "src": "Thierry_Henry_(51649035951)_(cropped).jpg"
+    "src": "Thierry_Henry_(51649035951)_(cropped).jpg",
+    "cat": "Sports"
   },
-  { "id": "thomas-edison", "name": "Thomas Edison", "level": 2, "w": 469, "h": 600, "src": "Thomas_Edison2.jpg" },
+  {
+    "id": "thomas-edison",
+    "name": "Thomas Edison",
+    "level": 2,
+    "w": 469,
+    "h": 600,
+    "src": "Thomas_Edison2.jpg",
+    "cat": "General"
+  },
   {
     "id": "tim-berners-lee",
     "name": "Tim Berners-Lee",
     "level": 2,
     "w": 480,
     "h": 360,
-    "src": "Tim_Berners-Lee_at_the_2025_Web_Summit_(Cropped).jpg"
+    "src": "Tim_Berners-Lee_at_the_2025_Web_Summit_(Cropped).jpg",
+    "cat": "General"
   },
   {
     "id": "tina-turner",
@@ -2162,16 +2841,26 @@
     "level": 2,
     "w": 395,
     "h": 600,
-    "src": "Tina_Turner_Breaks_All_the_Rules.png"
+    "src": "Tina_Turner_Breaks_All_the_Rules.png",
+    "cat": "Music"
   },
-  { "id": "tony-blair", "name": "Tony Blair", "level": 2, "w": 390, "h": 600, "src": "Tony_Blair_(2010).jpg" },
+  {
+    "id": "tony-blair",
+    "name": "Tony Blair",
+    "level": 2,
+    "w": 390,
+    "h": 600,
+    "src": "Tony_Blair_(2010).jpg",
+    "cat": "Leaders"
+  },
   {
     "id": "trevor-noah",
     "name": "Trevor Noah",
     "level": 2,
     "w": 450,
     "h": 600,
-    "src": "Trevor_Noah_(53554114243)_(portrait_crop).jpg"
+    "src": "Trevor_Noah_(53554114243)_(portrait_crop).jpg",
+    "cat": "Screen"
   },
   {
     "id": "ursula-von-der-leyen",
@@ -2179,7 +2868,8 @@
     "level": 2,
     "w": 450,
     "h": 600,
-    "src": "Ursula_von_der_Leyen_2024.jpg"
+    "src": "Ursula_von_der_Leyen_2024.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "usain-bolt",
@@ -2187,16 +2877,18 @@
     "level": 2,
     "w": 480,
     "h": 598,
-    "src": "Usain_Bolt_smiling_Berlin_2009.JPG"
+    "src": "Usain_Bolt_smiling_Berlin_2009.JPG",
+    "cat": "Sports"
   },
-  { "id": "usher", "name": "Usher", "level": 2, "w": 468, "h": 600, "src": "Usher_Milan_2026.jpg" },
+  { "id": "usher", "name": "Usher", "level": 2, "w": 468, "h": 600, "src": "Usher_Milan_2026.jpg", "cat": "Music" },
   {
     "id": "vincent-van-gogh",
     "name": "Vincent van Gogh",
     "level": 2,
     "w": 475,
     "h": 600,
-    "src": "Vincent_van_Gogh_-_Self-Portrait_-_Google_Art_Project_(454045).jpg"
+    "src": "Vincent_van_Gogh_-_Self-Portrait_-_Google_Art_Project_(454045).jpg",
+    "cat": "Faith"
   },
   {
     "id": "viola-davis",
@@ -2204,7 +2896,8 @@
     "level": 2,
     "w": 416,
     "h": 600,
-    "src": "Viola_Davis_at_the_Air_Premiere_at_SXSW_(cropped).jpg"
+    "src": "Viola_Davis_at_the_Air_Premiere_at_SXSW_(cropped).jpg",
+    "cat": "Screen"
   },
   {
     "id": "virat-kohli",
@@ -2212,7 +2905,8 @@
     "level": 2,
     "w": 480,
     "h": 599,
-    "src": "Virat_Kohli_during_the_India_vs_Aus_4th_Test_match_at_Narendra_Modi_Stadium_on_09_March_2023.jpg"
+    "src": "Virat_Kohli_during_the_India_vs_Aus_4th_Test_match_at_Narendra_Modi_Stadium_on_09_March_2023.jpg",
+    "cat": "Sports"
   },
   {
     "id": "virgil-van-dijk",
@@ -2220,7 +2914,8 @@
     "level": 2,
     "w": 480,
     "h": 583,
-    "src": "20160604_AUT_NED_8876_(cropped).jpg"
+    "src": "20160604_AUT_NED_8876_(cropped).jpg",
+    "cat": "Sports"
   },
   {
     "id": "volodymyr-zelenskyy",
@@ -2228,7 +2923,8 @@
     "level": 2,
     "w": 463,
     "h": 600,
-    "src": "Volodymyr_Zelensky_2022_official_portrait_(cropped).jpg"
+    "src": "Volodymyr_Zelensky_2022_official_portrait_(cropped).jpg",
+    "cat": "Leaders"
   },
   {
     "id": "warren-buffett",
@@ -2236,7 +2932,8 @@
     "level": 2,
     "w": 450,
     "h": 600,
-    "src": "Warren_Buffett_at_the_2015_SelectUSA_Investment_Summit_(cropped).jpg"
+    "src": "Warren_Buffett_at_the_2015_SelectUSA_Investment_Summit_(cropped).jpg",
+    "cat": "General"
   },
   {
     "id": "yuri-gagarin",
@@ -2244,7 +2941,8 @@
     "level": 2,
     "w": 450,
     "h": 600,
-    "src": "Yuri_Gagarin_with_awards_(cropped)_2.jpg"
+    "src": "Yuri_Gagarin_with_awards_(cropped)_2.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "zlatan-ibrahimovic",
@@ -2252,7 +2950,8 @@
     "level": 2,
     "w": 400,
     "h": 600,
-    "src": "Zlatan_Ibrahimović_nyc.jpg"
+    "src": "Zlatan_Ibrahimović_nyc.jpg",
+    "cat": "Sports"
   },
   {
     "id": "achraf-hakimi",
@@ -2260,7 +2959,8 @@
     "level": 3,
     "w": 400,
     "h": 600,
-    "src": "Achraf_Hakimi_Morocco_v_Norway_7_June_2026-16.jpg"
+    "src": "Achraf_Hakimi_Morocco_v_Norway_7_June_2026-16.jpg",
+    "cat": "Sports"
   },
   {
     "id": "adam-smith",
@@ -2268,7 +2968,8 @@
     "level": 3,
     "w": 480,
     "h": 585,
-    "src": "Adam_Smith_The_Muir_portrait.jpg"
+    "src": "Adam_Smith_The_Muir_portrait.jpg",
+    "cat": "General"
   },
   {
     "id": "ademola-lookman",
@@ -2276,7 +2977,8 @@
     "level": 3,
     "w": 404,
     "h": 600,
-    "src": "Ademola_Lookman_(2019)_(cropped).jpg"
+    "src": "Ademola_Lookman_(2019)_(cropped).jpg",
+    "cat": "Sports"
   },
   {
     "id": "alex-iwobi",
@@ -2284,7 +2986,8 @@
     "level": 3,
     "w": 330,
     "h": 478,
-    "src": "Issa_Diop,_Alex_Iwobi_and_Antonee_Robinson_04032026_(1)_(cropped).jpg"
+    "src": "Issa_Diop,_Alex_Iwobi_and_Antonee_Robinson_04032026_(1)_(cropped).jpg",
+    "cat": "Sports"
   },
   {
     "id": "alexander-fleming",
@@ -2292,7 +2995,8 @@
     "level": 3,
     "w": 423,
     "h": 600,
-    "src": "Synthetic_Production_of_Penicillin_TR1468.jpg"
+    "src": "Synthetic_Production_of_Penicillin_TR1468.jpg",
+    "cat": "General"
   },
   {
     "id": "alfredo-di-stefano",
@@ -2300,16 +3004,26 @@
     "level": 3,
     "w": 442,
     "h": 600,
-    "src": "Alfredo_Di_Stefano_River_Plate.jpg"
+    "src": "Alfredo_Di_Stefano_River_Plate.jpg",
+    "cat": "Sports"
   },
-  { "id": "alice-walker", "name": "Alice Walker", "level": 3, "w": 480, "h": 417, "src": "Alice_Walker.jpg" },
+  {
+    "id": "alice-walker",
+    "name": "Alice Walker",
+    "level": 3,
+    "w": 480,
+    "h": 417,
+    "src": "Alice_Walker.jpg",
+    "cat": "Faith"
+  },
   {
     "id": "andrea-pirlo",
     "name": "Andrea Pirlo",
     "level": 3,
     "w": 401,
     "h": 600,
-    "src": "20150616_-_Portugal_-_Italie_-_Genève_-_Andrea_Pirlo_(cropped).jpg"
+    "src": "20150616_-_Portugal_-_Italie_-_Genève_-_Andrea_Pirlo_(cropped).jpg",
+    "cat": "Sports"
   },
   {
     "id": "andres-iniesta",
@@ -2317,25 +3031,44 @@
     "level": 3,
     "w": 474,
     "h": 600,
-    "src": "Andrés_Iniesta_Argentina_v_Spain_19_July_2026-034_(cropped).jpg"
+    "src": "Andrés_Iniesta_Argentina_v_Spain_19_July_2026-034_(cropped).jpg",
+    "cat": "Sports"
   },
-  { "id": "andy-cole", "name": "Andy Cole", "level": 3, "w": 450, "h": 600, "src": "Andy_Cole_in_2014.jpg" },
+  {
+    "id": "andy-cole",
+    "name": "Andy Cole",
+    "level": 3,
+    "w": 450,
+    "h": 600,
+    "src": "Andy_Cole_in_2014.jpg",
+    "cat": "Sports"
+  },
   {
     "id": "antonio-guterres",
     "name": "António Guterres",
     "level": 3,
     "w": 448,
     "h": 600,
-    "src": "Beate_Meinl-Reisinger_New-York_visit_-_March_2025_-_MGR8622_(cropped_1).jpg"
+    "src": "Beate_Meinl-Reisinger_New-York_visit_-_March_2025_-_MGR8622_(cropped_1).jpg",
+    "cat": "Leaders"
   },
-  { "id": "anwar-sadat", "name": "Anwar Sadat", "level": 3, "w": 406, "h": 600, "src": "Anwar_Sadat_cropped.jpg" },
+  {
+    "id": "anwar-sadat",
+    "name": "Anwar Sadat",
+    "level": 3,
+    "w": 406,
+    "h": 600,
+    "src": "Anwar_Sadat_cropped.jpg",
+    "cat": "Leaders"
+  },
   {
     "id": "archimedes",
     "name": "Archimedes",
     "level": 3,
     "w": 450,
     "h": 600,
-    "src": "Domenico-Fetti_Archimedes_1620.jpg"
+    "src": "Domenico-Fetti_Archimedes_1620.jpg",
+    "cat": "General"
   },
   {
     "id": "arsene-wenger",
@@ -2343,16 +3076,18 @@
     "level": 3,
     "w": 445,
     "h": 600,
-    "src": "25th_Laureus_World_Sports_Awards_-_Red_Carpet_-_Arsène_Wenger_-_240422_192850_(cropped).jpg"
+    "src": "25th_Laureus_World_Sports_Awards_-_Red_Carpet_-_Arsène_Wenger_-_240422_192850_(cropped).jpg",
+    "cat": "Sports"
   },
-  { "id": "ashley-cole", "name": "Ashley Cole", "level": 3, "w": 478, "h": 600, "src": "ACole.JPG" },
+  { "id": "ashley-cole", "name": "Ashley Cole", "level": 3, "w": 478, "h": 600, "src": "ACole.JPG", "cat": "Sports" },
   {
     "id": "ayra-starr",
     "name": "Ayra Starr",
     "level": 3,
     "w": 480,
     "h": 545,
-    "src": "Ayra_Starr_performing_in_2023_at_Shoke_Shoke_Festival.jpg"
+    "src": "Ayra_Starr_performing_in_2023_at_Shoke_Shoke_Festival.jpg",
+    "cat": "Music"
   },
   {
     "id": "ban-ki-moon",
@@ -2360,7 +3095,8 @@
     "level": 3,
     "w": 434,
     "h": 600,
-    "src": "Ban_Ki-moon_February_2016.jpg"
+    "src": "Ban_Ki-moon_February_2016.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "benazir-bhutto",
@@ -2368,7 +3104,8 @@
     "level": 3,
     "w": 480,
     "h": 599,
-    "src": "Oliver_Mark_-_Benazir_Bhutto,_Dubai_2006_(cropped).jpg"
+    "src": "Oliver_Mark_-_Benazir_Bhutto,_Dubai_2006_(cropped).jpg",
+    "cat": "Leaders"
   },
   {
     "id": "benny-hinn",
@@ -2376,7 +3113,8 @@
     "level": 3,
     "w": 432,
     "h": 600,
-    "src": "Benny_Hinn_2019_(361354094).jpg"
+    "src": "Benny_Hinn_2019_(361354094).jpg",
+    "cat": "Faith"
   },
   {
     "id": "billy-graham",
@@ -2384,7 +3122,8 @@
     "level": 3,
     "w": 436,
     "h": 600,
-    "src": "Billy_Graham_bw_photo,_April_11,_1966.jpg"
+    "src": "Billy_Graham_bw_photo,_April_11,_1966.jpg",
+    "cat": "Faith"
   },
   {
     "id": "blaise-pascal",
@@ -2392,16 +3131,26 @@
     "level": 3,
     "w": 480,
     "h": 572,
-    "src": "Blaise_Pascal_Versailles,_circa_1690.JPG"
+    "src": "Blaise_Pascal_Versailles,_circa_1690.JPG",
+    "cat": "General"
   },
-  { "id": "bob-geldof", "name": "Bob Geldof", "level": 3, "w": 480, "h": 543, "src": "Geldof,_Bob_(IMF_2009).jpg" },
+  {
+    "id": "bob-geldof",
+    "name": "Bob Geldof",
+    "level": 3,
+    "w": 480,
+    "h": 543,
+    "src": "Geldof,_Bob_(IMF_2009).jpg",
+    "cat": "Music"
+  },
   {
     "id": "bobby-charlton",
     "name": "Bobby Charlton",
     "level": 3,
     "w": 423,
     "h": 600,
-    "src": "LondonHouseAmsterdam1966_Bobby_Charlton.jpg"
+    "src": "LondonHouseAmsterdam1966_Bobby_Charlton.jpg",
+    "cat": "Sports"
   },
   {
     "id": "bobby-moore",
@@ -2409,7 +3158,8 @@
     "level": 3,
     "w": 480,
     "h": 542,
-    "src": "Bobby_moore_elgrafico_1970.jpg"
+    "src": "Bobby_moore_elgrafico_1970.jpg",
+    "cat": "Sports"
   },
   {
     "id": "bobby-robson",
@@ -2417,16 +3167,26 @@
     "level": 3,
     "w": 450,
     "h": 600,
-    "src": "Anefo_934-2658,_Bobby_Robson,_Netherlands,_14-06-1988.jpg"
+    "src": "Anefo_934-2658,_Bobby_Robson,_Netherlands,_14-06-1988.jpg",
+    "cat": "Sports"
   },
-  { "id": "bola-tinubu", "name": "Bola Tinubu", "level": 3, "w": 480, "h": 600, "src": "Bola_Tinubu_portrait.jpg" },
+  {
+    "id": "bola-tinubu",
+    "name": "Bola Tinubu",
+    "level": 3,
+    "w": 480,
+    "h": 600,
+    "src": "Bola_Tinubu_portrait.jpg",
+    "cat": "Leaders"
+  },
   {
     "id": "booker-t-washington",
     "name": "Booker T. Washington",
     "level": 3,
     "w": 424,
     "h": 600,
-    "src": "Booker_T_Washington_retouched_flattened-crop.jpg"
+    "src": "Booker_T_Washington_retouched_flattened-crop.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "brian-lara",
@@ -2434,7 +3194,8 @@
     "level": 3,
     "w": 439,
     "h": 600,
-    "src": "Brian_Lara_at_2012_Mumbai_Marathon_pre_bash.jpg"
+    "src": "Brian_Lara_at_2012_Mumbai_Marathon_pre_bash.jpg",
+    "cat": "Sports"
   },
   {
     "id": "burna-boy",
@@ -2442,7 +3203,8 @@
     "level": 3,
     "w": 480,
     "h": 480,
-    "src": "Untold_2024_-Burna_Boy_(53926047977)_(cropped).jpg"
+    "src": "Untold_2024_-Burna_Boy_(53926047977)_(cropped).jpg",
+    "cat": "Music"
   },
   {
     "id": "cafu",
@@ -2450,7 +3212,8 @@
     "level": 3,
     "w": 475,
     "h": 600,
-    "src": "Cafu_-_26.02.2026_-_Cerimônia_de_apresentação_das_taças_da_Copa_do_Mundo_de_2026.jpg"
+    "src": "Cafu_-_26.02.2026_-_Cerimônia_de_apresentação_das_taças_da_Copa_do_Mundo_de_2026.jpg",
+    "cat": "Sports"
   },
   {
     "id": "carl-friedrich-gauss",
@@ -2458,18 +3221,44 @@
     "level": 3,
     "w": 471,
     "h": 600,
-    "src": "Carl_Friedrich_Gauss_1840_by_Jensen.jpg"
+    "src": "Carl_Friedrich_Gauss_1840_by_Jensen.jpg",
+    "cat": "General"
   },
-  { "id": "carl-lewis", "name": "Carl Lewis", "level": 3, "w": 384, "h": 600, "src": "Carl_Lewis_(cropped).jpg" },
-  { "id": "cece-winans", "name": "CeCe Winans", "level": 3, "w": 399, "h": 600, "src": "Cece_Winans_(cropped).jpg" },
-  { "id": "central-cee", "name": "Central Cee", "level": 3, "w": 400, "h": 600, "src": "Central_cee-5.jpg" },
+  {
+    "id": "carl-lewis",
+    "name": "Carl Lewis",
+    "level": 3,
+    "w": 384,
+    "h": 600,
+    "src": "Carl_Lewis_(cropped).jpg",
+    "cat": "Sports"
+  },
+  {
+    "id": "cece-winans",
+    "name": "CeCe Winans",
+    "level": 3,
+    "w": 399,
+    "h": 600,
+    "src": "Cece_Winans_(cropped).jpg",
+    "cat": "Music"
+  },
+  {
+    "id": "central-cee",
+    "name": "Central Cee",
+    "level": 3,
+    "w": 400,
+    "h": 600,
+    "src": "Central_cee-5.jpg",
+    "cat": "Music"
+  },
   {
     "id": "charles-spurgeon",
     "name": "Charles Spurgeon",
     "level": 3,
     "w": 480,
     "h": 592,
-    "src": "Charles_Haddon_Spurgeon_by_Alexander_Melville.jpg"
+    "src": "Charles_Haddon_Spurgeon_by_Alexander_Melville.jpg",
+    "cat": "Faith"
   },
   {
     "id": "chimamanda-ngozi-adichie",
@@ -2477,7 +3266,8 @@
     "level": 3,
     "w": 466,
     "h": 600,
-    "src": "Chimamanda_Ngozi_Adichie_(2015).png"
+    "src": "Chimamanda_Ngozi_Adichie_(2015).png",
+    "cat": "Faith"
   },
   {
     "id": "clarence-seedorf",
@@ -2485,7 +3275,8 @@
     "level": 3,
     "w": 444,
     "h": 600,
-    "src": "Clarence_Seedorf_Introductory_Press_Conferences,_2_June_2025_-_40_(cropped).jpg"
+    "src": "Clarence_Seedorf_Introductory_Press_Conferences,_2_June_2025_-_40_(cropped).jpg",
+    "cat": "Sports"
   },
   {
     "id": "coretta-scott-king",
@@ -2493,7 +3284,8 @@
     "level": 3,
     "w": 415,
     "h": 600,
-    "src": "Coretta_Scott_King_1964.jpg"
+    "src": "Coretta_Scott_King_1964.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "craig-david",
@@ -2501,7 +3293,8 @@
     "level": 3,
     "w": 409,
     "h": 600,
-    "src": "Craig_David_(at_The_Queen's_Birthday_Party)_(cropped)_(1).jpg"
+    "src": "Craig_David_(at_The_Queen's_Birthday_Party)_(cropped)_(1).jpg",
+    "cat": "Music"
   },
   {
     "id": "cyril-ramaphosa",
@@ -2509,35 +3302,71 @@
     "level": 3,
     "w": 330,
     "h": 446,
-    "src": "Cyril_Ramaphosa_in_2026.jpg"
+    "src": "Cyril_Ramaphosa_in_2026.jpg",
+    "cat": "Leaders"
   },
-  { "id": "dalai-lama", "name": "Dalai Lama", "level": 3, "w": 400, "h": 600, "src": "The_Dalai_Lama_in_2012.jpg" },
-  { "id": "dave", "name": "Dave", "level": 3, "w": 450, "h": 600, "src": "Dave_Brussels_-_ING_arena_06022026.jpg" },
+  {
+    "id": "dalai-lama",
+    "name": "Dalai Lama",
+    "level": 3,
+    "w": 400,
+    "h": 600,
+    "src": "The_Dalai_Lama_in_2012.jpg",
+    "cat": "Faith"
+  },
+  {
+    "id": "dave",
+    "name": "Dave",
+    "level": 3,
+    "w": 450,
+    "h": 600,
+    "src": "Dave_Brussels_-_ING_arena_06022026.jpg",
+    "cat": "Music"
+  },
   {
     "id": "david-livingstone",
     "name": "David Livingstone",
     "level": 3,
     "w": 480,
     "h": 587,
-    "src": "David_Livingstone_by_Thomas_Annan.jpg"
+    "src": "David_Livingstone_by_Thomas_Annan.jpg",
+    "cat": "Leaders"
   },
-  { "id": "david-olusoga", "name": "David Olusoga", "level": 3, "w": 464, "h": 600, "src": "David_olusoga_2022_1.jpg" },
+  {
+    "id": "david-olusoga",
+    "name": "David Olusoga",
+    "level": 3,
+    "w": 464,
+    "h": 600,
+    "src": "David_olusoga_2022_1.jpg",
+    "cat": "Faith"
+  },
   {
     "id": "dennis-bergkamp",
     "name": "Dennis Bergkamp",
     "level": 3,
     "w": 472,
     "h": 600,
-    "src": "Dennis_Bergkamp_2014_(cropped).jpg"
+    "src": "Dennis_Bergkamp_2014_(cropped).jpg",
+    "cat": "Sports"
   },
-  { "id": "desmond-tutu", "name": "Desmond Tutu", "level": 3, "w": 400, "h": 600, "src": "Archbishop-Tutu-medium.jpg" },
+  {
+    "id": "desmond-tutu",
+    "name": "Desmond Tutu",
+    "level": 3,
+    "w": 400,
+    "h": 600,
+    "src": "Archbishop-Tutu-medium.jpg",
+    "cat": "Faith"
+  },
   {
     "id": "dietrich-bonhoeffer",
     "name": "Dietrich Bonhoeffer",
     "level": 3,
     "w": 378,
     "h": 600,
-    "src": "Bundesarchiv_Bild_146-1987-074-16,_Dietrich_Bonhoeffer.jpg"
+    "src": "Bundesarchiv_Bild_146-1987-074-16,_Dietrich_Bonhoeffer.jpg",
+    "cat": "Faith"
   },
   {
     "id": "dmitri-mendeleev",
@@ -2545,7 +3374,8 @@
     "level": 3,
     "w": 436,
     "h": 600,
-    "src": "Dmitri_Mendeleev.jpg"
+    "src": "Dmitri_Mendeleev.jpg",
+    "cat": "General"
   },
   {
     "id": "dwight-yorke",
@@ -2553,7 +3383,8 @@
     "level": 3,
     "w": 480,
     "h": 557,
-    "src": "Dwight_Yorke_in_Chennai.jpg"
+    "src": "Dwight_Yorke_in_Chennai.jpg",
+    "cat": "Sports"
   },
   {
     "id": "eliud-kipchoge",
@@ -2561,7 +3392,8 @@
     "level": 3,
     "w": 362,
     "h": 600,
-    "src": "Eliud_Kipchoge_in_Berlin_-_2015_(cropped).jpg"
+    "src": "Eliud_Kipchoge_in_Berlin_-_2015_(cropped).jpg",
+    "cat": "Sports"
   },
   {
     "id": "emile-heskey",
@@ -2569,7 +3401,8 @@
     "level": 3,
     "w": 477,
     "h": 600,
-    "src": "Emile_Heskey_as_a_player_of_England_national_football_team.jpg"
+    "src": "Emile_Heskey_as_a_player_of_England_national_football_team.jpg",
+    "cat": "Sports"
   },
   {
     "id": "emmanuel-adebayor",
@@ -2577,16 +3410,26 @@
     "level": 3,
     "w": 480,
     "h": 532,
-    "src": "Emmanuel_Adebayor_-_Lech_-_Manchester_026.jpg"
+    "src": "Emmanuel_Adebayor_-_Lech_-_Manchester_026.jpg",
+    "cat": "Sports"
   },
-  { "id": "enrico-fermi", "name": "Enrico Fermi", "level": 3, "w": 480, "h": 593, "src": "Enrico_Fermi_1943-49.jpg" },
+  {
+    "id": "enrico-fermi",
+    "name": "Enrico Fermi",
+    "level": 3,
+    "w": 480,
+    "h": 593,
+    "src": "Enrico_Fermi_1943-49.jpg",
+    "cat": "General"
+  },
   {
     "id": "ernest-rutherford",
     "name": "Ernest Rutherford",
     "level": 3,
     "w": 444,
     "h": 600,
-    "src": "Sir_Ernest_Rutherford_LCCN2014716719_-_restoration1.jpg"
+    "src": "Sir_Ernest_Rutherford_LCCN2014716719_-_restoration1.jpg",
+    "cat": "General"
   },
   {
     "id": "erwin-schrodinger",
@@ -2594,7 +3437,8 @@
     "level": 3,
     "w": 434,
     "h": 600,
-    "src": "Erwin_Schrödinger_-_Narodowe_Archiwum_Cyfrowe_(1-E-939).jpg"
+    "src": "Erwin_Schrödinger_-_Narodowe_Archiwum_Cyfrowe_(1-E-939).jpg",
+    "cat": "General"
   },
   {
     "id": "euclid",
@@ -2602,25 +3446,44 @@
     "level": 3,
     "w": 444,
     "h": 600,
-    "src": "Italian_-_Euclid_-_Google_Art_Project.jpg"
+    "src": "Italian_-_Euclid_-_Google_Art_Project.jpg",
+    "cat": "General"
   },
-  { "id": "fela-kuti", "name": "Fela Kuti", "level": 3, "w": 412, "h": 600, "src": "Fela_Kuti_circa_1986.jpg" },
+  {
+    "id": "fela-kuti",
+    "name": "Fela Kuti",
+    "level": 3,
+    "w": 412,
+    "h": 600,
+    "src": "Fela_Kuti_circa_1986.jpg",
+    "cat": "Music"
+  },
   {
     "id": "ferenc-puskas",
     "name": "Ferenc Puskás",
     "level": 3,
     "w": 465,
     "h": 600,
-    "src": "Ferenc_Puskas_en_1965.jpg"
+    "src": "Ferenc_Puskas_en_1965.jpg",
+    "cat": "Sports"
   },
-  { "id": "frank-bruno", "name": "Frank Bruno", "level": 3, "w": 458, "h": 600, "src": "Frank_Bruno_2022.png" },
+  {
+    "id": "frank-bruno",
+    "name": "Frank Bruno",
+    "level": 3,
+    "w": 458,
+    "h": 600,
+    "src": "Frank_Bruno_2022.png",
+    "cat": "Sports"
+  },
   {
     "id": "franz-beckenbauer",
     "name": "Franz Beckenbauer",
     "level": 3,
     "w": 439,
     "h": 600,
-    "src": "Franz_Beckenbauer_(1975).jpg"
+    "src": "Franz_Beckenbauer_(1975).jpg",
+    "cat": "Sports"
   },
   {
     "id": "gamal-abdel-nasser",
@@ -2628,16 +3491,26 @@
     "level": 3,
     "w": 459,
     "h": 600,
-    "src": "Stevan_Kragujevic,_Gamal_Abdel_Naser_u_Beogradu,_1962.jpg"
+    "src": "Stevan_Kragujevic,_Gamal_Abdel_Naser_u_Beogradu,_1962.jpg",
+    "cat": "Leaders"
   },
-  { "id": "george-best", "name": "George Best", "level": 3, "w": 434, "h": 600, "src": "George_best_1976.jpg" },
+  {
+    "id": "george-best",
+    "name": "George Best",
+    "level": 3,
+    "w": 434,
+    "h": 600,
+    "src": "George_best_1976.jpg",
+    "cat": "Sports"
+  },
   {
     "id": "george-washington-carver",
     "name": "George Washington Carver",
     "level": 3,
     "w": 479,
     "h": 600,
-    "src": "George_Washington_Carver_c1910_-_Restoration.jpg"
+    "src": "George_Washington_Carver_c1910_-_Restoration.jpg",
+    "cat": "General"
   },
   {
     "id": "george-weah",
@@ -2645,7 +3518,8 @@
     "level": 3,
     "w": 449,
     "h": 600,
-    "src": "Clar_Weah,_George_Weah,_Joe_Biden,_Jill_Biden_(cropped).jpg"
+    "src": "Clar_Weah,_George_Weah,_Joe_Biden,_Jill_Biden_(cropped).jpg",
+    "cat": "Sports"
   },
   {
     "id": "george-whitefield",
@@ -2653,7 +3527,8 @@
     "level": 3,
     "w": 480,
     "h": 568,
-    "src": "Robert_Hunter_(c.1715-1720-c.1803)_(possibly)_-_Reverend_George_Whitefield_(1714–1770),_MA_-_72_-_Mansfield_College.jpg"
+    "src": "Robert_Hunter_(c.1715-1720-c.1803)_(possibly)_-_Reverend_George_Whitefield_(1714–1770),_MA_-_72_-_Mansfield_College.jpg",
+    "cat": "Faith"
   },
   {
     "id": "gianluigi-buffon",
@@ -2661,17 +3536,35 @@
     "level": 3,
     "w": 476,
     "h": 600,
-    "src": "Norway_Italy_-_June_2025_A_44_(Gianluigi_Buffon).jpg"
+    "src": "Norway_Italy_-_June_2025_A_44_(Gianluigi_Buffon).jpg",
+    "cat": "Sports"
   },
-  { "id": "gordon-brown", "name": "Gordon Brown", "level": 3, "w": 469, "h": 600, "src": "Gordon_Brown_(2008).jpg" },
-  { "id": "gregor-mendel", "name": "Gregor Mendel", "level": 3, "w": 442, "h": 600, "src": "Gregor_Mendel_2.jpg" },
+  {
+    "id": "gordon-brown",
+    "name": "Gordon Brown",
+    "level": 3,
+    "w": 469,
+    "h": 600,
+    "src": "Gordon_Brown_(2008).jpg",
+    "cat": "Leaders"
+  },
+  {
+    "id": "gregor-mendel",
+    "name": "Gregor Mendel",
+    "level": 3,
+    "w": 442,
+    "h": 600,
+    "src": "Gregor_Mendel_2.jpg",
+    "cat": "General"
+  },
   {
     "id": "hakeem-olajuwon",
     "name": "Hakeem Olajuwon",
     "level": 3,
     "w": 480,
     "h": 569,
-    "src": "Nigerian_President_Buhari_Stands_With_Secretary_Kerry,_U.S._Delegation_After_They_Attended_His_Inauguration_Ceremony_(cropped).jpg"
+    "src": "Nigerian_President_Buhari_Stands_With_Secretary_Kerry,_U.S._Delegation_After_They_Attended_His_Inauguration_Ceremony_(cropped).jpg",
+    "cat": "Sports"
   },
   {
     "id": "hosni-mubarak",
@@ -2679,16 +3572,26 @@
     "level": 3,
     "w": 459,
     "h": 600,
-    "src": "Hosni_Mubarak_-_Official_Photo.JPG"
+    "src": "Hosni_Mubarak_-_Official_Photo.JPG",
+    "cat": "Leaders"
   },
-  { "id": "ian-rush", "name": "Ian Rush", "level": 3, "w": 414, "h": 600, "src": "Ian_Rush_in_Singapore.jpg" },
+  {
+    "id": "ian-rush",
+    "name": "Ian Rush",
+    "level": 3,
+    "w": 414,
+    "h": 600,
+    "src": "Ian_Rush_in_Singapore.jpg",
+    "cat": "Sports"
+  },
   {
     "id": "ida-b-wells",
     "name": "Ida B. Wells",
     "level": 3,
     "w": 330,
     "h": 471,
-    "src": "Mary_Garrity_-_Ida_B._Wells-Barnett_-_Google_Art_Project_-_restoration_crop.jpg"
+    "src": "Mary_Garrity_-_Ida_B._Wells-Barnett_-_Google_Art_Project_-_restoration_crop.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "iker-casillas",
@@ -2696,7 +3599,8 @@
     "level": 3,
     "w": 480,
     "h": 521,
-    "src": "Iker-Casillas-SportsTrade-2021-cropped.jpg"
+    "src": "Iker-Casillas-SportsTrade-2021-cropped.jpg",
+    "cat": "Sports"
   },
   {
     "id": "israel-adesanya",
@@ -2704,7 +3608,8 @@
     "level": 3,
     "w": 472,
     "h": 600,
-    "src": "Israel_Adesanya_at_UFC_230.jpg"
+    "src": "Israel_Adesanya_at_UFC_230.jpg",
+    "cat": "Sports"
   },
   {
     "id": "jacinda-ardern",
@@ -2712,7 +3617,8 @@
     "level": 3,
     "w": 480,
     "h": 600,
-    "src": "New_Zealand_Prime_Minister_Jacinda_Ardern_in_2018.jpg"
+    "src": "New_Zealand_Prime_Minister_Jacinda_Ardern_in_2018.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "jack-ma",
@@ -2720,7 +3626,8 @@
     "level": 3,
     "w": 480,
     "h": 569,
-    "src": "20th_Anniversary_Schwab_Foundation_Gala_Dinner_(44887783681)_(cropped).jpg"
+    "src": "20th_Anniversary_Schwab_Foundation_Gala_Dinner_(44887783681)_(cropped).jpg",
+    "cat": "General"
   },
   {
     "id": "jacob-zuma",
@@ -2728,7 +3635,8 @@
     "level": 3,
     "w": 450,
     "h": 600,
-    "src": "Jacob_Zuma,_29_November_2017_(cropped).jpg"
+    "src": "Jacob_Zuma,_29_November_2017_(cropped).jpg",
+    "cat": "Leaders"
   },
   {
     "id": "jacques-chirac",
@@ -2736,7 +3644,8 @@
     "level": 3,
     "w": 429,
     "h": 600,
-    "src": "Jacques_Chirac_(1997)_(cropped).jpg"
+    "src": "Jacques_Chirac_(1997)_(cropped).jpg",
+    "cat": "Leaders"
   },
   {
     "id": "james-clerk-maxwell",
@@ -2744,7 +3653,8 @@
     "level": 3,
     "w": 480,
     "h": 600,
-    "src": "James-Clerk-Maxwell-1831-1879.jpg"
+    "src": "James-Clerk-Maxwell-1831-1879.jpg",
+    "cat": "General"
   },
   {
     "id": "james-watson",
@@ -2752,7 +3662,8 @@
     "level": 3,
     "w": 450,
     "h": 600,
-    "src": "James_D._Watson_LCCN2007680359.jpg"
+    "src": "James_D._Watson_LCCN2007680359.jpg",
+    "cat": "General"
   },
   {
     "id": "jamie-carragher",
@@ -2760,7 +3671,8 @@
     "level": 3,
     "w": 455,
     "h": 600,
-    "src": "Football_against_poverty_2014_-_Jamie_Carragher_(cropped).jpg"
+    "src": "Football_against_poverty_2014_-_Jamie_Carragher_(cropped).jpg",
+    "cat": "Sports"
   },
   {
     "id": "jay-jay-okocha",
@@ -2768,7 +3680,8 @@
     "level": 3,
     "w": 330,
     "h": 416,
-    "src": "Match_legends_2017_CC_(5).jpg"
+    "src": "Match_legends_2017_CC_(5).jpg",
+    "cat": "Sports"
   },
   {
     "id": "jeremy-corbyn",
@@ -2776,7 +3689,8 @@
     "level": 3,
     "w": 330,
     "h": 440,
-    "src": "Official_portrait_of_Jeremy_Corbyn_MP,_2024_(3x4_cropped).jpg"
+    "src": "Official_portrait_of_Jeremy_Corbyn_MP,_2024_(3x4_cropped).jpg",
+    "cat": "Leaders"
   },
   {
     "id": "jermain-defoe",
@@ -2784,34 +3698,62 @@
     "level": 3,
     "w": 480,
     "h": 535,
-    "src": "Jermain-Defoe_(cropped).jpg"
+    "src": "Jermain-Defoe_(cropped).jpg",
+    "cat": "Sports"
   },
-  { "id": "jesse-owens", "name": "Jesse Owens", "level": 3, "w": 437, "h": 600, "src": "Jesse_Owens_1936.jpg" },
+  {
+    "id": "jesse-owens",
+    "name": "Jesse Owens",
+    "level": 3,
+    "w": 437,
+    "h": 600,
+    "src": "Jesse_Owens_1936.jpg",
+    "cat": "Sports"
+  },
   {
     "id": "jessie-j",
     "name": "Jessie J",
     "level": 3,
     "w": 330,
     "h": 457,
-    "src": "WEHO2022_(52125746986)_(cropped).jpg"
+    "src": "WEHO2022_(52125746986)_(cropped).jpg",
+    "cat": "Music"
   },
-  { "id": "joel-embiid", "name": "Joel Embiid", "level": 3, "w": 406, "h": 600, "src": "Joel_Embiid_2019.jpg" },
+  {
+    "id": "joel-embiid",
+    "name": "Joel Embiid",
+    "level": 3,
+    "w": 406,
+    "h": 600,
+    "src": "Joel_Embiid_2019.jpg",
+    "cat": "Sports"
+  },
   {
     "id": "joel-osteen",
     "name": "Joel Osteen",
     "level": 3,
     "w": 467,
     "h": 600,
-    "src": "Joel_Osteen_Preaching_(cropped).jpg"
+    "src": "Joel_Osteen_Preaching_(cropped).jpg",
+    "cat": "Faith"
   },
-  { "id": "johannes-kepler", "name": "Johannes Kepler", "level": 3, "w": 418, "h": 600, "src": "JKepler.jpg" },
+  {
+    "id": "johannes-kepler",
+    "name": "Johannes Kepler",
+    "level": 3,
+    "w": 418,
+    "h": 600,
+    "src": "JKepler.jpg",
+    "cat": "General"
+  },
   {
     "id": "john-boyega",
     "name": "John Boyega",
     "level": 3,
     "w": 450,
     "h": 600,
-    "src": "John_Boyega_(54716098702).jpg"
+    "src": "John_Boyega_(54716098702).jpg",
+    "cat": "Screen"
   },
   {
     "id": "john-calvin",
@@ -2819,16 +3761,26 @@
     "level": 3,
     "w": 432,
     "h": 600,
-    "src": "John_Calvin_Museum_Catharijneconvent_RMCC_s84_cropped.png"
+    "src": "John_Calvin_Museum_Catharijneconvent_RMCC_s84_cropped.png",
+    "cat": "Faith"
   },
-  { "id": "john-lewis", "name": "John Lewis", "level": 3, "w": 416, "h": 600, "src": "John_Lewis-2006_(cropped).jpg" },
+  {
+    "id": "john-lewis",
+    "name": "John Lewis",
+    "level": 3,
+    "w": 416,
+    "h": 600,
+    "src": "John_Lewis-2006_(cropped).jpg",
+    "cat": "Leaders"
+  },
   {
     "id": "john-mahama",
     "name": "John Mahama",
     "level": 3,
     "w": 457,
     "h": 600,
-    "src": "John_Mahama_in_Yokohama_(cropped).jpg"
+    "src": "John_Mahama_in_Yokohama_(cropped).jpg",
+    "cat": "Leaders"
   },
   {
     "id": "john-maynard-keynes",
@@ -2836,7 +3788,8 @@
     "level": 3,
     "w": 450,
     "h": 600,
-    "src": "John_Maynard_Keynes_(1929).jpg"
+    "src": "John_Maynard_Keynes_(1929).jpg",
+    "cat": "General"
   },
   {
     "id": "john-terry",
@@ -2844,7 +3797,8 @@
     "level": 3,
     "w": 450,
     "h": 600,
-    "src": "John_Terry_at_pro-am_Wentworth_golf_course_September_2023_(cropped).jpg"
+    "src": "John_Terry_at_pro-am_Wentworth_golf_course_September_2023_(cropped).jpg",
+    "cat": "Sports"
   },
   {
     "id": "john-wesley",
@@ -2852,25 +3806,44 @@
     "level": 3,
     "w": 480,
     "h": 586,
-    "src": "John_Wesley_by_George_Romney.jpg"
+    "src": "John_Wesley_by_George_Romney.jpg",
+    "cat": "Faith"
   },
-  { "id": "jonas-salk", "name": "Jonas Salk", "level": 3, "w": 443, "h": 600, "src": "Jonas_Salk_candid.jpg" },
+  {
+    "id": "jonas-salk",
+    "name": "Jonas Salk",
+    "level": 3,
+    "w": 443,
+    "h": 600,
+    "src": "Jonas_Salk_candid.jpg",
+    "cat": "General"
+  },
   {
     "id": "joyce-meyer",
     "name": "Joyce Meyer",
     "level": 3,
     "w": 409,
     "h": 600,
-    "src": "Joyce_Meyer_in_2015_(5Cnll1B0h2Y).jpg"
+    "src": "Joyce_Meyer_in_2015_(5Cnll1B0h2Y).jpg",
+    "cat": "Faith"
   },
-  { "id": "kamaru-usman", "name": "Kamaru Usman", "level": 3, "w": 480, "h": 432, "src": "KamaruUsmanPress2018.png" },
+  {
+    "id": "kamaru-usman",
+    "name": "Kamaru Usman",
+    "level": 3,
+    "w": 480,
+    "h": 432,
+    "src": "KamaruUsmanPress2018.png",
+    "cat": "Sports"
+  },
   {
     "id": "katherine-johnson",
     "name": "Katherine Johnson",
     "level": 3,
     "w": 480,
     "h": 600,
-    "src": "Katherine_Johnson_1983.jpg"
+    "src": "Katherine_Johnson_1983.jpg",
+    "cat": "General"
   },
   {
     "id": "kelechi-iheanacho",
@@ -2878,7 +3851,8 @@
     "level": 3,
     "w": 399,
     "h": 600,
-    "src": "Kelechi_Iheanacho-Nigeria_(2).jpg"
+    "src": "Kelechi_Iheanacho-Nigeria_(2).jpg",
+    "cat": "Sports"
   },
   {
     "id": "kenneth-copeland",
@@ -2886,7 +3860,8 @@
     "level": 3,
     "w": 480,
     "h": 538,
-    "src": "Kenneth_Copeland_2011.jpg"
+    "src": "Kenneth_Copeland_2011.jpg",
+    "cat": "Faith"
   },
   {
     "id": "kenny-dalglish",
@@ -2894,7 +3869,8 @@
     "level": 3,
     "w": 480,
     "h": 526,
-    "src": "Kenny_Dalglish_2009_Singapore.jpg"
+    "src": "Kenny_Dalglish_2009_Singapore.jpg",
+    "cat": "Sports"
   },
   {
     "id": "kirk-franklin",
@@ -2902,16 +3878,26 @@
     "level": 3,
     "w": 452,
     "h": 600,
-    "src": "Kirk_Franklin_at_JoyFest_'17_(cropped).jpg"
+    "src": "Kirk_Franklin_at_JoyFest_'17_(cropped).jpg",
+    "cat": "Music"
   },
-  { "id": "kofi-annan", "name": "Kofi Annan", "level": 3, "w": 478, "h": 600, "src": "Kofi_Annan_2012_(cropped).jpg" },
+  {
+    "id": "kofi-annan",
+    "name": "Kofi Annan",
+    "level": 3,
+    "w": 478,
+    "h": 600,
+    "src": "Kofi_Annan_2012_(cropped).jpg",
+    "cat": "Leaders"
+  },
   {
     "id": "kwame-nkrumah",
     "name": "Kwame Nkrumah",
     "level": 3,
     "w": 438,
     "h": 600,
-    "src": "Kwame_Nkrumah_Portrait,_The_National_Archives_UK.jpg"
+    "src": "Kwame_Nkrumah_Portrait,_The_National_Archives_UK.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "langston-hughes",
@@ -2919,7 +3905,8 @@
     "level": 3,
     "w": 410,
     "h": 600,
-    "src": "Langston_Hughes_by_Carl_Van_Vechten_Trim.jpg"
+    "src": "Langston_Hughes_by_Carl_Van_Vechten_Trim.jpg",
+    "cat": "Faith"
   },
   {
     "id": "lenny-henry",
@@ -2927,7 +3914,8 @@
     "level": 3,
     "w": 450,
     "h": 600,
-    "src": "Sir_Lenny_Henry_signing_books_(2)_-_Copy.jpg"
+    "src": "Sir_Lenny_Henry_signing_books_(2)_-_Copy.jpg",
+    "cat": "Screen"
   },
   {
     "id": "leona-lewis",
@@ -2935,7 +3923,8 @@
     "level": 3,
     "w": 400,
     "h": 600,
-    "src": "Leona_Lewis_attends_the_Premiere_of_the_Film_\"ARGYLLE\"_at_Odeon_Luxe_Leicester_Square_on_January_24,_2024_in_London,_England.jpg"
+    "src": "Leona_Lewis_attends_the_Premiere_of_the_Film_\"ARGYLLE\"_at_Odeon_Luxe_Leicester_Square_on_January_24,_2024_in_London,_England.jpg",
+    "cat": "Music"
   },
   {
     "id": "leonhard-euler",
@@ -2943,7 +3932,8 @@
     "level": 3,
     "w": 464,
     "h": 600,
-    "src": "Leonhard_Euler_-_Jakob_Emanuel_Handmann_(Kunstmuseum_Basel).jpg"
+    "src": "Leonhard_Euler_-_Jakob_Emanuel_Handmann_(Kunstmuseum_Basel).jpg",
+    "cat": "General"
   },
   {
     "id": "les-ferdinand",
@@ -2951,17 +3941,19 @@
     "level": 3,
     "w": 426,
     "h": 600,
-    "src": "LesFerdinandMay2015_(cropped).JPG"
+    "src": "LesFerdinandMay2015_(cropped).JPG",
+    "cat": "Sports"
   },
-  { "id": "lev-yashin", "name": "Lev Yashin", "level": 3, "w": 450, "h": 600, "src": "LevYashin.JPG" },
-  { "id": "lizzo", "name": "Lizzo", "level": 3, "w": 330, "h": 449, "src": "Lizzo_September_2025.png" },
+  { "id": "lev-yashin", "name": "Lev Yashin", "level": 3, "w": 450, "h": 600, "src": "LevYashin.JPG", "cat": "Sports" },
+  { "id": "lizzo", "name": "Lizzo", "level": 3, "w": 330, "h": 449, "src": "Lizzo_September_2025.png", "cat": "Music" },
   {
     "id": "louis-pasteur",
     "name": "Louis Pasteur",
     "level": 3,
     "w": 435,
     "h": 600,
-    "src": "Louis_Pasteur,_foto_av_Paul_Nadar,_Crisco_edit.jpg"
+    "src": "Louis_Pasteur,_foto_av_Paul_Nadar,_Crisco_edit.jpg",
+    "cat": "General"
   },
   {
     "id": "madam-c-j-walker",
@@ -2969,7 +3961,8 @@
     "level": 3,
     "w": 407,
     "h": 600,
-    "src": "Madam_C._J._Walker_by_Addison_N._Scurlock.jpg"
+    "src": "Madam_C._J._Walker_by_Addison_N._Scurlock.jpg",
+    "cat": "General"
   },
   {
     "id": "medgar-evers",
@@ -2977,7 +3970,8 @@
     "level": 3,
     "w": 467,
     "h": 600,
-    "src": "Medgar_Evers_press_photo.jpg"
+    "src": "Medgar_Evers_press_photo.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "megan-rapinoe",
@@ -2985,7 +3979,8 @@
     "level": 3,
     "w": 446,
     "h": 600,
-    "src": "Megan_Rapinoe_(48675274817)_(cropped).jpg"
+    "src": "Megan_Rapinoe_(48675274817)_(cropped).jpg",
+    "cat": "Sports"
   },
   {
     "id": "meghan-markle",
@@ -2993,16 +3988,26 @@
     "level": 3,
     "w": 450,
     "h": 600,
-    "src": "SXSW-2024-OB7A9986-alih-Meghan,_Duchess_of_Sussex_(cropped).jpg"
+    "src": "SXSW-2024-OB7A9986-alih-Meghan,_Duchess_of_Sussex_(cropped).jpg",
+    "cat": "General"
   },
-  { "id": "micah-richards", "name": "Micah Richards", "level": 3, "w": 480, "h": 574, "src": "Richards_crop.JPG" },
+  {
+    "id": "micah-richards",
+    "name": "Micah Richards",
+    "level": 3,
+    "w": 480,
+    "h": 574,
+    "src": "Richards_crop.JPG",
+    "cat": "Sports"
+  },
   {
     "id": "michael-faraday",
     "name": "Michael Faraday",
     "level": 3,
     "w": 454,
     "h": 600,
-    "src": "Michael_Faraday_sitting_crop.jpg"
+    "src": "Michael_Faraday_sitting_crop.jpg",
+    "cat": "General"
   },
   {
     "id": "michaela-coel",
@@ -3010,16 +4015,26 @@
     "level": 3,
     "w": 346,
     "h": 600,
-    "src": "Michaela_Coel_-_TIFF_2025_-_Toronto,_Canada.jpg"
+    "src": "Michaela_Coel_-_TIFF_2025_-_Toronto,_Canada.jpg",
+    "cat": "Screen"
   },
-  { "id": "missy-elliott", "name": "Missy Elliott", "level": 3, "w": 465, "h": 600, "src": "Missy_Elliot.jpg" },
+  {
+    "id": "missy-elliott",
+    "name": "Missy Elliott",
+    "level": 3,
+    "w": 465,
+    "h": 600,
+    "src": "Missy_Elliot.jpg",
+    "cat": "Music"
+  },
   {
     "id": "mo-farah",
     "name": "Mo Farah",
     "level": 3,
     "w": 451,
     "h": 600,
-    "src": "2023_London_Marathon_-_Sir_Mo_Farah_(2)_(cropped).jpg"
+    "src": "2023_London_Marathon_-_Sir_Mo_Farah_(2)_(cropped).jpg",
+    "cat": "Sports"
   },
   {
     "id": "nicola-sturgeon",
@@ -3027,7 +4042,8 @@
     "level": 3,
     "w": 450,
     "h": 600,
-    "src": "Nicola_Sturgeon_2021.jpg"
+    "src": "Nicola_Sturgeon_2021.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "nicolas-sarkozy",
@@ -3035,7 +4051,8 @@
     "level": 3,
     "w": 392,
     "h": 600,
-    "src": "Nicolas_Sarkozy_in_2010.jpg"
+    "src": "Nicolas_Sarkozy_in_2010.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "nicolaus-copernicus",
@@ -3043,16 +4060,26 @@
     "level": 3,
     "w": 480,
     "h": 600,
-    "src": "Nikolaus_Kopernikus_MOT.jpg"
+    "src": "Nikolaus_Kopernikus_MOT.jpg",
+    "cat": "General"
   },
-  { "id": "niels-bohr", "name": "Niels Bohr", "level": 3, "w": 427, "h": 600, "src": "Niels_Bohr.jpg" },
+  {
+    "id": "niels-bohr",
+    "name": "Niels Bohr",
+    "level": 3,
+    "w": 427,
+    "h": 600,
+    "src": "Niels_Bohr.jpg",
+    "cat": "General"
+  },
   {
     "id": "noah-lyles",
     "name": "Noah Lyles",
     "level": 3,
     "w": 397,
     "h": 600,
-    "src": "Noah_Lyles_Olympic_Games_03.08.2024.jpg"
+    "src": "Noah_Lyles_Olympic_Games_03.08.2024.jpg",
+    "cat": "Sports"
   },
   {
     "id": "olaf-scholz",
@@ -3060,7 +4087,8 @@
     "level": 3,
     "w": 430,
     "h": 600,
-    "src": "Olaf_Scholz_September_2024.jpg"
+    "src": "Olaf_Scholz_September_2024.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "ole-gunnar-solskjr",
@@ -3068,7 +4096,8 @@
     "level": 3,
     "w": 439,
     "h": 600,
-    "src": "Ole_Gunnar_Solskjaer_Trondheim2011-1_crop.jpg"
+    "src": "Ole_Gunnar_Solskjaer_Trondheim2011-1_crop.jpg",
+    "cat": "Sports"
   },
   {
     "id": "patrice-lumumba",
@@ -3076,25 +4105,44 @@
     "level": 3,
     "w": 450,
     "h": 600,
-    "src": "PatriceLumumba1960.jpg"
+    "src": "PatriceLumumba1960.jpg",
+    "cat": "Leaders"
   },
-  { "id": "paul-dirac", "name": "Paul Dirac", "level": 3, "w": 407, "h": 600, "src": "Paul_Dirac,_1933.jpg" },
+  {
+    "id": "paul-dirac",
+    "name": "Paul Dirac",
+    "level": 3,
+    "w": 407,
+    "h": 600,
+    "src": "Paul_Dirac,_1933.jpg",
+    "cat": "General"
+  },
   {
     "id": "paul-kagame",
     "name": "Paul Kagame",
     "level": 3,
     "w": 456,
     "h": 600,
-    "src": "Paul_Kagame_2024_(cropped).jpg"
+    "src": "Paul_Kagame_2024_(cropped).jpg",
+    "cat": "Leaders"
   },
-  { "id": "paul-robeson", "name": "Paul Robeson", "level": 3, "w": 480, "h": 598, "src": "Paul_Robeson_1942_crop.jpg" },
+  {
+    "id": "paul-robeson",
+    "name": "Paul Robeson",
+    "level": 3,
+    "w": 480,
+    "h": 598,
+    "src": "Paul_Robeson_1942_crop.jpg",
+    "cat": "Music"
+  },
   {
     "id": "paula-radcliffe",
     "name": "Paula Radcliffe",
     "level": 3,
     "w": 295,
     "h": 600,
-    "src": "Paula_Radcliffe_NYC_Marathon_2008_cropped.jpg"
+    "src": "Paula_Radcliffe_NYC_Marathon_2008_cropped.jpg",
+    "cat": "Sports"
   },
   {
     "id": "piers-morgan",
@@ -3102,7 +4150,8 @@
     "level": 3,
     "w": 450,
     "h": 600,
-    "src": "Piers_Morgan_at_2026_SXSW_London_05_(cropped).jpg"
+    "src": "Piers_Morgan_at_2026_SXSW_London_05_(cropped).jpg",
+    "cat": "Screen"
   },
   {
     "id": "rio-ferdinand",
@@ -3110,17 +4159,27 @@
     "level": 3,
     "w": 437,
     "h": 600,
-    "src": "Web_Summit_2015_-_Dublin,_Ireland_-_22183056474_(cropped).jpg"
+    "src": "Web_Summit_2015_-_Dublin,_Ireland_-_22183056474_(cropped).jpg",
+    "cat": "Sports"
   },
-  { "id": "rivaldo", "name": "Rivaldo", "level": 3, "w": 458, "h": 600, "src": "Rivaldo.jpg" },
-  { "id": "riyad-mahrez", "name": "Riyad Mahrez", "level": 3, "w": 330, "h": 600, "src": "Mahrez_2021.jpg" },
+  { "id": "rivaldo", "name": "Rivaldo", "level": 3, "w": 458, "h": 600, "src": "Rivaldo.jpg", "cat": "Sports" },
+  {
+    "id": "riyad-mahrez",
+    "name": "Riyad Mahrez",
+    "level": 3,
+    "w": 330,
+    "h": 600,
+    "src": "Mahrez_2021.jpg",
+    "cat": "Sports"
+  },
   {
     "id": "robert-hooke",
     "name": "Robert Hooke",
     "level": 3,
     "w": 480,
     "h": 594,
-    "src": "Portrait_of_a_Mathematician_1680c.jpg"
+    "src": "Portrait_of_a_Mathematician_1680c.jpg",
+    "cat": "General"
   },
   {
     "id": "robert-mugabe",
@@ -3128,7 +4187,8 @@
     "level": 3,
     "w": 480,
     "h": 597,
-    "src": "Robert_Mugabe_Official_Portrait_(4x5_cropped).jpg"
+    "src": "Robert_Mugabe_Official_Portrait_(4x5_cropped).jpg",
+    "cat": "Leaders"
   },
   {
     "id": "roberto-baggio",
@@ -3136,7 +4196,8 @@
     "level": 3,
     "w": 473,
     "h": 600,
-    "src": "روبرتو_باجو_(cropped).jpg"
+    "src": "روبرتو_باجو_(cropped).jpg",
+    "cat": "Sports"
   },
   {
     "id": "roberto-carlos",
@@ -3144,7 +4205,8 @@
     "level": 3,
     "w": 450,
     "h": 600,
-    "src": "LS3_1288_(53332367864)_(cropped).jpg"
+    "src": "LS3_1288_(53332367864)_(cropped).jpg",
+    "cat": "Sports"
   },
   {
     "id": "romario",
@@ -3152,7 +4214,8 @@
     "level": 3,
     "w": 454,
     "h": 600,
-    "src": "Senadores_da_57ª_Legislatura_(52689451805)_(cropped_-_3x4).jpg"
+    "src": "Senadores_da_57ª_Legislatura_(52689451805)_(cropped_-_3x4).jpg",
+    "cat": "Sports"
   },
   {
     "id": "rosalind-franklin",
@@ -3160,7 +4223,8 @@
     "level": 3,
     "w": 480,
     "h": 583,
-    "src": "Rosalind_Franklin_(retouched).jpg"
+    "src": "Rosalind_Franklin_(retouched).jpg",
+    "cat": "General"
   },
   {
     "id": "shaun-wright-phillips",
@@ -3168,25 +4232,44 @@
     "level": 3,
     "w": 472,
     "h": 600,
-    "src": "Shaun_Wright-Phillips_in_2008_(cropped-J1).jpg"
+    "src": "Shaun_Wright-Phillips_in_2008_(cropped-J1).jpg",
+    "cat": "Sports"
   },
-  { "id": "shinzo-abe", "name": "Shinzo Abe", "level": 3, "w": 441, "h": 600, "src": "Shinzō_Abe_20120501.jpg" },
+  {
+    "id": "shinzo-abe",
+    "name": "Shinzo Abe",
+    "level": 3,
+    "w": 441,
+    "h": 600,
+    "src": "Shinzō_Abe_20120501.jpg",
+    "cat": "Leaders"
+  },
   {
     "id": "shirley-chisholm",
     "name": "Shirley Chisholm",
     "level": 3,
     "w": 403,
     "h": 600,
-    "src": "Shirley_Chisholm.jpg"
+    "src": "Shirley_Chisholm.jpg",
+    "cat": "Leaders"
   },
-  { "id": "skepta", "name": "Skepta", "level": 3, "w": 330, "h": 464, "src": "Skepta_2025_(cropped).jpg" },
+  {
+    "id": "skepta",
+    "name": "Skepta",
+    "level": 3,
+    "w": 330,
+    "h": 464,
+    "src": "Skepta_2025_(cropped).jpg",
+    "cat": "Music"
+  },
   {
     "id": "sojourner-truth",
     "name": "Sojourner Truth",
     "level": 3,
     "w": 432,
     "h": 600,
-    "src": "Sojourner_Truth,_1870_(cropped,_restored).jpg"
+    "src": "Sojourner_Truth,_1870_(cropped,_restored).jpg",
+    "cat": "Leaders"
   },
   {
     "id": "sophie-okonedo",
@@ -3194,7 +4277,8 @@
     "level": 3,
     "w": 480,
     "h": 593,
-    "src": "Sophie_Okonedo_-_IFFR_2015_(cropped).jpg"
+    "src": "Sophie_Okonedo_-_IFFR_2015_(cropped).jpg",
+    "cat": "Screen"
   },
   {
     "id": "steve-biko",
@@ -3202,7 +4286,8 @@
     "level": 3,
     "w": 330,
     "h": 511,
-    "src": "Steve_Biko_on_Flyer_for_Steve_Biko_Memorial_at_the_Carver_Cultural_Center.jpg"
+    "src": "Steve_Biko_on_Flyer_for_Steve_Biko_Memorial_at_the_Carver_Cultural_Center.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "stormzy",
@@ -3210,16 +4295,26 @@
     "level": 3,
     "w": 451,
     "h": 600,
-    "src": "StormzyO2270322_(34_of_77)_(cropped).jpg"
+    "src": "StormzyO2270322_(34_of_77)_(cropped).jpg",
+    "cat": "Music"
   },
-  { "id": "tems", "name": "Tems", "level": 3, "w": 450, "h": 600, "src": "Tems_Afro_Plus_Fest_(55514652102).jpg" },
+  {
+    "id": "tems",
+    "name": "Tems",
+    "level": 3,
+    "w": 450,
+    "h": 600,
+    "src": "Tems_Afro_Plus_Fest_(55514652102).jpg",
+    "cat": "Music"
+  },
   {
     "id": "theresa-may",
     "name": "Theresa May",
     "level": 3,
     "w": 450,
     "h": 600,
-    "src": "Official_portrait_of_Baroness_May_of_Maidenhead_crop_2.jpg"
+    "src": "Official_portrait_of_Baroness_May_of_Maidenhead_crop_2.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "thomas-sankara",
@@ -3227,7 +4322,8 @@
     "level": 3,
     "w": 468,
     "h": 600,
-    "src": "Thomas_Sankara_in_Harlem_(1984).png"
+    "src": "Thomas_Sankara_in_Harlem_(1984).png",
+    "cat": "Leaders"
   },
   {
     "id": "thurgood-marshall",
@@ -3235,7 +4331,8 @@
     "level": 3,
     "w": 478,
     "h": 600,
-    "src": "Thurgood-marshall-2.jpg"
+    "src": "Thurgood-marshall-2.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "tinie-tempah",
@@ -3243,26 +4340,53 @@
     "level": 3,
     "w": 400,
     "h": 600,
-    "src": "Tinie_Tempah_at_SXSW_London_2025.jpg"
+    "src": "Tinie_Tempah_at_SXSW_London_2025.jpg",
+    "cat": "Music"
   },
-  { "id": "tom-daley", "name": "Tom Daley", "level": 3, "w": 408, "h": 600, "src": "Tom_Daley_London_(cropped).jpg" },
-  { "id": "toni-morrison", "name": "Toni Morrison", "level": 3, "w": 421, "h": 600, "src": "Toni_Morrison.jpg" },
+  {
+    "id": "tom-daley",
+    "name": "Tom Daley",
+    "level": 3,
+    "w": 408,
+    "h": 600,
+    "src": "Tom_Daley_London_(cropped).jpg",
+    "cat": "Sports"
+  },
+  {
+    "id": "toni-morrison",
+    "name": "Toni Morrison",
+    "level": 3,
+    "w": 421,
+    "h": 600,
+    "src": "Toni_Morrison.jpg",
+    "cat": "Faith"
+  },
   {
     "id": "victor-osimhen",
     "name": "Victor Osimhen",
     "level": 3,
     "w": 449,
     "h": 600,
-    "src": "Victor-osimhen-nigeria-2024-3-4.jpg"
+    "src": "Victor-osimhen-nigeria-2024-3-4.jpg",
+    "cat": "Sports"
   },
-  { "id": "viv-richards", "name": "Viv Richards", "level": 3, "w": 439, "h": 600, "src": "Vivian_richards_crop.jpg" },
+  {
+    "id": "viv-richards",
+    "name": "Viv Richards",
+    "level": 3,
+    "w": 439,
+    "h": 600,
+    "src": "Vivian_richards_crop.jpg",
+    "cat": "Sports"
+  },
   {
     "id": "w-e-b-du-bois",
     "name": "W. E. B. Du Bois",
     "level": 3,
     "w": 450,
     "h": 600,
-    "src": "W.E.B._Du_Bois_by_James_E._Purdy,_1907_(3x4).jpg"
+    "src": "W.E.B._Du_Bois_by_James_E._Purdy,_1907_(3x4).jpg",
+    "cat": "General"
   },
   {
     "id": "werner-heisenberg",
@@ -3270,7 +4394,8 @@
     "level": 3,
     "w": 450,
     "h": 600,
-    "src": "Werner_Heisenberg_Portrait_(3x4_cropped).jpg"
+    "src": "Werner_Heisenberg_Portrait_(3x4_cropped).jpg",
+    "cat": "General"
   },
   {
     "id": "william-ruto",
@@ -3278,7 +4403,8 @@
     "level": 3,
     "w": 480,
     "h": 591,
-    "src": "President_Ruto_Potrait_2022_(cropped).jpg"
+    "src": "President_Ruto_Potrait_2022_(cropped).jpg",
+    "cat": "Leaders"
   },
   {
     "id": "william-tyndale",
@@ -3286,16 +4412,26 @@
     "level": 3,
     "w": 455,
     "h": 600,
-    "src": "Beza's_Icones,_contemporary_portraits_of_reformers_of_religion_and_letters_-_William_Tindale_on_Page_58.jpg"
+    "src": "Beza's_Icones,_contemporary_portraits_of_reformers_of_religion_and_letters_-_William_Tindale_on_Page_58.jpg",
+    "cat": "Faith"
   },
-  { "id": "yaya-toure", "name": "Yaya Touré", "level": 3, "w": 330, "h": 435, "src": "Yaya_Touré_(cropped).jpg" },
+  {
+    "id": "yaya-toure",
+    "name": "Yaya Touré",
+    "level": 3,
+    "w": 330,
+    "h": 435,
+    "src": "Yaya_Touré_(cropped).jpg",
+    "cat": "Sports"
+  },
   {
     "id": "yoweri-museveni",
     "name": "Yoweri Museveni",
     "level": 3,
     "w": 450,
     "h": 600,
-    "src": "Museveni_July_2012_(3x4_cropped).jpg"
+    "src": "Museveni_July_2012_(3x4_cropped).jpg",
+    "cat": "Leaders"
   },
   {
     "id": "zadie-smith",
@@ -3303,7 +4439,8 @@
     "level": 3,
     "w": 480,
     "h": 600,
-    "src": "Zadie_Smith_NBCC_2011_Shankbone_(cropped).jpg"
+    "src": "Zadie_Smith_NBCC_2011_Shankbone_(cropped).jpg",
+    "cat": "Faith"
   },
   {
     "id": "zora-neale-hurston",
@@ -3311,35 +4448,71 @@
     "level": 3,
     "w": 416,
     "h": 600,
-    "src": "Hurston-Zora-Neale-LOC.jpg"
+    "src": "Hurston-Zora-Neale-LOC.jpg",
+    "cat": "Faith"
   },
-  { "id": "abedi-pele", "name": "Abedi Pele", "level": 4, "w": 368, "h": 600, "src": "Abedi_Pele_2007.jpg" },
+  {
+    "id": "abedi-pele",
+    "name": "Abedi Pele",
+    "level": 4,
+    "w": 368,
+    "h": 600,
+    "src": "Abedi_Pele_2007.jpg",
+    "cat": "Sports"
+  },
   {
     "id": "abubakar-tafawa-balewa",
     "name": "Abubakar Tafawa Balewa",
     "level": 4,
     "w": 330,
     "h": 494,
-    "src": "Tafawa_Balewa_in_office_02.jpg"
+    "src": "Tafawa_Balewa_in_office_02.jpg",
+    "cat": "Leaders"
   },
-  { "id": "ahmed-musa", "name": "Ahmed Musa", "level": 4, "w": 426, "h": 600, "src": "Ahmed_Musa_20180625.jpg" },
+  {
+    "id": "ahmed-musa",
+    "name": "Ahmed Musa",
+    "level": 4,
+    "w": 426,
+    "h": 600,
+    "src": "Ahmed_Musa_20180625.jpg",
+    "cat": "Sports"
+  },
   {
     "id": "aimee-semple-mcpherson",
     "name": "Aimee Semple McPherson",
     "level": 4,
     "w": 381,
     "h": 600,
-    "src": "LAPL_ASM_1911_00024641.jpg"
+    "src": "LAPL_ASM_1911_00024641.jpg",
+    "cat": "Faith"
   },
-  { "id": "alex-morgan", "name": "Alex Morgan", "level": 4, "w": 422, "h": 600, "src": "Alex_Morgan_May19.jpg" },
-  { "id": "allyson-felix", "name": "Allyson Felix", "level": 4, "w": 479, "h": 600, "src": "AllysonFelixRio2016.jpg" },
+  {
+    "id": "alex-morgan",
+    "name": "Alex Morgan",
+    "level": 4,
+    "w": 422,
+    "h": 600,
+    "src": "Alex_Morgan_May19.jpg",
+    "cat": "Sports"
+  },
+  {
+    "id": "allyson-felix",
+    "name": "Allyson Felix",
+    "level": 4,
+    "w": 479,
+    "h": 600,
+    "src": "AllysonFelixRio2016.jpg",
+    "cat": "Sports"
+  },
   {
     "id": "amina-j-mohammed",
     "name": "Amina J. Mohammed",
     "level": 4,
     "w": 450,
     "h": 600,
-    "src": "UN_Deputy_Secretary_General_Amina_J._Mohammed_(3x4_cropped).jpg"
+    "src": "UN_Deputy_Secretary_General_Amina_J._Mohammed_(3x4_cropped).jpg",
+    "cat": "Leaders"
   },
   {
     "id": "angelique-kidjo",
@@ -3347,7 +4520,8 @@
     "level": 4,
     "w": 434,
     "h": 600,
-    "src": "Angélique_Kidjo_Gershwin_2023.jpg"
+    "src": "Angélique_Kidjo_Gershwin_2023.jpg",
+    "cat": "Music"
   },
   {
     "id": "ant-mcpartlin",
@@ -3355,7 +4529,8 @@
     "level": 4,
     "w": 429,
     "h": 600,
-    "src": "Anthony_McPartlin_(of_Ant_and_Dec).jpg"
+    "src": "Anthony_McPartlin_(of_Ant_and_Dec).jpg",
+    "cat": "Screen"
   },
   {
     "id": "asake",
@@ -3363,7 +4538,8 @@
     "level": 4,
     "w": 480,
     "h": 557,
-    "src": "Asake_in_2024_performing_at_a_Toronto_concert.png"
+    "src": "Asake_in_2024_performing_at_a_Toronto_concert.png",
+    "cat": "Music"
   },
   {
     "id": "atiku-abubakar",
@@ -3371,7 +4547,8 @@
     "level": 4,
     "w": 400,
     "h": 600,
-    "src": "Atiku_Abubakar_2023.jpg"
+    "src": "Atiku_Abubakar_2023.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "bayard-rustin",
@@ -3379,7 +4556,8 @@
     "level": 4,
     "w": 330,
     "h": 388,
-    "src": "BayardRustinAug1963-LibraryOfCongress_crop.jpg"
+    "src": "BayardRustinAug1963-LibraryOfCongress_crop.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "ben-stokes",
@@ -3387,7 +4565,8 @@
     "level": 4,
     "w": 467,
     "h": 600,
-    "src": "3_14_Captain_Ben_(cropped)_(cropped).jpg"
+    "src": "3_14_Captain_Ben_(cropped)_(cropped).jpg",
+    "cat": "Sports"
   },
   {
     "id": "benjamin-banneker",
@@ -3395,7 +4574,8 @@
     "level": 4,
     "w": 330,
     "h": 402,
-    "src": "Benjamin_Banneker_woodcut,_age_64.jpg"
+    "src": "Benjamin_Banneker_woodcut,_age_64.jpg",
+    "cat": "General"
   },
   {
     "id": "benjamin-zephaniah",
@@ -3403,7 +4583,8 @@
     "level": 4,
     "w": 473,
     "h": 600,
-    "src": "Benjamin_Zephaniah_20181206.jpg"
+    "src": "Benjamin_Zephaniah_20181206.jpg",
+    "cat": "Faith"
   },
   {
     "id": "beth-mead",
@@ -3411,7 +4592,8 @@
     "level": 4,
     "w": 387,
     "h": 600,
-    "src": "Eng_Women_0_Czech_Rep_0_11_10_2022-225_(52426070932)_(cropped).jpg"
+    "src": "Eng_Women_0_Czech_Rep_0_11_10_2022-225_(52426070932)_(cropped).jpg",
+    "cat": "Sports"
   },
   {
     "id": "black-coffee",
@@ -3419,7 +4601,8 @@
     "level": 4,
     "w": 480,
     "h": 346,
-    "src": "Dj_Shimza_with_Black_Coffee_Dj.jpg"
+    "src": "Dj_Shimza_with_Black_Coffee_Dj.jpg",
+    "cat": "Music"
   },
   {
     "id": "bradley-wiggins",
@@ -3427,16 +4610,26 @@
     "level": 4,
     "w": 480,
     "h": 588,
-    "src": "2015_UEC_Track_Elite_European_Championships_158_(cropped).JPG"
+    "src": "2015_UEC_Track_Elite_European_Championships_158_(cropped).JPG",
+    "cat": "Sports"
   },
-  { "id": "chinua-achebe", "name": "Chinua Achebe", "level": 4, "w": 401, "h": 600, "src": "Chinua_Achebe,_1966.jpg" },
+  {
+    "id": "chinua-achebe",
+    "name": "Chinua Achebe",
+    "level": 4,
+    "w": 401,
+    "h": 600,
+    "src": "Chinua_Achebe,_1966.jpg",
+    "cat": "Faith"
+  },
   {
     "id": "chris-gayle",
     "name": "Chris Gayle",
     "level": 4,
     "w": 480,
     "h": 425,
-    "src": "Two_views_of_Chris_Gayle_(48020785077).jpg"
+    "src": "Two_views_of_Chris_Gayle_(48020785077).jpg",
+    "cat": "Sports"
   },
   {
     "id": "chris-hoy",
@@ -3444,16 +4637,26 @@
     "level": 4,
     "w": 451,
     "h": 600,
-    "src": "Prostate_Cancer_Roundtable_with_Sir_Chris_Hoy_(cropped).jpg"
+    "src": "Prostate_Cancer_Roundtable_with_Sir_Chris_Hoy_(cropped).jpg",
+    "cat": "Sports"
   },
-  { "id": "chris-oyakhilome", "name": "Chris Oyakhilome", "level": 4, "w": 397, "h": 600, "src": "Pastorchris.jpg" },
+  {
+    "id": "chris-oyakhilome",
+    "name": "Chris Oyakhilome",
+    "level": 4,
+    "w": 397,
+    "h": 600,
+    "src": "Pastorchris.jpg",
+    "cat": "Faith"
+  },
   {
     "id": "christine-sinclair",
     "name": "Christine Sinclair",
     "level": 4,
     "w": 450,
     "h": 600,
-    "src": "Christine_Sinclair_2016_(3x4_cropped).jpg"
+    "src": "Christine_Sinclair_2016_(3x4_cropped).jpg",
+    "cat": "Sports"
   },
   {
     "id": "chuka-umunna",
@@ -3461,17 +4664,35 @@
     "level": 4,
     "w": 450,
     "h": 600,
-    "src": "Official_portrait_of_Chuka_Umunna_crop_2_(cropped).jpg"
+    "src": "Official_portrait_of_Chuka_Umunna_crop_2_(cropped).jpg",
+    "cat": "Leaders"
   },
-  { "id": "claudia-jones", "name": "Claudia Jones", "level": 4, "w": 480, "h": 573, "src": "Claudia_Jones_1951.jpg" },
-  { "id": "corrie-ten-boom", "name": "Corrie ten Boom", "level": 4, "w": 380, "h": 600, "src": "CorrieTenBoom.jpg" },
+  {
+    "id": "claudia-jones",
+    "name": "Claudia Jones",
+    "level": 4,
+    "w": 480,
+    "h": 573,
+    "src": "Claudia_Jones_1951.jpg",
+    "cat": "Leaders"
+  },
+  {
+    "id": "corrie-ten-boom",
+    "name": "Corrie ten Boom",
+    "level": 4,
+    "w": 380,
+    "h": 600,
+    "src": "CorrieTenBoom.jpg",
+    "cat": "Faith"
+  },
   {
     "id": "daley-thompson",
     "name": "Daley Thompson",
     "level": 4,
     "w": 435,
     "h": 600,
-    "src": "Daley_Thomson_2007_Laureus_day.jpg"
+    "src": "Daley_Thomson_2007_Laureus_day.jpg",
+    "cat": "Sports"
   },
   {
     "id": "david-lammy",
@@ -3479,7 +4700,8 @@
     "level": 4,
     "w": 330,
     "h": 440,
-    "src": "David_Lammy_Official_Cabinet_Portrait,_September_2025_(cropped)~2.jpg"
+    "src": "David_Lammy_Official_Cabinet_Portrait,_September_2025_(cropped)~2.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "david-oyedepo",
@@ -3487,16 +4709,26 @@
     "level": 4,
     "w": 480,
     "h": 436,
-    "src": "David_and_Florence_Abiola_Oyedepo.jpg"
+    "src": "David_and_Florence_Abiola_Oyedepo.jpg",
+    "cat": "Faith"
   },
-  { "id": "davido", "name": "Davido", "level": 4, "w": 464, "h": 600, "src": "Davido_2024_(cropped).jpg" },
+  {
+    "id": "davido",
+    "name": "Davido",
+    "level": 4,
+    "w": 464,
+    "h": 600,
+    "src": "Davido_2024_(cropped).jpg",
+    "cat": "Music"
+  },
   {
     "id": "declan-donnelly",
     "name": "Declan Donnelly",
     "level": 4,
     "w": 330,
     "h": 463,
-    "src": "Declan_Donnelly_(of_Ant_and_Dec).jpg"
+    "src": "Declan_Donnelly_(of_Ant_and_Dec).jpg",
+    "cat": "Screen"
   },
   {
     "id": "diamond-platnumz",
@@ -3504,7 +4736,8 @@
     "level": 4,
     "w": 480,
     "h": 409,
-    "src": "Diamond_Platnumz.jpg"
+    "src": "Diamond_Platnumz.jpg",
+    "cat": "Music"
   },
   {
     "id": "diane-abbott",
@@ -3512,7 +4745,8 @@
     "level": 4,
     "w": 450,
     "h": 600,
-    "src": "Official_portrait_of_Ms_Diane_Abbott_crop_2.jpg"
+    "src": "Official_portrait_of_Ms_Diane_Abbott_crop_2.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "dina-asher-smith",
@@ -3520,7 +4754,8 @@
     "level": 4,
     "w": 330,
     "h": 355,
-    "src": "Dina_Asher-Smith_2_Oregon_2022_(cropped).jpg"
+    "src": "Dina_Asher-Smith_2_Oregon_2022_(cropped).jpg",
+    "cat": "Sports"
   },
   {
     "id": "dorothy-vaughan",
@@ -3528,7 +4763,8 @@
     "level": 4,
     "w": 471,
     "h": 600,
-    "src": "Dorothy_Vaughan_2.jpg"
+    "src": "Dorothy_Vaughan_2.jpg",
+    "cat": "General"
   },
   {
     "id": "dwight-l-moody",
@@ -3536,16 +4772,26 @@
     "level": 4,
     "w": 449,
     "h": 600,
-    "src": "Dwight_Lyman_Moody_c.1900.jpg"
+    "src": "Dwight_Lyman_Moody_c.1900.jpg",
+    "cat": "Faith"
   },
-  { "id": "edward-jenner", "name": "Edward Jenner", "level": 4, "w": 474, "h": 600, "src": "Edward_Jenner.jpg" },
+  {
+    "id": "edward-jenner",
+    "name": "Edward Jenner",
+    "level": 4,
+    "w": 474,
+    "h": 600,
+    "src": "Edward_Jenner.jpg",
+    "cat": "General"
+  },
   {
     "id": "ellen-johnson-sirleaf",
     "name": "Ellen Johnson Sirleaf",
     "level": 4,
     "w": 451,
     "h": 600,
-    "src": "Ellen_Johnson-Sirleaf_(2022)_(cropped).jpg"
+    "src": "Ellen_Johnson-Sirleaf_(2022)_(cropped).jpg",
+    "cat": "Leaders"
   },
   {
     "id": "emmy-noether",
@@ -3553,25 +4799,36 @@
     "level": 4,
     "w": 448,
     "h": 600,
-    "src": "Emmy_Noether_(3x4_cropped).jpg"
+    "src": "Emmy_Noether_(3x4_cropped).jpg",
+    "cat": "General"
   },
-  { "id": "eusebio", "name": "Eusébio", "level": 4, "w": 452, "h": 600, "src": "Eusebio_en_1973.jpg" },
+  { "id": "eusebio", "name": "Eusébio", "level": 4, "w": 452, "h": 600, "src": "Eusebio_en_1973.jpg", "cat": "Sports" },
   {
     "id": "fannie-lou-hamer",
     "name": "Fannie Lou Hamer",
     "level": 4,
     "w": 330,
     "h": 497,
-    "src": "Fannie_Lou_Hamer_1964-08-22.png"
+    "src": "Fannie_Lou_Hamer_1964-08-22.png",
+    "cat": "Leaders"
   },
-  { "id": "francis-crick", "name": "Francis Crick", "level": 4, "w": 330, "h": 363, "src": "Francis_Crick_crop.jpg" },
+  {
+    "id": "francis-crick",
+    "name": "Francis Crick",
+    "level": 4,
+    "w": 330,
+    "h": 363,
+    "src": "Francis_Crick_crop.jpg",
+    "cat": "General"
+  },
   {
     "id": "funmilayo-ransome-kuti",
     "name": "Funmilayo Ransome-Kuti",
     "level": 4,
     "w": 402,
     "h": 600,
-    "src": "70_year_old_Funmilayo_Ransome-Kuti_on_her_birthday.png"
+    "src": "70_year_old_Funmilayo_Ransome-Kuti_on_her_birthday.png",
+    "cat": "Leaders"
   },
   {
     "id": "gabby-douglas",
@@ -3579,16 +4836,26 @@
     "level": 4,
     "w": 450,
     "h": 600,
-    "src": "Gabby_Douglas_2016_Summer_Olympics_Gold_Medal.jpg"
+    "src": "Gabby_Douglas_2016_Summer_Olympics_Gold_Medal.jpg",
+    "cat": "Sports"
   },
-  { "id": "garth-crooks", "name": "Garth Crooks", "level": 4, "w": 467, "h": 600, "src": "Garth_Crooks_2012.jpg" },
+  {
+    "id": "garth-crooks",
+    "name": "Garth Crooks",
+    "level": 4,
+    "w": 467,
+    "h": 600,
+    "src": "Garth_Crooks_2012.jpg",
+    "cat": "Sports"
+  },
   {
     "id": "genevieve-nnaji",
     "name": "Genevieve Nnaji",
     "level": 4,
     "w": 480,
     "h": 371,
-    "src": "Genevieve_Nnaji_in_Weekend_Getaway.png"
+    "src": "Genevieve_Nnaji_in_Weekend_Getaway.png",
+    "cat": "Screen"
   },
   {
     "id": "gianfranco-zola",
@@ -3596,7 +4863,8 @@
     "level": 4,
     "w": 462,
     "h": 600,
-    "src": "Zola_2018_(cropped).jpg"
+    "src": "Zola_2018_(cropped).jpg",
+    "cat": "Sports"
   },
   {
     "id": "goodluck-jonathan",
@@ -3604,35 +4872,71 @@
     "level": 4,
     "w": 445,
     "h": 600,
-    "src": "Goodluck_Jonathan_World_Economic_Forum_2013.jpg"
+    "src": "Goodluck_Jonathan_World_Economic_Forum_2013.jpg",
+    "cat": "Leaders"
   },
-  { "id": "gordon-banks", "name": "Gordon Banks", "level": 4, "w": 446, "h": 600, "src": "Gordon_Banks_2007.jpg" },
-  { "id": "graca-machel", "name": "Graça Machel", "level": 4, "w": 399, "h": 600, "src": "Madame_Graca_Machel.jpg" },
+  {
+    "id": "gordon-banks",
+    "name": "Gordon Banks",
+    "level": 4,
+    "w": 446,
+    "h": 600,
+    "src": "Gordon_Banks_2007.jpg",
+    "cat": "Sports"
+  },
+  {
+    "id": "graca-machel",
+    "name": "Graça Machel",
+    "level": 4,
+    "w": 399,
+    "h": 600,
+    "src": "Madame_Graca_Machel.jpg",
+    "cat": "Leaders"
+  },
   {
     "id": "haile-gebrselassie",
     "name": "Haile Gebrselassie",
     "level": 4,
     "w": 480,
     "h": 540,
-    "src": "Olympic_great_Haile_Gebrselassie_speaking_at_the_Olympic_hunger_summit_in_Downing_Street,_12_August_2012_(cropped).jpg"
+    "src": "Olympic_great_Haile_Gebrselassie_speaking_at_the_Olympic_hunger_summit_in_Downing_Street,_12_August_2012_(cropped).jpg",
+    "cat": "Sports"
   },
-  { "id": "hudson-taylor", "name": "Hudson Taylor", "level": 4, "w": 423, "h": 600, "src": "HudsonTaylorin1893.jpg" },
+  {
+    "id": "hudson-taylor",
+    "name": "Hudson Taylor",
+    "level": 4,
+    "w": 423,
+    "h": 600,
+    "src": "HudsonTaylorin1893.jpg",
+    "cat": "Faith"
+  },
   {
     "id": "ibrahim-babangida",
     "name": "Ibrahim Babangida",
     "level": 4,
     "w": 426,
     "h": 600,
-    "src": "Ibrahim_Babangida_(cropped).jpg"
+    "src": "Ibrahim_Babangida_(cropped).jpg",
+    "cat": "Leaders"
   },
-  { "id": "j-j-thomson", "name": "J. J. Thomson", "level": 4, "w": 384, "h": 600, "src": "J.J_Thomson.jpg" },
+  {
+    "id": "j-j-thomson",
+    "name": "J. J. Thomson",
+    "level": 4,
+    "w": 384,
+    "h": 600,
+    "src": "J.J_Thomson.jpg",
+    "cat": "General"
+  },
   {
     "id": "james-cleverly",
     "name": "James Cleverly",
     "level": 4,
     "w": 450,
     "h": 600,
-    "src": "Official_portrait_of_James_Cleverly_MP_crop_2,_2024.jpg"
+    "src": "Official_portrait_of_James_Cleverly_MP_crop_2,_2024.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "jerry-rawlings",
@@ -3640,7 +4944,8 @@
     "level": 4,
     "w": 452,
     "h": 600,
-    "src": "JJ_Rawlings_in_Brussels_1998_(P002554000101,_cropped).jpg"
+    "src": "JJ_Rawlings_in_Brussels_1998_(P002554000101,_cropped).jpg",
+    "cat": "Leaders"
   },
   {
     "id": "jessica-ennis-hill",
@@ -3648,7 +4953,8 @@
     "level": 4,
     "w": 423,
     "h": 600,
-    "src": "25th_Laureus_World_Sports_Awards_-_Red_Carpet_-_Jessica_Ennis-Hill_-_240422_175644_(cropped).jpg"
+    "src": "25th_Laureus_World_Sports_Awards_-_Red_Carpet_-_Jessica_Ennis-Hill_-_240422_175644_(cropped).jpg",
+    "cat": "Sports"
   },
   {
     "id": "john-barnes",
@@ -3656,25 +4962,36 @@
     "level": 4,
     "w": 480,
     "h": 600,
-    "src": "John_Barnes_in_Singapore,_2023_01.jpg"
+    "src": "John_Barnes_in_Singapore,_2023_01.jpg",
+    "cat": "Sports"
   },
-  { "id": "john-knox", "name": "John Knox", "level": 4, "w": 330, "h": 413, "src": "Knoxbezaicones.jpg" },
+  {
+    "id": "john-knox",
+    "name": "John Knox",
+    "level": 4,
+    "w": 330,
+    "h": 413,
+    "src": "Knoxbezaicones.jpg",
+    "cat": "Faith"
+  },
   {
     "id": "john-piper",
     "name": "John Piper",
     "level": 4,
     "w": 447,
     "h": 600,
-    "src": "Photo_of_John_Piper,_Oct_2010_(cropped2).jpg"
+    "src": "Photo_of_John_Piper,_Oct_2010_(cropped2).jpg",
+    "cat": "Faith"
   },
-  { "id": "john-snow", "name": "John Snow", "level": 4, "w": 408, "h": 600, "src": "John_Snow.jpg" },
+  { "id": "john-snow", "name": "John Snow", "level": 4, "w": 408, "h": 600, "src": "John_Snow.jpg", "cat": "General" },
   {
     "id": "jomo-kenyatta",
     "name": "Jomo Kenyatta",
     "level": 4,
     "w": 330,
     "h": 444,
-    "src": "Jomo_Kenyatta_(cropped)_in_June_15th,_1966.jpg"
+    "src": "Jomo_Kenyatta_(cropped)_in_June_15th,_1966.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "jorja-smith",
@@ -3682,16 +4999,26 @@
     "level": 4,
     "w": 429,
     "h": 600,
-    "src": "Jorja_Smith_11_26_2018_-5_(45772599074).jpg"
+    "src": "Jorja_Smith_11_26_2018_-5_(45772599074).jpg",
+    "cat": "Music"
   },
-  { "id": "joseph-lister", "name": "Joseph Lister", "level": 4, "w": 445, "h": 600, "src": "Joseph_Lister_1902.jpg" },
+  {
+    "id": "joseph-lister",
+    "name": "Joseph Lister",
+    "level": 4,
+    "w": 445,
+    "h": 600,
+    "src": "Joseph_Lister_1902.jpg",
+    "cat": "General"
+  },
   {
     "id": "julius-nyerere",
     "name": "Julius Nyerere",
     "level": 4,
     "w": 409,
     "h": 600,
-    "src": "President_Nyerere_van_Tanzania,_koppen,_Bestanddeelnr_928-2879_(cropped).jpg"
+    "src": "President_Nyerere_van_Tanzania,_koppen,_Bestanddeelnr_928-2879_(cropped).jpg",
+    "cat": "Leaders"
   },
   {
     "id": "justin-welby",
@@ -3699,7 +5026,8 @@
     "level": 4,
     "w": 330,
     "h": 453,
-    "src": "Official_portrait_of_The_Lord_Archbishop_of_Canterbury_crop_2.jpg"
+    "src": "Official_portrait_of_The_Lord_Archbishop_of_Canterbury_crop_2.jpg",
+    "cat": "Faith"
   },
   {
     "id": "kanu-nwankwo",
@@ -3707,7 +5035,8 @@
     "level": 4,
     "w": 480,
     "h": 582,
-    "src": "1_nwankwo_kanu_2017_(edited).jpg"
+    "src": "1_nwankwo_kanu_2017_(edited).jpg",
+    "cat": "Sports"
   },
   {
     "id": "katarina-johnson-thompson",
@@ -3715,7 +5044,8 @@
     "level": 4,
     "w": 400,
     "h": 600,
-    "src": "WK2B0124_katarina_jt_(cropped-1).jpg"
+    "src": "WK2B0124_katarina_jt_(cropped-1).jpg",
+    "cat": "Sports"
   },
   {
     "id": "kathryn-kuhlman",
@@ -3723,7 +5053,8 @@
     "level": 4,
     "w": 410,
     "h": 600,
-    "src": "Richard_Roberts_Kathryn_Kuhlman.jpeg"
+    "src": "Richard_Roberts_Kathryn_Kuhlman.jpeg",
+    "cat": "Faith"
   },
   {
     "id": "kelly-holmes",
@@ -3731,7 +5062,8 @@
     "level": 4,
     "w": 421,
     "h": 600,
-    "src": "Kelly_Holmes_at_Athens_2004_cropped.jpg"
+    "src": "Kelly_Holmes_at_Athens_2004_cropped.jpg",
+    "cat": "Sports"
   },
   {
     "id": "kenneth-kaunda",
@@ -3739,7 +5071,8 @@
     "level": 4,
     "w": 480,
     "h": 596,
-    "src": "Kenneth_David_Kaunda.jpg"
+    "src": "Kenneth_David_Kaunda.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "kwasi-kwarteng",
@@ -3747,16 +5080,26 @@
     "level": 4,
     "w": 450,
     "h": 600,
-    "src": "Kwasi_Kwarteng_Official_Cabinet_Portrait,_September_2022_(cropped)_2.jpg"
+    "src": "Kwasi_Kwarteng_Official_Cabinet_Portrait,_September_2022_(cropped)_2.jpg",
+    "cat": "Leaders"
   },
-  { "id": "labrinth", "name": "Labrinth", "level": 4, "w": 444, "h": 600, "src": "Labrinth_portrait_(cropped).jpg" },
+  {
+    "id": "labrinth",
+    "name": "Labrinth",
+    "level": 4,
+    "w": 444,
+    "h": 600,
+    "src": "Labrinth_portrait_(cropped).jpg",
+    "cat": "Music"
+  },
   {
     "id": "laurie-cunningham",
     "name": "Laurie Cunningham",
     "level": 4,
     "w": 480,
     "h": 351,
-    "src": "Souness_(links)_en_Neal_(rechts)_in_duel_met_Cunningham_(Real_Madrid).jpg"
+    "src": "Souness_(links)_en_Neal_(rechts)_in_duel_met_Cunningham_(Real_Madrid).jpg",
+    "cat": "Sports"
   },
   {
     "id": "leah-williamson",
@@ -3764,7 +5107,8 @@
     "level": 4,
     "w": 427,
     "h": 600,
-    "src": "Lionesses_Victory_Parade_2025_(54687088710)_(cropped_-_Williamson).jpg"
+    "src": "Lionesses_Victory_Parade_2025_(54687088710)_(cropped_-_Williamson).jpg",
+    "cat": "Sports"
   },
   {
     "id": "linford-christie",
@@ -3772,16 +5116,26 @@
     "level": 4,
     "w": 480,
     "h": 321,
-    "src": "Linford_Christie_presenting_awards.jpg"
+    "src": "Linford_Christie_presenting_awards.jpg",
+    "cat": "Sports"
   },
-  { "id": "lise-meitner", "name": "Lise Meitner", "level": 4, "w": 459, "h": 600, "src": "Lise_Meitner_NatGeo.jpg" },
+  {
+    "id": "lise-meitner",
+    "name": "Lise Meitner",
+    "level": 4,
+    "w": 459,
+    "h": 600,
+    "src": "Lise_Meitner_NatGeo.jpg",
+    "cat": "General"
+  },
   {
     "id": "little-simz",
     "name": "Little Simz",
     "level": 4,
     "w": 365,
     "h": 600,
-    "src": "SimbiAjikawo-TIFF2025-01-Cropped.png"
+    "src": "SimbiAjikawo-TIFF2025-01-Cropped.png",
+    "cat": "Music"
   },
   {
     "id": "lucy-bronze",
@@ -3789,17 +5143,35 @@
     "level": 4,
     "w": 479,
     "h": 600,
-    "src": "20250510-Lucy_Bronze_(cropped_-_portrait).jpg"
+    "src": "20250510-Lucy_Bronze_(cropped_-_portrait).jpg",
+    "cat": "Sports"
   },
-  { "id": "mae-jemison", "name": "Mae Jemison", "level": 4, "w": 480, "h": 600, "src": "Mae_Carol_Jemison.jpg" },
-  { "id": "malorie-blackman", "name": "Malorie Blackman", "level": 4, "w": 378, "h": 600, "src": "Maloriesmall.jpg" },
+  {
+    "id": "mae-jemison",
+    "name": "Mae Jemison",
+    "level": 4,
+    "w": 480,
+    "h": 600,
+    "src": "Mae_Carol_Jemison.jpg",
+    "cat": "General"
+  },
+  {
+    "id": "malorie-blackman",
+    "name": "Malorie Blackman",
+    "level": 4,
+    "w": 378,
+    "h": 600,
+    "src": "Maloriesmall.jpg",
+    "cat": "Faith"
+  },
   {
     "id": "marta",
     "name": "Marta",
     "level": 4,
     "w": 432,
     "h": 600,
-    "src": "NC_Courage_vs_Orlando_Pride_(Jun_2024)_073_(cropped).jpg"
+    "src": "NC_Courage_vs_Orlando_Pride_(Jun_2024)_073_(cropped).jpg",
+    "cat": "Sports"
   },
   {
     "id": "mary-jackson",
@@ -3807,25 +5179,44 @@
     "level": 4,
     "w": 471,
     "h": 600,
-    "src": "Mary_Jackson_1979_Portrait_(LRC-1979-B701_P_F002-07086).jpg"
+    "src": "Mary_Jackson_1979_Portrait_(LRC-1979-B701_P_F002-07086).jpg",
+    "cat": "General"
   },
-  { "id": "mary-seacole", "name": "Mary Seacole", "level": 4, "w": 360, "h": 600, "src": "Mary_Jane_Seacole.jpeg" },
+  {
+    "id": "mary-seacole",
+    "name": "Mary Seacole",
+    "level": 4,
+    "w": 360,
+    "h": 600,
+    "src": "Mary_Jane_Seacole.jpeg",
+    "cat": "Leaders"
+  },
   {
     "id": "masai-ujiri",
     "name": "Masai Ujiri",
     "level": 4,
     "w": 480,
     "h": 540,
-    "src": "Masai_Ujiri_at_TIFF_2025_(cropped).jpg"
+    "src": "Masai_Ujiri_at_TIFF_2025_(cropped).jpg",
+    "cat": "Sports"
   },
-  { "id": "max-lucado", "name": "Max Lucado", "level": 4, "w": 404, "h": 600, "src": "Max_Lucado_-_November_2019.jpg" },
+  {
+    "id": "max-lucado",
+    "name": "Max Lucado",
+    "level": 4,
+    "w": 404,
+    "h": 600,
+    "src": "Max_Lucado_-_November_2019.jpg",
+    "cat": "Faith"
+  },
   {
     "id": "michael-essien",
     "name": "Michael Essien",
     "level": 4,
     "w": 409,
     "h": 600,
-    "src": "Chelsea_Legends_1_Inter_Forever_4_(28453496098)_(cropped).jpg"
+    "src": "Chelsea_Legends_1_Inter_Forever_4_(28453496098)_(cropped).jpg",
+    "cat": "Sports"
   },
   {
     "id": "mikel-john-obi",
@@ -3833,17 +5224,35 @@
     "level": 4,
     "w": 450,
     "h": 600,
-    "src": "Mikel_John_Obi_(53557649520)_(cropped).jpg"
+    "src": "Mikel_John_Obi_(53557649520)_(cropped).jpg",
+    "cat": "Sports"
   },
-  { "id": "miriam-makeba", "name": "Miriam Makeba", "level": 4, "w": 480, "h": 581, "src": "Miriam_makeba_01.jpg" },
-  { "id": "moshood-abiola", "name": "Moshood Abiola", "level": 4, "w": 446, "h": 600, "src": "MoshoodAbiola.jpg" },
+  {
+    "id": "miriam-makeba",
+    "name": "Miriam Makeba",
+    "level": 4,
+    "w": 480,
+    "h": 581,
+    "src": "Miriam_makeba_01.jpg",
+    "cat": "Music"
+  },
+  {
+    "id": "moshood-abiola",
+    "name": "Moshood Abiola",
+    "level": 4,
+    "w": 446,
+    "h": 600,
+    "src": "MoshoodAbiola.jpg",
+    "cat": "Leaders"
+  },
   {
     "id": "muhammadu-buhari",
     "name": "Muhammadu Buhari",
     "level": 4,
     "w": 450,
     "h": 600,
-    "src": "Muhammadu_Buhari,_President_of_the_Federal_Republic_of_Nigeria_(3x4_cropped).jpg"
+    "src": "Muhammadu_Buhari,_President_of_the_Federal_Republic_of_Nigeria_(3x4_cropped).jpg",
+    "cat": "Leaders"
   },
   {
     "id": "nana-akufo-addo",
@@ -3851,7 +5260,8 @@
     "level": 4,
     "w": 475,
     "h": 600,
-    "src": "Nana_Akufo-Addo_at_European_Development_Days_2017.jpg"
+    "src": "Nana_Akufo-Addo_at_European_Development_Days_2017.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "ngozi-okonjo-iweala",
@@ -3859,7 +5269,8 @@
     "level": 4,
     "w": 450,
     "h": 600,
-    "src": "Ngozi_Okonjo-Iweala_takes_over_as_new_WTO_Director-General,_1_March_2021_(50993534756)_(cropped).jpg"
+    "src": "Ngozi_Okonjo-Iweala_takes_over_as_new_WTO_Director-General,_1_March_2021_(50993534756)_(cropped).jpg",
+    "cat": "Leaders"
   },
   {
     "id": "ngugi-wa-thiong-o",
@@ -3867,7 +5278,8 @@
     "level": 4,
     "w": 427,
     "h": 600,
-    "src": "Ngugi_wa_Thiong'o_-_Festivaletteratura_2012.JPG"
+    "src": "Ngugi_wa_Thiong'o_-_Festivaletteratura_2012.JPG",
+    "cat": "Faith"
   },
   {
     "id": "nnedi-okorafor",
@@ -3875,7 +5287,8 @@
     "level": 4,
     "w": 427,
     "h": 600,
-    "src": "Nnedi_Okorafor_by_Gage_Skidmore.jpg"
+    "src": "Nnedi_Okorafor_by_Gage_Skidmore.jpg",
+    "cat": "Faith"
   },
   {
     "id": "nwankwo-kanu",
@@ -3883,18 +5296,44 @@
     "level": 4,
     "w": 480,
     "h": 582,
-    "src": "1_nwankwo_kanu_2017_(edited).jpg"
+    "src": "1_nwankwo_kanu_2017_(edited).jpg",
+    "cat": "Sports"
   },
-  { "id": "obafemi-awolowo", "name": "Obafemi Awolowo", "level": 4, "w": 404, "h": 600, "src": "Obafemi_Awolowo.jpg" },
-  { "id": "obafemi-martins", "name": "Obafemi Martins", "level": 4, "w": 309, "h": 600, "src": "Martins_Llevant.jpg" },
-  { "id": "odion-ighalo", "name": "Odion Ighalo", "level": 4, "w": 480, "h": 557, "src": "Odion_Ighalo_24.jpeg" },
+  {
+    "id": "obafemi-awolowo",
+    "name": "Obafemi Awolowo",
+    "level": 4,
+    "w": 404,
+    "h": 600,
+    "src": "Obafemi_Awolowo.jpg",
+    "cat": "Leaders"
+  },
+  {
+    "id": "obafemi-martins",
+    "name": "Obafemi Martins",
+    "level": 4,
+    "w": 309,
+    "h": 600,
+    "src": "Martins_Llevant.jpg",
+    "cat": "Sports"
+  },
+  {
+    "id": "odion-ighalo",
+    "name": "Odion Ighalo",
+    "level": 4,
+    "w": 480,
+    "h": 557,
+    "src": "Odion_Ighalo_24.jpeg",
+    "cat": "Sports"
+  },
   {
     "id": "olaudah-equiano",
     "name": "Olaudah Equiano",
     "level": 4,
     "w": 460,
     "h": 600,
-    "src": "Olaudah_Equiano_-_Project_Gutenberg_eText_15399_(cropped).png"
+    "src": "Olaudah_Equiano_-_Project_Gutenberg_eText_15399_(cropped).png",
+    "cat": "Leaders"
   },
   {
     "id": "oliver-kahn",
@@ -3902,36 +5341,64 @@
     "level": 4,
     "w": 480,
     "h": 480,
-    "src": "2022-07-30_Fußball,_Männer,_DFL-Supercup,_RB_Leipzig_-_FC_Bayern_München_1DX_3179_by_Stepro.jpg"
+    "src": "2022-07-30_Fußball,_Männer,_DFL-Supercup,_RB_Leipzig_-_FC_Bayern_München_1DX_3179_by_Stepro.jpg",
+    "cat": "Sports"
   },
-  { "id": "olu-jacobs", "name": "Olu Jacobs", "level": 4, "w": 441, "h": 600, "src": "OluJacobs.jpg" },
+  { "id": "olu-jacobs", "name": "Olu Jacobs", "level": 4, "w": 441, "h": 600, "src": "OluJacobs.jpg", "cat": "Screen" },
   {
     "id": "olusegun-obasanjo",
     "name": "Olusegun Obasanjo",
     "level": 4,
     "w": 330,
     "h": 451,
-    "src": "Olusegun_Obasanjo_DD-SC-07-14396-cropped.jpg"
+    "src": "Olusegun_Obasanjo_DD-SC-07-14396-cropped.jpg",
+    "cat": "Leaders"
   },
-  { "id": "omah-lay", "name": "Omah Lay", "level": 4, "w": 480, "h": 600, "src": "Omah_Lay_in_2023.jpg" },
+  {
+    "id": "omah-lay",
+    "name": "Omah Lay",
+    "level": 4,
+    "w": 480,
+    "h": 600,
+    "src": "Omah_Lay_in_2023.jpg",
+    "cat": "Music"
+  },
   {
     "id": "oral-roberts",
     "name": "Oral Roberts",
     "level": 4,
     "w": 401,
     "h": 600,
-    "src": "Young_Brown,_Jack_Moore,_William_Branham,_Oral_Roberts,_Gordon_Lindsay_Kansas_City_1948_(cropped_-_Oral_Roberts).jpg"
+    "src": "Young_Brown,_Jack_Moore,_William_Branham,_Oral_Roberts,_Gordon_Lindsay_Kansas_City_1948_(cropped_-_Oral_Roberts).jpg",
+    "cat": "Faith"
   },
-  { "id": "pete-edochie", "name": "Pete Edochie", "level": 4, "w": 480, "h": 258, "src": "Pete-edochie.jpg" },
-  { "id": "peter-obi", "name": "Peter Obi", "level": 4, "w": 431, "h": 600, "src": "Peter_Obi.png" },
-  { "id": "peter-shilton", "name": "Peter Shilton", "level": 4, "w": 464, "h": 600, "src": "Peter_Shilton.png" },
+  {
+    "id": "pete-edochie",
+    "name": "Pete Edochie",
+    "level": 4,
+    "w": 480,
+    "h": 258,
+    "src": "Pete-edochie.jpg",
+    "cat": "Screen"
+  },
+  { "id": "peter-obi", "name": "Peter Obi", "level": 4, "w": 431, "h": 600, "src": "Peter_Obi.png", "cat": "Leaders" },
+  {
+    "id": "peter-shilton",
+    "name": "Peter Shilton",
+    "level": 4,
+    "w": 464,
+    "h": 600,
+    "src": "Peter_Shilton.png",
+    "cat": "Sports"
+  },
   {
     "id": "prince-harry",
     "name": "Prince Harry",
     "level": 4,
     "w": 330,
     "h": 488,
-    "src": "Prince_Harry_launching_the_2020_Invictus_Games_(cropped).jpg"
+    "src": "Prince_Harry_launching_the_2020_Invictus_Games_(cropped).jpg",
+    "cat": "Leaders"
   },
   {
     "id": "priti-patel",
@@ -3939,7 +5406,8 @@
     "level": 4,
     "w": 450,
     "h": 600,
-    "src": "Priti_Patel_Official_Cabinet_Portrait,_September_2021_(cropped).jpg"
+    "src": "Priti_Patel_Official_Cabinet_Portrait,_September_2021_(cropped).jpg",
+    "cat": "Leaders"
   },
   {
     "id": "ralph-abernathy",
@@ -3947,7 +5415,8 @@
     "level": 4,
     "w": 450,
     "h": 600,
-    "src": "Reverend_Ralph_David_Abernathy,_head-and-shoulders_portrait,_facing_right,_speaking_at_a_National_Press_Club_luncheon,_Washington,_D.C._(3x4_cropped).jpg"
+    "src": "Reverend_Ralph_David_Abernathy,_head-and-shoulders_portrait,_facing_right,_speaking_at_a_National_Press_Club_luncheon,_Washington,_D.C._(3x4_cropped).jpg",
+    "cat": "Leaders"
   },
   {
     "id": "ramsey-nouah",
@@ -3955,7 +5424,8 @@
     "level": 4,
     "w": 480,
     "h": 424,
-    "src": "Actor_in_Gbomo_Gbomo_Express.png"
+    "src": "Actor_in_Gbomo_Gbomo_Express.png",
+    "cat": "Screen"
   },
   {
     "id": "ravi-zacharias",
@@ -3963,7 +5433,8 @@
     "level": 4,
     "w": 400,
     "h": 600,
-    "src": "Ravi_Zacharias_Preaching.jpg"
+    "src": "Ravi_Zacharias_Preaching.jpg",
+    "cat": "Faith"
   },
   {
     "id": "reinhard-bonnke",
@@ -3971,19 +5442,53 @@
     "level": 4,
     "w": 480,
     "h": 600,
-    "src": "Evangelist_Reinhard_Bonnke.jpg"
+    "src": "Evangelist_Reinhard_Bonnke.jpg",
+    "cat": "Faith"
   },
-  { "id": "rick-warren", "name": "Rick Warren", "level": 4, "w": 480, "h": 360, "src": "Rick_Warren_(2016).jpg" },
-  { "id": "robert-koch", "name": "Robert Koch", "level": 4, "w": 428, "h": 600, "src": "RobertKoch_cropped.jpg" },
-  { "id": "robert-pires", "name": "Robert Pires", "level": 4, "w": 433, "h": 600, "src": "Robert_Pires_2011.jpg" },
-  { "id": "roger-milla", "name": "Roger Milla", "level": 4, "w": 480, "h": 594, "src": "Milla2008cropped.jpg" },
+  {
+    "id": "rick-warren",
+    "name": "Rick Warren",
+    "level": 4,
+    "w": 480,
+    "h": 360,
+    "src": "Rick_Warren_(2016).jpg",
+    "cat": "Faith"
+  },
+  {
+    "id": "robert-koch",
+    "name": "Robert Koch",
+    "level": 4,
+    "w": 428,
+    "h": 600,
+    "src": "RobertKoch_cropped.jpg",
+    "cat": "General"
+  },
+  {
+    "id": "robert-pires",
+    "name": "Robert Pires",
+    "level": 4,
+    "w": 433,
+    "h": 600,
+    "src": "Robert_Pires_2011.jpg",
+    "cat": "Sports"
+  },
+  {
+    "id": "roger-milla",
+    "name": "Roger Milla",
+    "level": 4,
+    "w": 480,
+    "h": 594,
+    "src": "Milla2008cropped.jpg",
+    "cat": "Sports"
+  },
   {
     "id": "rowan-williams",
     "name": "Rowan Williams",
     "level": 4,
     "w": 480,
     "h": 582,
-    "src": "Rowan_Williams_-001b.jpg"
+    "src": "Rowan_Williams_-001b.jpg",
+    "cat": "Faith"
   },
   {
     "id": "samora-machel",
@@ -3991,7 +5496,8 @@
     "level": 4,
     "w": 455,
     "h": 600,
-    "src": "Samora_Moises_Machel_detail_DF-SC-88-01383.jpg"
+    "src": "Samora_Moises_Machel_detail_DF-SC-88-01383.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "samuel-chukwueze",
@@ -3999,7 +5505,8 @@
     "level": 4,
     "w": 324,
     "h": 600,
-    "src": "Samuel_Chukwueze_01112025_(1).jpg"
+    "src": "Samuel_Chukwueze_01112025_(1).jpg",
+    "cat": "Sports"
   },
   {
     "id": "samuel-peter",
@@ -4007,7 +5514,8 @@
     "level": 4,
     "w": 356,
     "h": 600,
-    "src": "Samuel_Peter_(while_boxing_vs._Jameel_McCline,_2007).jpg"
+    "src": "Samuel_Peter_(while_boxing_vs._Jameel_McCline,_2007).jpg",
+    "cat": "Sports"
   },
   {
     "id": "shelly-ann-fraser-pryce",
@@ -4015,7 +5523,8 @@
     "level": 4,
     "w": 375,
     "h": 600,
-    "src": "Women's_100_m-_Beijing_2015.jpg"
+    "src": "Women's_100_m-_Beijing_2015.jpg",
+    "cat": "Sports"
   },
   {
     "id": "smith-wigglesworth",
@@ -4023,7 +5532,8 @@
     "level": 4,
     "w": 479,
     "h": 600,
-    "src": "Smith_Wigglesworth_preaching.jpg"
+    "src": "Smith_Wigglesworth_preaching.jpg",
+    "cat": "Faith"
   },
   {
     "id": "sol-campbell",
@@ -4031,34 +5541,62 @@
     "level": 4,
     "w": 450,
     "h": 600,
-    "src": "Sol_Campbell_(54921202604)_(cropped).jpg"
+    "src": "Sol_Campbell_(54921202604)_(cropped).jpg",
+    "cat": "Sports"
   },
-  { "id": "t-d-jakes", "name": "T. D. Jakes", "level": 4, "w": 330, "h": 495, "src": "Mr._T.D._Jakes.jpg" },
+  {
+    "id": "t-d-jakes",
+    "name": "T. D. Jakes",
+    "level": 4,
+    "w": 330,
+    "h": 495,
+    "src": "Mr._T.D._Jakes.jpg",
+    "cat": "Faith"
+  },
   {
     "id": "ta-nehisi-coates",
     "name": "Ta-Nehisi Coates",
     "level": 4,
     "w": 450,
     "h": 600,
-    "src": "Ta-Nehisi_Coates_at_the_2025_Edinburgh_International_Book_Festival-21_(cropped).jpg"
+    "src": "Ta-Nehisi_Coates_at_the_2025_Edinburgh_International_Book_Festival-21_(cropped).jpg",
+    "cat": "Faith"
   },
-  { "id": "thabo-mbeki", "name": "Thabo Mbeki", "level": 4, "w": 452, "h": 600, "src": "Thabo_Mbeki,_August_2023.jpg" },
+  {
+    "id": "thabo-mbeki",
+    "name": "Thabo Mbeki",
+    "level": 4,
+    "w": 452,
+    "h": 600,
+    "src": "Thabo_Mbeki,_August_2023.jpg",
+    "cat": "Leaders"
+  },
   {
     "id": "tiwa-savage",
     "name": "Tiwa Savage",
     "level": 4,
     "w": 400,
     "h": 600,
-    "src": "Tiwa_Savage's_studio_portrait.jpg"
+    "src": "Tiwa_Savage's_studio_portrait.jpg",
+    "cat": "Music"
   },
-  { "id": "tomi-adeyemi", "name": "Tomi Adeyemi", "level": 4, "w": 400, "h": 600, "src": "NBF2024-tomi-adeyemi.jpg" },
+  {
+    "id": "tomi-adeyemi",
+    "name": "Tomi Adeyemi",
+    "level": 4,
+    "w": 400,
+    "h": 600,
+    "src": "NBF2024-tomi-adeyemi.jpg",
+    "cat": "Faith"
+  },
   {
     "id": "tony-allen",
     "name": "Tony Allen",
     "level": 4,
     "w": 480,
     "h": 480,
-    "src": "Tony_Allen_med_band_cropped_(231308).jpg"
+    "src": "Tony_Allen_med_band_cropped_(231308).jpg",
+    "cat": "Music"
   },
   {
     "id": "tony-elumelu",
@@ -4066,18 +5604,44 @@
     "level": 4,
     "w": 480,
     "h": 437,
-    "src": "Reception_for_African_Innovators_as_Part_of_the_U.S.-Africa_Leaders_Summit_(52560567420)_(cropped).jpg"
+    "src": "Reception_for_African_Innovators_as_Part_of_the_U.S.-Africa_Leaders_Summit_(52560567420)_(cropped).jpg",
+    "cat": "General"
   },
-  { "id": "uhuru-kenyatta", "name": "Uhuru Kenyatta", "level": 4, "w": 480, "h": 536, "src": "Uhuru_Kenyatta.png" },
-  { "id": "victor-moses", "name": "Victor Moses", "level": 4, "w": 480, "h": 595, "src": "Victor_Moses_(SPA-AKH).jpg" },
-  { "id": "watchman-nee", "name": "Watchman Nee", "level": 4, "w": 460, "h": 600, "src": "WatchmanNee.jpg" },
+  {
+    "id": "uhuru-kenyatta",
+    "name": "Uhuru Kenyatta",
+    "level": 4,
+    "w": 480,
+    "h": 536,
+    "src": "Uhuru_Kenyatta.png",
+    "cat": "Leaders"
+  },
+  {
+    "id": "victor-moses",
+    "name": "Victor Moses",
+    "level": 4,
+    "w": 480,
+    "h": 595,
+    "src": "Victor_Moses_(SPA-AKH).jpg",
+    "cat": "Sports"
+  },
+  {
+    "id": "watchman-nee",
+    "name": "Watchman Nee",
+    "level": 4,
+    "w": 460,
+    "h": 600,
+    "src": "WatchmanNee.jpg",
+    "cat": "Faith"
+  },
   {
     "id": "wilfred-ndidi",
     "name": "Wilfred Ndidi",
     "level": 4,
     "w": 480,
     "h": 517,
-    "src": "Wilfred_Ndidi-Nigeria.jpg"
+    "src": "Wilfred_Ndidi-Nigeria.jpg",
+    "cat": "Sports"
   },
   {
     "id": "winnie-madikizela-mandela",
@@ -4085,7 +5649,8 @@
     "level": 4,
     "w": 400,
     "h": 600,
-    "src": "Winnie_Mandela.jpg"
+    "src": "Winnie_Mandela.jpg",
+    "cat": "Leaders"
   },
   {
     "id": "wizkid",
@@ -4093,7 +5658,8 @@
     "level": 4,
     "w": 480,
     "h": 480,
-    "src": "Artworks-UWHjOik17qMFy0Sb-64tibA-t500x500.jpg"
+    "src": "Artworks-UWHjOik17qMFy0Sb-64tibA-t500x500.jpg",
+    "cat": "Music"
   },
   {
     "id": "wole-soyinka",
@@ -4101,7 +5667,8 @@
     "level": 4,
     "w": 330,
     "h": 439,
-    "src": "Wole_Soyinka_in_2018_(3x4_cropped).jpg"
+    "src": "Wole_Soyinka_in_2018_(3x4_cropped).jpg",
+    "cat": "Faith"
   },
   {
     "id": "yakubu-gowon",
@@ -4109,7 +5676,8 @@
     "level": 4,
     "w": 456,
     "h": 600,
-    "src": "Gen._Yakubu_Gowon_GCFR_(cropped).jpg"
+    "src": "Gen._Yakubu_Gowon_GCFR_(cropped).jpg",
+    "cat": "Leaders"
   },
   {
     "id": "yemi-osinbajo",
@@ -4117,6 +5685,7 @@
     "level": 4,
     "w": 452,
     "h": 600,
-    "src": "Yemi_Osinbajo_2017-05-27.jpg"
+    "src": "Yemi_Osinbajo_2017-05-27.jpg",
+    "cat": "Leaders"
   }
 ]
