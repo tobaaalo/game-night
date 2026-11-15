@@ -804,3 +804,17 @@ html[data-text="large"] {
   height: 1.5rem;
   accent-color: var(--buzzer);
 }
+
+/* Very narrow phones (iPhone SE, small Androids) */
+@media (max-width: 360px) {
+  .topbar .wrap {
+    gap: var(--s2);
+  }
+  .brand {
+    font-size: var(--step-1);
+  }
+  .who-pill {
+    padding: 4px 8px;
+    gap: 4px;
+  }
+}

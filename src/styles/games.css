@@ -1716,7 +1716,17 @@
 .memcard.won { opacity: 0.55; }
 .memcard img { width: 100%; height: 100%; object-fit: cover; }
 .drawpad { width: 100%; max-width: 420px; aspect-ratio: 1; margin: 0 auto; background: #fff; border-radius: 14px; border: 2px solid var(--line, #0003); }
-.ink { width: 30px; height: 30px; border-radius: 50%; border: 3px solid transparent; }
+.ink { width: 44px; height: 44px; border-radius: 50%; border: 3px solid transparent; background-clip: padding-box; }
 .ink.on { border-color: var(--accent, #e8a21a); }
 .bingo-cell, .memcard, .memcard.up { color: #2a0a14; }
 .bingo-cell span, .memcard span { color: inherit; }
+
+.bingo-cell { min-height: 84px; font-size: 0.9rem; }
+.memcard { font-size: 0.85rem; min-height: 64px; }
+.drawpad { max-height: 52vh; }
+.qcard input.input { font-size: 16px; min-height: 48px; }
+@media (max-width: 360px) {
+  .bingo { gap: 6px; }
+  .bingo-cell { font-size: 0.8rem; padding: 4px; }
+  .memgrid { gap: 6px; }
+}
