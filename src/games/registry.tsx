@@ -42,6 +42,8 @@ import {
 } from "./generators";
 import { QuizRun, Setup, type Field, type SetupValues } from "./quiz";
 import { CardDeck, KnowMe, NPAT, RevealRun, TimedRun, type RevealItem } from "./party";
+import { BucketList, CharadesBingo, DrawGuess, MemoryMatch, WordChain } from "./extra";
+import { DRAWWORDS } from "../content";
 import { loadCustom, customToGame } from "../lib/custom";
 
 export type Section = "pictures" | "quiz" | "talk" | "party" | "yours";
@@ -282,6 +284,76 @@ const realFields: Field[] = [
 ];
 
 const num = (v: unknown) => Number(v);
+
+const timeField = (key: string, legend: string, opts: [number, string][], def: number): Field => ({
+  key,
+  legend,
+  options: opts.map(([value, label]) => ({ value, label })),
+  def,
+});
+const EMOJI_PAIRS: [string, string][] = [
+  ["🐘", "Elephant"],
+  ["🚀", "Rocket"],
+  ["🍕", "Pizza"],
+  ["🌋", "Volcano"],
+  ["🎸", "Guitar"],
+  ["⚽", "Football"],
+  ["🦁", "Lion"],
+  ["🏰", "Castle"],
+  ["🚲", "Bicycle"],
+  ["🌈", "Rainbow"],
+  ["🍌", "Banana"],
+  ["🔑", "Key"],
+  ["🐢", "Tortoise"],
+  ["🎂", "Cake"],
+  ["🌙", "Moon"],
+  ["🚂", "Train"],
+];
+const matchFields: Field[] = [
+  {
+    key: "theme",
+    legend: "Match a picture to its name",
+    options: [
+      { value: "faces", label: "Famous faces" },
+      { value: "sports", label: "Sports stars" },
+      { value: "flags", label: "Flags" },
+      { value: "emoji", label: "Emoji" },
+    ],
+    def: "flags",
+  },
+  timeField(
+    "pairs",
+    "How many pairs",
+    [
+      [4, "4"],
+      [6, "6"],
+      [8, "8"],
+    ],
+    6,
+  ),
+  levelField(1, RULES.faces),
+];
+async function matchPairs(v: SetupValues): Promise<[string, string | undefined, string][]> {
+  const n = num(v.pairs);
+  const lv = num(v.level);
+  switch (v.theme) {
+    case "faces":
+      return drawMany("match-faces", facePool(lv), n).map((f) => [f.name, `/faces/${f.id}.jpg`, f.name]);
+    case "sports":
+      return drawMany("match-sports", athletePool(lv), n).map((f) => [f.name, `/faces/${f.id}.jpg`, f.name]);
+    case "flags": {
+      const w = await loadWorld();
+      const pool = w.countries.filter((c) => !lv || c.lv === lv);
+      return drawMany("match-flags", pool.length >= n ? pool : w.countries, n).map((c) => [
+        c.n,
+        `/flags/${c.c}.svg`,
+        c.n,
+      ]);
+    }
+    default:
+      return drawMany("match-emoji", EMOJI_PAIRS, n).map(([e, t]) => [e, undefined, t]);
+  }
+}
 
 const simpleFields = (rules: Record<number, string>): Field[] => [levelField(1, rules), countField()];
 const quizSetup = (v: SetupValues) => ({ level: num(v.level), count: num(v.count) });
@@ -567,6 +639,124 @@ export const GAMES: GameDef[] = [
     scores: false,
     stat: "Fingers down",
     Play: () => <CardDeck id="nhie" items={NHIE} format={(x) => "Never have I ever " + x} />,
+  },
+  {
+    id: "bingo",
+    name: "Charades Bingo",
+    blurb: "Act out squares to claim a line.",
+    how: "A 3x3 card of things to act out. On your turn, pick a square and act it out without speaking. If the others guess it before time runs out, the square is yours. Three in a row wins bonus points.",
+    section: "party",
+    groups: ["couple", "friends"],
+    stat: "Three in a row",
+    Play: () => (
+      <SetupThen
+        id="bingo"
+        fields={[
+          timeField(
+            "sec",
+            "Time to act",
+            [
+              [90, "Easy, 90s"],
+              [60, "Normal, 60s"],
+              [30, "Hard, 30s"],
+            ],
+            60,
+          ),
+        ]}
+        build={(v) => ({ sec: num(v.sec) })}
+        run={(d, again) => <CharadesBingo seconds={d.sec} onAgain={again} />}
+      />
+    ),
+  },
+  {
+    id: "wordchain",
+    name: "Word Chain",
+    blurb: "Start your word with the last letter.",
+    how: "Say a word that starts with the last letter of the previous word. Type it in to lock it. No repeats. Run out of time and you are out. In a group the last player standing wins; alone, build the longest chain.",
+    section: "party",
+    groups: ["couple", "friends"],
+    stat: "Beat the clock",
+    Play: () => (
+      <SetupThen
+        id="wordchain"
+        fields={[
+          timeField(
+            "sec",
+            "Time per word",
+            [
+              [15, "Easy, 15s"],
+              [10, "Normal, 10s"],
+              [6, "Hard, 6s"],
+            ],
+            10,
+          ),
+        ]}
+        build={(v) => ({ sec: num(v.sec) })}
+        run={(d, again) => <WordChain seconds={d.sec} onAgain={again} />}
+      />
+    ),
+  },
+  {
+    id: "match",
+    name: "Memory Match",
+    blurb: "Match each picture to its name.",
+    how: "Flip two cards. If a picture and its name match, you keep them and go again. If not, they flip back and the next player goes. Most pairs wins.",
+    section: "pictures",
+    groups: ["couple", "friends"],
+    stat: "Find the pairs",
+    Play: () => (
+      <SetupThen
+        id="match"
+        fields={matchFields}
+        build={matchPairs}
+        run={(pairs, again) => <MemoryMatch pairs={pairs} onAgain={again} />}
+      />
+    ),
+  },
+  {
+    id: "draw",
+    name: "Draw and Guess",
+    blurb: "Sketch it on the screen. Others guess.",
+    how: "The drawer taps to see a secret word, then draws it with a finger. No letters or numbers. Everyone else shouts guesses. Whoever guesses right scores a point and so does the drawer.",
+    section: "party",
+    groups: ["couple", "friends"],
+    stat: "Draw on the phone",
+    Play: () => (
+      <SetupThen
+        id="draw"
+        fields={[
+          levelField(1, RULES.emoji),
+          timeField(
+            "sec",
+            "Time to draw",
+            [
+              [90, "90s"],
+              [60, "60s"],
+              [30, "30s"],
+            ],
+            60,
+          ),
+        ]}
+        build={(v) => ({ lv: num(v.level), sec: num(v.sec) })}
+        run={(d, again) => (
+          <DrawGuess words={DRAWWORDS.filter((w) => !d.lv || w[0] === d.lv)} seconds={d.sec} onAgain={again} />
+        )}
+      />
+    ),
+  },
+  {
+    id: "bucket",
+    name: "Couples Bucket List",
+    blurb: "Vote in secret and find what you both want.",
+    how: "Each of you secretly votes Yes, Maybe or Not for me on 12 ideas, passing the phone between you. The app shows what you both said yes to, and you can save those to your own list and tick them off.",
+    section: "talk",
+    groups: ["couple"],
+    scores: false,
+    stat: "Dreams in common",
+    Play: () => {
+      const [k, setK] = useState(0);
+      return <BucketList key={k} onAgain={() => setK((x) => x + 1)} />;
+    },
   },
   {
     id: "proverbs",

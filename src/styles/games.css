@@ -1703,3 +1703,20 @@
 .make-strip {
   padding: var(--s4);
 }
+
+/* Extra games */
+.bingo { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.bingo-cell { min-height: 78px; padding: 6px; border-radius: 12px; border: 2px solid var(--line, #0003); background: var(--card, #fff); font-size: 0.82rem; line-height: 1.15; }
+.bingo-cell.taken { background: var(--accent, #e8a21a); font-weight: 800; }
+.bingo-cell.now { outline: 3px solid var(--accent, #e8a21a); }
+.memgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.memgrid.big { grid-template-columns: repeat(4, 1fr); }
+.memcard { aspect-ratio: 3 / 4; border-radius: 12px; border: 2px solid var(--line, #0003); background: var(--accent, #e8a21a); font-size: 0.78rem; font-weight: 700; display: grid; place-items: center; padding: 4px; overflow: hidden; line-height: 1.1; }
+.memcard.up { background: var(--card, #fff); }
+.memcard.won { opacity: 0.55; }
+.memcard img { width: 100%; height: 100%; object-fit: cover; }
+.drawpad { width: 100%; max-width: 420px; aspect-ratio: 1; margin: 0 auto; background: #fff; border-radius: 14px; border: 2px solid var(--line, #0003); }
+.ink { width: 30px; height: 30px; border-radius: 50%; border: 3px solid transparent; }
+.ink.on { border-color: var(--accent, #e8a21a); }
+.bingo-cell, .memcard, .memcard.up { color: #2a0a14; }
+.bingo-cell span, .memcard span { color: inherit; }

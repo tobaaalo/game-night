@@ -21,6 +21,9 @@ import higherlower from "./higherlower.json";
 import oddone from "./oddone.json";
 import years from "./years.json";
 import nhie from "./nhie.json";
+import bingo from "./bingo.json";
+import drawwords from "./drawwords.json";
+import bucket from "./bucket.json";
 
 export type Level = 1 | 2 | 3 | 4;
 /** [level, question, [rightAnswer, ...wrong]] */
@@ -157,3 +160,8 @@ export const ODDONE = oddone as [number, string[], string, string][];
 /** [level, event, year] */
 export const YEARS = years as [number, string, number][];
 export const NHIE = nhie as string[];
+export const BINGO = [...(charades as string[]), ...(bingo as string[])];
+/** [level, word] */
+export const DRAWWORDS = drawwords as [number, string][];
+/** [category, idea] */
+export const BUCKET = bucket as [string, string][];

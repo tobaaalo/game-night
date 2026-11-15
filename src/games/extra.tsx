@@ -1,0 +1,595 @@
+import { useEffect, useRef, useState } from "react";
+import clsx from "clsx";
+import { TimerDial, WhoGotIt, useCountdown } from "../components/ui";
+import { nameOf, useApp } from "../lib/app";
+import { draw, drawFresh, shuffle } from "../lib/deck";
+import { load, save } from "../lib/store";
+import { BINGO, BUCKET } from "../content";
+import { Finish, Img } from "./frame";
+
+function Clock({ seconds, onEnd }: { seconds: number; onEnd: () => void }) {
+  const [left] = useCountdown(seconds, true, onEnd);
+  return <TimerDial left={left} total={seconds} />;
+}
+
+/* ---------- Charades Bingo ---------- */
+const LINES = [
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+  [0, 3, 6],
+  [1, 4, 7],
+  [2, 5, 8],
+  [0, 4, 8],
+  [2, 4, 6],
+];
+
+export function CharadesBingo({ seconds, onAgain }: { seconds: number; onAgain: () => void }) {
+  const { players, award } = useApp();
+  const [cells] = useState(() => drawFresh("bingo", BINGO, 9));
+  const [owner, setOwner] = useState<(string | null)[]>(() => Array<string | null>(9).fill(null));
+  const [turn, setTurn] = useState(0);
+  const [acting, setActing] = useState<number | null>(null);
+  const [winner, setWinner] = useState<string | null>(null);
+  const cur = players[turn % players.length];
+  const full = owner.every(Boolean);
+  const idxOf = (id: string) => players.findIndex((p) => p.id === id);
+  const next = () => {
+    setActing(null);
+    setTurn((t) => t + 1);
+  };
+  const got = () => {
+    if (acting === null) return;
+    const o = owner.slice();
+    o[acting] = cur.id;
+    setOwner(o);
+    award(cur.id, 1);
+    if (LINES.some((l) => l.every((i) => o[i] === cur.id))) {
+      award(cur.id, 3);
+      setWinner(cur.id);
+      setActing(null);
+    } else next();
+  };
+  if (winner || full) {
+    const w = winner ? players[idxOf(winner)] : null;
+    return (
+      <div className="qcard stack center-text">
+        <p className="h3">
+          {w ? `${nameOf(w, idxOf(w.id))} got a line! +3 bonus points` : "Board full. No line this time."}
+        </p>
+        <Finish onAgain={onAgain} />
+      </div>
+    );
+  }
+  return (
+    <div className="qcard stack">
+      <p className="turn">{nameOf(cur, turn % players.length)}, pick a square to act</p>
+      <div className="bingo">
+        {cells.map((c, i) => {
+          const o = owner[i];
+          return (
+            <button
+              key={c}
+              className={clsx("bingo-cell", o && "taken", acting === i && "now")}
+              disabled={!!o || acting !== null}
+              onClick={() => setActing(i)}
+            >
+              {o ? <b>{nameOf(players[idxOf(o)], idxOf(o)).slice(0, 2)}</b> : <span>{c}</span>}
+            </button>
+          );
+        })}
+      </div>
+      {acting !== null && (
+        <div className="stack center-text">
+          <Clock key={acting} seconds={seconds} onEnd={() => undefined} />
+          <p className="h3">Act: {cells[acting]}</p>
+          <div className="actions center">
+            <button className="btn" onClick={got}>
+              Guessed
+            </button>
+            <button className="btn ghost" onClick={next}>
+              Missed
+            </button>
+          </div>
+        </div>
+      )}
+      <p className="hint center-text">Get three in a row to win. Miss and the next player goes.</p>
+    </div>
+  );
+}
+
+/* ---------- Word Chain ---------- */
+const STARTS = [
+  "apple",
+  "river",
+  "table",
+  "music",
+  "orange",
+  "garden",
+  "island",
+  "window",
+  "ladder",
+  "mirror",
+  "pepper",
+  "sunset",
+  "nature",
+  "engine",
+  "market",
+];
+
+export function WordChain({ seconds, onAgain }: { seconds: number; onAgain: () => void }) {
+  const { players, award } = useApp();
+  const [start] = useState(() => draw("chainstart", STARTS));
+  const [chain, setChain] = useState<string[]>([start]);
+  const [out, setOut] = useState<string[]>([]);
+  const [turn, setTurn] = useState(0);
+  const [text, setText] = useState("");
+  const [err, setErr] = useState("");
+  const [done, setDone] = useState(false);
+  const alive = players.filter((p) => !out.includes(p.id));
+  const solo = players.length < 2;
+  const cur = alive.length ? alive[turn % alive.length] : players[0];
+  const last = chain[chain.length - 1];
+  function knockOut() {
+    if (solo) {
+      setDone(true);
+      return;
+    }
+    const nowOut = [...out, cur.id];
+    setOut(nowOut);
+    const rest = players.filter((p) => !nowOut.includes(p.id));
+    if (rest.length <= 1) {
+      if (rest[0]) award(rest[0].id, 2);
+      setDone(true);
+    }
+  }
+  const submit = () => {
+    const w = text.trim().toLowerCase();
+    if (w.length < 2) return;
+    if (w[0] !== last[last.length - 1]) return setErr(`It must start with “${last[last.length - 1].toUpperCase()}”.`);
+    if (chain.includes(w)) return setErr("That word has been used.");
+    setErr("");
+    setChain([...chain, w]);
+    setText("");
+    setTurn((t) => t + 1);
+  };
+  if (done)
+    return (
+      <div className="qcard stack center-text">
+        <p className="h3">
+          {solo
+            ? `Chain of ${chain.length - 1} words`
+            : `${nameOf(
+                alive[0] ?? cur,
+                players.findIndex((p) => p.id === (alive[0] ?? cur).id),
+              )} wins! +2 points`}
+        </p>
+        <p className="hint">{chain.join(" → ")}</p>
+        <Finish onAgain={onAgain} />
+      </div>
+    );
+  return (
+    <div className="qcard stack center-text">
+      {!solo && (
+        <p className="turn">
+          {nameOf(
+            cur,
+            players.findIndex((p) => p.id === cur.id),
+          )}
+          &rsquo;s turn
+        </p>
+      )}
+      <Clock key={`${chain.length}-${out.length}`} seconds={seconds} onEnd={knockOut} />
+      <p className="bigtext">{last}</p>
+      <p className="hint">Say a word starting with “{last[last.length - 1].toUpperCase()}”. Type it to lock it in.</p>
+      <form
+        className="stack"
+        onSubmit={(e) => {
+          e.preventDefault();
+          submit();
+        }}
+      >
+        <input
+          className="input"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          autoCapitalize="none"
+          autoComplete="off"
+          aria-label="Your word"
+        />
+        {err && (
+          <p className="error-text" role="alert">
+            {err}
+          </p>
+        )}
+        <button className="btn" type="submit">
+          Lock it in
+        </button>
+      </form>
+      <p className="hint">Words so far: {chain.length - 1}. No repeats. Run out of time and you are out.</p>
+    </div>
+  );
+}
+
+/* ---------- Memory Match ---------- */
+export interface MatchCard {
+  id: string;
+  pair: number;
+  img?: string;
+  text?: string;
+}
+
+export function MemoryMatch({
+  pairs,
+  onAgain,
+}: {
+  pairs: [string, string | undefined, string][];
+  onAgain: () => void;
+}) {
+  const { players, award } = useApp();
+  const [cards] = useState<MatchCard[]>(() =>
+    shuffle(
+      pairs.flatMap(([key, img, text], i) => [
+        { id: `${key}-a`, pair: i, img, text: img ? undefined : key },
+        { id: `${key}-b`, pair: i, text },
+      ]),
+    ),
+  );
+  const [open, setOpen] = useState<number[]>([]);
+  const [found, setFound] = useState<number[]>([]);
+  const [turn, setTurn] = useState(0);
+  const [moves, setMoves] = useState(0);
+  const lock = useRef(false);
+  const cur = players[turn % players.length];
+  const finished = found.length === pairs.length;
+  const flip = (i: number) => {
+    if (lock.current || open.includes(i) || found.includes(cards[i].pair)) return;
+    const o = [...open, i];
+    setOpen(o);
+    if (o.length < 2) return;
+    setMoves((m) => m + 1);
+    lock.current = true;
+    const hit = cards[o[0]].pair === cards[o[1]].pair;
+    setTimeout(() => {
+      if (hit) {
+        setFound((f) => [...f, cards[o[0]].pair]);
+        award(cur.id, 1);
+      } else setTurn((t) => t + 1);
+      setOpen([]);
+      lock.current = false;
+    }, 900);
+  };
+  useEffect(() => () => void (lock.current = false), []);
+  if (finished)
+    return (
+      <div className="qcard stack center-text">
+        <p className="h3">All pairs found in {moves} moves</p>
+        <Finish onAgain={onAgain} />
+      </div>
+    );
+  return (
+    <div className="qcard stack">
+      <p className="turn">
+        {nameOf(cur, turn % players.length)}&rsquo;s turn · {moves} {moves === 1 ? "move" : "moves"}
+      </p>
+      <div className={clsx("memgrid", cards.length > 12 && "big")}>
+        {cards.map((c, i) => {
+          const up = open.includes(i) || found.includes(c.pair);
+          return (
+            <button
+              key={c.id}
+              className={clsx("memcard", up && "up", found.includes(c.pair) && "won")}
+              onClick={() => flip(i)}
+              aria-label={up ? (c.text ?? "Picture") : "Hidden card"}
+            >
+              {up ? c.img ? <Img src={c.img} alt="Card" square /> : <span>{c.text}</span> : <span>?</span>}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+/* ---------- Draw and Guess ---------- */
+const INKS = ["#1b1b1b", "#d0312d", "#1d6fd1", "#2e8b3d"];
+
+export function DrawGuess({
+  words,
+  seconds,
+  onAgain,
+}: {
+  words: [number, string][];
+  seconds: number;
+  onAgain: () => void;
+}) {
+  const { players, award } = useApp();
+  const [turn, setTurn] = useState(0);
+  const [phase, setPhase] = useState<"ready" | "peek" | "draw" | "judge">("ready");
+  const [word, setWord] = useState<[number, string]>(() => draw("drawwords", words));
+  const [ink, setInk] = useState(INKS[0]);
+  const cv = useRef<HTMLCanvasElement>(null);
+  const strokes = useRef<{ c: string; p: [number, number][] }[]>([]);
+  const cur = players[turn % players.length];
+  const redraw = () => {
+    const c = cv.current;
+    const g = c?.getContext("2d");
+    if (!c || !g) return;
+    g.clearRect(0, 0, c.width, c.height);
+    g.lineWidth = 5;
+    g.lineCap = "round";
+    g.lineJoin = "round";
+    for (const s of strokes.current) {
+      g.strokeStyle = s.c;
+      g.beginPath();
+      s.p.forEach(([x, y], i) => (i ? g.lineTo(x, y) : g.moveTo(x, y)));
+      if (s.p.length === 1) g.lineTo(s.p[0][0] + 0.1, s.p[0][1]);
+      g.stroke();
+    }
+  };
+  const pt = (e: React.PointerEvent<HTMLCanvasElement>): [number, number] => {
+    const r = e.currentTarget.getBoundingClientRect();
+    return [((e.clientX - r.left) / r.width) * 600, ((e.clientY - r.top) / r.height) * 600];
+  };
+  const down = (e: React.PointerEvent<HTMLCanvasElement>) => {
+    e.currentTarget.setPointerCapture(e.pointerId);
+    strokes.current.push({ c: ink, p: [pt(e)] });
+    redraw();
+  };
+  const move = (e: React.PointerEvent<HTMLCanvasElement>) => {
+    if (e.buttons === 0 && e.pointerType === "mouse") return;
+    const s = strokes.current[strokes.current.length - 1];
+    if (!s || !e.currentTarget.hasPointerCapture(e.pointerId)) return;
+    s.p.push(pt(e));
+    redraw();
+  };
+  const nextRound = () => {
+    strokes.current = [];
+    setWord(draw("drawwords", words));
+    setTurn((t) => t + 1);
+    setPhase("ready");
+  };
+  const [rounds, setRounds] = useState(0);
+  if (rounds >= Math.max(2, players.length) * 2 && phase === "ready")
+    return (
+      <div className="qcard stack center-text">
+        <p className="h3">That&rsquo;s {rounds} drawings. Nicely done.</p>
+        <Finish onAgain={onAgain} />
+      </div>
+    );
+  return (
+    <div className="qcard stack center-text">
+      <p className="turn">{nameOf(cur, turn % players.length)} draws</p>
+      {phase === "ready" && (
+        <>
+          <p className="hint">Only the drawer should look. Everyone else, eyes away!</p>
+          <button className="btn" onClick={() => setPhase("peek")}>
+            Show me the word
+          </button>
+        </>
+      )}
+      {phase === "peek" && (
+        <>
+          <p className="bigtext">{word[1]}</p>
+          <p className="hint">Draw it without writing letters or numbers.</p>
+          <button className="btn" onClick={() => setPhase("draw")}>
+            Start drawing
+          </button>
+        </>
+      )}
+      {(phase === "draw" || phase === "judge") && (
+        <>
+          {phase === "draw" && <Clock key={turn} seconds={seconds} onEnd={() => setPhase("judge")} />}
+          <canvas
+            ref={cv}
+            width={600}
+            height={600}
+            className="drawpad"
+            style={{ touchAction: "none" }}
+            onPointerDown={phase === "draw" ? down : undefined}
+            onPointerMove={phase === "draw" ? move : undefined}
+          />
+          {phase === "draw" ? (
+            <div className="actions center">
+              {INKS.map((c) => (
+                <button
+                  key={c}
+                  className={clsx("ink", ink === c && "on")}
+                  style={{ background: c }}
+                  onClick={() => setInk(c)}
+                  aria-label={`Pen colour ${c}`}
+                />
+              ))}
+              <button
+                className="btn ghost small"
+                onClick={() => {
+                  strokes.current.pop();
+                  redraw();
+                }}
+              >
+                Undo
+              </button>
+              <button className="btn small" onClick={() => setPhase("judge")}>
+                Guessed
+              </button>
+            </div>
+          ) : (
+            <>
+              <p className="h3">It was “{word[1]}”</p>
+              <WhoGotIt
+                label="Who guessed it?"
+                points={1}
+                exclude={cur.id}
+                onDone={(ids) => {
+                  ids.forEach((id) => award(id, 1));
+                  if (ids.length) award(cur.id, 1);
+                  setRounds((r) => r + 1);
+                  nextRound();
+                }}
+              />
+            </>
+          )}
+        </>
+      )}
+    </div>
+  );
+}
+
+/* ---------- Couples Bucket List ---------- */
+type Vote = "yes" | "maybe" | "no";
+interface Saved {
+  text: string;
+  done: boolean;
+}
+
+export function BucketList({ onAgain }: { onAgain: () => void }) {
+  const { players } = useApp();
+  const [mode, setMode] = useState<"menu" | "a" | "b" | "result" | "list">("menu");
+  const [ideas, setIdeas] = useState<[string, string][]>([]);
+  const [votes, setVotes] = useState<[Vote[], Vote[]]>([[], []]);
+  const [saved, setSaved] = useState<Saved[]>(() => load<Saved[]>("gn.bucket", []));
+  const [added, setAdded] = useState("");
+  const n1 = players[0] ? nameOf(players[0], 0) : "Person 1";
+  const n2 = players[1] ? nameOf(players[1], 1) : "Person 2";
+  const persist = (s: Saved[]) => {
+    setSaved(s);
+    save("gn.bucket", s);
+  };
+  const begin = () => {
+    setIdeas(drawFresh("bucket", BUCKET, 12));
+    setVotes([[], []]);
+    setMode("a");
+  };
+  const cast = (who: 0 | 1, v: Vote) => {
+    const next: [Vote[], Vote[]] = [votes[0], votes[1]];
+    next[who] = [...next[who], v];
+    setVotes(next);
+    if (next[who].length >= ideas.length) setMode(who === 0 ? "b" : "result");
+  };
+  if (mode === "menu" || mode === "list")
+    return (
+      <div className="qcard stack center-text">
+        {mode === "menu" ? (
+          <>
+            <p className="h3">Build your bucket list</p>
+            <p className="hint">Each of you secretly votes on 12 ideas. We show what you both want.</p>
+            <button className="btn" onClick={begin}>
+              New round
+            </button>
+            <button className="btn ghost" onClick={() => setMode("list")}>
+              Our list ({saved.length})
+            </button>
+          </>
+        ) : (
+          <>
+            <p className="h3">Our list</p>
+            {saved.length === 0 && <p className="hint">Nothing here yet. Play a round and save your matches.</p>}
+            <ul className="stack" style={{ textAlign: "left", listStyle: "none", padding: 0 }}>
+              {saved.map((s, i) => (
+                <li key={s.text}>
+                  <label>
+                    <input
+                      type="checkbox"
+                      checked={s.done}
+                      onChange={() => persist(saved.map((x, j) => (j === i ? { ...x, done: !x.done } : x)))}
+                    />{" "}
+                    <span style={{ textDecoration: s.done ? "line-through" : "none" }}>{s.text}</span>
+                  </label>
+                </li>
+              ))}
+            </ul>
+            <form
+              className="stack"
+              onSubmit={(e) => {
+                e.preventDefault();
+                const t = added.trim();
+                if (t && !saved.some((s) => s.text === t)) persist([...saved, { text: t, done: false }]);
+                setAdded("");
+              }}
+            >
+              <input
+                className="input"
+                value={added}
+                onChange={(e) => setAdded(e.target.value)}
+                placeholder="Add your own idea"
+              />
+              <button className="btn small" type="submit">
+                Add
+              </button>
+            </form>
+            <button className="btn ghost" onClick={() => setMode("menu")}>
+              Back
+            </button>
+          </>
+        )}
+      </div>
+    );
+  if (mode === "a" || mode === "b") {
+    const who = mode === "a" ? 0 : 1;
+    const i = votes[who].length;
+    return (
+      <div className="qcard stack center-text">
+        <p className="turn">
+          {who === 0 ? n1 : n2}: vote in secret ({i + 1} of {ideas.length})
+        </p>
+        <div className="deckcard">
+          <p>{ideas[i]?.[1]}</p>
+        </div>
+        <div className="actions center">
+          <button className="btn" onClick={() => cast(who, "yes")}>
+            Yes please
+          </button>
+          <button className="btn ghost" onClick={() => cast(who, "maybe")}>
+            Maybe
+          </button>
+          <button className="btn ghost" onClick={() => cast(who, "no")}>
+            Not for me
+          </button>
+        </div>
+      </div>
+    );
+  }
+  const both = ideas.filter((_, i) => votes[0][i] === "yes" && votes[1][i] === "yes");
+  const talk = ideas.filter(
+    (_, i) => (votes[0][i] === "yes" && votes[1][i] === "maybe") || (votes[0][i] === "maybe" && votes[1][i] === "yes"),
+  );
+  return (
+    <div className="qcard stack">
+      <p className="h3 center-text">
+        You both said yes to {both.length} {both.length === 1 ? "idea" : "ideas"}
+      </p>
+      <ul className="stack">
+        {both.map((b) => (
+          <li key={b[1]}>{b[1]}</li>
+        ))}
+      </ul>
+      {talk.length > 0 && (
+        <>
+          <p className="h3">Worth a chat</p>
+          <ul className="stack">
+            {talk.map((b) => (
+              <li key={b[1]}>{b[1]}</li>
+            ))}
+          </ul>
+        </>
+      )}
+      <div className="actions center">
+        <button
+          className="btn"
+          onClick={() => {
+            persist([
+              ...saved,
+              ...both.filter((b) => !saved.some((s) => s.text === b[1])).map((b) => ({ text: b[1], done: false })),
+            ]);
+            setMode("list");
+          }}
+        >
+          Save to our list
+        </button>
+        <button className="btn ghost" onClick={onAgain}>
+          Done
+        </button>
+      </div>
+    </div>
+  );
+}
