@@ -24,6 +24,7 @@ import nhie from "./nhie.json";
 import bingo from "./bingo.json";
 import drawwords from "./drawwords.json";
 import bucket from "./bucket.json";
+import ladder from "./ladder.json";
 
 export type Level = 1 | 2 | 3 | 4;
 /** [level, question, [rightAnswer, ...wrong]] */
@@ -165,3 +166,4 @@ export const BINGO = [...(charades as string[]), ...(bingo as string[])];
 export const DRAWWORDS = drawwords as [number, string][];
 /** [category, idea] */
 export const BUCKET = bucket as [string, string][];
+export const LADDER = ladder as unknown as { words: Record<string, string>; puzzles: [number, string, string, number][] };

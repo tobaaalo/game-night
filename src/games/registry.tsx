@@ -26,7 +26,7 @@ import {
   loadWorld,
 } from "../content";
 import type { Group } from "../lib/app";
-import { drawMany, shuffle } from "../lib/deck";
+import { drawFresh, drawMany, shuffle } from "../lib/deck";
 import {
   bibleQuestions,
   faceQuestions,
@@ -42,8 +42,8 @@ import {
 } from "./generators";
 import { QuizRun, Setup, type Field, type SetupValues } from "./quiz";
 import { CardDeck, KnowMe, NPAT, RevealRun, TimedRun, type RevealItem } from "./party";
-import { BucketList, CharadesBingo, DrawGuess, MemoryMatch, WordChain } from "./extra";
-import { DRAWWORDS } from "../content";
+import { WordLadder, BucketList, CharadesBingo, DrawGuess, MemoryMatch, WordChain } from "./extra";
+import { DRAWWORDS, LADDER } from "../content";
 import { loadCustom, customToGame } from "../lib/custom";
 
 export type Section = "pictures" | "quiz" | "talk" | "party" | "yours";
@@ -309,6 +309,13 @@ const EMOJI_PAIRS: [string, string][] = [
   ["🌙", "Moon"],
   ["🚂", "Train"],
 ];
+const LADDER_RULES = {
+  1: "Three-letter words and short ladders.",
+  2: "Four-letter words, about five moves.",
+  3: "Longer ladders, seven to nine moves.",
+  4: "Very long ladders of ten or more moves. Only for word wizards.",
+  0: "A mix of all four levels.",
+};
 const matchFields: Field[] = [
   {
     key: "theme",
@@ -757,6 +764,27 @@ export const GAMES: GameDef[] = [
       const [k, setK] = useState(0);
       return <BucketList key={k} onAgain={() => setK((x) => x + 1)} />;
     },
+  },
+  {
+    id: "ladder",
+    name: "Word Ladder",
+    blurb: "Turn FAST into SLOW, one letter at a time.",
+    how: "Change one letter at a time, and every step must be a real word, to turn the first word into the last. Finish at or under par for a bonus point. Hints cost a point.",
+    section: "party",
+    groups: ["couple", "friends"],
+    stat: "Change one letter",
+    Play: () => (
+      <SetupThen
+        id="ladder"
+        fields={[levelField(1, LADDER_RULES), countField(5)]}
+        build={(v) => {
+          const lv = num(v.level);
+          const pool = LADDER.puzzles.filter((p) => !lv || p[0] === lv);
+          return drawFresh("ladder-" + lv, pool, num(v.count), (p: [number, string, string, number]) => p[1] + p[2]);
+        }}
+        run={(list, again) => <WordLadder puzzles={list} onAgain={again} />}
+      />
+    ),
   },
   {
     id: "proverbs",

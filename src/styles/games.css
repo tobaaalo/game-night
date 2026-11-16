@@ -1730,3 +1730,10 @@
   .bingo-cell { font-size: 0.8rem; padding: 4px; }
   .memgrid { gap: 6px; }
 }
+
+.ladder { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; font-weight: 700; letter-spacing: 0.2em; opacity: 0.7; }
+.ladder-now { display: flex; gap: 8px; justify-content: center; }
+.ltile { width: 56px; height: 64px; border-radius: 12px; border: 2px solid var(--line, #0003); background: var(--card, #fff); color: #2a0a14; font-size: 1.6rem; font-weight: 800; }
+.ltile.on { background: var(--accent, #e8a21a); }
+.lpicker { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+.lkey { min-height: 44px; border-radius: 10px; border: 2px solid var(--line, #0003); background: var(--card, #fff); color: #2a0a14; font-weight: 800; }

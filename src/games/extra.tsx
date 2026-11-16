@@ -4,7 +4,7 @@ import { TimerDial, WhoGotIt, useCountdown } from "../components/ui";
 import { nameOf, useApp } from "../lib/app";
 import { draw, drawFresh, shuffle } from "../lib/deck";
 import { load, save } from "../lib/store";
-import { BINGO, BUCKET } from "../content";
+import { BINGO, BUCKET, LADDER } from "../content";
 import { Finish, Img } from "./frame";
 
 function Clock({ seconds, onEnd }: { seconds: number; onEnd: () => void }) {
@@ -590,6 +590,188 @@ export function BucketList({ onAgain }: { onAgain: () => void }) {
           Done
         </button>
       </div>
+    </div>
+  );
+}
+
+/* ---------- Word Ladder ---------- */
+type Puzzle = [number, string, string, number];
+const ABC = "abcdefghijklmnopqrstuvwxyz".split("");
+
+let dict: Record<number, Set<string>> | null = null;
+const wordsOf = (n: number) => {
+  dict ??= {};
+  return (dict[n] ??= new Set(LADDER.words[String(n)].split(" ")));
+};
+
+/** Shortest route from a to b through valid words (breadth first). */
+function route(a: string, b: string): string[] {
+  const ws = wordsOf(a.length);
+  const prev = new Map<string, string>([[a, ""]]);
+  const q = [a];
+  for (let h = 0; h < q.length; h++) {
+    const u = q[h];
+    if (u === b) break;
+    for (let i = 0; i < u.length; i++)
+      for (const c of ABC) {
+        const v = u.slice(0, i) + c + u.slice(i + 1);
+        if (v !== u && !prev.has(v) && (ws.has(v) || v === b)) {
+          prev.set(v, u);
+          q.push(v);
+        }
+      }
+  }
+  const out: string[] = [];
+  for (let w = b; w; w = prev.get(w) ?? "") out.unshift(w);
+  return out[0] === a ? out : [];
+}
+
+export function WordLadder({ puzzles, onAgain }: { puzzles: Puzzle[]; onAgain: () => void }) {
+  const { players, award } = useApp();
+  const [n, setN] = useState(0);
+  const [ladder, setLadder] = useState<string[]>([puzzles[0][1]]);
+  const [pick, setPick] = useState<number | null>(null);
+  const [msg, setMsg] = useState("");
+  const [hints, setHints] = useState(0);
+  const [state, setState] = useState<"play" | "won" | "gave">("play");
+  const [shown, setShown] = useState<string[]>([]);
+  const [score, setScore] = useState(0);
+  const [lv, start, goal, par] = puzzles[n] ?? puzzles[0];
+  const player = players[n % players.length];
+  const cur = ladder[ladder.length - 1];
+  const moves = ladder.length - 1;
+  const finished = n >= puzzles.length;
+  const tryLetter = (c: string) => {
+    if (pick === null || state !== "play") return;
+    const w = cur.slice(0, pick) + c + cur.slice(pick + 1);
+    setPick(null);
+    if (w === cur) return;
+    if (ladder.includes(w)) return setMsg(`You already used “${w.toUpperCase()}”.`);
+    if (w !== goal && !wordsOf(w.length).has(w)) return setMsg(`“${w.toUpperCase()}” isn't in our word list.`);
+    setMsg("");
+    setLadder([...ladder, w]);
+    if (w === goal) {
+      const pts = Math.max(0, lv + (moves + 1 <= par ? 1 : 0) - hints);
+      award(player.id, pts);
+      setScore((s) => s + pts);
+      setState("won");
+    }
+  };
+  const hint = () => {
+    const r = route(cur, goal);
+    if (r.length > 1) {
+      setHints((h) => h + 1);
+      setMsg(`Try “${r[1].toUpperCase()}” next.`);
+    }
+  };
+  const next = () => {
+    const k = n + 1;
+    setN(k);
+    if (k < puzzles.length) setLadder([puzzles[k][1]]);
+    setPick(null);
+    setMsg("");
+    setHints(0);
+    setShown([]);
+    setState("play");
+  };
+  if (finished)
+    return (
+      <div className="qcard stack center-text">
+        <p className="h3">
+          {puzzles.length} ladders done. {score} points scored.
+        </p>
+        <Finish onAgain={onAgain} />
+      </div>
+    );
+  return (
+    <div className="qcard stack center-text">
+      <p className="turn">
+        {nameOf(player, n % players.length)} · ladder {n + 1} of {puzzles.length}
+      </p>
+      <p className="hint">
+        Change one letter at a time to turn <b>{start.toUpperCase()}</b> into <b>{goal.toUpperCase()}</b>. Par is {par}{" "}
+        moves.
+      </p>
+      <ol className="ladder">
+        {ladder.slice(0, -1).map((w) => (
+          <li key={w}>{w.toUpperCase()}</li>
+        ))}
+      </ol>
+      <div className="ladder-now" role="group" aria-label="Current word. Tap a letter to change it.">
+        {cur.split("").map((c, i) => (
+          <button
+            key={i}
+            className={clsx("ltile", pick === i && "on")}
+            disabled={state !== "play"}
+            onClick={() => setPick(pick === i ? null : i)}
+            aria-label={`Letter ${i + 1}: ${c}`}
+          >
+            {c.toUpperCase()}
+          </button>
+        ))}
+      </div>
+      <p className="hint">
+        Target: {goal.toUpperCase()} · {moves} {moves === 1 ? "move" : "moves"}
+      </p>
+      {pick !== null && state === "play" && (
+        <div className="lpicker" role="group" aria-label="Pick a new letter">
+          {ABC.map((c) => (
+            <button key={c} className="lkey" onClick={() => tryLetter(c)}>
+              {c.toUpperCase()}
+            </button>
+          ))}
+        </div>
+      )}
+      {msg && (
+        <p className="error-text" role="status">
+          {msg}
+        </p>
+      )}
+      {state === "play" && (
+        <div className="actions center">
+          <button
+            className="btn ghost small"
+            disabled={ladder.length < 2}
+            onClick={() => {
+              setLadder(ladder.slice(0, -1));
+              setMsg("");
+              setPick(null);
+            }}
+          >
+            Undo
+          </button>
+          <button className="btn ghost small" onClick={hint}>
+            Hint (−1 point)
+          </button>
+          <button
+            className="btn ghost small"
+            onClick={() => {
+              setShown(route(start, goal));
+              setState("gave");
+            }}
+          >
+            Give up
+          </button>
+        </div>
+      )}
+      {state === "won" && (
+        <>
+          <p className="h3">
+            {moves <= par ? "Par or better!" : "Solved!"} {moves} moves
+          </p>
+          <button className="btn" onClick={next}>
+            {n + 1 < puzzles.length ? "Next ladder" : "See results"}
+          </button>
+        </>
+      )}
+      {state === "gave" && (
+        <>
+          <p className="hint">One way through: {shown.map((w) => w.toUpperCase()).join(" → ")}</p>
+          <button className="btn" onClick={next}>
+            {n + 1 < puzzles.length ? "Next ladder" : "See results"}
+          </button>
+        </>
+      )}
     </div>
   );
 }
