@@ -105,7 +105,7 @@ for (const w of WIDTHS) {
   await step("19-wyr", async () => page.goto(BASE + "/play/wyr"));
   await step("20-finish", async () => {
     await page.goto(BASE + "/play/trivia");
-    await page.getByText("5", { exact: true }).click();
+    await page.getByText(/^[3-6]$/).first().click();
     await click(page, "Start");
     for (let i = 0; i < 5; i++) {
       await page.locator(".option").first().click();
@@ -189,7 +189,7 @@ for (const w of WIDTHS) {
   await step("35-room-pickgame", async () => page.locator(".joined li").first().waitFor({ timeout: 8000 }));
   await step("36-room-question", async () => {
     await page.locator(".ticket, .tile", { hasText: "Bible Trivia" }).click();
-    await page.getByText("5", { exact: true }).click();
+    await page.getByRole("group", { name: "How many" }).locator(".chip").first().click();
     await page.getByRole("button", { name: /Start with/ }).click();
     await page.locator(".room-clock").waitFor({ timeout: 8000 });
   });
