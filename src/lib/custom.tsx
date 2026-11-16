@@ -15,6 +15,8 @@ export interface CustomGame {
   /** Set once the game has been shared: the 6-character code, and who can see it. */
   shareId?: string;
   scope?: "link" | "public";
+  /** A copy saved from someone else's link. Removed automatically if the owner deletes the original. */
+  fromLink?: boolean;
 }
 
 export const CUSTOM_TYPES: Record<CustomType, { label: string; help: string; example: string }> = {

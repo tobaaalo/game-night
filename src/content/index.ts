@@ -93,15 +93,8 @@ export const SPORT_LIST: [string, string][] = [
   ["mma", "MMA"],
   ["f1", "Formula 1"],
   ["cricket", "Cricket"],
-  ["rugby", "Rugby"],
-  ["golf", "Golf"],
   ["nfl", "NFL"],
-  ["baseball", "Baseball"],
-  ["hockey", "Hockey"],
   ["wrestling", "Wrestling"],
-  ["swimming", "Swimming"],
-  ["cycling", "Cycling"],
-  ["gymnastics", "Gymnastics"],
   ["olympics", "Olympics"],
 ];
 export const PAIRS = realai as Pair[];

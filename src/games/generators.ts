@@ -75,16 +75,20 @@ export function athletePool(level: number, sports?: string[], eras?: string[]) {
   return poolFor(inSport.length >= 8 ? inSport : ATHLETES, level);
 }
 
-/** Wrong answers that can't be ruled out: same gender, same field, similar fame. */
+/**
+ * Wrong answers that can't be ruled out: same gender, same field, similar fame.
+ * They are drawn from the same no-repeat deck as the answers, so a face is never shown twice
+ * (as an answer or an option) until the whole deck has been used.
+ */
 export function lookalikes<T extends Person>(
   f: T,
   all: T[],
   group: (x: T) => string,
-  n = 3,
-  used: Set<string> = new Set(),
+  n: number,
+  used: Set<string>,
+  bank: string,
 ): T[] {
-  const fresh = all.filter((x) => x.id !== f.id && !used.has(x.name));
-  const rest = fresh.length >= n * 4 ? fresh : all.filter((x) => x.id !== f.id);
+  const rest = all.filter((x) => x.id !== f.id);
   const sex = rest.filter((x) => x.g === f.g || x.g === "x" || f.g === "x");
   const near = (x: T) => Math.abs(x.level - f.level) <= 1;
   const tiers = [
@@ -92,9 +96,15 @@ export function lookalikes<T extends Person>(
     sex.filter((x) => group(x) === group(f)),
     sex.filter(near),
     sex,
+    rest,
   ];
   const out: T[] = [];
-  for (const t of tiers) for (const x of shuffle(t)) if (out.length < n && !out.includes(x)) out.push(x);
+  for (const t of tiers) {
+    const need = n - out.length;
+    if (need <= 0) break;
+    const c = t.filter((x) => !used.has(x.name) && !out.includes(x));
+    out.push(...drawFresh(bank, c, need, (x) => x.id));
+  }
   return out;
 }
 
@@ -104,8 +114,9 @@ function personQuestion<T extends Person>(
   group: (x: T) => string,
   alt: string,
   used: Set<string>,
+  bank: string,
 ): HostQuestion {
-  const same = lookalikes(f, all, group, 3, used);
+  const same = lookalikes(f, all, group, 3, used, bank);
   same.forEach((x) => used.add(x.name));
   const options = shuffle([f.name, ...same.map((x) => x.name)]);
   return {
@@ -121,15 +132,15 @@ function personQuestion<T extends Person>(
 }
 
 export function faceQuestions(s: QuizSetup): HostQuestion[] {
-  const picked = drawMany("faces", facePool(s.level, s.cats), s.count);
+  const picked = drawFresh("faces", facePool(s.level, s.cats), s.count, (x) => x.id);
   const used = new Set(picked.map((f) => f.name));
-  return picked.map((f) => personQuestion(f, FACES, (x) => x.cat, "A famous face", used));
+  return picked.map((f) => personQuestion(f, FACES, (x) => x.cat, "A famous face", used, "faces"));
 }
 
 export function athleteQuestions(s: QuizSetup): HostQuestion[] {
-  const picked = drawMany("sports", athletePool(s.level, s.cats, s.eras), s.count);
+  const picked = drawFresh("sports", athletePool(s.level, s.cats, s.eras), s.count, (x) => x.id);
   const used = new Set(picked.map((f) => f.name));
-  return picked.map((f) => personQuestion(f, ATHLETES, (x) => x.sports[0], "A sports star", used));
+  return picked.map((f) => personQuestion(f, ATHLETES, (x) => x.sports[0], "A sports star", used, "sports"));
 }
 
 export function realAiQuestions(s: QuizSetup): HostQuestion[] {
@@ -267,8 +278,8 @@ export function higherLowerQuestions(s: QuizSetup): HostQuestion[] {
   return picked.map((p) => {
     const higher = p.b[1] > p.a[1];
     return {
-      prompt: `${p.cat}. Is ${p.b[0]} higher or lower?`,
-      media: { type: "big" as const, text: `${p.a[0]}: ${fmt(p.a[1])}` },
+      prompt: `Is ${p.b[0]} higher or lower?`,
+      media: { type: "big" as const, text: `${p.a[0]}: ${fmt(p.a[1])}`, sub: p.cat },
       options: ["Higher", "Lower"],
       correct: higher ? 0 : 1,
       seconds: 15,

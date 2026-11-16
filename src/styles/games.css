@@ -1737,3 +1737,19 @@
 .ltile.on { background: var(--accent, #e8a21a); }
 .lpicker { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
 .lkey { min-height: 44px; border-radius: 10px; border: 2px solid var(--line, #0003); background: var(--card, #fff); color: #2a0a14; font-weight: 800; }
+
+.bigsub { margin: 0; font-size: clamp(0.78rem, 3.6vw, 1rem); white-space: nowrap; text-align: center; opacity: 0.85; letter-spacing: 0.02em; }
+
+/* Compact landing controls */
+.lib-bar { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: nowrap; margin: 4px 0 10px; }
+.lib-bar .view-toggle { margin: 0; flex: 0 0 auto; }
+.lib-bar .buzzer { margin: 0; flex: 0 1 auto; min-height: 44px; }
+.lib-feature { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 0 0 12px; }
+.lib-feature.one { grid-template-columns: 1fr; }
+.lib-feature .roomcard { margin: 0; padding: 8px 10px; gap: 8px; min-height: 48px; align-items: center; text-align: left; }
+.lib-feature .roomcard-icon { width: 30px; height: 30px; flex: 0 0 30px; }
+.lib-feature .roomcard-text { display: grid; min-width: 0; }
+.lib-feature .roomcard-title { font-size: 0.8rem; line-height: 1.1; }
+.lib-feature .roomcard-sub { font-size: 0.75rem; line-height: 1.15; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.qprompt { white-space: pre-line; }

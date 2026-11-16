@@ -40,7 +40,7 @@ export function GameImport({ id }: { id: string }) {
       lines: g.lines,
       updated: Date.now(),
     };
-    saveCustom([{ ...copy, shareId: g.id }, ...list]);
+    saveCustom([{ ...copy, shareId: g.id, fromLink: true }, ...list]);
     return copy.id;
   };
   return (

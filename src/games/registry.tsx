@@ -81,10 +81,10 @@ const levelField = (def = 1, rules?: Record<number, string>): Field => ({
 });
 const RULES = {
   bible: {
-    1: "Stories a child learns in Sunday school.",
-    2: "Well-known people and events most churchgoers know.",
-    3: "Specific details: lesser characters, places and numbers.",
-    4: "Deep cuts: genealogies, minor figures and exact facts.",
+    1: "Well-known people and events, finishing famous verses, and the main books.",
+    2: "Which book a verse is in, who wrote what, and what comes next in the Bible.",
+    3: "Specific details, lesser characters, and verses from the less-read books.",
+    4: "Very difficult. Spot the book of a verse from the minor prophets and the letters, and exact facts.",
     0: "A mix of all four levels.",
   },
   trivia: {

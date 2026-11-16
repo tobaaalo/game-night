@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import clsx from "clsx";
 import { Choice } from "../components/ui";
 import { nameOf, useApp } from "../lib/app";
@@ -17,10 +17,24 @@ export interface Field {
 }
 export type SetupValues = Record<string, string | number | (string | number)[]>;
 
+/** Round counts up to a multiple of the number of players so everyone gets the same number of turns. */
+export function fitToPlayers(fields: Field[], n: number): Field[] {
+  if (n < 2) return fields;
+  const up = (x: unknown) => Math.ceil(Number(x) / n) * n;
+  return fields.map((f) => {
+    if (f.key !== "count") return f;
+    const seen = new Set<number>();
+    const options = f.options
+      .map((o) => ({ ...o, value: up(o.value), label: String(up(o.value)) }))
+      .filter((o) => !seen.has(o.value as number) && seen.add(o.value as number));
+    return { ...f, options, def: up(f.def) };
+  });
+}
+
 /** Setup screen: sensible defaults, remembered per game, one Start button. */
 export function Setup({
   id,
-  fields,
+  fields: rawFields,
   onStart,
   startLabel = "Start",
   note,
@@ -35,6 +49,8 @@ export function Setup({
   note?: string;
   error?: string;
 }) {
+  const { players } = useApp();
+  const fields = useMemo(() => fitToPlayers(rawFields, players.length), [rawFields, players.length]);
   const [v, setV] = useState<SetupValues>(() => {
     const saved = load<SetupValues>(`gn.setup.${id}`, {});
     const out: SetupValues = {};

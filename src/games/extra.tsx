@@ -227,14 +227,23 @@ export function MemoryMatch({
   onAgain: () => void;
 }) {
   const { players, award } = useApp();
-  const [cards] = useState<MatchCard[]>(() =>
-    shuffle(
-      pairs.flatMap(([key, img, text], i) => [
-        { id: `${key}-a`, pair: i, img, text: img ? undefined : key },
-        { id: `${key}-b`, pair: i, text },
-      ]),
-    ),
-  );
+  const [cards] = useState<MatchCard[]>(() => {
+    const base = pairs.flatMap(([key, img, text], i): MatchCard[] => [
+      { id: `${key}-a`, pair: i, img, text: img ? undefined : key },
+      { id: `${key}-b`, pair: i, text },
+    ]);
+    // Scatter: a card's partner must be at least three grid steps away (4 columns).
+    const far = (list: MatchCard[]) => {
+      const at = new Map<number, number[]>();
+      list.forEach((c, i) => at.set(c.pair, [...(at.get(c.pair) ?? []), i]));
+      return [...at.values()].every(
+        ([i, j]) => Math.abs((i % 4) - (j % 4)) + Math.abs(Math.floor(i / 4) - Math.floor(j / 4)) >= 3,
+      );
+    };
+    let best = shuffle(base);
+    for (let t = 0; t < 400 && !far(best); t++) best = shuffle(base);
+    return best;
+  });
   const [open, setOpen] = useState<number[]>([]);
   const [found, setFound] = useState<number[]>([]);
   const [turn, setTurn] = useState(0);

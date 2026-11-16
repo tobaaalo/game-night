@@ -5,9 +5,9 @@ import { useApp } from "../lib/app";
 import { pick } from "../lib/deck";
 import { SECTIONS, gamesFor, gameById, type GameDef, type Section } from "../games/registry";
 import { GameFrame } from "../games/frame";
-import { CUSTOM_TYPES } from "../lib/custom";
+import { CUSTOM_TYPES, loadCustom, saveCustom } from "../lib/custom";
 import { load, save } from "../lib/store";
-import { getPublic, loadCommunity, saveCommunity } from "../lib/shared";
+import { getPublic, getShared, loadCommunity, saveCommunity } from "../lib/shared";
 import type { SharedGame } from "../shared/protocol";
 
 export function Library() {
@@ -36,6 +36,16 @@ export function Library() {
         saveCommunity(l);
       })
       .catch(() => undefined);
+  }, [online]);
+  useEffect(() => {
+    if (!online) return;
+    // Drop copies of other people's games once the original has been deleted.
+    const copies = loadCustom().filter((g) => g.fromLink && g.shareId);
+    copies.forEach((g) =>
+      getShared(g.shareId as string).catch((e: Error) => {
+        if (e.message === "Game not found.") saveCustom(loadCustom().filter((x) => x.id !== g.id));
+      }),
+    );
   }, [online]);
   useEffect(() => {
     if (!group) go("/who", { replace: true });
@@ -72,16 +82,15 @@ export function Library() {
         <Scoreboard players={players} compact />
       </div>
 
-      <div className="view-toggle" role="group" aria-label="How to show games">
-        <button aria-pressed={view === "grid"} onClick={() => setView("grid")}>
-          Grid
-        </button>
-        <button aria-pressed={view === "list"} onClick={() => setView("list")}>
-          List
-        </button>
-      </div>
-
-      <div className="lib-feature stagger">
+      <div className="lib-bar stagger">
+        <div className="view-toggle" role="group" aria-label="How to show games">
+          <button aria-pressed={view === "grid"} onClick={() => setView("grid")}>
+            Grid
+          </button>
+          <button aria-pressed={view === "list"} onClick={() => setView("list")}>
+            List
+          </button>
+        </div>
         <button
           className={clsx("buzzer", spinning && "pressed")}
           onClick={surprise}
@@ -92,14 +101,17 @@ export function Library() {
           </span>
           <span className="buzzer-label">Surprise us</span>
         </button>
+      </div>
+
+      <div className={clsx("lib-feature stagger", group !== "friends" && "one")}>
         {daily && (
           <button className="roomcard" onClick={() => go(`/play/${daily.id}`)}>
             <span className="roomcard-icon" aria-hidden="true">
               <Icon.shuffle />
             </span>
-            <span>
-              <span className="roomcard-title">Today&rsquo;s game: {daily.name}</span>
-              <span className="roomcard-sub">A new pick every day.</span>
+            <span className="roomcard-text">
+              <span className="roomcard-title">Today&rsquo;s pick</span>
+              <span className="roomcard-sub">{daily.name}</span>
             </span>
           </button>
         )}
@@ -108,12 +120,10 @@ export function Library() {
             <span className="roomcard-icon" aria-hidden="true">
               <Icon.phones />
             </span>
-            <span>
-              <span className="roomcard-title">Play on everyone&rsquo;s phones</span>
+            <span className="roomcard-text">
+              <span className="roomcard-title">Join by phone</span>
               <span className="roomcard-sub" id="room-sub">
-                {online
-                  ? "Friends join with a 4-letter code."
-                  : "Needs internet. Pass-the-phone games still work offline."}
+                {online ? "4-letter code" : "Needs internet"}
               </span>
             </span>
           </button>

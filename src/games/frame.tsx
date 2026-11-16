@@ -100,7 +100,12 @@ export function MediaView({
         </svg>
       );
     case "big":
-      return <p className="bigtext">{media.text}</p>;
+      return (
+        <>
+          {media.sub && <p className="bigsub">{media.sub}</p>}
+          <p className="bigtext">{media.text}</p>
+        </>
+      );
     case "pair":
       return (
         <div className={clsx("pair", revealed && "revealed")}>

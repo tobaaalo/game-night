@@ -5,7 +5,7 @@ export type Media =
   | { type: "pair"; a: { src?: string; text?: string }; b: { src?: string; text?: string } }
   | { type: "flag"; code: string }
   | { type: "shape"; d: string }
-  | { type: "big"; text: string };
+  | { type: "big"; text: string; sub?: string };
 
 /** A question as the host sends it. `correct` never leaves the server before the reveal. */
 export interface HostQuestion {
