@@ -8,6 +8,7 @@ import type {
   SharedGame,
   SharedType,
 } from "../shared/protocol";
+import { teamApply, teamStart, type TeamMsg, type TeamState } from "../shared/team";
 import { handleApi, json } from "./api";
 
 interface Env {
@@ -34,6 +35,7 @@ interface Stored {
   q?: HostQuestion & { n: number; deadline: number };
   answers: Record<string, { idx: number; at: number }>;
   reveal?: RoomState["reveal"];
+  team?: TeamState;
   n: number;
 }
 interface Tag {
@@ -148,6 +150,15 @@ export class Room extends DurableObject<Env> {
       st.question = pub;
     }
     if (s.phase === "reveal" || s.phase === "ended") st.reveal = s.reveal;
+    if (s.team) {
+      st.team = {
+        ...s.team,
+        members: [
+          { id: "host", name: "Host", here: host },
+          ...s.players.map((p) => ({ id: p.pid, name: p.name, here: set.has(p.pid) })),
+        ],
+      };
+    }
     return st;
   }
 
@@ -199,6 +210,29 @@ export class Room extends DurableObject<Env> {
     const tag = ws.deserializeAttachment() as Tag;
     const s = this.s;
     if (msg.t === "ping") return this.send(ws, { t: "pong" });
+    if (msg.t.startsWith("team-")) {
+      const id = tag.role === "host" ? "host" : (tag.pid ?? "");
+      const order = ["host", ...s.players.map((p) => p.pid)];
+      if (msg.t === "team-start") {
+        if (tag.role !== "host") return;
+        s.game = "Word Ladder";
+        s.phase = "team";
+        s.q = undefined;
+        s.reveal = undefined;
+        s.team = teamStart(msg.mode, msg.puzzles.slice(0, 20), order);
+      } else if (s.team) {
+        const { set, host } = this.connectedPids();
+        if (host) set.add("host");
+        if (!teamApply(s.team, msg as TeamMsg, id, order, set)) {
+          // Someone else got there first. Send the up-to-date board back so this phone catches up.
+          this.send(ws, { t: "state", state: this.view(), you: tag.pid });
+          return;
+        }
+      }
+      await this.save();
+      this.broadcast();
+      return;
+    }
     if (tag.role === "host") {
       if (msg.t === "setup") {
         s.game = msg.game;
@@ -220,6 +254,7 @@ export class Room extends DurableObject<Env> {
         if (s.phase === "question") this.doReveal();
         s.phase = "ended";
       } else if (msg.t === "lobby") {
+        s.team = undefined;
         s.phase = "lobby";
         s.q = undefined;
         s.reveal = undefined;

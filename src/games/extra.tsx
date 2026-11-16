@@ -605,16 +605,16 @@ export function BucketList({ onAgain }: { onAgain: () => void }) {
 
 /* ---------- Word Ladder ---------- */
 type Puzzle = [number, string, string, number];
-const ABC = "abcdefghijklmnopqrstuvwxyz".split("");
+export const ABC = "abcdefghijklmnopqrstuvwxyz".split("");
 
 let dict: Record<number, Set<string>> | null = null;
-const wordsOf = (n: number) => {
+export const wordsOf = (n: number) => {
   dict ??= {};
   return (dict[n] ??= new Set(LADDER.words[String(n)].split(" ")));
 };
 
 /** Shortest route from a to b through valid words (breadth first). */
-function route(a: string, b: string): string[] {
+export function route(a: string, b: string): string[] {
   const ws = wordsOf(a.length);
   const prev = new Map<string, string>([[a, ""]]);
   const q = [a];

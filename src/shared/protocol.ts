@@ -1,4 +1,5 @@
 // Messages shared by the room server (Cloudflare Durable Object) and the app.
+import type { TeamMsg, TeamState } from "./team";
 
 export type Media =
   | { type: "image"; src: string; alt: string }
@@ -39,7 +40,7 @@ export interface RevealResult {
   picks: Record<string, { idx: number; gained: number }>;
 }
 
-export type Phase = "lobby" | "question" | "reveal" | "ended";
+export type Phase = "lobby" | "question" | "reveal" | "ended" | "team";
 
 export interface RoomState {
   code: string;
@@ -50,6 +51,8 @@ export interface RoomState {
   question?: PublicQuestion;
   reveal?: RevealResult;
   total?: number;
+  /** Team Word Ladder: the shared board, and who is on the team (the host first). */
+  team?: TeamState & { members: { id: string; name: string; here: boolean }[] };
 }
 
 export type ClientMsg =
@@ -60,7 +63,8 @@ export type ClientMsg =
   | { t: "lobby" }
   | { t: "kick"; pid: string }
   | { t: "answer"; idx: number }
-  | { t: "ping" };
+  | { t: "ping" }
+  | TeamMsg;
 
 export type ServerMsg =
   | { t: "state"; state: RoomState; you?: string }

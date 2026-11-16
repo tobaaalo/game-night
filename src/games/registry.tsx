@@ -1,5 +1,6 @@
 import { useEffect, useState, type ReactNode } from "react";
 import type { HostQuestion } from "../shared/protocol";
+import { TEAM_NAMES, type TeamMode } from "../shared/team";
 import {
   CHARADES,
   COUPLE,
@@ -70,6 +71,10 @@ export interface GameDef {
   Play: () => ReactNode;
   /** For room mode: setup fields + question builder */
   roomFields?: Field[];
+  /** Team games: build the puzzles and the room starts one shared board instead of asking questions. */
+  teamBuild?: (v: SetupValues) => [number, string, string, number][];
+  roomName?: string;
+  roomBlurb?: string;
   buildQuestions?: (v: SetupValues) => Promise<HostQuestion[]>;
 }
 
@@ -773,6 +778,28 @@ export const GAMES: GameDef[] = [
     section: "party",
     groups: ["couple", "friends"],
     stat: "Change one letter",
+    room: true,
+    roomName: "Word Ladder (team)",
+    roomBlurb: "Two phones, one ladder. Solve it together.",
+    roomFields: [
+      {
+        key: "mode",
+        legend: "How do you play?",
+        options: (Object.keys(TEAM_NAMES) as TeamMode[]).map((k) => ({
+          value: k,
+          label: TEAM_NAMES[k].label,
+          rule: TEAM_NAMES[k].rule,
+        })),
+        def: "turns",
+      },
+      levelField(1, LADDER_RULES),
+      countField(5),
+    ],
+    teamBuild: (v) => {
+      const lv = num(v.level);
+      const pool = LADDER.puzzles.filter((p) => !lv || p[0] === lv);
+      return drawFresh("ladder-" + lv, pool, num(v.count), (p: [number, string, string, number]) => p[1] + p[2]);
+    },
     Play: () => (
       <SetupThen
         id="ladder"

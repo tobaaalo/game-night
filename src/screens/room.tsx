@@ -7,6 +7,7 @@ import { load, save } from "../lib/store";
 import { gamesFor, type GameDef } from "../games/registry";
 import { MediaView, useKeys } from "../games/frame";
 import { Setup } from "../games/quiz";
+import { TeamLadder } from "../games/team";
 import { normaliseCode, type ClientMsg, type HostQuestion, type RoomState, type ServerMsg } from "../shared/protocol";
 
 type Conn = "connecting" | "open" | "retrying" | "closed";
@@ -360,8 +361,8 @@ function HostLive({
                     <span className="stub-no">{String(i + 1).padStart(2, "0")}</span>
                   </span>
                   <span className="ticket-body">
-                    <span className="ticket-title">{g.name}</span>
-                    <span className="ticket-blurb">{g.blurb}</span>
+                    <span className="ticket-title">{g.roomName ?? g.name}</span>
+                    <span className="ticket-blurb">{g.roomBlurb ?? g.blurb}</span>
                   </span>
                 </button>
               ))}
@@ -386,6 +387,11 @@ function HostLive({
                 }
                 onStart={async (v) => {
                   if (!players.length) return;
+                  if (game.teamBuild) {
+                    const puzzles = game.teamBuild(v);
+                    send({ t: "team-start", mode: v.mode === "free" ? "free" : "turns", puzzles });
+                    return;
+                  }
                   const list = (await game.buildQuestions?.(v)) ?? [];
                   setQs(list);
                   send({ t: "setup", game: game.name, total: list.length });
@@ -405,6 +411,21 @@ function HostLive({
           onReveal={() => send({ t: "reveal" })}
           onNext={() => ask(qi + 1)}
           last={qi + 1 >= qs.length}
+        />
+      )}
+
+      {phase === "team" && state?.team && (
+        <TeamLadder
+          team={state.team}
+          me="host"
+          send={send}
+          onFinish={{
+            label: "Play another game",
+            run: () => {
+              send({ t: "lobby" });
+              setGame(null);
+            },
+          }}
         />
       )}
 
@@ -766,6 +787,7 @@ function PlayerLive({ code, name, onLeave }: { code: string; name: string; onLea
           </p>
         </div>
       )}
+      {state.phase === "team" && state.team && you && <TeamLadder team={state.team} me={you} send={send} />}
       {state.phase === "ended" && <Leaderboard state={state} title="Final scores" you={you} />}
     </div>
   );

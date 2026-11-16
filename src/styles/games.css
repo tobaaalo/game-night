@@ -1753,3 +1753,8 @@
 .lib-feature .roomcard-sub { font-size: 0.75rem; line-height: 1.15; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 .qprompt { white-space: pre-line; }
+.turnbar { margin: 0; padding: 8px 14px; border-radius: 999px; font-weight: 700; background: #0002; justify-self: center; }
+.turnbar.mine { background: var(--accent, #e8a21a); color: #2a0a14; }
+.ltile.theirs { outline: 3px dashed var(--accent, #e8a21a); outline-offset: 2px; }
+.tally { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.tally li { display: flex; justify-content: space-between; gap: 12px; padding: 10px 14px; border-radius: 12px; background: #0002; }
