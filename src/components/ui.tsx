@@ -240,8 +240,11 @@ export function useCountdown(seconds: number, running: boolean, onEnd: () => voi
   useEffect(() => setLeft(seconds), [seconds]);
   useEffect(() => {
     if (!running) return;
+    // Every run starts from the full time. (It used to start from whatever was left last turn, so the
+    // second player got only a few seconds.)
     const started = Date.now();
-    const startLeft = left;
+    const startLeft = seconds;
+    setLeft(seconds);
     const t = setInterval(() => {
       const l = Math.max(0, startLeft - Math.floor((Date.now() - started) / 1000));
       setLeft(l);

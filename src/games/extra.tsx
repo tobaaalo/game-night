@@ -608,14 +608,19 @@ type Puzzle = [number, string, string, number];
 export const ABC = "abcdefghijklmnopqrstuvwxyz".split("");
 
 let dict: Record<number, Set<string>> | null = null;
+let easy: Record<number, Set<string>> | null = null;
+/** Every word we accept: a full English dictionary, so real words are never turned down. */
 export const wordsOf = (n: number) => {
   dict ??= {};
-  return (dict[n] ??= new Set(LADDER.words[String(n)].split(" ")));
+  return (dict[n] ??= new Set((LADDER.valid[String(n)] ?? LADDER.words[String(n)]).split(" ")));
+};
+/** Everyday words only. Hints and puzzles use these so they never lead you through odd words. */
+const everydayOf = (n: number) => {
+  easy ??= {};
+  return (easy[n] ??= new Set(LADDER.words[String(n)].split(" ")));
 };
 
-/** Shortest route from a to b through valid words (breadth first). */
-export function route(a: string, b: string): string[] {
-  const ws = wordsOf(a.length);
+function search(a: string, b: string, ws: Set<string>): string[] {
   const prev = new Map<string, string>([[a, ""]]);
   const q = [a];
   for (let h = 0; h < q.length; h++) {
@@ -633,6 +638,11 @@ export function route(a: string, b: string): string[] {
   const out: string[] = [];
   for (let w = b; w; w = prev.get(w) ?? "") out.unshift(w);
   return out[0] === a ? out : [];
+}
+
+/** Shortest route from a to b. Tries everyday words first, then any real word. */
+export function route(a: string, b: string): string[] {
+  return search(a, b, everydayOf(a.length)).length ? search(a, b, everydayOf(a.length)) : search(a, b, wordsOf(a.length));
 }
 
 export function WordLadder({ puzzles, onAgain }: { puzzles: Puzzle[]; onAgain: () => void }) {

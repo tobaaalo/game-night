@@ -25,6 +25,14 @@ interface Player {
   name: string;
   score: number;
 }
+interface Answer {
+  idx: number;
+  at: number;
+  /** Which clue was showing when the answer was locked in (clue questions only). */
+  stage: number;
+  /** Answers can be changed once, in case of a mis-tap. */
+  changes: number;
+}
 interface Stored {
   code: string;
   hostKey: string;
@@ -33,7 +41,14 @@ interface Stored {
   phase: RoomState["phase"];
   players: Player[];
   q?: HostQuestion & { n: number; deadline: number };
-  answers: Record<string, { idx: number; at: number }>;
+  /** Every question for this game. The server moves through them by itself, so nobody has to tap Next. */
+  queue?: HostQuestion[];
+  qi: number;
+  stage: number;
+  nextAt?: number;
+  nextAct?: "reveal" | "clue" | "next";
+  touched: number;
+  answers: Record<string, Answer>;
   reveal?: RoomState["reveal"];
   team?: TeamState;
   n: number;
@@ -44,6 +59,10 @@ interface Tag {
 }
 
 const IDLE_MS = 2 * 60 * 60 * 1000;
+/** How long the answer stays on screen before the next question starts by itself. */
+const REVEAL_MS = 3500;
+/** A short pause after everyone has answered, so a mis-tap can still be fixed. */
+const ALL_IN_MS = 1800;
 
 export class Room extends DurableObject<Env> {
   s: Stored | null = null;
@@ -56,11 +75,29 @@ export class Room extends DurableObject<Env> {
   }
 
   async save() {
-    if (this.s) await this.ctx.storage.put("s", this.s);
-    await this.ctx.storage.setAlarm(Date.now() + IDLE_MS);
+    if (this.s) {
+      this.s.touched = Date.now();
+      await this.ctx.storage.put("s", this.s);
+    }
+    await this.arm();
+  }
+
+  /** One alarm does two jobs: the next automatic step of the game, and closing an abandoned room. */
+  async arm() {
+    const idle = (this.s?.touched ?? Date.now()) + IDLE_MS;
+    const at = this.s?.nextAt ? Math.min(this.s.nextAt, idle) : idle;
+    await this.ctx.storage.setAlarm(Math.max(at, Date.now() + 20));
   }
 
   async alarm() {
+    const s = this.s;
+    if (s?.nextAt && s.nextAt <= Date.now() + 50) {
+      this.step();
+      await this.save();
+      this.broadcast();
+      return;
+    }
+    if (s && Date.now() - s.touched < IDLE_MS) return this.arm();
     for (const ws of this.ctx.getWebSockets()) ws.close(1000, "Room closed");
     await this.ctx.storage.deleteAll();
     this.s = null;
@@ -79,6 +116,9 @@ export class Room extends DurableObject<Env> {
         phase: "lobby",
         players: [],
         answers: {},
+        qi: -1,
+        stage: 0,
+        touched: Date.now(),
         n: 0,
       };
       await this.save();
@@ -87,6 +127,29 @@ export class Room extends DurableObject<Env> {
     if (!this.s) return json({ error: "No room with that code. Check the letters with the host." }, 404);
     if (url.pathname === "/info")
       return json({ code: this.s.code, game: this.s.game, phase: this.s.phase, players: this.s.players.length });
+    // Fallbacks for a weak connection: ask for the latest board, or send a move, with plain requests.
+    if (url.pathname === "/poll") {
+      const pid = url.searchParams.get("pid") ?? "";
+      const known = this.s.players.some((p) => p.pid === pid);
+      if (url.searchParams.get("role") === "player" && !known)
+        return json({ error: "You're not in this room any more." }, 404);
+      if (url.searchParams.get("role") === "player") this.markSeen(pid);
+      return json({ state: this.view(), you: pid || undefined });
+    }
+    if (url.pathname === "/msg" && req.method === "POST") {
+      const b = (await req.json().catch(() => null)) as { role?: string; key?: string; pid?: string; msg?: ClientMsg } | null;
+      if (!b?.msg) return json({ error: "Bad request." }, 400);
+      let tag: Tag;
+      if (b.role === "host") {
+        if (b.key !== this.s.hostKey) return json({ error: "Only the host can do that." }, 403);
+        tag = { role: "host" };
+      } else {
+        if (!this.s.players.some((p) => p.pid === b.pid)) return json({ error: "You're not in this room any more." }, 404);
+        tag = { role: "player", pid: b.pid };
+      }
+      await this.handle(b.msg, tag, () => undefined);
+      return json({ state: this.view(), you: tag.pid });
+    }
     if (url.pathname === "/ws") {
       if (req.headers.get("Upgrade") !== "websocket") return json({ error: "Expected a WebSocket" }, 426);
       const role = url.searchParams.get("role");
@@ -113,11 +176,18 @@ export class Room extends DurableObject<Env> {
       }
       this.ctx.acceptWebSocket(server, [tag.role, tag.pid ?? "host"]);
       server.serializeAttachment(tag);
+      if (tag.pid) this.markSeen(tag.pid);
       await this.save();
       this.broadcast();
       return new Response(null, { status: 101, webSocket: client });
     }
     return json({ error: "Not found" }, 404);
+  }
+
+  /** Players on the plain-request fallback count as connected for a little while. */
+  seen = new Map<string, number>();
+  markSeen(pid: string) {
+    this.seen.set(pid, Date.now());
   }
 
   connectedPids() {
@@ -128,6 +198,7 @@ export class Room extends DurableObject<Env> {
       if (t?.role === "host") host = true;
       if (t?.pid) set.add(t.pid);
     }
+    for (const [pid, at] of this.seen) if (Date.now() - at < 12000) set.add(pid);
     return { set, host };
   }
 
@@ -141,13 +212,24 @@ export class Room extends DurableObject<Env> {
       connected: set.has(p.pid),
       answered: s.phase === "question" && !!s.answers[p.pid],
     }));
-    const st: RoomState = { code: s.code, game: s.game, phase: s.phase, hostConnected: host, players, total: s.total };
+    const st: RoomState = {
+      code: s.code,
+      game: s.game,
+      phase: s.phase,
+      hostConnected: host,
+      players,
+      total: s.total,
+      now: Date.now(),
+    };
+    if (s.nextAt && s.nextAct === "next") st.nextAt = s.nextAt;
     if (s.q) {
-      const { correct: _c, explain: _e, captions: _cap, ...pub } = s.q;
+      const { correct: _c, explain: _e, captions: _cap, clues, ...pub } = s.q;
       void _c;
       void _e;
       void _cap;
-      st.question = pub;
+      st.question = clues
+        ? { ...pub, shown: s.phase === "question" ? clues.slice(0, s.stage + 1) : clues, clueCount: clues.length }
+        : pub;
     }
     if (s.phase === "reveal" || s.phase === "ended") st.reveal = s.reveal;
     if (s.team) {
@@ -179,24 +261,81 @@ export class Room extends DurableObject<Env> {
     }
   }
 
+  /** Starts question number qi, or ends the game after the last one. */
+  startQuestion(qi: number) {
+    const s = this.s!;
+    const q = s.queue?.[qi];
+    if (!q) {
+      s.phase = "ended";
+      s.nextAt = undefined;
+      s.nextAct = undefined;
+      return;
+    }
+    s.qi = qi;
+    s.n = qi + 1;
+    s.stage = 0;
+    const now = Date.now();
+    s.q = { ...q, n: s.n, deadline: now + q.seconds * 1000 };
+    s.answers = {};
+    s.reveal = undefined;
+    s.phase = "question";
+    this.scheduleInQuestion();
+  }
+
+  /** The next thing that happens during a question: a new clue, or the answer. */
+  scheduleInQuestion() {
+    const s = this.s!;
+    const q = s.q!;
+    const clues = q.clues?.length ?? 0;
+    if (clues > 1 && s.stage < clues - 1) {
+      const start = q.deadline - q.seconds * 1000;
+      s.nextAt = start + ((s.stage + 1) * q.seconds * 1000) / clues;
+      s.nextAct = "clue";
+    } else {
+      s.nextAt = q.deadline + 300;
+      s.nextAct = "reveal";
+    }
+  }
+
+  step() {
+    const s = this.s;
+    if (!s) return;
+    const act = s.nextAct;
+    s.nextAt = undefined;
+    s.nextAct = undefined;
+    if (act === "clue" && s.phase === "question") {
+      s.stage++;
+      this.scheduleInQuestion();
+    } else if (act === "reveal" && s.phase === "question") this.doReveal();
+    else if (act === "next" && s.phase === "reveal") this.startQuestion(s.qi + 1);
+  }
+
   doReveal() {
     const s = this.s!;
     if (!s.q || s.phase !== "question") return;
     const picks: Record<string, { idx: number; gained: number }> = {};
     const start = s.q.deadline - s.q.seconds * 1000;
+    const clues = s.q.clues?.length ?? 0;
     for (const p of s.players) {
       const a = s.answers[p.pid];
       if (!a) continue;
       let gained = 0;
-      if (a.idx === s.q.correct) {
-        const speed = Math.max(0, Math.min(1, 1 - (a.at - start) / (s.q.seconds * 1000)));
-        gained = Math.round(s.q.points * 100 + speed * 50);
+      if (s.q.correct >= 0 && a.idx === s.q.correct) {
+        if (clues) gained = (clues - a.stage) * s.q.points;
+        else {
+          const speed = Math.max(0, Math.min(1, 1 - (a.at - start) / (s.q.seconds * 1000)));
+          gained = Math.round(s.q.points * 100 + speed * 50);
+        }
         p.score += gained;
       }
       picks[p.pid] = { idx: a.idx, gained };
     }
     s.reveal = { correct: s.q.correct, explain: s.q.explain, captions: s.q.captions, picks };
     s.phase = "reveal";
+    if (s.queue) {
+      s.nextAt = Date.now() + REVEAL_MS + (s.q.explain ? 1500 : 0);
+      s.nextAct = "next";
+    } else s.nextAt = undefined;
   }
 
   async webSocketMessage(ws: WebSocket, raw: string | ArrayBuffer) {
@@ -208,24 +347,39 @@ export class Room extends DurableObject<Env> {
       return;
     }
     const tag = ws.deserializeAttachment() as Tag;
+    await this.handle(msg, tag, (m) => this.send(ws, m));
+  }
+
+  async handle(msg: ClientMsg, tag: Tag, reply: (m: ServerMsg) => void) {
     const s = this.s;
-    if (msg.t === "ping") return this.send(ws, { t: "pong" });
+    if (!s) return;
+    if (msg.t === "ping") return reply({ t: "pong" });
+    if (tag.pid) this.markSeen(tag.pid);
     if (msg.t.startsWith("team-")) {
       const id = tag.role === "host" ? "host" : (tag.pid ?? "");
       const order = ["host", ...s.players.map((p) => p.pid)];
+      const mix = (a: string[]) => {
+        for (let i = a.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
+      };
       if (msg.t === "team-start") {
         if (tag.role !== "host") return;
         s.game = "Word Ladder";
         s.phase = "team";
         s.q = undefined;
         s.reveal = undefined;
-        s.team = teamStart(msg.mode, msg.puzzles.slice(0, 20), order);
+        s.queue = undefined;
+        s.nextAt = undefined;
+        s.team = teamStart(msg.vs, msg.within, msg.teams, msg.puzzles.slice(0, 20), order, mix);
       } else if (s.team) {
         const { set, host } = this.connectedPids();
         if (host) set.add("host");
-        if (!teamApply(s.team, msg as TeamMsg, id, order, set)) {
+        if (!teamApply(s.team, msg as TeamMsg, id, set)) {
           // Someone else got there first. Send the up-to-date board back so this phone catches up.
-          this.send(ws, { t: "state", state: this.view(), you: tag.pid });
+          reply({ t: "state", state: this.view(), you: tag.pid });
           return;
         }
       }
@@ -238,23 +392,24 @@ export class Room extends DurableObject<Env> {
         s.game = msg.game;
         s.total = msg.total;
         s.n = 0;
+        s.qi = -1;
         s.phase = "lobby";
         s.q = undefined;
+        s.team = undefined;
         s.reveal = undefined;
+        s.nextAt = undefined;
+        s.queue = msg.queue?.slice(0, 40);
         s.players.forEach((p) => (p.score = 0));
-      } else if (msg.t === "question") {
-        s.n += 1;
-        s.q = { ...msg.q, n: s.n, deadline: Date.now() + msg.q.seconds * 1000 };
-        s.answers = {};
-        s.reveal = undefined;
-        s.phase = "question";
-        await this.ctx.storage.setAlarm(Date.now() + IDLE_MS);
+        if (s.queue?.length) this.startQuestion(0);
       } else if (msg.t === "reveal") this.doReveal();
       else if (msg.t === "end") {
         if (s.phase === "question") this.doReveal();
         s.phase = "ended";
+        s.nextAt = undefined;
       } else if (msg.t === "lobby") {
         s.team = undefined;
+        s.queue = undefined;
+        s.nextAt = undefined;
         s.phase = "lobby";
         s.q = undefined;
         s.reveal = undefined;
@@ -262,12 +417,25 @@ export class Room extends DurableObject<Env> {
         s.players = s.players.filter((p) => p.pid !== msg.pid);
         for (const w of this.ctx.getWebSockets(msg.pid)) w.close(4000, "Removed by host");
       }
-    } else if (msg.t === "answer" && tag.pid && s.phase === "question" && s.q) {
-      if (!s.answers[tag.pid] && Number.isInteger(msg.idx) && msg.idx >= 0 && msg.idx < s.q.options.length) {
-        s.answers[tag.pid] = { idx: msg.idx, at: Math.min(Date.now(), s.q.deadline) };
+    }
+    // Anyone can move on from an answer straight away.
+    if (msg.t === "next" && s.phase === "reveal" && s.queue) this.startQuestion(s.qi + 1);
+    if (msg.t === "answer" && tag.pid && s.phase === "question" && s.q) {
+      const idx = msg.idx;
+      if (Number.isInteger(idx) && idx >= 0 && idx < s.q.options.length) {
+        const a = s.answers[tag.pid];
+        const at = Math.min(Date.now(), s.q.deadline);
+        if (!a) s.answers[tag.pid] = { idx, at, stage: s.stage, changes: 0 };
+        else if (a.idx !== idx) {
+          if (a.changes >= 1) reply({ t: "error", message: "You can only change your answer once." });
+          else s.answers[tag.pid] = { idx, at, stage: s.stage, changes: 1 };
+        }
         const { set } = this.connectedPids();
         const waiting = s.players.filter((p) => set.has(p.pid) && !s.answers[p.pid]);
-        if (waiting.length === 0) this.doReveal();
+        if (waiting.length === 0) {
+          s.nextAt = Date.now() + ALL_IN_MS;
+          s.nextAct = "reveal";
+        }
       }
     }
     await this.save();

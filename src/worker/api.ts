@@ -70,11 +70,11 @@ async function route(req: Request, env: ApiEnv): Promise<Response> {
     }
     return json({ error: "Couldn't make a room right now. Try again in a moment." }, 503);
   }
-  const m = url.pathname.match(/^\/api\/rooms\/([A-Z]{4})(\/ws)?$/);
+  const m = url.pathname.match(/^\/api\/rooms\/([A-Z]{4})(\/ws|\/poll|\/msg)?$/);
   if (m) {
     const stub = env.ROOMS.get(env.ROOMS.idFromName(m[1]));
     const inner = new URL(req.url);
-    inner.pathname = m[2] ? "/ws" : "/info";
+    inner.pathname = m[2] ?? "/info";
     return stub.fetch(new Request(inner.toString(), req));
   }
   if (url.pathname.startsWith("/api/games") || url.pathname.startsWith("/api/admin/")) return games(req, env, url);

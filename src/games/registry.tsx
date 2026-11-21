@@ -1,6 +1,6 @@
 import { useEffect, useState, type ReactNode } from "react";
 import type { HostQuestion } from "../shared/protocol";
-import { TEAM_NAMES, type TeamMode } from "../shared/team";
+import { TEAM_OPTIONS } from "../shared/team";
 import {
   CHARADES,
   COUPLE,
@@ -43,8 +43,9 @@ import {
 } from "./generators";
 import { QuizRun, Setup, type Field, type SetupValues } from "./quiz";
 import { CardDeck, KnowMe, NPAT, RevealRun, TimedRun, type RevealItem } from "./party";
+import { ClueRun } from "./clues";
 import { WordLadder, BucketList, CharadesBingo, DrawGuess, MemoryMatch, WordChain } from "./extra";
-import { DRAWWORDS, LADDER } from "../content";
+import { CLUES, DRAWWORDS, LADDER } from "../content";
 import { loadCustom, customToGame } from "../lib/custom";
 
 export type Section = "pictures" | "quiz" | "talk" | "party" | "yours";
@@ -128,12 +129,14 @@ const RULES = {
     0: "A mix of all four levels.",
   },
 };
-const countField = (def = 10): Field => ({
-  key: "count",
-  legend: "How many",
-  options: [5, 10, 15, 20].map((n) => ({ value: n, label: String(n) })),
+const countField = (def = 10, opts = [5, 10, 15, 20], key = "count", legend = "How many"): Field => ({
+  key,
+  legend,
+  options: opts.map((n) => ({ value: n, label: String(n) })),
   def,
 });
+/** Word Ladder rounds. A different key from "count", so the number is never rounded up to match the players. */
+const laddersField = countField(4, [2, 3, 4, 5, 6], "rounds", "How many ladders");
 
 /** Wraps a setup → play cycle for games that build a list up front. */
 function SetupThen<T>({
@@ -391,6 +394,48 @@ const YEAR_RULES = {
   0: "A mix of all four levels.",
 };
 
+const emojiFields: Field[] = [
+          {
+            key: "cats",
+            legend: "Categories",
+            options: EMOJI_CATS.map(([value, label]) => ({ value, label })),
+            def: EMOJI_CATS.map((c) => c[0]),
+            multi: true,
+          },
+          levelField(0, RULES.emoji),
+          countField(),
+        ];
+
+const name5Fields: Field[] = [
+          {
+            key: "th",
+            legend: "Themes",
+            options: N5_THEMES.map(([value, label]) => ({ value, label })),
+            def: N5_THEMES.map((t) => t[0]),
+            multi: true,
+          },
+          levelField(1, RULES.name5),
+          {
+            key: "s",
+            legend: "Seconds on the clock",
+            options: [10, 15, 20].map((n) => ({ value: n, label: `${n}s` })),
+            def: 10,
+          },
+        ];
+
+const CLUE_FAMILY: Record<string, string> = {
+  person: "p", character: "p", country: "w", place: "w", animal: "a", food: "f", thing: "t", film: "t",
+};
+const CLUE_RULES: Record<number, string> = {
+  1: "Famous people, places, animals and things almost everyone knows.",
+  2: "Well known, but you will have to think.",
+  3: "Harder names from history, science, art and the wider world.",
+  4: "Very hard. Only the sharpest guessers get these.",
+  0: "A mix of all four levels.",
+};
+const clueFields: Field[] = [levelField(1, CLUE_RULES), countField(5)];
+const cluePool = (v: SetupValues) => CLUES.filter((c) => !num(v.level) || c[0] === num(v.level));
+
 export const GAMES: GameDef[] = [
   {
     id: "faces",
@@ -544,20 +589,30 @@ export const GAMES: GameDef[] = [
     section: "pictures",
     groups: ["couple", "friends"],
     stat: "Guess from emojis",
+    room: true,
+    roomFields: emojiFields,
+    buildQuestions: async (v) => {
+      const cats = v.cats as string[];
+      const pool = EMOJI.filter((e) => cats.includes(e[0]) && (!num(v.level) || e[1] === num(v.level)));
+      return drawMany("emoji", pool, num(v.count)).map<HostQuestion>(([cat, lv, q, a]) => {
+        // Wrong answers come from the same category, so the category never gives the answer away.
+        const wrong = shuffle(EMOJI.filter((e) => e[0] === cat && e[3] !== a)).slice(0, 3).map((e) => e[3]);
+        const options = shuffle([a, ...wrong]);
+        return {
+          prompt: "What do these emojis mean?",
+          media: { type: "big", text: q, sub: EMOJI_CATS.find((c) => c[0] === cat)?.[1] ?? "" },
+          options,
+          correct: options.indexOf(a),
+          seconds: 20,
+          points: lv,
+          label: levelName(lv),
+        };
+      });
+    },
     Play: () => (
       <SetupThen
         id="emoji"
-        fields={[
-          {
-            key: "cats",
-            legend: "Categories",
-            options: EMOJI_CATS.map(([value, label]) => ({ value, label })),
-            def: EMOJI_CATS.map((c) => c[0]),
-            multi: true,
-          },
-          levelField(0, RULES.emoji),
-          countField(),
-        ]}
+        fields={emojiFields}
         build={(v) => {
           const cats = v.cats as string[];
           const pool = EMOJI.filter((e) => cats.includes(e[0]) && (!num(v.level) || e[1] === num(v.level)));
@@ -782,36 +837,66 @@ export const GAMES: GameDef[] = [
     roomName: "Word Ladder (team)",
     roomBlurb: "Two phones, one ladder. Solve it together.",
     roomFields: [
-      {
-        key: "mode",
-        legend: "How do you play?",
-        options: (Object.keys(TEAM_NAMES) as TeamMode[]).map((k) => ({
-          value: k,
-          label: TEAM_NAMES[k].label,
-          rule: TEAM_NAMES[k].rule,
-        })),
-        def: "turns",
-      },
+      { key: "teams", legend: "Who plays together?", options: [...TEAM_OPTIONS.teams], def: 0 },
+      { key: "vs", legend: "How do you play against each other?", options: [...TEAM_OPTIONS.vs], def: "race" },
+      { key: "within", legend: "Inside a team", options: [...TEAM_OPTIONS.within], def: "free" },
       levelField(1, LADDER_RULES),
-      countField(5),
+      laddersField,
     ],
     teamBuild: (v) => {
       const lv = num(v.level);
       const pool = LADDER.puzzles.filter((p) => !lv || p[0] === lv);
-      return drawFresh("ladder-" + lv, pool, num(v.count), (p: [number, string, string, number]) => p[1] + p[2]);
+      return drawFresh("ladder-" + lv, pool, num(v.rounds), (p: [number, string, string, number]) => p[1] + p[2]);
     },
     Play: () => (
       <SetupThen
         id="ladder"
-        fields={[levelField(1, LADDER_RULES), countField(5)]}
+        fields={[levelField(1, LADDER_RULES), laddersField]}
         build={(v) => {
           const lv = num(v.level);
           const pool = LADDER.puzzles.filter((p) => !lv || p[0] === lv);
-          return drawFresh("ladder-" + lv, pool, num(v.count), (p: [number, string, string, number]) => p[1] + p[2]);
+          return drawFresh("ladder-" + lv, pool, num(v.rounds), (p: [number, string, string, number]) => p[1] + p[2]);
         }}
         run={(list, again) => <WordLadder puzzles={list} onAgain={again} />}
       />
     ),
+  },
+  {
+    id: "clues",
+    name: "Three Clues",
+    blurb: "Three clues, one word. The fewer clues you need, the more you score.",
+    how: "Hear the first clue and guess. Right on clue 1 is 3 points, clue 2 is 2 points, clue 3 is 1 point. The answer can be a person, a place, an animal, a thing, anything at all.",
+    section: "quiz",
+    groups: ["couple", "friends"],
+    room: true,
+    stat: "3, 2, 1 points",
+    Play: () => (
+      <SetupThen
+        id="clues"
+        fields={clueFields}
+        build={(v) => drawFresh("clues-" + num(v.level), cluePool(v), num(v.count), (c) => c[2])}
+        run={(list, again) => <ClueRun items={list} onAgain={again} />}
+      />
+    ),
+    roomFields: clueFields,
+    buildQuestions: async (v) =>
+      drawFresh("clues-" + num(v.level), cluePool(v), num(v.count), (c) => c[2]).map<HostQuestion>((c) => {
+        // Wrong answers are the same kind of thing (a person, a place, an animal...), so the kind never gives it away.
+        const kin = CLUES.filter((x) => x[2] !== c[2] && CLUE_FAMILY[x[1]] === CLUE_FAMILY[c[1]]);
+        const near = kin.filter((x) => Math.abs(x[0] - c[0]) <= 1);
+        const pick = shuffle(near.length >= 3 ? near : kin).slice(0, 3).map((x) => x[2]);
+        const options = shuffle([c[2], ...pick]);
+        return {
+          prompt: "Who or what am I?",
+          options,
+          correct: options.indexOf(c[2]),
+          seconds: 30,
+          points: 1,
+          clues: [c[3], c[4], c[5]],
+          label: levelName(c[0]),
+          explain: `It was ${c[2]}.`,
+        };
+      }),
   },
   {
     id: "proverbs",
@@ -821,6 +906,13 @@ export const GAMES: GameDef[] = [
     section: "quiz",
     groups: ["couple", "friends"],
     stat: "Finish the saying",
+    room: true,
+    roomFields: [],
+    buildQuestions: async () =>
+      drawMany("proverbs", PROVERBS, PROVERBS.length).map<HostQuestion>(([q, a]) => {
+        const options = shuffle([a, ...shuffle(PROVERBS.filter((p) => p[1] !== a)).slice(0, 3).map((p) => p[1])]);
+        return { prompt: q, options, correct: options.indexOf(a), seconds: 15, points: 1 };
+      }),
     Play: () => {
       const [k, setK] = useState(0);
       return (
@@ -954,25 +1046,25 @@ export const GAMES: GameDef[] = [
     section: "party",
     groups: ["couple", "friends"],
     stat: "Beat the clock",
+    room: true,
+    roomFields: name5Fields,
+    buildQuestions: async (v) => {
+      const th = v.th as string[];
+      const pool = NAME5.filter((x) => th.includes(x[1]) && (!num(v.level) || x[0] === num(v.level)));
+      return drawMany("name5", pool, 10).map<HostQuestion>((x) => ({
+        prompt: `Name 5: ${x[2]}`,
+        options: ["I named all five!", "I didn't make it"],
+        correct: 0,
+        seconds: num(v.s),
+        points: x[0],
+        label: levelName(x[0]),
+        explain: "Say them out loud, then tap if you got all five. It's an honesty game!",
+      }));
+    },
     Play: () => (
       <SetupThen
         id="name5"
-        fields={[
-          {
-            key: "th",
-            legend: "Themes",
-            options: N5_THEMES.map(([value, label]) => ({ value, label })),
-            def: N5_THEMES.map((t) => t[0]),
-            multi: true,
-          },
-          levelField(1, RULES.name5),
-          {
-            key: "s",
-            legend: "Seconds on the clock",
-            options: [10, 15, 20].map((n) => ({ value: n, label: `${n}s` })),
-            def: 10,
-          },
-        ]}
+        fields={name5Fields}
         build={(v) => {
           const th = v.th as string[];
           const pool = NAME5.filter((x) => th.includes(x[1]) && (!num(v.level) || x[0] === num(v.level)));

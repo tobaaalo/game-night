@@ -8,73 +8,138 @@ import { gamesFor, type GameDef } from "../games/registry";
 import { MediaView, useKeys } from "../games/frame";
 import { Setup } from "../games/quiz";
 import { TeamLadder } from "../games/team";
-import { normaliseCode, type ClientMsg, type HostQuestion, type RoomState, type ServerMsg } from "../shared/protocol";
+import { normaliseCode, type ClientMsg, type RoomState, type ServerMsg } from "../shared/protocol";
 
-type Conn = "connecting" | "open" | "retrying" | "closed";
+type Conn = "connecting" | "open" | "retrying" | "slow" | "closed";
 
-/** WebSocket with automatic reconnect and keep-alive. */
-function useRoomSocket(url: string | null, onError: (m: string) => void) {
+type Fallback = { code: string; role: "host" | "player"; key?: string; pid?: () => string };
+
+/**
+ * Live connection to the room. It is built for patchy mobile data:
+ * - it never gives up: it keeps retrying with a short back-off and rejoins the moment the phone wakes or comes online;
+ * - it notices a "zombie" connection (still open but silent) and replaces it;
+ * - if live connections keep failing, it falls back to plain requests every couple of seconds, and sends answers that way too.
+ */
+function useRoomSocket(url: string | null, onError: (m: string) => void, fb?: Fallback) {
   const [state, setState] = useState<RoomState | null>(null);
   const [you, setYou] = useState<string>();
   const [conn, setConn] = useState<Conn>("connecting");
+  const [skew, setSkew] = useState(0);
   const ws = useRef<WebSocket | null>(null);
   const tries = useRef(0);
   const errRef = useRef(onError);
   errRef.current = onError;
+  const fbRef = useRef(fb);
+  fbRef.current = fb;
+  const take = useCallback((m: { state: RoomState; you?: string }) => {
+    setState(m.state);
+    if (m.you) setYou(m.you);
+    if (m.state.now) setSkew(m.state.now - Date.now());
+  }, []);
   useEffect(() => {
     if (!url) return;
     let stop = false;
     let final = false;
-    let ping: ReturnType<typeof setInterval>;
-    let timer: ReturnType<typeof setTimeout>;
+    let ping: ReturnType<typeof setInterval> | undefined;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    let poll: ReturnType<typeof setInterval> | undefined;
+    let lastHeard = Date.now();
+    const stopPoll = () => {
+      clearInterval(poll);
+      poll = undefined;
+    };
+    const startPoll = () => {
+      const f = fbRef.current;
+      if (poll || !f) return;
+      const run = async () => {
+        try {
+          const q = new URLSearchParams({ role: f.role, pid: f.pid?.() ?? "" });
+          const r = await fetch(`/api/rooms/${f.code}/poll?${q}`);
+          const j = (await r.json()) as { state?: RoomState; you?: string; error?: string };
+          if (r.ok && j.state) {
+            take({ state: j.state, you: j.you });
+            setConn((c) => (c === "open" ? c : "slow"));
+          } else if (r.status === 404 && j.error) {
+            final = true;
+            stopPoll();
+            setConn("closed");
+            errRef.current(j.error);
+          }
+        } catch {
+          /* still offline */
+        }
+      };
+      void run();
+      poll = setInterval(run, 2500);
+    };
     const open = () => {
+      if (stop || final) return;
       setConn(tries.current ? "retrying" : "connecting");
-      const s = new WebSocket(url);
+      let s: WebSocket;
+      try {
+        s = new WebSocket(url);
+      } catch {
+        return retry();
+      }
       ws.current = s;
       s.onopen = () => {
         tries.current = 0;
+        lastHeard = Date.now();
+        stopPoll();
         setConn("open");
-        ping = setInterval(() => s.readyState === 1 && s.send(JSON.stringify({ t: "ping" })), 25000);
+        clearInterval(ping);
+        ping = setInterval(() => {
+          if (s.readyState !== 1) return;
+          if (Date.now() - lastHeard > 25000) return s.close(); // silent for too long: replace it
+          s.send(JSON.stringify({ t: "ping" }));
+        }, 8000);
       };
       s.onmessage = (e) => {
+        lastHeard = Date.now();
         const m = JSON.parse(e.data as string) as ServerMsg;
-        if (m.t === "state") {
-          setState(m.state);
-          if (m.you) setYou(m.you);
-        } else if (m.t === "error") errRef.current(m.message);
+        if (m.t === "state") take(m);
+        else if (m.t === "error") errRef.current(m.message);
       };
       s.onclose = (e) => {
         clearInterval(ping);
-        if (stop) return;
+        if (stop || ws.current !== s) return;
         if (e.code === 4000) {
           final = true;
+          stopPoll();
           setConn("closed");
           errRef.current("The host removed you from the room.");
           return;
         }
         if (e.code === 1000 && e.reason === "Room closed") {
           final = true;
+          stopPoll();
           setConn("closed");
           errRef.current("This room has closed.");
           return;
         }
-        tries.current++;
-        if (tries.current > 8) {
-          setConn("closed");
-          errRef.current("Lost the connection to the room. Check you're online, then try joining again.");
-          return;
-        }
-        setConn("retrying");
-        timer = setTimeout(open, Math.min(8000, 500 * 2 ** tries.current));
+        retry();
       };
+    };
+    const retry = () => {
+      tries.current++;
+      setConn("retrying");
+      if (tries.current >= 2) startPoll();
+      clearTimeout(timer);
+      timer = setTimeout(open, Math.min(5000, 400 * 2 ** Math.min(tries.current, 4)));
     };
     open();
     // A locked or sleeping phone drops its connection. Rejoin the moment it wakes, without waiting for the back-off.
     const wake = () => {
       if (stop || final || document.visibilityState === "hidden") return;
-      if (ws.current && ws.current.readyState <= 1) return;
+      if (ws.current && ws.current.readyState === 1 && Date.now() - lastHeard < 20000) return;
       clearTimeout(timer);
       tries.current = 0;
+      try {
+        ws.current?.close();
+      } catch {
+        /* ignore */
+      }
+      ws.current = null;
       open();
     };
     document.addEventListener("visibilitychange", wake);
@@ -85,13 +150,26 @@ function useRoomSocket(url: string | null, onError: (m: string) => void) {
       stop = true;
       clearTimeout(timer);
       clearInterval(ping);
+      stopPoll();
       ws.current?.close(1000, "leaving");
     };
-  }, [url]);
-  const send = useCallback((m: ClientMsg) => {
-    if (ws.current?.readyState === 1) ws.current.send(JSON.stringify(m));
-  }, []);
-  return { state, you, conn, send };
+  }, [url, take]);
+  const send = useCallback(
+    (m: ClientMsg) => {
+      if (ws.current?.readyState === 1) return ws.current.send(JSON.stringify(m));
+      const f = fbRef.current;
+      if (!f) return;
+      fetch(`/api/rooms/${f.code}/msg`, {
+        method: "POST",
+        body: JSON.stringify({ role: f.role, key: f.key, pid: f.pid?.(), msg: m }),
+      })
+        .then((r) => r.json())
+        .then((j: { state?: RoomState; you?: string }) => j.state && take({ state: j.state, you: j.you }))
+        .catch(() => undefined);
+    },
+    [take],
+  );
+  return { state, you, conn, send, skew };
 }
 
 const wsUrl = (code: string, q: Record<string, string>) =>
@@ -107,17 +185,19 @@ function ConnBanner({ conn }: { conn: Conn }) {
         ? "Connecting to the room…"
         : conn === "retrying"
           ? "Reconnecting… hang tight."
-          : "Disconnected."}
+          : conn === "slow"
+            ? "Weak signal. Still playing, just a little slower."
+            : "Disconnected."}
     </p>
   );
 }
 
-function Countdown({ deadline }: { deadline: number }) {
-  const [now, setNow] = useState(Date.now());
+function Countdown({ deadline, skew = 0 }: { deadline: number; skew?: number }) {
+  const [now, setNow] = useState(Date.now() + skew);
   useEffect(() => {
-    const t = setInterval(() => setNow(Date.now()), 250);
+    const t = setInterval(() => setNow(Date.now() + skew), 250);
     return () => clearInterval(t);
-  }, []);
+  }, [skew]);
   const left = Math.max(0, Math.ceil((deadline - now) / 1000));
   return (
     <span className={clsx("room-clock", left <= 5 && "low")} role="timer" aria-label={`${left} seconds left`}>
@@ -219,9 +299,11 @@ function HostLive({
   const { toast } = useApp();
   const [error, setError] = useState("");
   const url = useMemo(() => wsUrl(room.code, { role: "host", key: room.hostKey }), [room]);
-  const { state, conn, send } = useRoomSocket(url, setError);
-  const [qs, setQs] = useState<HostQuestion[]>([]);
-  const [qi, setQi] = useState(0);
+  const { state, conn, send, skew } = useRoomSocket(url, setError, {
+    code: room.code,
+    role: "host",
+    key: room.hostKey,
+  });
   const [qr, setQr] = useState("");
   const joinUrl = `${location.origin}/join/${room.code}`;
   useEffect(() => {
@@ -229,30 +311,6 @@ function HostLive({
       setQr(""),
     );
   }, [joinUrl]);
-
-  // Auto-reveal when time runs out
-  const deadline = state?.phase === "question" ? state.question?.deadline : undefined;
-  useEffect(() => {
-    if (!deadline) return;
-    const t = setTimeout(() => send({ t: "reveal" }), Math.max(0, deadline - Date.now()) + 400);
-    return () => clearTimeout(t);
-  }, [deadline, send]);
-
-  const ask = (i: number) => {
-    const q = qs[i];
-    if (!q) return send({ t: "end" });
-    setQi(i);
-    send({ t: "question", q });
-  };
-  useKeys(
-    (k, e) => {
-      if ((k === " " || k === "Enter") && state?.phase === "reveal") {
-        e.preventDefault();
-        ask(qi + 1);
-      }
-    },
-    [state?.phase, qi, qs],
-  );
 
   if (error && conn === "closed")
     return (
@@ -389,14 +447,18 @@ function HostLive({
                   if (!players.length) return;
                   if (game.teamBuild) {
                     const puzzles = game.teamBuild(v);
-                    send({ t: "team-start", mode: v.mode === "free" ? "free" : "turns", puzzles });
+                    send({
+                      t: "team-start",
+                      vs: v.vs === "after" ? "after" : "race",
+                      within: v.within === "turns" ? "turns" : "free",
+                      teams: Number(v.teams) || 0,
+                      puzzles,
+                    });
                     return;
                   }
                   const list = (await game.buildQuestions?.(v)) ?? [];
-                  setQs(list);
-                  send({ t: "setup", game: game.name, total: list.length });
-                  setQi(0);
-                  setTimeout(() => list[0] && send({ t: "question", q: list[0] }), 50);
+                  // The server runs the whole game from here: timers, reveals and the next question.
+                  send({ t: "setup", game: game.name, total: list.length, queue: list });
                 }}
               />
             </section>
@@ -407,10 +469,9 @@ function HostLive({
       {(phase === "question" || phase === "reveal") && state?.question && (
         <HostQuestionView
           state={state}
-          q={qs[qi]}
+          skew={skew}
           onReveal={() => send({ t: "reveal" })}
-          onNext={() => ask(qi + 1)}
-          last={qi + 1 >= qs.length}
+          onNext={() => send({ t: "next" })}
         />
       )}
 
@@ -452,23 +513,60 @@ function HostLive({
   );
 }
 
-function HostQuestionView({
+function Clues({ q }: { q: NonNullable<RoomState["question"]> }) {
+  if (!q.shown) return null;
+  const worth = (q.clueCount ?? 3) - q.shown.length + 1;
+  return (
+    <div className="clues stack">
+      {q.shown.map((c, i) => (
+        <p key={i} className={clsx("clue", i === q.shown!.length - 1 && "new")}>
+          <b>Clue {i + 1}</b> {c}
+        </p>
+      ))}
+      <p className="hint">
+        Right now a correct answer is worth {worth} {worth === 1 ? "point" : "points"}.
+      </p>
+    </div>
+  );
+}
+
+/** "Next question in 3" with a button to skip the wait. */
+function NextBar({
   state,
-  q,
-  onReveal,
+  skew,
   onNext,
-  last,
 }: {
   state: RoomState;
-  q?: HostQuestion;
+  skew: number;
+  onNext: () => void;
+}) {
+  const last = (state.question?.n ?? 0) >= (state.total ?? 0);
+  return (
+    <div className="actions center">
+      {state.nextAt && !last && <Countdown deadline={state.nextAt} skew={skew} />}
+      <button className="btn" onClick={onNext} autoFocus>
+        {last ? "See final scores" : "Next question"}
+      </button>
+    </div>
+  );
+}
+
+function HostQuestionView({
+  state,
+  skew,
+  onReveal,
+  onNext,
+}: {
+  state: RoomState;
+  skew: number;
   onReveal: () => void;
   onNext: () => void;
-  last: boolean;
 }) {
   const pq = state.question!;
   const revealed = state.phase === "reveal";
   const answered = state.players.filter((p) => p.answered).length;
   const correct = state.reveal?.correct;
+  const poll = (correct ?? 0) < 0;
   return (
     <div className={clsx("stage marquee", !revealed && "live")}>
       <div className="qcard">
@@ -476,9 +574,10 @@ function HostQuestionView({
           <p className="prog">
             Question {pq.n} of {state.total} {pq.label ? `· ${pq.label}` : ""}
           </p>
-          {!revealed ? <Countdown deadline={pq.deadline} /> : <span className="tag">Answer</span>}
+          {!revealed ? <Countdown deadline={pq.deadline} skew={skew} /> : <span className="tag">Answer</span>}
         </div>
         <h2 className="qprompt">{pq.prompt}</h2>
+        <Clues q={pq} />
         <MediaView media={pq.media} revealed={revealed} captions={state.reveal?.captions} />
         <div className={clsx("options", pq.options.length === 2 && "two")}>
           {pq.options.map((o, i) => {
@@ -488,8 +587,8 @@ function HostQuestionView({
                 key={i}
                 className={clsx(
                   "option static",
-                  revealed && i === correct && "right",
-                  revealed && i !== correct && "dim",
+                  revealed && !poll && i === correct && "right",
+                  revealed && !poll && i !== correct && "dim",
                 )}
               >
                 <kbd>{i + 1}</kbd>
@@ -510,13 +609,9 @@ function HostQuestionView({
           </div>
         ) : (
           <div className="stack">
-            {q?.explain && <p className="verdict good">{q.explain}</p>}
+            {state.reveal?.explain && <p className="verdict good">{state.reveal.explain}</p>}
             <Leaderboard state={state} compact />
-            <div className="actions center">
-              <button className="btn" onClick={onNext} autoFocus>
-                {last ? "See final scores" : "Next question"}
-              </button>
-            </div>
+            <NextBar state={state} skew={skew} onNext={onNext} />
           </div>
         )}
       </div>
@@ -570,7 +665,13 @@ export function RoomJoin({ initial }: { initial?: string }) {
   const [name, setName] = useState(() => load("gn.joinname", players[0]?.name ?? ""));
   const [err, setErr] = useState("");
   const [busy, setBusy] = useState(false);
-  const [joined, setJoined] = useState<{ code: string; name: string } | null>(null);
+  const [joined, setJoined] = useState<{ code: string; name: string } | null>(() => {
+    // Came back after a refresh, a dropped connection or a locked phone: go straight back into the room.
+    const ses = load<{ code: string; name: string; at: number } | null>("gn.session", null);
+    const want = normaliseCode(initial ?? "");
+    if (!ses || Date.now() - ses.at > 3 * 3600 * 1000) return null;
+    return !want || want === ses.code ? { code: ses.code, name: ses.name } : null;
+  });
 
   const submit = async () => {
     setErr("");
@@ -594,7 +695,7 @@ export function RoomJoin({ initial }: { initial?: string }) {
     }
   };
 
-  if (joined) return <PlayerLive code={joined.code} name={joined.name} onLeave={() => setJoined(null)} />;
+  if (joined) return <PlayerLive code={joined.code} name={joined.name} onLeave={() => (save("gn.session", null), setJoined(null))} />;
   return (
     <form
       className="screen join"
@@ -658,24 +759,40 @@ function PlayerLive({ code, name, onLeave }: { code: string; name: string; onLea
   const pidKey = `gn.pid.${code}`;
   const [error, setError] = useState("");
   const url = useMemo(() => wsUrl(code, { role: "player", name, pid: load(pidKey, "") }), [code, name, pidKey]);
-  const { state, you, conn, send } = useRoomSocket(url, setError);
-  const [mine, setMine] = useState<{ n: number; idx: number } | null>(null);
+  const { state, you, conn, send, skew } = useRoomSocket(url, setError, {
+    code,
+    role: "player",
+    pid: () => load(pidKey, ""),
+  });
+  // Remember who I am in this room, so a refresh or a dropped connection drops me straight back in.
+  const [mine, setMine] = useState<{ n: number; idx: number; changed: boolean } | null>(null);
   useEffect(() => {
     if (you) save(pidKey, you);
   }, [you, pidKey]);
+  useEffect(() => {
+    save("gn.session", { code, name, at: Date.now() });
+  }, [code, name]);
   const q = state?.question;
   const myPick = mine && q && mine.n === q.n ? mine.idx : null;
+  const canChange = !!mine && !mine.changed;
   const answer = (idx: number) => {
-    if (!q || myPick != null || state?.phase !== "question") return;
-    setMine({ n: q.n, idx });
+    if (!q || state?.phase !== "question") return;
+    if (myPick != null && (idx === myPick || mine?.changed)) return;
+    setMine({ n: q.n, idx, changed: myPick != null });
     send({ t: "answer", idx });
     navigator.vibrate?.(30);
   };
+  // If my answer was lost on a bad connection, send it again once I'm back.
+  const mePlayer = state?.players.find((p) => p.pid === you);
+  useEffect(() => {
+    if (conn === "open" && state?.phase === "question" && q && mine && mine.n === q.n && mePlayer && !mePlayer.answered)
+      send({ t: "answer", idx: mine.idx });
+  }, [conn, mePlayer?.answered, q?.n, state?.phase]); // eslint-disable-line react-hooks/exhaustive-deps
   useKeys(
     (k) => {
       if (/^[1-9]$/.test(k) && q && +k <= q.options.length) answer(+k - 1);
     },
-    [q, myPick, state?.phase],
+    [q, myPick, state?.phase, mine],
   );
 
   if (error && conn === "closed")
@@ -733,9 +850,10 @@ function PlayerLive({ code, name, onLeave }: { code: string; name: string; onLea
             <p className="prog">
               {q.n} / {state.total}
             </p>
-            {state.phase === "question" && <Countdown deadline={q.deadline} />}
+            {state.phase === "question" && <Countdown deadline={q.deadline} skew={skew} />}
           </div>
           <h2 className="qprompt">{q.prompt}</h2>
+          <Clues q={q} />
           <MediaView
             media={q.media}
             revealed={state.phase === "reveal"}
@@ -770,7 +888,7 @@ function PlayerLive({ code, name, onLeave }: { code: string; name: string; onLea
                   )}
                   aria-pressed={myPick === i}
                   onClick={() => answer(i)}
-                  aria-disabled={myPick != null || state.phase !== "question"}
+                  aria-disabled={(myPick != null && !canChange) || state.phase !== "question"}
                 >
                   <kbd>{i + 1}</kbd>
                   <span>{o}</span>
@@ -779,12 +897,23 @@ function PlayerLive({ code, name, onLeave }: { code: string; name: string; onLea
             })}
           </div>
           <p className="verdict center-text" aria-live="polite">
-            {state.phase === "question" && (myPick != null ? "Locked in! Waiting for the others…" : "Tap your answer.")}
+            {state.phase === "question" &&
+              (myPick != null
+                ? canChange
+                  ? "Locked in! Tapped the wrong one? You can change it once."
+                  : "Locked in! Waiting for the others…"
+                : "Tap your answer.")}
             {state.phase === "reveal" &&
-              (gained
-                ? `Nice! +${gained}`
-                : `${myPick == null ? "Too slow this time." : "Not this time."} It was ${q.options[state.reveal?.correct ?? 0]}.`)}
+              ((state.reveal?.correct ?? 0) < 0
+                ? "Here is how everyone voted."
+                : gained
+                  ? `Nice! +${gained}`
+                  : `${myPick == null ? "Too slow this time." : "Not this time."} It was ${q.options[state.reveal?.correct ?? 0]}.`)}
           </p>
+          {state.phase === "reveal" && state.reveal?.explain && <p className="verdict good">{state.reveal.explain}</p>}
+          {state.phase === "reveal" && (
+            <NextBar state={state} skew={skew} onNext={() => send({ t: "next" })} />
+          )}
         </div>
       )}
       {state.phase === "team" && state.team && you && <TeamLadder team={state.team} me={you} send={send} />}

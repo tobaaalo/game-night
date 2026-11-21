@@ -20,10 +20,18 @@ export interface HostQuestion {
   explain?: string;
   /** Labels shown under each picture after the reveal, e.g. ["AI", "Real"]. Host-only until reveal. */
   captions?: string[];
+  /** Clue games: the clues, shown one at a time. Guess on the first for the most points. */
+  clues?: string[];
 }
 
 /** The same question as players see it. */
-export type PublicQuestion = Omit<HostQuestion, "correct" | "explain" | "captions"> & { n: number; deadline: number };
+export type PublicQuestion = Omit<HostQuestion, "correct" | "explain" | "captions" | "clues"> & {
+  n: number;
+  deadline: number;
+  /** Clue games: the clues shown so far. */
+  shown?: string[];
+  clueCount?: number;
+};
 
 export interface PublicPlayer {
   pid: string;
@@ -51,12 +59,17 @@ export interface RoomState {
   question?: PublicQuestion;
   reveal?: RevealResult;
   total?: number;
+  /** Server time when this was sent, so a phone with a wrong clock still counts down correctly. */
+  now?: number;
+  /** When the next question starts by itself. */
+  nextAt?: number;
   /** Team Word Ladder: the shared board, and who is on the team (the host first). */
   team?: TeamState & { members: { id: string; name: string; here: boolean }[] };
 }
 
 export type ClientMsg =
-  | { t: "setup"; game: string; total: number }
+  | { t: "setup"; game: string; total: number; queue?: HostQuestion[] }
+  | { t: "next" }
   | { t: "question"; q: HostQuestion }
   | { t: "reveal" }
   | { t: "end" }
