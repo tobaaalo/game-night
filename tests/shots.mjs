@@ -132,6 +132,7 @@ for (const w of WIDTHS) {
   await step("26-library-friends", async () => click(page, "Pick a game"));
   await step("27-charades", async () => {
     await page.goto(BASE + "/play/charades");
+    await page.getByRole("button", { name: /^Start$/ }).click();
     await click(page, "Start 60 seconds");
   });
   await step("27b-new-games-setup", async () => {
