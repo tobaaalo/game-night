@@ -252,6 +252,16 @@ export { draw };
 
 const fmt = (n: number) => (n >= 100 ? Math.round(n).toLocaleString("en-GB") : String(n));
 
+const HOLWORDS: Record<string, { hi: string; lo: string; unit: string; ask: string }> = {
+  "Mountain height (metres)": { hi: "Taller", lo: "Shorter", unit: " m", ask: "How tall is the mountain?" },
+  "River length (km)": { hi: "Longer", lo: "Shorter", unit: " km", ask: "How long is the river?" },
+  "Population (millions, roughly)": { hi: "More people", lo: "Fewer people", unit: " million", ask: "How many people live there?" },
+  "Land area (thousand sq km)": { hi: "Bigger", lo: "Smaller", unit: " thousand sq km", ask: "How big is the country?" },
+  "Height (metres)": { hi: "Taller", lo: "Shorter", unit: " m", ask: "How tall is it?" },
+  "Top speed (km/h)": { hi: "Faster", lo: "Slower", unit: " km/h", ask: "How fast can it go?" },
+  "Diameter (km)": { hi: "Bigger", lo: "Smaller", unit: " km", ask: "How wide is it?" },
+};
+
 /** Higher or Lower: harder levels compare numbers that are closer together. */
 export function higherLowerQuestions(s: QuizSetup): HostQuestion[] {
   type P = { cat: string; a: [string, number]; b: [string, number]; lv: number };
@@ -276,16 +286,18 @@ export function higherLowerQuestions(s: QuizSetup): HostQuestion[] {
     picked.push(p);
   }
   return picked.map((p) => {
+    const w = HOLWORDS[p.cat] ?? { hi: "Higher", lo: "Lower", unit: "" };
     const higher = p.b[1] > p.a[1];
+    const show = (n: number) => `${fmt(n)}${w.unit}`;
     return {
-      prompt: `Is ${p.b[0]} higher or lower?`,
-      media: { type: "big" as const, text: `${p.a[0]}: ${fmt(p.a[1])}`, sub: p.cat },
-      options: ["Higher", "Lower"],
+      prompt: `Is ${p.b[0]} ${w.hi.toLowerCase()} or ${w.lo.toLowerCase()} than ${p.a[0]}?`,
+      media: { type: "big" as const, text: `${p.a[0]}: ${show(p.a[1])}`, sub: w.ask },
+      options: [w.hi, w.lo],
       correct: higher ? 0 : 1,
       seconds: 15,
       points: p.lv,
       label: levelName(p.lv),
-      explain: `${p.b[0]} is ${fmt(p.b[1])}, so ${higher ? "higher" : "lower"}.`,
+      explain: `${p.b[0]} is ${show(p.b[1])}, so it is ${higher ? w.hi.toLowerCase() : w.lo.toLowerCase()} than ${p.a[0]}.`,
     };
   });
 }

@@ -2,6 +2,8 @@ import { useEffect, useState, type ReactNode } from "react";
 import type { HostQuestion } from "../shared/protocol";
 import { TEAM_OPTIONS } from "../shared/team";
 import {
+  BINGO,
+  BUCKET,
   CHARADES,
   COUPLE,
   EMOJI,
@@ -27,7 +29,7 @@ import {
   loadWorld,
 } from "../content";
 import type { Group } from "../lib/app";
-import { drawFresh, drawMany, shuffle } from "../lib/deck";
+import { draw, drawFresh, drawMany, shuffle } from "../lib/deck";
 import {
   bibleQuestions,
   faceQuestions,
@@ -46,6 +48,8 @@ import { CardDeck, KnowMe, NPAT, RevealRun, TimedRun, type RevealItem } from "./
 import { ClueRun } from "./clues";
 import { WordLadder, BucketList, CharadesBingo, DrawGuess, MemoryMatch, WordChain } from "./extra";
 import { CLUES, DRAWWORDS, LADDER } from "../content";
+import type { LiveCfg } from "../shared/live";
+import { STARTS } from "./extra";
 import { loadCustom, customToGame } from "../lib/custom";
 
 export type Section = "pictures" | "quiz" | "talk" | "party" | "yours";
@@ -77,6 +81,8 @@ export interface GameDef {
   roomName?: string;
   roomBlurb?: string;
   buildQuestions?: (v: SetupValues, names: string[]) => Promise<HostQuestion[]>;
+  /** Live games: one shared board the server runs (acting, drawing, typing together). */
+  liveBuild?: (v: SetupValues, names: string[]) => LiveCfg | Promise<LiveCfg>;
 }
 
 const levelField = (def = 1, rules?: Record<number, string>): Field => ({
@@ -703,8 +709,8 @@ export const GAMES: GameDef[] = [
   {
     id: "hol",
     name: "Higher or Lower",
-    blurb: "Is the next number bigger or smaller?",
-    how: "You see one number, like a mountain's height. Say whether the next one is higher or lower. Harder levels compare numbers that are close together.",
+    blurb: "Is the next one bigger or smaller?",
+    how: "You see one thing and its number, like a mountain and how tall it is. Then you are asked about a second thing: is it taller or shorter, bigger or smaller? Harder levels use numbers that are close.",
     section: "quiz",
     groups: ["couple", "friends"],
     room: true,
@@ -766,6 +772,29 @@ export const GAMES: GameDef[] = [
     section: "party",
     groups: ["couple", "friends"],
     stat: "Three in a row",
+    room: true,
+    roomName: "Charades Bingo (turns)",
+    roomBlurb: "One acts, the rest guess. Turn after turn.",
+    roomFields: [
+      timeField(
+        "sec",
+        "Time to act",
+        [
+          [90, "Easy, 90s"],
+          [60, "Normal, 60s"],
+          [30, "Hard, 30s"],
+        ],
+        60,
+      ),
+      ...turnFields,
+    ],
+    liveBuild: (v) => ({
+      kind: "perform",
+      items: shuffle(BINGO).map((w) => ({ w })),
+      turns: num(v.count) || 6,
+      seconds: num(v.sec) || 60,
+      buzz: false,
+    }),
     Play: () => (
       <SetupThen
         id="bingo"
@@ -794,6 +823,20 @@ export const GAMES: GameDef[] = [
     section: "party",
     groups: ["couple", "friends"],
     stat: "Beat the clock",
+    room: true,
+    roomFields: [
+      timeField(
+        "sec",
+        "Time per word",
+        [
+          [15, "Easy, 15s"],
+          [10, "Normal, 10s"],
+          [6, "Hard, 6s"],
+        ],
+        10,
+      ),
+    ],
+    liveBuild: (v) => ({ kind: "chain", start: draw("chainstart", STARTS), seconds: num(v.sec) || 10 }),
     Play: () => (
       <SetupThen
         id="wordchain"
@@ -822,6 +865,24 @@ export const GAMES: GameDef[] = [
     section: "pictures",
     groups: ["couple", "friends"],
     stat: "Find the pairs",
+    room: true,
+    roomName: "Memory Match (shared board)",
+    roomFields: [
+      timeField(
+        "pairs",
+        "How many pairs",
+        [
+          [6, "6"],
+          [8, "8"],
+          [10, "10"],
+        ],
+        8,
+      ),
+    ],
+    liveBuild: (v) => ({
+      kind: "memory",
+      symbols: drawMany("match-room", EMOJI_PAIRS, num(v.pairs) || 8).map((p) => p[0]),
+    }),
     Play: () => (
       <SetupThen
         id="match"
@@ -839,6 +900,30 @@ export const GAMES: GameDef[] = [
     section: "party",
     groups: ["couple", "friends"],
     stat: "Draw on the phone",
+    room: true,
+    roomFields: [
+      levelField(1, RULES.emoji),
+      countField(4, [2, 4, 6, 10], "count", "How many drawings", "drawings in total"),
+      timeField(
+        "sec",
+        "Time to draw",
+        [
+          [90, "90s"],
+          [60, "60s"],
+          [30, "30s"],
+        ],
+        60,
+      ),
+    ],
+    liveBuild: (v) => ({
+      kind: "draw",
+      words: drawMany(
+        "drawroom",
+        DRAWWORDS.filter((w) => !num(v.level) || w[0] === num(v.level)),
+        num(v.count) || 4,
+      ).map((w) => w[1]),
+      seconds: num(v.sec) || 60,
+    }),
     Play: () => (
       <SetupThen
         id="draw"
@@ -877,6 +962,18 @@ export const GAMES: GameDef[] = [
     groups: ["couple"],
     scores: false,
     stat: "Dreams in common",
+    room: true,
+    roomFields: talkFields,
+    buildQuestions: pollRoom(
+      "bucket",
+      BUCKET.map((b) => b[1]),
+      (x) => ({
+        prompt: x,
+        options: ["Yes please", "Maybe", "Not for me"],
+        seconds: 20,
+        explain: "Everyone voted in secret. The bars show what the room wants to do together.",
+      }),
+    ),
     Play: () => {
       const [k, setK] = useState(0);
       return <BucketList key={k} onAgain={() => setK((x) => x + 1)} />;
@@ -997,6 +1094,9 @@ export const GAMES: GameDef[] = [
     groups: ["couple", "friends"],
     minPlayers: 2,
     stat: "Test each other",
+    room: true,
+    roomFields: [countField(6, [3, 6, 9, 12], "count", "How many rounds", "rounds in total")],
+    liveBuild: (v) => ({ kind: "knowme", questions: drawMany("knowme", KNOWME, num(v.count) || 6) }),
     Play: () => <KnowMe questions={KNOWME} />,
   },
   {
@@ -1104,6 +1204,15 @@ export const GAMES: GameDef[] = [
     groups: ["friends"],
     minPlayers: 2,
     stat: "Act it out",
+    room: true,
+    roomFields: turnFields,
+    liveBuild: (v) => ({
+      kind: "perform",
+      items: shuffle(CHARADES).map((w) => ({ w })),
+      turns: num(v.count) || 6,
+      seconds: 60,
+      buzz: false,
+    }),
     Play: () => (
       <SetupThen
         id="charades"
@@ -1132,6 +1241,15 @@ export const GAMES: GameDef[] = [
     groups: ["friends"],
     minPlayers: 2,
     stat: "Describe without saying",
+    room: true,
+    roomFields: turnFields,
+    liveBuild: (v) => ({
+      kind: "perform",
+      items: shuffle(TABOO).map((w) => ({ w: w[0], ban: w.slice(1) })),
+      turns: num(v.count) || 6,
+      seconds: 60,
+      buzz: true,
+    }),
     Play: () => (
       <SetupThen
         id="taboo"
@@ -1170,18 +1288,20 @@ export const GAMES: GameDef[] = [
     stat: "Beat the clock",
     room: true,
     roomFields: name5Fields,
-    buildQuestions: async (v) => {
+    liveBuild: (v) => {
       const th = v.th as string[];
       const pool = NAME5.filter((x) => th.includes(x[1]) && (!num(v.level) || x[0] === num(v.level)));
-      return drawMany("name5", pool, num(v.count) || 10).map<HostQuestion>((x) => ({
-        prompt: `Name 5: ${x[2]}`,
-        options: ["I named all five!", "I didn't make it"],
-        correct: 0,
-        seconds: num(v.s),
-        points: x[0],
-        label: levelName(x[0]),
-        explain: "Say them out loud, then tap if you got all five. It's an honesty game!",
-      }));
+      return {
+        kind: "words",
+        rounds: drawMany("name5", pool, num(v.count) || 10).map((x) => ({
+          prompt: `Name 5: ${x[2]}`,
+          labels: ["1", "2", "3", "4", "5"],
+        })),
+        seconds: Math.max(30, num(v.s) * 3),
+        hi: 2,
+        lo: 1,
+        pool: true,
+      };
     },
     Play: () => (
       <SetupThen
@@ -1223,6 +1343,20 @@ export const GAMES: GameDef[] = [
     section: "party",
     groups: ["couple", "friends"],
     stat: "Pen & paper",
+    room: true,
+    roomFields: [countField(3, [3, 5, 8], "count", "How many rounds", "letters in total")],
+    liveBuild: (v) => ({
+      kind: "words",
+      rounds: shuffle("ABCDEFGHIJKLMNOPRSTW".split("")).slice(0, num(v.count) || 3).map((letter) => ({
+        prompt: "Fill them all in before time runs out.",
+        labels: ["Name", "Place", "Animal", "Thing", "Food"],
+        letter,
+      })),
+      seconds: 60,
+      hi: 10,
+      lo: 5,
+      pool: false,
+    }),
     Play: () => <NPAT />,
   },
 ];

@@ -8,6 +8,7 @@ import { gamesFor, type GameDef } from "../games/registry";
 import { MediaView, useKeys } from "../games/frame";
 import { Setup } from "../games/quiz";
 import { TeamLadder } from "../games/team";
+import { LiveGame } from "./live";
 import { normaliseCode, type ClientMsg, type RoomState, type ServerMsg } from "../shared/protocol";
 
 type Conn = "connecting" | "open" | "retrying" | "slow" | "closed";
@@ -457,6 +458,14 @@ function HostLive({
                     });
                     return;
                   }
+                  if (game.liveBuild) {
+                    const cfg = await game.liveBuild(
+                      v,
+                      players.map((p) => p.name),
+                    );
+                    send({ t: "live-start", game: game.name, cfg });
+                    return;
+                  }
                   const list =
                     (await game.buildQuestions?.(
                       v,
@@ -478,6 +487,13 @@ function HostLive({
           onReveal={() => send({ t: "reveal" })}
           onNext={() => send({ t: "next" })}
         />
+      )}
+
+      {phase === "live" && state?.live && (
+        <div className="stack">
+          <LiveGame state={state} me="host" send={send} skew={skew} />
+          <Leaderboard state={state} title="Scores" />
+        </div>
       )}
 
       {phase === "team" && state?.team && (
@@ -914,6 +930,7 @@ function PlayerLive({ code, name, onLeave }: { code: string; name: string; onLea
           {state.phase === "reveal" && <NextBar state={state} skew={skew} onNext={() => send({ t: "next" })} />}
         </div>
       )}
+      {state.phase === "live" && state.live && you && <LiveGame state={state} me={you} send={send} skew={skew} />}
       {state.phase === "team" && state.team && you && <TeamLadder team={state.team} me={you} send={send} />}
       {state.phase === "ended" && <Leaderboard state={state} title="Final scores" you={you} />}
     </div>

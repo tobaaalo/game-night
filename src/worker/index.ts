@@ -9,6 +9,7 @@ import type {
   SharedType,
 } from "../shared/protocol";
 import { teamApply, teamStart, type TeamMsg, type TeamState } from "../shared/team";
+import { liveApply, liveStart, liveStep, liveView, type Ctx, type Live } from "../shared/live";
 import { handleApi, json } from "./api";
 
 interface Env {
@@ -46,11 +47,12 @@ interface Stored {
   qi: number;
   stage: number;
   nextAt?: number;
-  nextAct?: "reveal" | "clue" | "next";
+  nextAct?: "reveal" | "clue" | "next" | "live";
   touched: number;
   answers: Record<string, Answer>;
   reveal?: RoomState["reveal"];
   team?: TeamState;
+  live?: Live;
   n: number;
 }
 interface Tag {
@@ -134,7 +136,7 @@ export class Room extends DurableObject<Env> {
       if (url.searchParams.get("role") === "player" && !known)
         return json({ error: "You're not in this room any more." }, 404);
       if (url.searchParams.get("role") === "player") this.markSeen(pid);
-      return json({ state: this.view(), you: pid || undefined });
+      return json({ state: this.view(pid), you: pid || undefined });
     }
     if (url.pathname === "/msg" && req.method === "POST") {
       const b = (await req.json().catch(() => null)) as { role?: string; key?: string; pid?: string; msg?: ClientMsg } | null;
@@ -148,7 +150,7 @@ export class Room extends DurableObject<Env> {
         tag = { role: "player", pid: b.pid };
       }
       await this.handle(b.msg, tag, () => undefined);
-      return json({ state: this.view(), you: tag.pid });
+      return json({ state: this.view(tag.pid), you: tag.pid });
     }
     if (url.pathname === "/ws") {
       if (req.headers.get("Upgrade") !== "websocket") return json({ error: "Expected a WebSocket" }, 426);
@@ -202,7 +204,7 @@ export class Room extends DurableObject<Env> {
     return { set, host };
   }
 
-  view(): RoomState {
+  view(viewer?: string): RoomState {
     const s = this.s!;
     const { set, host } = this.connectedPids();
     const players: PublicPlayer[] = s.players.map((p) => ({
@@ -232,6 +234,7 @@ export class Room extends DurableObject<Env> {
         : pub;
     }
     if (s.phase === "reveal" || s.phase === "ended") st.reveal = s.reveal;
+    if (s.live) st.live = liveView(s.live, viewer);
     if (s.team) {
       st.team = {
         ...s.team,
@@ -254,10 +257,9 @@ export class Room extends DurableObject<Env> {
 
   broadcast() {
     if (!this.s) return;
-    const state = this.view();
     for (const ws of this.ctx.getWebSockets()) {
       const t = ws.deserializeAttachment() as Tag | null;
-      this.send(ws, { t: "state", state, you: t?.pid });
+      this.send(ws, { t: "state", state: this.view(t?.pid), you: t?.pid });
     }
   }
 
@@ -308,6 +310,41 @@ export class Room extends DurableObject<Env> {
       this.scheduleInQuestion();
     } else if (act === "reveal" && s.phase === "question") this.doReveal();
     else if (act === "next" && s.phase === "reveal") this.startQuestion(s.qi + 1);
+    else if (act === "live" && s.phase === "live" && s.live) this.liveAdvance(liveStep(s.live, this.liveCtx()));
+  }
+
+  liveCtx(): Ctx {
+    const s = this.s!;
+    const { set } = this.connectedPids();
+    return {
+      now: Date.now(),
+      score: (pid, n) => {
+        const p = s.players.find((x) => x.pid === pid);
+        if (p) p.score += n;
+      },
+      shuffle: (a) => {
+        const b = [...a];
+        for (let i = b.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [b[i], b[j]] = [b[j], b[i]];
+        }
+        return b;
+      },
+      here: (pid) => set.has(pid) || !this.s!.players.length,
+    };
+  }
+
+  /** After any live move: finish the game, or arm the alarm for the next automatic step. */
+  liveAdvance(over: boolean) {
+    const s = this.s!;
+    if (over || !s.live) {
+      s.phase = "ended";
+      s.nextAt = undefined;
+      s.nextAct = undefined;
+      return;
+    }
+    s.nextAt = s.live.at;
+    s.nextAct = s.live.at ? "live" : undefined;
   }
 
   doReveal() {
@@ -379,12 +416,45 @@ export class Room extends DurableObject<Env> {
         if (host) set.add("host");
         if (!teamApply(s.team, msg as TeamMsg, id, set)) {
           // Someone else got there first. Send the up-to-date board back so this phone catches up.
-          reply({ t: "state", state: this.view(), you: tag.pid });
+          reply({ t: "state", state: this.view(tag.pid), you: tag.pid });
           return;
         }
       }
       await this.save();
       this.broadcast();
+      return;
+    }
+    if (msg.t === "live-start" && tag.role === "host") {
+      const names: Record<string, string> = {};
+      s.players.forEach((p) => (names[p.pid] = p.name));
+      s.game = msg.game;
+      s.n = 0;
+      s.qi = -1;
+      s.total = 0;
+      s.q = undefined;
+      s.team = undefined;
+      s.reveal = undefined;
+      s.queue = undefined;
+      s.players.forEach((p) => (p.score = 0));
+      s.phase = "live";
+      s.live = liveStart(msg.cfg, names, this.liveCtx());
+      this.liveAdvance(false);
+      await this.save();
+      this.broadcast();
+      return;
+    }
+    if (msg.t === "live") {
+      if (s.phase !== "live" || !s.live) return;
+      const r = liveApply(s.live, msg, tag.role === "host" ? "host" : (tag.pid ?? ""), tag.role === "host", this.liveCtx());
+      if (r.error) reply({ t: "error", message: r.error });
+      if (r.end) this.liveAdvance(true);
+      else if (r.changed) this.liveAdvance(false);
+      if (r.changed || r.end) {
+        // Strokes arrive many times a second, so they are kept in memory and saved with the next real move.
+        if (msg.a !== "stroke") await this.save();
+        else await this.arm();
+        this.broadcast();
+      }
       return;
     }
     if (tag.role === "host") {
@@ -396,6 +466,7 @@ export class Room extends DurableObject<Env> {
         s.phase = "lobby";
         s.q = undefined;
         s.team = undefined;
+        s.live = undefined;
         s.reveal = undefined;
         s.nextAt = undefined;
         s.queue = msg.queue?.slice(0, 40);
@@ -404,10 +475,12 @@ export class Room extends DurableObject<Env> {
       } else if (msg.t === "reveal") this.doReveal();
       else if (msg.t === "end") {
         if (s.phase === "question") this.doReveal();
+        s.live = undefined;
         s.phase = "ended";
         s.nextAt = undefined;
       } else if (msg.t === "lobby") {
         s.team = undefined;
+        s.live = undefined;
         s.queue = undefined;
         s.nextAt = undefined;
         s.phase = "lobby";

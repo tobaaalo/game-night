@@ -99,7 +99,7 @@ export function CharadesBingo({ seconds, onAgain }: { seconds: number; onAgain: 
 }
 
 /* ---------- Word Chain ---------- */
-const STARTS = [
+export const STARTS = [
   "apple",
   "river",
   "table",
