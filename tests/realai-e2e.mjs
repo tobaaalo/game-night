@@ -14,10 +14,10 @@ await page.getByRole("button", { name: "Pick a game" }).first().click();
 async function run(mode, label) {
   await page.goto(BASE + "/play/realai");
   await page.getByText(mode, { exact: true }).first().click();
-  await page.locator(".own input").fill("20");
+  await page.locator(".own input").fill(process.env.N || "20");
   await page.getByRole("button", { name: /^Start$/ }).click();
   const seen = [], broken = [];
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < Number(process.env.N || 20); i++) {
     await page.waitForSelector(".qcard", { timeout: 15000 });
     await page.waitForTimeout(700);
     if (mode === "Pictures") {
