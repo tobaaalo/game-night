@@ -35,7 +35,7 @@ function Board({
   onClear: () => void;
 }) {
   const ref = useRef<HTMLCanvasElement>(null);
-  const local = useRef<number[][]>([]);
+  const local = useRef<number[][]>(strokes.map((x) => [...x]));
   const cur = useRef<number[] | null>(null);
   const paint = () => {
     const c = ref.current;
