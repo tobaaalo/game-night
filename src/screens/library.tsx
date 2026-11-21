@@ -130,6 +130,13 @@ export function Library() {
         )}
       </div>
 
+      {group === "friends" && (
+        <p className="room-legend">
+          <span className="room-swatch" aria-hidden="true" />
+          Yellow tab: can also be played in a room, everyone on their own phone.
+        </p>
+      )}
+
       {sections.map(({ s, list }) => (
         <section key={s} className="lib-section" aria-labelledby={`sec-${s}`}>
           <h2 id={`sec-${s}`} className="sec-sign h3">
@@ -238,7 +245,7 @@ function Ticket({
   const room = g.room && showRoom;
   if (view === "grid")
     return (
-      <button className="tile" onClick={onOpen}>
+      <button className={clsx("tile", room && "inroom")} onClick={onOpen}>
         <span className="tile-title">{g.name}</span>
         <span className="tile-stat">{g.stat}</span>
         {room && (
@@ -249,16 +256,17 @@ function Ticket({
       </button>
     );
   return (
-    <button className="ticket" onClick={onOpen}>
+    <button className={clsx("ticket", room && "inroom")} onClick={onOpen}>
       <span className="stub" aria-hidden="true">
         <span className="stub-no">{String(n).padStart(2, "0")}</span>
+        {room && <Icon.phones />}
       </span>
       <span className="ticket-body">
         <span className="ticket-title">{g.name}</span>
         <span className="ticket-blurb">{g.blurb}</span>
         <span className="ticket-meta">
           {g.stat}
-          {room && <span className="tag">Room play</span>}
+          {room && <span className="sr-only"> Can also be played in a room</span>}
         </span>
       </span>
     </button>

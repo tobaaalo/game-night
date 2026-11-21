@@ -76,7 +76,7 @@ export interface GameDef {
   teamBuild?: (v: SetupValues) => [number, string, string, number][];
   roomName?: string;
   roomBlurb?: string;
-  buildQuestions?: (v: SetupValues) => Promise<HostQuestion[]>;
+  buildQuestions?: (v: SetupValues, names: string[]) => Promise<HostQuestion[]>;
 }
 
 const levelField = (def = 1, rules?: Record<number, string>): Field => ({
@@ -200,6 +200,17 @@ const deckPlay = (id: string, items: string[], format?: (s: string) => string) =
     run={(d, again) => <CardDeck id={id} items={items} format={format} total={d.total} onAgain={again} />}
   />
 );
+
+/** Room version of a talking game: everyone answers on their own phone, results show how the room voted. No points. */
+const pollRoom =
+  (
+    id: string,
+    items: string[],
+    make: (x: string, names: string[]) => Pick<HostQuestion, "prompt" | "options"> & Partial<HostQuestion>,
+  ) =>
+  async (v: SetupValues, names: string[]): Promise<HostQuestion[]> =>
+    drawMany(id, items, num(v.count) || 10).map((x) => ({ correct: -1, seconds: 30, points: 0, ...make(x, names) }));
+const talkFields: Field[] = [countField(10, [5, 10, 15, 20], "count", "How many cards", "cards in total")];
 
 const quizPlay =
   (id: string, fields: Field[], build: (v: SetupValues) => Promise<HostQuestion[]>, note?: string) => () => (
@@ -737,6 +748,14 @@ export const GAMES: GameDef[] = [
     groups: ["couple", "friends"],
     scores: false,
     stat: "Fingers down",
+    room: true,
+    roomFields: talkFields,
+    buildQuestions: pollRoom("nhie", NHIE, (x) => ({
+      prompt: "Never have I ever " + x,
+      options: ["I have", "Never"],
+      seconds: 20,
+      explain: "Anyone who has done it puts a finger down.",
+    })),
     Play: deckPlay("nhie", NHIE, (x) => "Never have I ever " + x),
   },
   {
@@ -989,6 +1008,14 @@ export const GAMES: GameDef[] = [
     groups: ["couple"],
     scores: false,
     stat: "Conversation cards",
+    room: true,
+    roomFields: talkFields,
+    buildQuestions: pollRoom("couple", COUPLE, (x) => ({
+      prompt: x,
+      options: ["Next card"],
+      seconds: 60,
+      explain: "Take your time. Skip it if you like.",
+    })),
     Play: deckPlay("couple", COUPLE),
   },
   {
@@ -1000,6 +1027,14 @@ export const GAMES: GameDef[] = [
     groups: ["couple", "friends"],
     scores: false,
     stat: "Pick a side",
+    room: true,
+    roomFields: talkFields,
+    buildQuestions: pollRoom("wyr", WYR, (x) => ({
+      prompt: "Would you rather " + x[0].toLowerCase() + x.slice(1),
+      options: ["First option", "Second option"],
+      seconds: 25,
+      explain: "Defend your pick in one sentence.",
+    })),
     Play: deckPlay("wyr", WYR, (x) => "Would you rather " + x[0].toLowerCase() + x.slice(1)),
   },
   {
@@ -1012,6 +1047,14 @@ export const GAMES: GameDef[] = [
     minPlayers: 3,
     scores: false,
     stat: "Point and vote",
+    room: true,
+    roomFields: talkFields,
+    buildQuestions: pollRoom("likely", LIKELY, (x, names) => ({
+      prompt: `Who's most likely to ${x}?`,
+      options: names,
+      seconds: 25,
+      explain: "Whoever got the most votes explains themselves.",
+    })),
     Play: deckPlay("likely", LIKELY, (x) => `Who's most likely to ${x}?`),
   },
   {
@@ -1023,6 +1066,14 @@ export const GAMES: GameDef[] = [
     groups: ["friends"],
     scores: false,
     stat: "Spotlight cards",
+    room: true,
+    roomFields: talkFields,
+    buildQuestions: pollRoom("hotseat", HOTSEAT, (x) => ({
+      prompt: x,
+      options: ["Next card"],
+      seconds: 45,
+      explain: "Ask the hot seat this one.",
+    })),
     Play: deckPlay("hotseat", HOTSEAT),
   },
   {
@@ -1034,6 +1085,14 @@ export const GAMES: GameDef[] = [
     groups: ["couple", "friends"],
     scores: false,
     stat: "Spot the lie",
+    room: true,
+    roomFields: talkFields,
+    buildQuestions: pollRoom("twotruths", TWOTRUTHS, (x) => ({
+      prompt: `Topic: ${x}. The speaker tells two truths and a lie. Which one is the lie?`,
+      options: ["Statement 1", "Statement 2", "Statement 3"],
+      seconds: 45,
+      explain: "The speaker now reveals the lie.",
+    })),
     Play: deckPlay("twotruths", TWOTRUTHS, (x) => `Topic: ${x}`),
   },
   {

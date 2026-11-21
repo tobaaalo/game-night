@@ -457,7 +457,11 @@ function HostLive({
                     });
                     return;
                   }
-                  const list = (await game.buildQuestions?.(v)) ?? [];
+                  const list =
+                    (await game.buildQuestions?.(
+                      v,
+                      players.map((p) => p.name),
+                    )) ?? [];
                   // The server runs the whole game from here: timers, reveals and the next question.
                   send({ t: "setup", game: game.name, total: list.length, queue: list });
                 }}

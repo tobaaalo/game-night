@@ -1783,3 +1783,10 @@
   .setup .dock .btn { max-width: 420px; margin-inline: auto; display: flex; }
   .setup { max-width: 760px; margin-inline: auto; }
 }
+
+/* Room games: a yellow number tab instead of a text tag */
+.ticket.inroom .stub { background: var(--bulb); gap: 2px; align-content: center; }
+.ticket.inroom .stub svg { width: 14px; height: 14px; }
+.tile.inroom { border-left: 6px solid var(--bulb); }
+.room-legend { display: flex; align-items: center; gap: 0.6rem; margin: 0 0 var(--s4); color: var(--chrome-dim); font-size: var(--step-0); }
+.room-swatch { flex: none; width: 22px; height: 28px; border-radius: 4px; background: var(--bulb); }
