@@ -64,5 +64,59 @@
     "name": "Jollof rice",
     "src": "Jollof Rice with Stew.jpg",
     "aiTool": "Gamma"
+  },
+  {
+    "id": "camel",
+    "name": "Camel",
+    "src": "07._Camel_Profile%2C_near_Silverton%2C_NSW%2C_07.07.2007.jpg",
+    "aiTool": "Figma AI (Gemini)"
+  },
+  {
+    "id": "bald-eagle",
+    "name": "Bald eagle",
+    "src": "Bald_eagle_about_to_fly_in_Alaska_(2016).jpg",
+    "aiTool": "Figma AI (Gemini)"
+  },
+  {
+    "id": "big-ben",
+    "name": "Big Ben",
+    "src": "Elizabeth_Tower_and_the_north_front_of_the_Palace_of_Westminster,_London.jpg",
+    "aiTool": "Figma AI (Gemini)"
+  },
+  {
+    "id": "chameleon",
+    "name": "Chameleon",
+    "src": "Panther_Chameleon_738367_%28cropped%29.jpg",
+    "aiTool": "Figma AI (Gemini)"
+  },
+  {
+    "id": "cow",
+    "name": "Cow",
+    "src": "Cow_(Fleckvieh_breed)_Oeschinensee_Slaunger_2009-07-07.jpg",
+    "aiTool": "Figma AI (Gemini)"
+  },
+  {
+    "id": "domestic-cat",
+    "name": "Siamese cat",
+    "src": "Siam_lilacpoint.jpg",
+    "aiTool": "Figma AI (Gemini)"
+  },
+  {
+    "id": "golden-gate",
+    "name": "Golden Gate Bridge",
+    "src": "Golden_Gate_Bridge_as_seen_from_Battery_East.jpg",
+    "aiTool": "Figma AI (Gemini)"
+  },
+  {
+    "id": "gorilla",
+    "name": "Gorilla",
+    "src": "Gorille_des_plaines_de_l%27ouest_%C3%A0_l%27Espace_Zoologique.jpg",
+    "aiTool": "Figma AI (Gemini)"
+  },
+  {
+    "id": "grand-piano",
+    "name": "Grand piano",
+    "src": "Steinway_Vienna_002.JPG",
+    "aiTool": "Figma AI (Gemini)"
   }
 ]
