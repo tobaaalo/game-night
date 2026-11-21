@@ -14,6 +14,8 @@ export interface Field {
   options: { value: string | number; label: string; rule?: string }[];
   multi?: boolean;
   def: string | number | (string | number)[];
+  /** Lets people type their own whole number. `multiple` makes it a multiple of the number of players. */
+  custom?: { min: number; max: number; multiple?: boolean; unit: string };
 }
 export type SetupValues = Record<string, string | number | (string | number)[]>;
 
@@ -31,6 +33,21 @@ export function fitToPlayers(fields: Field[], n: number): Field[] {
   });
 }
 
+/** Why a typed number can't be used yet, or "" when it is fine. */
+export function countProblem(text: string, c: NonNullable<Field["custom"]>, players: number): string {
+  const t = text.trim();
+  if (!t) return "";
+  const n = Number(t);
+  if (!/^\d+$/.test(t) || n < c.min || n > c.max) return `Type a whole number from ${c.min} to ${c.max}.`;
+  if (c.multiple && players >= 2 && n % players) {
+    const down = Math.floor(n / players) * players;
+    const up = Math.ceil(n / players) * players;
+    const pick = [down >= c.min ? down : 0, up <= c.max ? up : 0].filter(Boolean).join(" or ");
+    return `With ${players} players, use a multiple of ${players} so everyone gets the same number of turns${pick ? `, like ${pick}` : ""}.`;
+  }
+  return "";
+}
+
 /** Setup screen: sensible defaults, remembered per game, one Start button. */
 export function Setup({
   id,
@@ -40,7 +57,10 @@ export function Setup({
   note,
   error,
   disabled,
+  players: playerCount,
 }: {
+  /** How many people share the turns. Defaults to the players added on this phone; rooms pass who has joined. */
+  players?: number;
   disabled?: boolean;
   id: string;
   fields: Field[];
@@ -49,49 +69,108 @@ export function Setup({
   note?: string;
   error?: string;
 }) {
-  const { players } = useApp();
-  const fields = useMemo(() => fitToPlayers(rawFields, players.length), [rawFields, players.length]);
+  const { players: local } = useApp();
+  const n = playerCount ?? local.length;
+  const fields = useMemo(() => fitToPlayers(rawFields, n), [rawFields, n]);
+  const [typed, setTyped] = useState<Record<string, string>>({});
   const [v, setV] = useState<SetupValues>(() => {
     const saved = load<SetupValues>(`gn.setup.${id}`, {});
     const out: SetupValues = {};
     for (const f of fields) {
       const s = saved[f.key];
+      const own = f.custom && typeof s === "number" && !countProblem(String(s), f.custom, n);
       const valid = Array.isArray(s)
         ? s.every((x) => f.options.some((o) => o.value === x))
-        : f.options.some((o) => o.value === s);
+        : f.options.some((o) => o.value === s) || !!own;
       out[f.key] = s !== undefined && valid ? s : f.def;
     }
     return out;
   });
   const empty = fields.some((f) => f.multi && (v[f.key] as unknown[]).length === 0);
+  const problems = fields.map((f) => (f.custom ? countProblem(typed[f.key] ?? "", f.custom, n) : ""));
+  const stuck = problems.some(Boolean);
+  // Players joining or leaving a room changes what fits: round the chosen number up to the next multiple.
+  useEffect(() => {
+    if (n < 2) return;
+    setV((p) => {
+      let out = p;
+      for (const f of fields) {
+        const x = p[f.key];
+        if (f.custom?.multiple && typeof x === "number" && x % n) {
+          if (out === p) out = { ...p };
+          out[f.key] = Math.ceil(x / n) * n;
+        }
+      }
+      return out;
+    });
+  }, [n, fields]);
+  // A saved number from a game with a different number of players may no longer fit.
+  const oddSaved = fields.some(
+    (f) => f.custom?.multiple && n >= 2 && typeof v[f.key] === "number" && (v[f.key] as number) % n !== 0,
+  );
   return (
     <form
       className="setup stagger"
       onSubmit={(e) => {
         e.preventDefault();
-        if (empty) return;
+        if (empty || stuck || oddSaved) return;
         save(`gn.setup.${id}`, v);
         onStart(v);
       }}
     >
-      {fields.map((f) => (
-        <Choice
-          key={f.key}
-          legend={f.legend}
-          options={f.options}
-          value={v[f.key] as never}
-          multi={f.multi}
-          onChange={(x) => setV((p) => ({ ...p, [f.key]: x as never }))}
-        />
+      {fields.map((f, i) => (
+        <div key={f.key} className="field">
+          <Choice
+            legend={f.legend}
+            options={f.options}
+            value={v[f.key] as never}
+            multi={f.multi}
+            onChange={(x) => {
+              setTyped((p) => ({ ...p, [f.key]: "" }));
+              setV((p) => ({ ...p, [f.key]: x as never }));
+            }}
+          />
+          {f.custom && (
+            <label className="own">
+              <span>Or type your own</span>
+              <input
+                type="text"
+                inputMode="numeric"
+                pattern="[0-9]*"
+                autoComplete="off"
+                placeholder={`${f.custom.min}-${f.custom.max}`}
+                value={typed[f.key] ?? ""}
+                aria-invalid={!!problems[i]}
+                aria-label={`${f.legend}: type your own number of ${f.custom.unit}`}
+                onChange={(e) => {
+                  const t = e.target.value.replace(/\D/g, "").slice(0, 3);
+                  setTyped((p) => ({ ...p, [f.key]: t }));
+                  if (f.custom && t && !countProblem(t, f.custom, n)) setV((p) => ({ ...p, [f.key]: Number(t) }));
+                }}
+              />
+              <span>{f.custom.unit}</span>
+            </label>
+          )}
+          {problems[i] && (
+            <p className="error-text" role="alert">
+              {problems[i]}
+            </p>
+          )}
+        </div>
       ))}
       {note && <p className="hint">{note}</p>}
+      {oddSaved && !stuck && (
+        <p className="error-text" role="alert">
+          Your saved number doesn&rsquo;t split between {n} players. Pick one above.
+        </p>
+      )}
       {(empty || error) && (
         <p className="error-text" role="alert">
           {empty ? "Pick at least one option above to start." : error}
         </p>
       )}
       <div className="dock">
-        <button className="btn block" type="submit" disabled={empty || disabled}>
+        <button className="btn block" type="submit" disabled={empty || stuck || oddSaved || disabled}>
           {startLabel}
         </button>
       </div>

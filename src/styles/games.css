@@ -1765,3 +1765,21 @@
 .clues { text-align: left; max-width: 34rem; margin: 0 auto; }
 .clue { margin: 0; padding: 10px 14px; border-radius: 12px; background: #0002; }
 .clue.new { background: var(--accent, #e8a21a); color: #2a0a14; }
+
+/* Type-your-own number under a count chip group */
+.field { display: grid; gap: 0.5rem; }
+.own { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; font-size: 0.95rem; color: var(--muted, inherit); }
+.own input {
+  width: 5.5rem; min-height: 44px; padding: 0 0.75rem; font: inherit; text-align: center;
+  border: 2px solid currentColor; border-radius: 0.6rem; background: transparent; color: inherit;
+}
+.own input[aria-invalid="true"] { border-color: var(--bad, #c0392b); }
+
+/* ---------- Desktop polish ---------- */
+@media (min-width: 900px) {
+  .dock { background: none; position: static; }
+  .welcome { justify-content: center; gap: var(--s6, 2.5rem); }
+  .welcome .dock { margin-top: 0; }
+  .setup .dock .btn { max-width: 420px; margin-inline: auto; display: flex; }
+  .setup { max-width: 760px; margin-inline: auto; }
+}

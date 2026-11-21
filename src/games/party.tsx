@@ -86,10 +86,14 @@ export function CardDeck({
   id,
   items,
   format = (s) => s,
+  total,
+  onAgain,
 }: {
   id: string;
   items: string[];
   format?: (s: string) => string;
+  total?: number;
+  onAgain?: () => void;
 }) {
   const [hist, setHist] = useState<string[]>(() => [draw(id, items)]);
   const [pos, setPos] = useState(0);
@@ -107,9 +111,16 @@ export function CardDeck({
     },
     [pos, hist],
   );
+  if (total && onAgain && pos >= total)
+    return (
+      <div className="qcard stack center-text">
+        <p className="h3">That&rsquo;s all {total} cards.</p>
+        <Finish onAgain={onAgain} />
+      </div>
+    );
   return (
     <div className="qcard deck">
-      <p className="prog">Card {pos + 1}</p>
+      <p className="prog">{total ? `Card ${pos + 1} of ${total}` : `Card ${pos + 1}`}</p>
       <div className="deckcard" key={pos}>
         <p>{format(hist[pos])}</p>
       </div>
@@ -120,7 +131,7 @@ export function CardDeck({
           </button>
         )}
         <button className="btn" onClick={next} autoFocus>
-          Next card
+          {total && pos + 1 >= total ? "Finish" : "Next card"}
         </button>
       </div>
       <p className="hint center-text">
@@ -246,7 +257,12 @@ export function TimedRun<T>({
   oneShot,
   pointsOf = () => 1,
   intro,
+  total,
+  onAgain,
 }: {
+  /** Turns in the whole game, shared equally between the players. */
+  total?: number;
+  onAgain?: () => void;
   id: string;
   items: T[];
   seconds: number;
@@ -279,7 +295,9 @@ export function TimedRun<T>({
     if (oneShot) setPhase("done");
     else setItem(draw(id, items));
   };
+  const [taken, setTaken] = useState(0);
   const nextPlayer = () => {
+    setTaken((x) => x + 1);
     setTurn((t) => (t + 1) % players.length);
     setPhase("ready");
   };
@@ -295,6 +313,13 @@ export function TimedRun<T>({
     },
     [phase, item, turn],
   );
+  if (total && onAgain && taken >= total)
+    return (
+      <div className="qcard stack center-text">
+        <p className="h3">That&rsquo;s all {total} turns.</p>
+        <Finish onAgain={onAgain} />
+      </div>
+    );
   return (
     <div className="qcard">
       <div className="qmeta">
@@ -333,7 +358,7 @@ export function TimedRun<T>({
           </p>
           <div className="actions center">
             <button className="btn" onClick={nextPlayer} autoFocus>
-              Next player
+              {total && taken + 1 >= total ? "Finish" : "Next player"}
             </button>
           </div>
         </div>

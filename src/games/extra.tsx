@@ -306,10 +306,12 @@ const INKS = ["#1b1b1b", "#d0312d", "#1d6fd1", "#2e8b3d"];
 export function DrawGuess({
   words,
   seconds,
+  total,
   onAgain,
 }: {
   words: [number, string][];
   seconds: number;
+  total?: number;
   onAgain: () => void;
 }) {
   const { players, award } = useApp();
@@ -359,7 +361,7 @@ export function DrawGuess({
     setPhase("ready");
   };
   const [rounds, setRounds] = useState(0);
-  if (rounds >= Math.max(2, players.length) * 2 && phase === "ready")
+  if (rounds >= (total ?? Math.max(2, players.length) * 2) && phase === "ready")
     return (
       <div className="qcard stack center-text">
         <p className="h3">That&rsquo;s {rounds} drawings. Nicely done.</p>
@@ -642,7 +644,9 @@ function search(a: string, b: string, ws: Set<string>): string[] {
 
 /** Shortest route from a to b. Tries everyday words first, then any real word. */
 export function route(a: string, b: string): string[] {
-  return search(a, b, everydayOf(a.length)).length ? search(a, b, everydayOf(a.length)) : search(a, b, wordsOf(a.length));
+  return search(a, b, everydayOf(a.length)).length
+    ? search(a, b, everydayOf(a.length))
+    : search(a, b, wordsOf(a.length));
 }
 
 export function WordLadder({ puzzles, onAgain }: { puzzles: Puzzle[]; onAgain: () => void }) {

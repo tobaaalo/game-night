@@ -437,6 +437,7 @@ function HostLive({
               <Setup
                 id={`room-${game.id}`}
                 fields={game.roomFields ?? []}
+                players={players.length}
                 disabled={!players.length}
                 startLabel={
                   players.length
@@ -531,15 +532,7 @@ function Clues({ q }: { q: NonNullable<RoomState["question"]> }) {
 }
 
 /** "Next question in 3" with a button to skip the wait. */
-function NextBar({
-  state,
-  skew,
-  onNext,
-}: {
-  state: RoomState;
-  skew: number;
-  onNext: () => void;
-}) {
+function NextBar({ state, skew, onNext }: { state: RoomState; skew: number; onNext: () => void }) {
   const last = (state.question?.n ?? 0) >= (state.total ?? 0);
   return (
     <div className="actions center">
@@ -695,7 +688,10 @@ export function RoomJoin({ initial }: { initial?: string }) {
     }
   };
 
-  if (joined) return <PlayerLive code={joined.code} name={joined.name} onLeave={() => (save("gn.session", null), setJoined(null))} />;
+  if (joined)
+    return (
+      <PlayerLive code={joined.code} name={joined.name} onLeave={() => (save("gn.session", null), setJoined(null))} />
+    );
   return (
     <form
       className="screen join"
@@ -911,9 +907,7 @@ function PlayerLive({ code, name, onLeave }: { code: string; name: string; onLea
                   : `${myPick == null ? "Too slow this time." : "Not this time."} It was ${q.options[state.reveal?.correct ?? 0]}.`)}
           </p>
           {state.phase === "reveal" && state.reveal?.explain && <p className="verdict good">{state.reveal.explain}</p>}
-          {state.phase === "reveal" && (
-            <NextBar state={state} skew={skew} onNext={() => send({ t: "next" })} />
-          )}
+          {state.phase === "reveal" && <NextBar state={state} skew={skew} onNext={() => send({ t: "next" })} />}
         </div>
       )}
       {state.phase === "team" && state.team && you && <TeamLadder team={state.team} me={you} send={send} />}

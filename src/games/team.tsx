@@ -95,7 +95,9 @@ export function TeamLadder({
           ))}
         </ol>
         {team.teams.some((t) => t.members.length > 1) && (
-          <p className="hint">Teams: {team.teams.map((t, k) => `${label(t, k)} is ${t.members.map(name).join(" and ")}`).join(". ")}.</p>
+          <p className="hint">
+            Teams: {team.teams.map((t, k) => `${label(t, k)} is ${t.members.map(name).join(" and ")}`).join(". ")}.
+          </p>
         )}
         {onFinish && (
           <button className="btn" onClick={onFinish.run}>
@@ -118,7 +120,12 @@ export function TeamLadder({
       {board}
       {mine && mine.members.length > 1 && (
         <p className="hint">
-          You are in {label(mine, idx(mine))} with {mine.members.filter((x) => x !== me).map(name).join(" and ")}.
+          You are in {label(mine, idx(mine))} with{" "}
+          {mine.members
+            .filter((x) => x !== me)
+            .map(name)
+            .join(" and ")}
+          .
         </p>
       )}
       {team.status === "play" && team.vs === "after" && !isMine && (
@@ -141,9 +148,7 @@ export function TeamLadder({
           {other ? `${name(other.by)} is choosing a letter…` : "Anyone on your team can play"}
         </p>
       )}
-      {playing && !isMine && b.picking && (
-        <p className="hint">{name(b.picking.by)} is choosing a letter…</p>
-      )}
+      {playing && !isMine && b.picking && <p className="hint">{name(b.picking.by)} is choosing a letter…</p>}
       <p className="hint">
         Change one letter at a time to turn <b>{start.toUpperCase()}</b> into <b>{goal.toUpperCase()}</b>. Par is {par}{" "}
         moves.
@@ -187,7 +192,11 @@ export function TeamLadder({
       )}
       {playing && isMine && (
         <div className="actions center">
-          <button className="btn ghost small" disabled={b.chain.length < 2} onClick={() => send({ t: "team-undo", v: b.v })}>
+          <button
+            className="btn ghost small"
+            disabled={b.chain.length < 2}
+            onClick={() => send({ t: "team-undo", v: b.v })}
+          >
             Undo
           </button>
           <button
@@ -218,7 +227,9 @@ export function TeamLadder({
       {team.status === "round" && (
         <div className="stack">
           <p className="h3">
-            {winner ? `${label(winner, idx(winner))} ${winner.members.length === 1 ? "wins" : "win"} this ladder!` : team.note}
+            {winner
+              ? `${label(winner, idx(winner))} ${winner.members.length === 1 ? "wins" : "win"} this ladder!`
+              : team.note}
           </p>
           {winner && team.note && <p className="hint">{team.note}</p>}
           <ol className="tally">
@@ -229,13 +240,22 @@ export function TeamLadder({
                   {t === mine ? " (you)" : ""}
                 </b>
                 <span>
-                  {t.board.status === "won" ? `${t.board.chain.length - 1} moves` : t.board.status === "gave" ? "gave up" : "did not finish"}
+                  {t.board.status === "won"
+                    ? `${t.board.chain.length - 1} moves`
+                    : t.board.status === "gave"
+                      ? "gave up"
+                      : "did not finish"}
                   {t.gained ? `, +${t.gained}` : ""}
                 </span>
               </li>
             ))}
           </ol>
-          <p className="hint">One way through: {route(start, goal).map((w) => w.toUpperCase()).join(" → ")}</p>
+          <p className="hint">
+            One way through:{" "}
+            {route(start, goal)
+              .map((w) => w.toUpperCase())
+              .join(" → ")}
+          </p>
           <button className="btn" onClick={() => send({ t: "team-next", rv: team.rv })}>
             {team.i + 1 < team.puzzles.length ? "Next ladder" : "See results"}
           </button>

@@ -129,14 +129,22 @@ const RULES = {
     0: "A mix of all four levels.",
   },
 };
-const countField = (def = 10, opts = [5, 10, 15, 20], key = "count", legend = "How many"): Field => ({
+const countField = (
+  def = 10,
+  opts = [5, 10, 15, 20],
+  key = "count",
+  legend = "How many",
+  unit = "in total",
+): Field => ({
   key,
   legend,
   options: opts.map((n) => ({ value: n, label: String(n) })),
   def,
+  // "count" fields are always a multiple of the number of players; ladders are shared between teams, so any number works.
+  custom: { min: 1, max: key === "count" ? 60 : 30, multiple: key === "count", unit },
 });
 /** Word Ladder rounds. A different key from "count", so the number is never rounded up to match the players. */
-const laddersField = countField(4, [2, 3, 4, 5, 6], "rounds", "How many ladders");
+const laddersField = countField(4, [2, 3, 4, 5, 6], "rounds", "How many ladders", "ladders");
 
 /** Wraps a setup → play cycle for games that build a list up front. */
 function SetupThen<T>({
@@ -182,6 +190,16 @@ function SetupThen<T>({
     </>
   );
 }
+
+/** Card decks: pick how many cards, then each person gets the same number of goes. */
+const deckPlay = (id: string, items: string[], format?: (s: string) => string) => () => (
+  <SetupThen
+    id={id}
+    fields={[countField(10, [10, 20, 30], "count", "How many cards", "cards in total")]}
+    build={(v) => ({ total: num(v.count) })}
+    run={(d, again) => <CardDeck id={id} items={items} format={format} total={d.total} onAgain={again} />}
+  />
+);
 
 const quizPlay =
   (id: string, fields: Field[], build: (v: SetupValues) => Promise<HostQuestion[]>, note?: string) => () => (
@@ -395,36 +413,47 @@ const YEAR_RULES = {
 };
 
 const emojiFields: Field[] = [
-          {
-            key: "cats",
-            legend: "Categories",
-            options: EMOJI_CATS.map(([value, label]) => ({ value, label })),
-            def: EMOJI_CATS.map((c) => c[0]),
-            multi: true,
-          },
-          levelField(0, RULES.emoji),
-          countField(),
-        ];
+  {
+    key: "cats",
+    legend: "Categories",
+    options: EMOJI_CATS.map(([value, label]) => ({ value, label })),
+    def: EMOJI_CATS.map((c) => c[0]),
+    multi: true,
+  },
+  levelField(0, RULES.emoji),
+  countField(),
+];
+
+/** Turns for the timed party games: each player gets the same number. */
+const turnFields: Field[] = [countField(6, [2, 4, 6, 10], "count", "How many turns", "turns in total")];
 
 const name5Fields: Field[] = [
-          {
-            key: "th",
-            legend: "Themes",
-            options: N5_THEMES.map(([value, label]) => ({ value, label })),
-            def: N5_THEMES.map((t) => t[0]),
-            multi: true,
-          },
-          levelField(1, RULES.name5),
-          {
-            key: "s",
-            legend: "Seconds on the clock",
-            options: [10, 15, 20].map((n) => ({ value: n, label: `${n}s` })),
-            def: 10,
-          },
-        ];
+  {
+    key: "th",
+    legend: "Themes",
+    options: N5_THEMES.map(([value, label]) => ({ value, label })),
+    def: N5_THEMES.map((t) => t[0]),
+    multi: true,
+  },
+  levelField(1, RULES.name5),
+  countField(10, [5, 10, 15, 20], "count", "How many turns"),
+  {
+    key: "s",
+    legend: "Seconds on the clock",
+    options: [10, 15, 20].map((n) => ({ value: n, label: `${n}s` })),
+    def: 10,
+  },
+];
 
 const CLUE_FAMILY: Record<string, string> = {
-  person: "p", character: "p", country: "c", place: "l", animal: "a", food: "f", thing: "t", film: "t",
+  person: "p",
+  character: "p",
+  country: "c",
+  place: "l",
+  animal: "a",
+  food: "f",
+  thing: "t",
+  film: "t",
 };
 const CLUE_RULES: Record<number, string> = {
   1: "Famous people, places, animals and things almost everyone knows.",
@@ -596,7 +625,9 @@ export const GAMES: GameDef[] = [
       const pool = EMOJI.filter((e) => cats.includes(e[0]) && (!num(v.level) || e[1] === num(v.level)));
       return drawMany("emoji", pool, num(v.count)).map<HostQuestion>(([cat, lv, q, a]) => {
         // Wrong answers come from the same category, so the category never gives the answer away.
-        const wrong = shuffle(EMOJI.filter((e) => e[0] === cat && e[3] !== a)).slice(0, 3).map((e) => e[3]);
+        const wrong = shuffle(EMOJI.filter((e) => e[0] === cat && e[3] !== a))
+          .slice(0, 3)
+          .map((e) => e[3]);
         const options = shuffle([a, ...wrong]);
         return {
           prompt: "What do these emojis mean?",
@@ -705,7 +736,7 @@ export const GAMES: GameDef[] = [
     groups: ["couple", "friends"],
     scores: false,
     stat: "Fingers down",
-    Play: () => <CardDeck id="nhie" items={NHIE} format={(x) => "Never have I ever " + x} />,
+    Play: deckPlay("nhie", NHIE, (x) => "Never have I ever " + x),
   },
   {
     id: "bingo",
@@ -793,6 +824,7 @@ export const GAMES: GameDef[] = [
         id="draw"
         fields={[
           levelField(1, RULES.emoji),
+          countField(4, [2, 4, 6, 10], "count", "How many drawings", "drawings in total"),
           timeField(
             "sec",
             "Time to draw",
@@ -804,9 +836,14 @@ export const GAMES: GameDef[] = [
             60,
           ),
         ]}
-        build={(v) => ({ lv: num(v.level), sec: num(v.sec) })}
+        build={(v) => ({ lv: num(v.level), sec: num(v.sec), total: num(v.count) })}
         run={(d, again) => (
-          <DrawGuess words={DRAWWORDS.filter((w) => !d.lv || w[0] === d.lv)} seconds={d.sec} onAgain={again} />
+          <DrawGuess
+            words={DRAWWORDS.filter((w) => !d.lv || w[0] === d.lv)}
+            seconds={d.sec}
+            total={d.total}
+            onAgain={again}
+          />
         )}
       />
     ),
@@ -884,7 +921,9 @@ export const GAMES: GameDef[] = [
         // Wrong answers are the same kind of thing (a person, a place, an animal...), so the kind never gives it away.
         const kin = CLUES.filter((x) => x[2] !== c[2] && CLUE_FAMILY[x[1]] === CLUE_FAMILY[c[1]]);
         const near = kin.filter((x) => Math.abs(x[0] - c[0]) <= 1);
-        const pick = shuffle(near.length >= 3 ? near : kin).slice(0, 3).map((x) => x[2]);
+        const pick = shuffle(near.length >= 3 ? near : kin)
+          .slice(0, 3)
+          .map((x) => x[2]);
         const options = shuffle([c[2], ...pick]);
         return {
           prompt: "Who or what am I?",
@@ -910,7 +949,12 @@ export const GAMES: GameDef[] = [
     roomFields: [],
     buildQuestions: async () =>
       drawMany("proverbs", PROVERBS, PROVERBS.length).map<HostQuestion>(([q, a]) => {
-        const options = shuffle([a, ...shuffle(PROVERBS.filter((p) => p[1] !== a)).slice(0, 3).map((p) => p[1])]);
+        const options = shuffle([
+          a,
+          ...shuffle(PROVERBS.filter((p) => p[1] !== a))
+            .slice(0, 3)
+            .map((p) => p[1]),
+        ]);
         return { prompt: q, options, correct: options.indexOf(a), seconds: 15, points: 1 };
       }),
     Play: () => {
@@ -944,7 +988,7 @@ export const GAMES: GameDef[] = [
     groups: ["couple"],
     scores: false,
     stat: "Conversation cards",
-    Play: () => <CardDeck id="couple" items={COUPLE} />,
+    Play: deckPlay("couple", COUPLE),
   },
   {
     id: "wyr",
@@ -955,7 +999,7 @@ export const GAMES: GameDef[] = [
     groups: ["couple", "friends"],
     scores: false,
     stat: "Pick a side",
-    Play: () => <CardDeck id="wyr" items={WYR} format={(x) => "Would you rather " + x[0].toLowerCase() + x.slice(1)} />,
+    Play: deckPlay("wyr", WYR, (x) => "Would you rather " + x[0].toLowerCase() + x.slice(1)),
   },
   {
     id: "likely",
@@ -967,7 +1011,7 @@ export const GAMES: GameDef[] = [
     minPlayers: 3,
     scores: false,
     stat: "Point and vote",
-    Play: () => <CardDeck id="likely" items={LIKELY} format={(x) => `Who's most likely to ${x}?`} />,
+    Play: deckPlay("likely", LIKELY, (x) => `Who's most likely to ${x}?`),
   },
   {
     id: "hotseat",
@@ -978,7 +1022,7 @@ export const GAMES: GameDef[] = [
     groups: ["friends"],
     scores: false,
     stat: "Spotlight cards",
-    Play: () => <CardDeck id="hotseat" items={HOTSEAT} />,
+    Play: deckPlay("hotseat", HOTSEAT),
   },
   {
     id: "twotruths",
@@ -989,7 +1033,7 @@ export const GAMES: GameDef[] = [
     groups: ["couple", "friends"],
     scores: false,
     stat: "Spot the lie",
-    Play: () => <CardDeck id="twotruths" items={TWOTRUTHS} format={(x) => `Topic: ${x}`} />,
+    Play: deckPlay("twotruths", TWOTRUTHS, (x) => `Topic: ${x}`),
   },
   {
     id: "charades",
@@ -1001,12 +1045,21 @@ export const GAMES: GameDef[] = [
     minPlayers: 2,
     stat: "Act it out",
     Play: () => (
-      <TimedRun
+      <SetupThen
         id="charades"
-        items={CHARADES}
-        seconds={60}
-        intro="Act out each word, no talking. Everyone else guesses."
-        render={(w) => <p>{w}</p>}
+        fields={turnFields}
+        build={(v) => ({ total: num(v.count) })}
+        run={(d, again) => (
+          <TimedRun
+            id="charades"
+            items={CHARADES}
+            seconds={60}
+            total={d.total}
+            onAgain={again}
+            intro="Act out each word, no talking. Everyone else guesses."
+            render={(w) => <p>{w}</p>}
+          />
+        )}
       />
     ),
   },
@@ -1020,20 +1073,29 @@ export const GAMES: GameDef[] = [
     minPlayers: 2,
     stat: "Describe without saying",
     Play: () => (
-      <TimedRun
+      <SetupThen
         id="taboo"
-        items={TABOO}
-        seconds={60}
-        intro="Describe each word without saying it or any banned word."
-        render={(w) => (
-          <div className="taboo">
-            <p>{w[0]}</p>
-            <ul aria-label="Banned words">
-              {w.slice(1).map((b) => (
-                <li key={b}>{b}</li>
-              ))}
-            </ul>
-          </div>
+        fields={turnFields}
+        build={(v) => ({ total: num(v.count) })}
+        run={(d, again) => (
+          <TimedRun
+            id="taboo"
+            items={TABOO}
+            seconds={60}
+            total={d.total}
+            onAgain={again}
+            intro="Describe each word without saying it or any banned word."
+            render={(w) => (
+              <div className="taboo">
+                <p>{w[0]}</p>
+                <ul aria-label="Banned words">
+                  {w.slice(1).map((b) => (
+                    <li key={b}>{b}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          />
         )}
       />
     ),
@@ -1051,7 +1113,7 @@ export const GAMES: GameDef[] = [
     buildQuestions: async (v) => {
       const th = v.th as string[];
       const pool = NAME5.filter((x) => th.includes(x[1]) && (!num(v.level) || x[0] === num(v.level)));
-      return drawMany("name5", pool, 10).map<HostQuestion>((x) => ({
+      return drawMany("name5", pool, num(v.count) || 10).map<HostQuestion>((x) => ({
         prompt: `Name 5: ${x[2]}`,
         options: ["I named all five!", "I didn't make it"],
         correct: 0,
@@ -1068,15 +1130,17 @@ export const GAMES: GameDef[] = [
         build={(v) => {
           const th = v.th as string[];
           const pool = NAME5.filter((x) => th.includes(x[1]) && (!num(v.level) || x[0] === num(v.level)));
-          return pool.length ? { pool, s: num(v.s), key: "name5" } : [];
+          return pool.length ? { pool, s: num(v.s), key: "name5", total: num(v.count) } : [];
         }}
-        run={(d) =>
+        run={(d, again) =>
           Array.isArray(d) ? null : (
             <TimedRun
               id={d.key}
               items={d.pool}
               seconds={d.s}
               oneShot
+              total={d.total}
+              onAgain={again}
               pointsOf={(x) => x[0]}
               intro={`One category, ${d.s} seconds, name five things.`}
               render={(x) => (

@@ -373,7 +373,7 @@ export class Room extends DurableObject<Env> {
         s.reveal = undefined;
         s.queue = undefined;
         s.nextAt = undefined;
-        s.team = teamStart(msg.vs, msg.within, msg.teams, msg.puzzles.slice(0, 20), order, mix);
+        s.team = teamStart(msg.vs, msg.within, msg.teams, msg.puzzles.slice(0, 40), order, mix);
       } else if (s.team) {
         const { set, host } = this.connectedPids();
         if (host) set.add("host");

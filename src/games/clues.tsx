@@ -25,9 +25,7 @@ export function ClueRun({ items, onAgain }: { items: ClueItem[]; onAgain: () => 
         <p className="prog">
           {i + 1} / {items.length}
         </p>
-        <p className="prog">
-          {end === "none" ? "0 pts" : `${worth} ${worth === 1 ? "pt" : "pts"}`}
-        </p>
+        <p className="prog">{end === "none" ? "0 pts" : `${worth} ${worth === 1 ? "pt" : "pts"}`}</p>
       </div>
       <h2 className="qprompt">Who or what am I?</h2>
       <div className="clues stack">
