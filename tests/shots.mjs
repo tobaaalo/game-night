@@ -6,10 +6,10 @@ import fs from "node:fs";
 const BASE = process.argv[2] ?? "http://127.0.0.1:8787";
 const OUT = process.argv[3] ?? "tests/screens";
 const WIDTHS = [375, 768, 1440];
-const exe = "/opt/pw-browsers/chromium-1194/chrome-linux/chrome";
+const exe = undefined;
 fs.mkdirSync(OUT, { recursive: true });
 
-const browser = await chromium.launch({ executablePath: exe });
+const browser = await chromium.launch({ executablePath: process.env.PW_CHROME || undefined });
 const problems = [];
 
 async function shot(page, w, name) {

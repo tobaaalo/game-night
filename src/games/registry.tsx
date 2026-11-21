@@ -424,7 +424,7 @@ const name5Fields: Field[] = [
         ];
 
 const CLUE_FAMILY: Record<string, string> = {
-  person: "p", character: "p", country: "w", place: "w", animal: "a", food: "f", thing: "t", film: "t",
+  person: "p", character: "p", country: "c", place: "l", animal: "a", food: "f", thing: "t", film: "t",
 };
 const CLUE_RULES: Record<number, string> = {
   1: "Famous people, places, animals and things almost everyone knows.",

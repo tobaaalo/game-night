@@ -1,7 +1,7 @@
 // Room checks with real phones (browser contexts). Usage: node tests/room-e2e.mjs <baseUrl>
 import { chromium } from "playwright";
 const BASE = process.argv[2];
-const b = await chromium.launch({ executablePath: "/opt/pw-browsers/chromium-1194/chrome-linux/chrome" });
+const b = await chromium.launch({ executablePath: process.env.PW_CHROME || undefined });
 const phone = async () => (await (await b.newContext({ viewport: { width: 375, height: 812 }, reducedMotion: "reduce" })).newPage());
 const fail = (m) => { console.log("FAIL", m); process.exit(1); };
 const ok = (m) => console.log("ok", m);
@@ -35,7 +35,7 @@ async function room(names) {
   await d.locator(".option").nth(0).click();
   await d.locator(".option").nth(1).click(); // change once
   if ((await d.locator(".option.mine").count()) !== 1 || !(await d.locator(".option").nth(1).getAttribute("class")).includes("mine")) fail("change once did not move my pick");
-  await d.locator(".option").nth(2).click(); // second change must be ignored
+  await d.locator(".option").nth(2).click({ force: true }); // second change must be ignored
   if (!(await d.locator(".option").nth(1).getAttribute("class")).includes("mine")) fail("second change should be ignored");
   ok("answer can be changed once");
   await f.locator(".option").nth(0).click();
