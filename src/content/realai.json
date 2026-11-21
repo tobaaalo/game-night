@@ -514,5 +514,137 @@
     "name": "Zebra",
     "src": "Plains_Zebra_Equus_quagga_cropped.jpg",
     "aiTool": "Pollinations AI"
+  },
+  {
+    "id": "alhambra",
+    "name": "Alhambra",
+    "src": "Dawn_Charles_V_Palace_Alhambra_Granada_Andalusia_Spain.jpg",
+    "aiTool": "Pollinations AI"
+  },
+  {
+    "id": "brandenburg-gate",
+    "name": "Brandenburg Gate",
+    "src": "Brandenburger_Tor_abends.jpg",
+    "aiTool": "Pollinations AI"
+  },
+  {
+    "id": "chichen-itza",
+    "name": "Chichen Itza",
+    "src": "Chichen_Itza_3.jpg",
+    "aiTool": "Pollinations AI"
+  },
+  {
+    "id": "crocodile",
+    "name": "Nile crocodile",
+    "src": "NileCrocodile.jpg",
+    "aiTool": "Pollinations AI"
+  },
+  {
+    "id": "empire-state",
+    "name": "Empire State Building",
+    "src": "Empire_State_Building_%28aerial_view%29.jpg",
+    "aiTool": "Pollinations AI"
+  },
+  {
+    "id": "giant-panda",
+    "name": "Giant panda",
+    "src": "Grosser_Panda.JPG",
+    "aiTool": "Pollinations AI"
+  },
+  {
+    "id": "goat",
+    "name": "Goat",
+    "src": "Hausziege_04.jpg",
+    "aiTool": "Pollinations AI"
+  },
+  {
+    "id": "great-white-shark",
+    "name": "Great white shark",
+    "src": "White_shark.jpg",
+    "aiTool": "Pollinations AI"
+  },
+  {
+    "id": "hagia-sophia",
+    "name": "Hagia Sophia",
+    "src": "Hagia_Sophia_%28228968325%29.jpeg",
+    "aiTool": "Pollinations AI"
+  },
+  {
+    "id": "kilimanjaro",
+    "name": "Mount Kilimanjaro",
+    "src": "Kilimanjaro_from_Amboseli.jpg",
+    "aiTool": "Pollinations AI"
+  },
+  {
+    "id": "leopard",
+    "name": "Leopard",
+    "src": "African_leopard_male_(cropped).jpg",
+    "aiTool": "Pollinations AI"
+  },
+  {
+    "id": "london-eye",
+    "name": "London Eye",
+    "src": "London-Eye-2009.JPG",
+    "aiTool": "Pollinations AI"
+  },
+  {
+    "id": "macaw",
+    "name": "Scarlet macaw",
+    "src": "Scarlet_macaw_(Ara_macao_cyanopterus)_Copan.jpg",
+    "aiTool": "Pollinations AI"
+  },
+  {
+    "id": "meerkat",
+    "name": "Meerkat",
+    "src": "Meerkat_%28Suricata_suricatta%29_Tswalu.jpg",
+    "aiTool": "Pollinations AI"
+  },
+  {
+    "id": "mute-swan",
+    "name": "Mute swan",
+    "src": "CygneVaires.jpg",
+    "aiTool": "Pollinations AI"
+  },
+  {
+    "id": "notre-dame",
+    "name": "Notre-Dame de Paris",
+    "src": "Notre-Dame_de_Paris,_4_October_2017.jpg",
+    "aiTool": "Pollinations AI"
+  },
+  {
+    "id": "parthenon",
+    "name": "Parthenon",
+    "src": "The_Parthenon_in_Athens.jpg",
+    "aiTool": "Pollinations AI"
+  },
+  {
+    "id": "rhinoceros",
+    "name": "Rhinoceros",
+    "src": "081_White_rhinoceros_(male)_in_the_Kalahari_Desert_of_Namibia_Photo_by_Giles_Laurent.jpg",
+    "aiTool": "Pollinations AI"
+  },
+  {
+    "id": "sloth",
+    "name": "Sloth",
+    "src": "Bicho-pregui%C3%A7a_3.jpg",
+    "aiTool": "Pollinations AI"
+  },
+  {
+    "id": "the-shard",
+    "name": "The Shard",
+    "src": "The_Shard_at_sunset_2017_%28cropped%29.jpg",
+    "aiTool": "Pollinations AI"
+  },
+  {
+    "id": "toucan",
+    "name": "Toco toucan",
+    "src": "006_Toco_toucan_in_Encontro_das_Águas_State_Park_Photo_by_Giles_Laurent_(cropped).jpg",
+    "aiTool": "Pollinations AI"
+  },
+  {
+    "id": "walrus",
+    "name": "Walrus",
+    "src": "Walrus_in_the_Russian_Arctic_National_Park,_Novaya_Zemlya_2015-2.jpg",
+    "aiTool": "Pollinations AI"
   }
 ]

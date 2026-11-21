@@ -15,6 +15,8 @@ export interface Field {
   multi?: boolean;
   def: string | number | (string | number)[];
   /** Lets people type their own whole number. `multiple` makes it a multiple of the number of players. */
+  /** Only show this question when another answer matches, e.g. text difficulty only for the Texts round. */
+  showIf?: { key: string; value: string | number };
   custom?: { min: number; max: number; multiple?: boolean; unit: string };
 }
 export type SetupValues = Record<string, string | number | (string | number)[]>;
@@ -118,46 +120,48 @@ export function Setup({
         onStart(v);
       }}
     >
-      {fields.map((f, i) => (
-        <div key={f.key} className="field">
-          <Choice
-            legend={f.legend}
-            options={f.options}
-            value={v[f.key] as never}
-            multi={f.multi}
-            onChange={(x) => {
-              setTyped((p) => ({ ...p, [f.key]: "" }));
-              setV((p) => ({ ...p, [f.key]: x as never }));
-            }}
-          />
-          {f.custom && (
-            <label className="own">
-              <span>Or type your own</span>
-              <input
-                type="text"
-                inputMode="numeric"
-                pattern="[0-9]*"
-                autoComplete="off"
-                placeholder={`${f.custom.min}-${f.custom.max}`}
-                value={typed[f.key] ?? ""}
-                aria-invalid={!!problems[i]}
-                aria-label={`${f.legend}: type your own number of ${f.custom.unit}`}
-                onChange={(e) => {
-                  const t = e.target.value.replace(/\D/g, "").slice(0, 3);
-                  setTyped((p) => ({ ...p, [f.key]: t }));
-                  if (f.custom && t && !countProblem(t, f.custom, n)) setV((p) => ({ ...p, [f.key]: Number(t) }));
-                }}
-              />
-              <span>{f.custom.unit}</span>
-            </label>
-          )}
-          {problems[i] && (
-            <p className="error-text" role="alert">
-              {problems[i]}
-            </p>
-          )}
-        </div>
-      ))}
+      {fields.map((f, i) =>
+        f.showIf && v[f.showIf.key] !== f.showIf.value ? null : (
+          <div key={f.key} className="field">
+            <Choice
+              legend={f.legend}
+              options={f.options}
+              value={v[f.key] as never}
+              multi={f.multi}
+              onChange={(x) => {
+                setTyped((p) => ({ ...p, [f.key]: "" }));
+                setV((p) => ({ ...p, [f.key]: x as never }));
+              }}
+            />
+            {f.custom && (
+              <label className="own">
+                <span>Or type your own</span>
+                <input
+                  type="text"
+                  inputMode="numeric"
+                  pattern="[0-9]*"
+                  autoComplete="off"
+                  placeholder={`${f.custom.min}-${f.custom.max}`}
+                  value={typed[f.key] ?? ""}
+                  aria-invalid={!!problems[i]}
+                  aria-label={`${f.legend}: type your own number of ${f.custom.unit}`}
+                  onChange={(e) => {
+                    const t = e.target.value.replace(/\D/g, "").slice(0, 3);
+                    setTyped((p) => ({ ...p, [f.key]: t }));
+                    if (f.custom && t && !countProblem(t, f.custom, n)) setV((p) => ({ ...p, [f.key]: Number(t) }));
+                  }}
+                />
+                <span>{f.custom.unit}</span>
+              </label>
+            )}
+            {problems[i] && (
+              <p className="error-text" role="alert">
+                {problems[i]}
+              </p>
+            )}
+          </div>
+        ),
+      )}
       {note && <p className="hint">{note}</p>}
       {oddSaved && !stuck && (
         <p className="error-text" role="alert">

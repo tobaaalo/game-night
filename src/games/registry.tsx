@@ -294,6 +294,7 @@ const realFields: Field[] = [
   {
     key: "level",
     legend: "Text difficulty",
+    showIf: { key: "mode", value: "text" },
     options: [
       { value: 1, label: "Easy", rule: "The AI text sounds like a typical AI." },
       { value: 2, label: "Hard", rule: "Both are casual and written in the same voice." },
