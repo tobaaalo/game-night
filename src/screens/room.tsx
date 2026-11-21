@@ -492,7 +492,16 @@ function HostLive({
       {phase === "live" && state?.live && (
         <div className="stack">
           <LiveGame state={state} me="host" send={send} skew={skew} />
-          <Leaderboard state={state} title="Scores" />
+          <ul className="live-scores" aria-label="Scores">
+            {[...players]
+              .sort((a, b) => b.score - a.score)
+              .map((p) => (
+                <li key={p.pid}>
+                  <span>{p.name}</span>
+                  <strong className="mono">{p.score}</strong>
+                </li>
+              ))}
+          </ul>
         </div>
       )}
 

@@ -462,7 +462,7 @@ export function LiveGame({ state, me, send, skew }: Props) {
       <div className="qcard live">
         {head}
         <p className="turn">{isActor ? "Your turn. Flip two cards." : `${nm(v.actor)} is flipping`}</p>
-        <div className="mem-grid" style={{ gridTemplateColumns: `repeat(${cards.length > 16 ? 5 : 4}, 1fr)` }}>
+        <div className="mem-grid" style={{ gridTemplateColumns: `repeat(${cards.length > 16 ? 5 : 4}, minmax(0, 1fr))` }}>
           {cards.map((c, i) => (
             <button
               key={i}

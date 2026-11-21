@@ -1833,3 +1833,8 @@
 .live-answers { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; }
 .live-answer { margin: 0; display: flex; justify-content: space-between; gap: 8px; }
 .live-answer.right { color: var(--good, #2e7d32); font-weight: 700; }
+.mem-grid { max-width: 520px; width: 100%; margin-inline: auto; }
+.mem-card { min-width: 0; padding: 0; }
+.live-scores { list-style: none; margin: 0 auto; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; max-width: 640px; }
+.live-scores li { display: flex; gap: 10px; align-items: center; padding: 8px 14px; border: 2px solid var(--line, #5a1a33); border-radius: 999px; }
+.live .qmeta, .live { max-width: 640px; margin-inline: auto; width: 100%; }
