@@ -2392,3 +2392,119 @@
   background: var(--bulb, #f2b84b);
   color: #1c0610;
 }
+
+/* ---------- Phones: a quiz question fits on one screen, no scrolling ---------- */
+@media (max-width: 719px) {
+  .game-screen {
+    gap: var(--s2);
+  }
+  .stage {
+    min-height: 0;
+    padding: var(--s3);
+    margin-top: 4px;
+  }
+  .qcard {
+    gap: var(--s2);
+  }
+  .qmeta {
+    min-height: 30px;
+  }
+  .qprompt {
+    font-size: clamp(1.1rem, 5.2vw, 1.45rem);
+    line-height: 1.12;
+  }
+  .qprompt.emoji {
+    font-size: clamp(2.4rem, 11vw, 3.6rem);
+  }
+  .qcard .link.small {
+    align-self: center;
+    min-height: 28px;
+    padding: 0;
+  }
+  .frame.flagbox {
+    width: min(210px, 56%);
+  }
+  .frame.portrait {
+    width: min(150px, 40vw);
+  }
+  .shape {
+    max-height: 22dvh;
+    margin: 0 auto;
+  }
+  .qcard .bigtext {
+    font-size: clamp(1.6rem, 9vw, 2.4rem);
+  }
+  .pair {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s2);
+  }
+  .pair .img.square {
+    aspect-ratio: 1;
+  }
+  .pair-side figcaption,
+  .pair-cap {
+    padding: 2px;
+  }
+  .pair-side blockquote {
+    padding: var(--s2);
+    font-size: 0.8rem;
+    line-height: 1.3;
+  }
+  .options {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .option {
+    min-height: 50px;
+    padding: 6px 10px;
+    gap: 8px;
+    font-size: var(--step-0);
+    line-height: 1.15;
+  }
+  .option kbd {
+    transform: scale(0.85);
+  }
+  .reveal-line {
+    min-height: 0;
+    gap: 6px;
+  }
+  .verdict {
+    font-size: 0.88rem;
+    line-height: 1.3;
+  }
+  .game-foot {
+    gap: var(--s2);
+  }
+  .bingo-cell {
+    min-height: 54px;
+    font-size: 0.85rem;
+  }
+  .bingo {
+    gap: 6px;
+  }
+  .qcard details.howto {
+    margin: 0;
+  }
+  .drawpad {
+    max-height: 33dvh;
+    width: auto;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  .giver {
+    min-height: 48px;
+    padding: 6px 14px;
+  }
+  .whogot {
+    gap: var(--s2);
+  }
+  .clues {
+    gap: var(--s2);
+  }
+  .bingo + .hint {
+    display: none;
+  }
+  .verdict {
+    font-size: 0.82rem;
+  }
+}
