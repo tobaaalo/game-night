@@ -286,7 +286,7 @@ export function QuizRun({ questions, onAgain }: { questions: HostQuestion[]; onA
   if (!q) return <Finish onAgain={onAgain} />;
   const right = picked === q.correct;
   return (
-    <div className="qcard" key={i}>
+    <div className={clsx("qcard fixed", !q.media && "nomedia")} key={i}>
       <div className="qmeta">
         <Turn id={current.id} />
         <p className="prog">
@@ -294,7 +294,7 @@ export function QuizRun({ questions, onAgain }: { questions: HostQuestion[]; onA
           {q.label ? ` · ${q.label}` : ""} · {q.points} {q.points === 1 ? "pt" : "pts"}
         </p>
       </div>
-      <h2 className="qprompt">{q.prompt}</h2>
+      <h2 className={clsx("qprompt", q.prompt.length > 150 ? "xlong" : q.prompt.length > 85 && "long")}>{q.prompt}</h2>
       {canSpeak() && (
         <button
           className="link small"
@@ -304,15 +304,19 @@ export function QuizRun({ questions, onAgain }: { questions: HostQuestion[]; onA
           Read aloud
         </button>
       )}
-      <MediaView
-        media={q.media}
-        revealed={picked != null}
-        captions={q.captions}
-        onPick={q.media?.type === "pair" ? choose : undefined}
-        states={q.options.map(
-          (_, idx) => picked != null && (idx === q.correct ? "right" : picked === idx ? "wrong" : undefined),
-        )}
-      />
+      {q.media && (
+        <div className="media-slot">
+          <MediaView
+            media={q.media}
+            revealed={picked != null}
+            captions={q.captions}
+            onPick={q.media?.type === "pair" ? choose : undefined}
+            states={q.options.map(
+              (_, idx) => picked != null && (idx === q.correct ? "right" : picked === idx ? "wrong" : undefined),
+            )}
+          />
+        </div>
+      )}
       <div
         className={clsx("options", q.options.length === 2 && "two")}
         role="group"

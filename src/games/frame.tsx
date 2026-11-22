@@ -20,7 +20,9 @@ export function GameFrame({
   scores?: boolean;
   live?: boolean;
 }) {
-  const { back, players, resetScores, markStart } = useApp();
+  const { back, players, resetScores, markStart, baseline } = useApp();
+  // The scoreboard shows this game only, not the whole night.
+  const gamePlayers = players.map((p) => ({ ...p, score: p.score - (baseline[p.id] ?? 0) }));
   const [help, setHelp] = useState(false);
   useEffect(() => markStart(), [markStart]);
   return (
@@ -39,7 +41,7 @@ export function GameFrame({
       <div className={clsx("stage marquee", live && "live")}>{children}</div>
       {scores && (
         <div className="game-foot">
-          <Scoreboard players={players} now={now} />
+          <Scoreboard players={gamePlayers} now={now} />
           <button className="link small" onClick={resetScores}>
             Reset scores
           </button>
@@ -68,15 +70,14 @@ export function Turn({ id }: { id: string }) {
 }
 
 /** Sizes big text from its longest word so a long name never runs off the screen. */
-export const fitLen = (t: string) =>
-  ({
-    "--len": Math.max(
-      4,
-      ...String(t)
-        .split(/\s+/)
-        .map((w) => w.length),
-    ),
-  }) as CSSProperties;
+export const fitLen = (t: string) => {
+  const words = String(t).split(/\s+/);
+  const n = String(t).length;
+  return {
+    "--len": Math.max(4, ...words.map((w) => w.length)),
+    "--k": n <= 18 ? 1 : n <= 36 ? 0.82 : n <= 60 ? 0.68 : 0.55,
+  } as CSSProperties;
+};
 
 export function MediaView({
   media,

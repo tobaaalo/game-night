@@ -664,7 +664,7 @@
   font-family: var(--font-display);
   text-align: center;
   --base: clamp(var(--step-3), 6vw, var(--step-5));
-  font-size: min(var(--base), calc((min(100vw, 760px) - 96px) / (var(--len, 8) * 0.82)));
+  font-size: min(calc(var(--base) * var(--k, 1)), calc((min(100vw, 760px) - 96px) / (var(--len, 8) * 0.82)));
   max-width: 100%;
   overflow-wrap: anywhere;
   line-height: 1.15;
@@ -2579,4 +2579,96 @@
   align-self: center;
   width: fit-content;
   max-width: 100%;
+}
+
+/* ---------- Fixed-size question card: the card never changes size, everything fits inside it ---------- */
+.stage:has(.qcard.fixed) {
+  height: calc(100dvh - 152px);
+  min-height: 500px;
+  max-height: 800px;
+  padding-block: var(--s3);
+}
+.qcard.fixed {
+  height: 100%;
+  min-height: 0;
+}
+.qcard.fixed .qprompt {
+  flex: 0 0 auto;
+}
+.qcard.fixed.nomedia .qprompt {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.media-slot {
+  flex: 1 1 0;
+  min-height: 0;
+  container-type: size;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.media-slot .frame.flagbox {
+  width: min(100cqw - 12px, calc(100cqh * 1.333 - 16px), 340px);
+}
+.media-slot .frame.portrait {
+  width: min(100cqw - 12px, calc((100cqh - 16px) * 0.8), 280px);
+}
+.media-slot .shape {
+  width: auto;
+  height: min(100cqh, 100cqw);
+  max-height: none;
+  max-width: 100%;
+}
+.media-slot .pair {
+  width: min(100cqw, calc((100cqh - 36px) * 2 + 12px), 600px);
+  max-width: none;
+  margin: 0;
+}
+.media-slot .pair-side blockquote {
+  overflow: auto;
+}
+.media-slot .bigtext {
+  padding: 0;
+  margin: 0;
+}
+.qcard.fixed .reveal-line {
+  flex: 0 0 132px;
+  height: 132px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  overflow: hidden;
+}
+.qcard.fixed .verdict {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@media (max-width: 380px) {
+  .stage:has(.qcard.fixed) {
+    min-height: 560px;
+  }
+  .qcard.fixed .option {
+    font-size: 0.85rem;
+    min-height: 46px;
+  }
+}
+
+.qcard.fixed .qprompt.long {
+  font-size: 1.08rem;
+  line-height: 1.25;
+}
+.qcard.fixed .qprompt.xlong {
+  font-size: 0.92rem;
+  line-height: 1.25;
+}
+.qcard.fixed.nomedia .qprompt {
+  min-height: 0;
+  overflow: auto;
 }
