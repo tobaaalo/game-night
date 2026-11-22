@@ -410,7 +410,19 @@ export function higherLowerQuestions(s: QuizSetup): HostQuestion[] {
 export function oddOneQuestions(s: QuizSetup): HostQuestion[] {
   let pool = ODDONE.filter((o) => !s.level || o[0] === s.level);
   if (pool.length < 8) pool = ODDONE;
-  return drawMany("oddone", pool, s.count).map(([lv, opts, odd, why]) => {
+  // Draw extra, then keep only questions that share no option with one already chosen,
+  // so nothing repeats (or half-repeats) inside a single game.
+  const cand = drawFresh("oddone2", pool, Math.min(pool.length, s.count * 3), (o) => o[2].toLowerCase());
+  const used = new Set<string>();
+  const picked: typeof pool = [];
+  for (const o of cand) {
+    if (picked.length >= s.count) break;
+    if (o[1].some((x) => used.has(x.toLowerCase()))) continue;
+    o[1].forEach((x) => used.add(x.toLowerCase()));
+    picked.push(o);
+  }
+  for (const o of cand) if (picked.length < s.count && !picked.includes(o)) picked.push(o);
+  return picked.map(([lv, opts, odd, why]) => {
     const order = shuffle(opts);
     return {
       prompt: "Which one is the odd one out?",

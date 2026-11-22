@@ -400,10 +400,10 @@ const HOL_RULES = {
   0: "A mix of all four levels.",
 };
 const ODD_RULES = {
-  1: "Spot the one that doesn't belong. Obvious to a child.",
-  2: "Needs a little general knowledge.",
-  3: "The link is less obvious. Think about geography, music, science and the Bible.",
-  4: "A clever hidden link, like botany or science technicalities.",
+  1: "The odd one comes from a completely different world. Obvious to a child.",
+  2: "Needs a little general knowledge, or the groups are easy to mix up.",
+  3: "Close cousins: the odd one comes from a very similar list, like two kinds of rock.",
+  4: "Experts only: rare names, and the odd one is a near neighbour of the rest.",
   0: "A mix of all four levels.",
 };
 const YEAR_RULES = {
