@@ -211,7 +211,18 @@ function Countdown({ deadline, skew = 0 }: { deadline: number; skew?: number }) 
 export function RoomHost() {
   const { go, online } = useApp();
   const [game, setGame] = useState<GameDef | null>(null);
-  const [room, setRoom] = useState<{ code: string; hostKey: string } | null>(() => load("gn.hostroom", null));
+  const [room, setRoom] = useState<{ code: string; hostKey: string } | null>(() => {
+    // A control link (?host=CODE.KEY) hands this device the host controls for that room.
+    const h = new URLSearchParams(location.search).get("host");
+    const m = h && /^([A-Z0-9]{4})\.([\w-]{8,})$/.exec(h);
+    if (m) {
+      const rm = { code: m[1], hostKey: m[2] };
+      save("gn.hostroom", rm);
+      history.replaceState(null, "", location.pathname);
+      return rm;
+    }
+    return load("gn.hostroom", null);
+  });
   const [err, setErr] = useState("");
   const [creating, setCreating] = useState(false);
 
@@ -306,6 +317,7 @@ function HostLive({
     key: room.hostKey,
   });
   const [qr, setQr] = useState("");
+  const [ctlCopied, setCtlCopied] = useState(false);
   const joinUrl = `${location.origin}/join/${room.code}`;
   useEffect(() => {
     QRCode.toDataURL(joinUrl, { margin: 1, width: 360, color: { dark: "#1c0610", light: "#efe6d8" } }).then(setQr, () =>
@@ -374,6 +386,16 @@ function HostLive({
                 <button className="btn quiet small" onClick={copy}>
                   Copy invite link
                 </button>
+                <button
+                  className="btn quiet small"
+                  onClick={() => {
+                    const link = `${location.origin}/room?host=${room.code}.${room.hostKey}`;
+                    void navigator.clipboard?.writeText(link);
+                    setCtlCopied(true);
+                  }}
+                >
+                  {ctlCopied ? "Control link copied" : "Control from a phone"}
+                </button>
               </div>
             </div>
           </div>
@@ -383,7 +405,8 @@ function HostLive({
             </h2>
             {players.length === 0 ? (
               <p className="muted">
-                Names appear here as people join. Want to play too? Join from your own phone with the same code.
+                Names appear here as people join. Want to play too? Join from your own phone with the same code. Want
+                the controls on a phone? Tap &ldquo;Control from a phone&rdquo; and send yourself the link.
               </p>
             ) : (
               <ul className="joined">
