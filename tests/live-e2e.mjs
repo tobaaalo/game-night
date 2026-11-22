@@ -3,8 +3,12 @@ import { chromium } from "playwright";
 const BASE = process.argv[2];
 const ONLY = process.argv[3];
 const b = await chromium.launch({ executablePath: process.env.PW_CHROME || undefined });
-const phone = async () => (await (await b.newContext({ viewport: { width: 375, height: 812 }, reducedMotion: "reduce" })).newPage());
-const fail = (m) => { console.log("FAIL", m); process.exit(1); };
+const phone = async () =>
+  await (await b.newContext({ viewport: { width: 375, height: 812 }, reducedMotion: "reduce" })).newPage();
+const fail = (m) => {
+  console.log("FAIL", m);
+  process.exit(1);
+};
 const ok = (m) => console.log("ok", m);
 async function room(names) {
   const host = await phone();
@@ -20,14 +24,18 @@ async function room(names) {
     await p.getByRole("button", { name: "Join" }).click();
     mates.push(p);
   }
-  await host.locator(".joined li").nth(names.length - 1).waitFor();
+  await host
+    .locator(".joined li")
+    .nth(names.length - 1)
+    .waitFor();
   return { host, mates };
 }
 async function start(host, game, pick = {}) {
   const t = host.locator(".ticket", { hasText: game }).first();
   if (!(await t.count())) fail(`${game} missing from rooms`);
   await t.click();
-  for (const [legend, idx] of Object.entries(pick)) await host.getByRole("group", { name: legend }).locator(".chip").nth(idx).click();
+  for (const [legend, idx] of Object.entries(pick))
+    await host.getByRole("group", { name: legend }).locator(".chip").nth(idx).click();
   await host.getByRole("button", { name: /Start with/ }).click();
 }
 async function fitAll(host, mates, label) {
@@ -48,18 +56,28 @@ async function actorOf(mates, sel) {
 const want = (g) => !ONLY || ONLY === g;
 
 if (want("perform")) {
-  for (const [game, buzz] of [["Charades Sprint", false], ["Don't Say It", true], ["Charades Bingo", false]]) {
+  for (const [game, buzz] of [
+    ["Charades Sprint", false],
+    ["Don't Say It", true],
+    ["Charades Bingo", false],
+  ]) {
     const { host, mates } = await room(["Dayo", "Femi", "Kemi"]);
     await start(host, game, { "How many turns": 0 });
     await fitAll(host, mates, game);
     const a = await actorOf(mates, ".taboo p");
     const word = await a.locator(".taboo p").first().innerText();
-    for (const m of mates) if (m !== a && (await m.locator(".taboo").count())) fail(`${game}: word leaked to a guesser`);
+    for (const m of mates)
+      if (m !== a && (await m.locator(".taboo").count())) fail(`${game}: word leaked to a guesser`);
     if ((await host.locator(".taboo").count()) !== 0) fail(`${game}: word leaked to host screen`);
     const g = mates.find((m) => m !== a);
-    if (buzz) { await g.getByRole("button", { name: /Buzz/ }).waitFor(); }
+    if (buzz) {
+      await g.getByRole("button", { name: /Buzz/ }).waitFor();
+    }
     await a.getByRole("button", { name: "Got it" }).click();
-    await a.locator(".btn", { hasText: /Femi|Kemi|Dayo/ }).first().click();
+    await a
+      .locator(".btn", { hasText: /Femi|Kemi|Dayo/ })
+      .first()
+      .click();
     await g.getByText("Guessed this turn: 1").waitFor({ timeout: 8000 });
     await a.getByRole("button", { name: "End my turn" }).click();
     await host.getByText(/got 1/).waitFor({ timeout: 8000 });
@@ -88,7 +106,7 @@ if (want("words")) {
 }
 if (want("name5")) {
   const { host, mates } = await room(["Dayo", "Femi", "Kemi"]);
-  await start(host, "Name 5 in 10", { "How many turns": 0 });
+  await start(host, "Name 5 in 10", { "How many turns": 0, "How to answer": 1 });
   await fitAll(host, mates, "Name 5 in 10");
   await mates[0].locator("input.input").nth(4).waitFor({ timeout: 10000 });
   for (const [i, m] of mates.entries()) {
@@ -101,20 +119,85 @@ if (want("name5")) {
   if (!/\+1/.test(t) || !/\+2/.test(t)) fail("name5 scoring: " + t);
   ok("Name 5: answers typed and scored (unique 2, shared 1)");
 }
+if (want("name5end")) {
+  const { host, mates } = await room(["Dayo", "Femi", "Kemi"]);
+  await start(host, "Name 5 in 10", { "How many turns": 0, "How to answer": 1 });
+  for (let r = 0; r < 12; r++) {
+    if (await host.getByText(/wins!|It.s a tie|Game over/).count()) break;
+    await mates[0]
+      .locator("input.input")
+      .nth(4)
+      .waitFor({ timeout: 20000 })
+      .catch(async () =>
+        fail(
+          "stuck at r" +
+            r +
+            " HOST: " +
+            (await host.locator("main").innerText()).replace(/\n+/g, " | ").slice(0, 300) +
+            " PHONE: " +
+            (await mates[0].locator("main").innerText()).replace(/\n+/g, " | ").slice(0, 200),
+        ),
+      );
+    // the last round is left unanswered on purpose: Next must still work
+    const last = /(\d+) \/ \1/.test(await mates[0].locator(".prog").first().innerText());
+    if (!last)
+      for (const [i, m] of mates.entries()) {
+        for (let k = 0; k < 5; k++) await m.locator("input.input").nth(k).fill(`r${r}i${i}${k}`);
+        await m.getByRole("button", { name: /Lock in/ }).click();
+      }
+    await host.locator(".live-results").waitFor({ timeout: 15000 });
+    const nx = mates[0].getByRole("button", { name: "Next" });
+    await nx.waitFor({ timeout: 8000 });
+    await nx.click();
+  }
+  await host
+    .getByText(/wins!|It.s a tie|Game over/)
+    .first()
+    .waitFor({ timeout: 15000 })
+    .catch(async () =>
+      fail(
+        "name5 end: " +
+          (await host.locator("main").innerText()).slice(0, 400) +
+          " || phone: " +
+          (await mates[0].locator("main").innerText()).slice(0, 300),
+      ),
+    );
+  ok("Name 5: Next works on every round including the last, game ends");
+}
+if (want("shout")) {
+  const { host, mates } = await room(["Dayo", "Femi", "Kemi"]);
+  await start(host, "Name 5 in 10", { "How many turns": 0, "How to answer": 0, "Seconds on the clock": 0 });
+  await fitAll(host, mates, "Name 5 shout");
+  const a = await actorOf(mates, "button:has-text('That is one')");
+  const others = mates.filter((m) => m !== a);
+  for (let k = 0; k < 3; k++) await a.getByRole("button", { name: "That is one" }).click();
+  await others[0].getByRole("button", { name: /Not valid/ }).click();
+  await sleep(500);
+  const tl = await a.locator(".shout-tally").innerText();
+  if (!/^2\s*\/\s*5/.test(tl.replace(/\n/g, " "))) fail("shout tally expected 2/5, got " + tl);
+  await a.getByRole("button", { name: "Done" }).click();
+  await a.locator("text=got 2 of 5").waitFor({ timeout: 8000 });
+  ok("Name 5 shout: count, veto, done, scored");
+}
 if (want("draw")) {
   const { host, mates } = await room(["Dayo", "Femi", "Kemi"]);
   await start(host, "Draw and Guess", { "How many drawings": 0 });
   await fitAll(host, mates, "Draw and Guess");
   const a = await actorOf(mates, ".qprompt:has-text('Draw:')");
   const word = (await a.locator(".qprompt").innerText()).replace(/^Draw:\s*/, "").trim();
-  const box = await a.locator("canvas.board").boundingBox();
+  const box = await a.locator("canvas.sketch").boundingBox();
   await a.mouse.move(box.x + 40, box.y + 40);
   await a.mouse.down();
   for (let i = 0; i < 30; i++) await a.mouse.move(box.x + 40 + i * 6, box.y + 40 + i * 4);
   await a.mouse.up();
   const g = mates.find((m) => m !== a);
   await sleep(1500);
-  const ink = await g.locator("canvas.board").evaluate((c) => { const d = c.getContext("2d").getImageData(0, 0, c.width, c.height).data; let n = 0; for (let i = 0; i < d.length; i += 4) if (d[i] < 100) n++; return n; });
+  const ink = await g.locator("canvas.sketch").evaluate((c) => {
+    const d = c.getContext("2d").getImageData(0, 0, c.width, c.height).data;
+    let n = 0;
+    for (let i = 0; i < d.length; i += 4) if (d[i] < 100) n++;
+    return n;
+  });
   if (ink < 200) fail("draw: guesser does not see the drawing (ink " + ink + ")");
   if (await g.getByText(word, { exact: true }).count()) fail("draw: word leaked to guesser");
   await g.getByPlaceholder("Type your guess").fill("nonsenseword");
@@ -129,9 +212,41 @@ if (want("chain")) {
   await start(host, "Word Chain");
   await fitAll(host, mates, "Word Chain");
   const a = await actorOf(mates, "input[placeholder^='A word starting']");
-  const need = (await a.locator("input[placeholder^='A word starting']").getAttribute("placeholder")).slice(-1).toLowerCase();
-  const words = { a: "apple", e: "egg", d: "dog", g: "goat", r: "rat", t: "tree", n: "nest", s: "sun", l: "lion", m: "moon", o: "owl", i: "ice", y: "yam", p: "pig", h: "hat", c: "cat", b: "bat", f: "fan", k: "kite", u: "umbrella", w: "wolf", v: "van", x: "xylophone", z: "zebra", j: "jam", q: "queen" };
+  const need = (await a.locator("input[placeholder^='A word starting']").getAttribute("placeholder"))
+    .slice(-1)
+    .toLowerCase();
+  const words = {
+    a: "apple",
+    e: "eagle",
+    d: "drums",
+    g: "goats",
+    r: "river",
+    t: "table",
+    n: "night",
+    s: "stone",
+    l: "lemon",
+    m: "mango",
+    o: "ocean",
+    i: "inbox",
+    y: "yacht",
+    p: "plant",
+    h: "horse",
+    c: "candy",
+    b: "bread",
+    f: "flame",
+    k: "kitty",
+    u: "uncle",
+    w: "water",
+    v: "voice",
+    x: "xerox",
+    z: "zebra",
+    j: "juice",
+    q: "quilt",
+  };
   await a.locator("input[placeholder^='A word starting']").fill("zzz");
+  await a.getByRole("button", { name: "Lock it in" }).click();
+  await a.getByText("Words need at least 5 letters.").waitFor();
+  await a.locator("input[placeholder^='A word starting']").fill(need === "z" ? "ppppp" : "zzzzz");
   await a.getByRole("button", { name: "Lock it in" }).click();
   await a.getByText(/must start with/).waitFor();
   await a.locator("input[placeholder^='A word starting']").fill(words[need]);

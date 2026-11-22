@@ -592,7 +592,7 @@ export function liveView(l: Live, viewer: string | undefined): LiveView {
   const c = l.cfg;
   const v: LiveView = {
     kind: c.kind,
-    round: Math.max(0, l.round),
+    round: Math.min(Math.max(0, l.round), Math.max(0, l.rounds - 1)),
     rounds: l.rounds,
     step: l.step,
     deadline: l.deadline,
@@ -613,7 +613,7 @@ export function liveView(l: Live, viewer: string | undefined): LiveView {
     v.prompt = l.prompt;
     v.wordLen = c.max;
   } else if (c.kind === "words") {
-    const rd = c.rounds[Math.max(0, l.round)];
+    const rd = c.rounds[Math.min(Math.max(0, l.round), c.rounds.length - 1)];
     v.prompt = rd.prompt;
     v.labels = rd.labels;
     v.letter = rd.letter;
