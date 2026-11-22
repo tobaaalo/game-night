@@ -1,0 +1,157 @@
+Madonna||1|Music|f
+Bob Dylan||2|Music|m
+Jay-Z||2|Music|m
+Katy Perry||2|Music|f
+Shakira||2|Music|f
+Britney Spears||2|Music|f
+Justin Timberlake||2|Music|m
+Selena Gomez||2|Music|f
+Miley Cyrus||2|Music|f
+Post Malone||2|Music|m
+Travis Scott||3|Music|m
+Bad Bunny||2|Music|m
+Olivia Rodrigo||2|Music|f
+Sabrina Carpenter||3|Music|f
+Charli XCX||3|Music|f
+Lana Del Rey||2|Music|f
+Tyler, the Creator||3|Music|m
+Frank Ocean||3|Music|m
+Bruce Springsteen||2|Music|m
+Paul Simon||3|Music|m
+Cher||2|Music|f
+Dolly Parton||2|Music|f
+Shania Twain||3|Music|f
+Garth Brooks||3|Music|m
+Johnny Cash||2|Music|m
+Willie Nelson||3|Music|m
+Tupac Shakur||2|Music|m
+The Notorious B.I.G.|Notorious B.I.G.|3|Music|m
+Dr. Dre||2|Music|m
+Ice Cube||3|Music|m
+50 Cent||2|Music|m
+Nas||3|Music|m
+Pharrell Williams||2|Music|m
+Timbaland||4|Music|m
+Quincy Jones||3|Music|m
+Berry Gordy||4|Music|m
+Smokey Robinson||3|Music|m
+Chuck Berry||3|Music|m
+Little Richard||3|Music|m
+Sam Cooke||3|Music|m
+Otis Redding||3|Music|m
+Nina Simone||3|Music|f
+Ella Fitzgerald||3|Music|f
+Louis Armstrong||2|Music|m
+Duke Ellington||3|Music|m
+Miles Davis||3|Music|m
+John Coltrane||3|Music|m
+Billie Holiday||3|Music|f
+Bessie Smith||4|Music|f
+Etta James||3|Music|f
+Gladys Knight||3|Music|f
+Patti LaBelle||3|Music|f
+Chaka Khan||3|Music|f
+Janet Jackson||2|Music|f
+Toni Braxton||3|Music|f
+Brandy (entertainer)|Brandy|3|Music|f
+Ashanti (singer)|Ashanti|3|Music|f
+Ne-Yo||3|Music|m
+Akon||3|Music|m
+Wyclef Jean||3|Music|m
+Youssou N'Dour||3|Music|m
+Salif Keita||4|Music|m
+Ali Farka Touré||4|Music|m
+Hugh Masekela||3|Music|m
+Thomas Mapfumo||4|Music|m
+Oliver Mtukudzi||4|Music|m
+Lucky Dube||3|Music|m
+Alpha Blondy||4|Music|m
+King Sunny Adé||4|Music|m
+Ebenezer Obey||4|Music|m
+Sunny Okosuns||4|Music|m
+Victor Uwaifo||4|Music|m
+2Baba||3|Music|m
+D'banj||3|Music|m
+Peter Okoye||4|Music|m
+Flavour N'abania|Flavour|4|Music|m
+Timaya||4|Music|m
+Olamide||3|Music|m
+Phyno||4|Music|m
+Kizz Daniel||3|Music|m
+Fireboy DML||3|Music|m
+Mr Eazi||3|Music|m
+Patoranking||4|Music|m
+Yemi Alade||3|Music|f
+Simi (singer)|Simi|3|Music|f
+Falz||3|Music|m
+Sarkodie||3|Music|m
+Shatta Wale||3|Music|m
+Stonebwoy||4|Music|m
+Fally Ipupa||4|Music|m
+Koffi Olomide||4|Music|m
+Amy Winehouse||2|Music|f
+George Michael||2|Music|m
+Rod Stewart||3|Music|m
+Phil Collins||3|Music|m
+Sting (musician)|Sting|3|Music|m
+Annie Lennox||3|Music|f
+Cliff Richard||3|Music|m
+Tom Jones (singer)|Tom Jones|3|Music|m
+Shirley Bassey||3|Music|f
+Dusty Springfield||4|Music|f
+Kate Bush||3|Music|f
+Ozzy Osbourne||3|Music|m
+Robert Plant||3|Music|m
+Roger Daltrey||4|Music|m
+Pete Townshend||4|Music|m
+Ringo Starr||2|Music|m
+George Harrison||2|Music|m
+Eric Clapton||3|Music|m
+Jimi Hendrix||2|Music|m
+Janis Joplin||3|Music|f
+Jim Morrison||3|Music|m
+Kurt Cobain||2|Music|m
+Dave Grohl||3|Music|m
+Chris Martin||2|Music|m
+Noel Gallagher||3|Music|m
+Liam Gallagher||3|Music|m
+Damon Albarn||3|Music|m
+Niall Horan||3|Music|m
+Zayn Malik||3|Music|m
+Louis Tomlinson||4|Music|m
+Liam Payne||3|Music|m
+Shawn Mendes||3|Music|m
+Charlie Puth||3|Music|m
+Sam Fender||4|Music|m
+Anne-Marie (singer)|Anne-Marie|4|Music|f
+Perrie Edwards||4|Music|f
+Leigh-Anne Pinnock||4|Music|f
+Jade Thirlwall||4|Music|f
+Jesy Nelson||4|Music|f
+Mel B||3|Music|f
+Victoria Beckham||2|Music|f
+Geri Halliwell||3|Music|f
+Emma Bunton||4|Music|f
+Melanie C||4|Music|f
+Sinach||3|Music|f
+Tope Alabi||3|Music|f
+Nathaniel Bassey||3|Music|m
+Mercy Chinwo||4|Music|f
+Don Moen||4|Music|m
+Yolanda Adams||4|Music|f
+Donnie McClurkin||4|Music|m
+Marvin Sapp||4|Music|m
+Fred Hammond||4|Music|m
+Tasha Cobbs Leonard||4|Music|f
+Lady Gaga||1|Music|f
+Pitbull (rapper)|Pitbull|3|Music|m
+Nelly||3|Music|m
+Ludacris||3|Music|m
+T.I.||4|Music|m
+Busta Rhymes||4|Music|m
+LL Cool J||3|Music|m
+Queen Latifah||3|Music|f
+Salt-N-Pepa||4|Music|f
+Lil Nas X||2|Music|m
+Roddy Ricch||4|Music|m
+Burna Boy||2|Music|m

@@ -1,0 +1,90 @@
+[
+{
+"id": "murtala-mohammed",
+"name": "Murtala Mohammed",
+"level": 3,
+"w": 478,
+"h": 600,
+"src": "Murtala_Mohammed.jpg",
+"cat": "Leaders",
+"g": "m",
+"lic": "Public domain"
+},
+{
+"id": "shehu-shagari",
+"name": "Shehu Shagari",
+"level": 4,
+"w": 460,
+"h": 600,
+"src": "President_Sharari_cropped.jpg",
+"cat": "Leaders",
+"g": "m",
+"lic": "Public domain"
+},
+{
+"id": "umaru-yar-adua",
+"name": "Umaru Yar'Adua",
+"level": 3,
+"w": 411,
+"h": 600,
+"src": "YarAdua_WEF_2008.jpg",
+"cat": "Leaders",
+"g": "m",
+"lic": "CC BY-SA 2.0"
+},
+{
+"id": "abdulsalami-abubakar",
+"name": "Abdulsalami Abubakar",
+"level": 4,
+"w": 471,
+"h": 600,
+"src": "Abdulsalami_Abubakar_detail_DF-SC-02-04323.jpg",
+"cat": "Leaders",
+"g": "m",
+"lic": "Public domain"
+},
+{
+"id": "nnamdi-azikiwe",
+"name": "Nnamdi Azikiwe",
+"level": 3,
+"w": 456,
+"h": 600,
+"src": "Zik_of_Africa.webp",
+"cat": "Leaders",
+"g": "m",
+"lic": "CC0"
+},
+{
+"id": "ahmadu-bello",
+"name": "Ahmadu Bello",
+"level": 3,
+"w": 410,
+"h": 600,
+"src": "Sir_Ahmadu_Bello_(1959).jpg",
+"cat": "Leaders",
+"g": "m",
+"lic": "Public domain"
+},
+{
+"id": "samuel-ladoke-akintola",
+"name": "Samuel Ladoke Akintola",
+"level": 4,
+"w": 443,
+"h": 600,
+"src": "Samuel_Ládòkè_Akíntọ́lá_-David_Ben_Gurion1961-1.jpg",
+"cat": "Leaders",
+"g": "m",
+"lic": "Public domain"
+},
+{
+"id": "bukola-saraki",
+"name": "Bukola Saraki",
+"level": 3,
+"w": 443,
+"h": 600,
+"src": "Bukola_Saraki_(cropped).jpg",
+"cat": "Leaders",
+"g": "m",
+"lic": "CC BY-SA 4.0"
+}
+]

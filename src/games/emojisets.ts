@@ -1,4 +1,6 @@
 /** Emoji sets for Memory Match. Every emoji appears once across all sets. */
+import { MORE_EMOJI } from "./emojisets_more";
+
 export type EmojiSet = [string, string][];
 
 export const EMOJI_SETS: Record<string, EmojiSet> = {
@@ -193,6 +195,8 @@ export const EMOJI_SETS: Record<string, EmojiSet> = {
     ["🌉", "Bridge"],
   ],
 };
+
+for (const [k, v] of Object.entries(MORE_EMOJI)) EMOJI_SETS[k] = [...(EMOJI_SETS[k] ?? []), ...v];
 
 export const EMOJI_THEMES: [string, string][] = [
   ["animals", "Animals"],

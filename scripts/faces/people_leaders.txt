@@ -1,0 +1,168 @@
+# Wikipedia title | Display name | level | category | gender
+Nnamdi Azikiwe||3|Leaders|m
+Murtala Mohammed||3|Leaders|m
+Shehu Shagari||4|Leaders|m
+Sani Abacha||3|Leaders|m
+Umaru Musa Yar'Adua|Umaru Yar'Adua|3|Leaders|m
+Ernest Shonekan||4|Leaders|m
+Abdulsalami Abubakar||4|Leaders|m
+Ahmadu Bello||3|Leaders|m
+Samuel Ladoke Akintola||4|Leaders|m
+Michael Okpara||4|Leaders|m
+Odumegwu Ojukwu|Chukwuemeka Odumegwu-Ojukwu|3|Leaders|m
+Bukola Saraki||3|Leaders|m
+Rotimi Amaechi||3|Leaders|m
+Babatunde Fashola||3|Leaders|m
+Nasir Ahmad el-Rufai|Nasir El-Rufai|3|Leaders|m
+Godswill Akpabio||3|Leaders|m
+Peter Obi||2|Leaders|m
+Rabiu Kwankwaso||3|Leaders|m
+Nyesom Wike||3|Leaders|m
+Aisha Buhari||3|Leaders|f
+Patience Jonathan||3|Leaders|f
+Remi Tinubu||3|Leaders|f
+Dora Akunyili||4|Leaders|f
+Oby Ezekwesili||3|Leaders|f
+Léopold Sédar Senghor|Léopold Senghor|4|Leaders|m
+Félix Houphouët-Boigny||4|Leaders|m
+Ahmed Sékou Touré|Ahmed Sékou Touré|4|Leaders|m
+Modibo Keïta||4|Leaders|m
+Hastings Banda||4|Leaders|m
+Seretse Khama||4|Leaders|m
+Sam Nujoma||4|Leaders|m
+Joaquim Chissano||4|Leaders|m
+Daniel arap Moi||3|Leaders|m
+Mwai Kibaki||3|Leaders|m
+Raila Odinga||3|Leaders|m
+Benjamin Mkapa||4|Leaders|m
+Jakaya Kikwete||4|Leaders|m
+John Magufuli||3|Leaders|m
+Samia Suluhu Hassan||3|Leaders|f
+Hakainde Hichilema||3|Leaders|m
+John Kufuor||3|Leaders|m
+Hilla Limann||4|Leaders|m
+Abdelaziz Bouteflika||3|Leaders|m
+Habib Bourguiba||4|Leaders|m
+Hassan II of Morocco|Hassan II|4|Leaders|m
+Mohammed VI of Morocco|Mohammed VI|3|Leaders|m
+Abdel Fattah el-Sisi||3|Leaders|m
+Mengistu Haile Mariam||4|Leaders|m
+Meles Zenawi||4|Leaders|m
+Abiy Ahmed||3|Leaders|m
+Isaias Afwerki||4|Leaders|m
+Omar al-Bashir||3|Leaders|m
+Idi Amin||2|Leaders|m
+Milton Obote||4|Leaders|m
+Mobutu Sese Seko||3|Leaders|m
+Laurent-Désiré Kabila||4|Leaders|m
+Félix Tshisekedi||4|Leaders|m
+Jean-Bédel Bokassa||4|Leaders|m
+Charles Taylor (Liberian politician)|Charles Taylor|3|Leaders|m
+George Weah||2|Leaders|m
+Paul Biya||3|Leaders|m
+Alassane Ouattara||3|Leaders|m
+Laurent Gbagbo||4|Leaders|m
+Macky Sall||3|Leaders|m
+Cheikh Anta Diop||4|Leaders|m
+Charles de Gaulle||2|Leaders|m
+François Mitterrand||3|Leaders|m
+Valéry Giscard d'Estaing||4|Leaders|m
+Konrad Adenauer||3|Leaders|m
+Willy Brandt||3|Leaders|m
+Helmut Kohl||3|Leaders|m
+Gerhard Schröder||3|Leaders|m
+Václav Havel||3|Leaders|m
+Lech Wałęsa||3|Leaders|m
+Aung San Suu Kyi||3|Leaders|f
+Corazon Aquino||3|Leaders|f
+Lee Kuan Yew||3|Leaders|m
+Mahathir Mohamad||3|Leaders|m
+Sukarno||3|Leaders|m
+Ho Chi Minh||2|Leaders|m
+Mao Zedong||1|Leaders|m
+Deng Xiaoping||3|Leaders|m
+Sun Yat-sen||3|Leaders|m
+Chiang Kai-shek||3|Leaders|m
+Benito Mussolini||2|Leaders|m
+Adolf Hitler||1|Leaders|m
+Joseph Stalin||1|Leaders|m
+Vladimir Lenin||2|Leaders|m
+Leon Trotsky||3|Leaders|m
+Nikita Khrushchev||3|Leaders|m
+Leonid Brezhnev||3|Leaders|m
+Francisco Franco||3|Leaders|m
+Josip Broz Tito||3|Leaders|m
+Kemal Atatürk|Mustafa Kemal Atatürk|3|Leaders|m
+Ruhollah Khomeini||3|Leaders|m
+Saddam Hussein||2|Leaders|m
+Hafez al-Assad||3|Leaders|m
+Bashar al-Assad||3|Leaders|m
+Yasser Arafat||3|Leaders|m
+Golda Meir||3|Leaders|f
+David Ben-Gurion||3|Leaders|m
+Shimon Peres||3|Leaders|m
+King Abdullah II|Abdullah II of Jordan|3|Leaders|m
+Mohammed bin Salman||3|Leaders|m
+Mohammed bin Zayed Al Nahyan|Mohamed bin Zayed|4|Leaders|m
+Ali Khamenei||3|Leaders|m
+Hassan Rouhani||4|Leaders|m
+Jair Bolsonaro||3|Leaders|m
+Luiz Inácio Lula da Silva|Lula da Silva|3|Leaders|m
+Hugo Chávez||3|Leaders|m
+Nicolás Maduro||3|Leaders|m
+Evo Morales||4|Leaders|m
+Eva Perón||3|Leaders|f
+Juan Perón||4|Leaders|m
+Salvador Allende||3|Leaders|m
+Augusto Pinochet||3|Leaders|m
+Simón Bolívar||3|Leaders|m
+Andrés Manuel López Obrador||3|Leaders|m
+Claudia Sheinbaum||3|Leaders|f
+Javier Milei||3|Leaders|m
+Justin Trudeau||1|Leaders|m
+Pierre Trudeau||4|Leaders|m
+Stephen Harper||4|Leaders|m
+Scott Morrison||4|Leaders|m
+Anthony Albanese||3|Leaders|m
+Julia Gillard||4|Leaders|f
+Helen Clark||4|Leaders|f
+Christopher Luxon||4|Leaders|m
+Theodore Roosevelt||2|Leaders|m
+Franklin D. Roosevelt||2|Leaders|m
+Harry S. Truman|Harry Truman|3|Leaders|m
+Dwight D. Eisenhower|Dwight Eisenhower|3|Leaders|m
+Lyndon B. Johnson|Lyndon Johnson|3|Leaders|m
+Richard Nixon||2|Leaders|m
+Gerald Ford||3|Leaders|m
+Jimmy Carter||2|Leaders|m
+George H. W. Bush||3|Leaders|m
+Thomas Jefferson||2|Leaders|m
+Ulysses S. Grant|Ulysses Grant|3|Leaders|m
+Woodrow Wilson||3|Leaders|m
+Herbert Hoover||4|Leaders|m
+Calvin Coolidge||4|Leaders|m
+Clement Attlee||3|Leaders|m
+Harold Wilson||4|Leaders|m
+Edward Heath||4|Leaders|m
+James Callaghan||4|Leaders|m
+John Major||3|Leaders|m
+Ramsay MacDonald||4|Leaders|m
+Neville Chamberlain||3|Leaders|m
+Rosa Luxemburg||4|Leaders|f
+Emmeline Pankhurst||3|Leaders|f
+Eleanor Roosevelt||3|Leaders|f
+Susan B. Anthony||3|Leaders|f
+Queen Victoria||2|Leaders|f
+Julius Caesar||2|Leaders|m
+Elizabeth I of England|Elizabeth I|2|Leaders|f
+Henry VIII||2|Leaders|m
+Alexander the Great||2|Leaders|m
+Marie Antoinette||2|Leaders|f
+Louis XIV||3|Leaders|m
+Catherine the Great||3|Leaders|f
+Peter the Great||3|Leaders|m
+Ivan the Terrible||4|Leaders|m
+Menelik II||4|Leaders|m
+Yaa Asantewaa||4|Leaders|f
+Jaja of Opobo||4|Leaders|m
+Oba Ovonramwen|Ovonramwen|4|Leaders|m
