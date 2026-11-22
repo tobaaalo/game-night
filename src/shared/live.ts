@@ -316,7 +316,8 @@ function enterReveal(l: Live, ctx: Ctx): void {
       if (pid === l.actor) continue;
       const g = (l.subs[pid] ?? [""])[0] ?? "";
       const n = norm(g);
-      const ok = !!secret && n.length >= 2 && (n === secret || (n.length >= 3 && (secret.includes(n) || n.includes(secret))));
+      const ok =
+        !!secret && n.length >= 2 && (n === secret || (n.length >= 3 && (secret.includes(n) || n.includes(secret))));
       if (ok) {
         ctx.score(pid, 100);
         if (l.actor) ctx.score(l.actor, 50);
@@ -558,7 +559,9 @@ export function liveApply(l: Live, m: LiveMsg, who: string, isHost: boolean, ctx
 
   if (c.kind === "knowme") {
     if (l.step === "secret" && isActor && m.a === "secret") {
-      const v = String(Array.isArray(m.v) ? m.v[0] : m.v).trim().slice(0, 80);
+      const v = String(Array.isArray(m.v) ? m.v[0] : m.v)
+        .trim()
+        .slice(0, 80);
       if (!v) return { error: "Type your answer first." };
       l.secret = v;
       l.at = ctx.now;

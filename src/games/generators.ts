@@ -255,8 +255,18 @@ const fmt = (n: number) => (n >= 100 ? Math.round(n).toLocaleString("en-GB") : S
 const HOLWORDS: Record<string, { hi: string; lo: string; unit: string; ask: string }> = {
   "Mountain height (metres)": { hi: "Taller", lo: "Shorter", unit: " m", ask: "How tall is the mountain?" },
   "River length (km)": { hi: "Longer", lo: "Shorter", unit: " km", ask: "How long is the river?" },
-  "Population (millions, roughly)": { hi: "More people", lo: "Fewer people", unit: " million", ask: "How many people live there?" },
-  "Land area (thousand sq km)": { hi: "Bigger", lo: "Smaller", unit: " thousand sq km", ask: "How big is the country?" },
+  "Population (millions, roughly)": {
+    hi: "More people",
+    lo: "Fewer people",
+    unit: " million",
+    ask: "How many people live there?",
+  },
+  "Land area (thousand sq km)": {
+    hi: "Bigger",
+    lo: "Smaller",
+    unit: " thousand sq km",
+    ask: "How big is the country?",
+  },
   "Height (metres)": { hi: "Taller", lo: "Shorter", unit: " m", ask: "How tall is it?" },
   "Top speed (km/h)": { hi: "Faster", lo: "Slower", unit: " km/h", ask: "How fast can it go?" },
   "Diameter (km)": { hi: "Bigger", lo: "Smaller", unit: " km", ask: "How wide is it?" },

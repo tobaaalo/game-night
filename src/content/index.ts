@@ -160,7 +160,11 @@ export const BINGO = [...(charades as string[]), ...(bingo as string[])];
 export const DRAWWORDS = drawwords as [number, string][];
 /** [category, idea] */
 export const BUCKET = bucket as [string, string][];
-export const LADDER = ladder as unknown as { words: Record<string, string>; valid: Record<string, string>; puzzles: [number, string, string, number][] };
+export const LADDER = ladder as unknown as {
+  words: Record<string, string>;
+  valid: Record<string, string>;
+  puzzles: [number, string, string, number][];
+};
 
 /** [level 1-4, kind, answer, clue 1 (hardest), clue 2, clue 3 (easiest)] */
 export type ClueItem = [number, string, string, string, string, string];

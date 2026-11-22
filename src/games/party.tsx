@@ -44,9 +44,11 @@ export function RevealRun({ items, onAgain }: { items: RevealItem[]; onAgain: ()
       <div className="qmeta">
         <p className="prog">
           {i + 1} / {items.length}
-          {it.label ? ` · ${it.label}` : ""} · {pts} {pts === 1 ? "pt" : "pts"}
+          {" · "}
+          {pts} {pts === 1 ? "pt" : "pts"}
         </p>
       </div>
+      {it.label && <p className="cat-label">{it.label}</p>}
       {it.image ? (
         <div className="frame portrait">
           <Img src={it.image.src} alt={shown ? it.answer : it.image.alt} />

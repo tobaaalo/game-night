@@ -64,6 +64,16 @@ export function CharadesBingo({ seconds, onAgain }: { seconds: number; onAgain: 
   return (
     <div className="qcard stack">
       <p className="turn">{nameOf(cur, turn % players.length)}, pick a square to act</p>
+      <details className="howto">
+        <summary>How to play</summary>
+        <ol>
+          <li>Pick a square and act it out. No talking.</li>
+          <li>Guessed in time? The square is yours, +1 point.</li>
+          <li>Missed? The turn passes to the next player.</li>
+          <li>Three in a row of your squares wins +3 bonus.</li>
+          <li>Board full with no line? Nobody wins the bonus.</li>
+        </ol>
+      </details>
       <div className="bingo">
         {cells.map((c, i) => {
           const o = owner[i];
@@ -183,7 +193,10 @@ export function WordChain({ seconds, onAgain }: { seconds: number; onAgain: () =
       )}
       <Clock key={`${chain.length}-${out.length}`} seconds={seconds} onEnd={knockOut} />
       <p className="bigtext">{last}</p>
-      <p className="hint">Say a word starting with “{last[last.length - 1].toUpperCase()}”. Type it to lock it in. Words must be at least {MIN_WORD} letters long.</p>
+      <p className="hint">
+        Say a word starting with “{last[last.length - 1].toUpperCase()}”. Type it to lock it in. Words must be at least{" "}
+        {MIN_WORD} letters long.
+      </p>
       <form
         className="stack"
         onSubmit={(e) => {

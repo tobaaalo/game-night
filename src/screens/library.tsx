@@ -103,7 +103,7 @@ export function Library() {
         </button>
       </div>
 
-      <div className={clsx("lib-feature stagger", group !== "friends" && "one")}>
+      <div className="lib-feature stagger">
         {daily && (
           <button className="roomcard" onClick={() => go(`/play/${daily.id}`)}>
             <span className="roomcard-icon" aria-hidden="true">
@@ -115,7 +115,7 @@ export function Library() {
             </span>
           </button>
         )}
-        {group === "friends" && (
+        {
           <button className="roomcard" onClick={() => go("/room")} disabled={!online} aria-describedby="room-sub">
             <span className="roomcard-icon" aria-hidden="true">
               <Icon.phones />
@@ -123,19 +123,19 @@ export function Library() {
             <span className="roomcard-text">
               <span className="roomcard-title">Join by phone</span>
               <span className="roomcard-sub" id="room-sub">
-                {online ? "4-letter code" : "Needs internet"}
+                {online ? "Open a room or join with a code" : "Needs internet"}
               </span>
             </span>
           </button>
-        )}
+        }
       </div>
 
-      {group === "friends" && (
+      {
         <p className="room-legend">
           <span className="room-swatch" aria-hidden="true" />
           Yellow tab: can also be played in a room, everyone on their own phone.
         </p>
-      )}
+      }
 
       {sections.map(({ s, list }) => (
         <section key={s} className="lib-section" aria-labelledby={`sec-${s}`}>
@@ -158,7 +158,7 @@ export function Library() {
               n += 1;
               return (
                 <li key={g.id}>
-                  <Ticket g={g} n={n} view={view} showRoom={group === "friends"} onOpen={() => go(`/play/${g.id}`)} />
+                  <Ticket g={g} n={n} view={view} showRoom onOpen={() => go(`/play/${g.id}`)} />
                 </li>
               );
             })}
@@ -234,13 +234,13 @@ function Ticket({
   n,
   view,
   onOpen,
-  showRoom,
+  showRoom = true,
 }: {
   g: GameDef;
   n: number;
   view: "list" | "grid";
   onOpen: () => void;
-  showRoom: boolean;
+  showRoom?: boolean;
 }) {
   const room = g.room && showRoom;
   if (view === "grid")

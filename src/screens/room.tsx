@@ -668,7 +668,13 @@ function Leaderboard({
         {ranked.map((p, i) => {
           const g = state.reveal?.picks[p.pid]?.gained;
           return (
-            <li key={p.pid} className={clsx(i === 0 && !compact && topScore > 0 && leaders.length === 1 && "first", p.pid === you && "you")}>
+            <li
+              key={p.pid}
+              className={clsx(
+                i === 0 && !compact && topScore > 0 && leaders.length === 1 && "first",
+                p.pid === you && "you",
+              )}
+            >
               <span className="place">{i + 1}</span>
               <span className="nm">
                 {p.name}

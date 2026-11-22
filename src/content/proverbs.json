@@ -1,410 +1,104 @@
 [
- [
-  "Early to bed, early to rise...",
-  "makes a man healthy, wealthy and wise"
- ],
- [
-  "A bird in the hand...",
-  "is worth two in the bush"
- ],
- [
-  "Don't count your chickens...",
-  "before they hatch"
- ],
- [
-  "If you want to go fast, go alone...",
-  "if you want to go far, go together"
- ],
- [
-  "It takes a village...",
-  "to raise a child"
- ],
- [
-  "Pride goes before destruction...",
-  "and a haughty spirit before a fall (Proverbs 16:18)"
- ],
- [
-  "Train up a child in the way he should go...",
-  "and when he is old he will not depart from it (Proverbs 22:6)"
- ],
- [
-  "A soft answer turns away wrath...",
-  "but a harsh word stirs up anger (Proverbs 15:1)"
- ],
- [
-  "As iron sharpens iron...",
-  "so one person sharpens another (Proverbs 27:17)"
- ],
- [
-  "The early bird...",
-  "catches the worm"
- ],
- [
-  "Rome wasn't...",
-  "built in a day"
- ],
- [
-  "Actions speak...",
-  "louder than words"
- ],
- [
-  "Don't put all your eggs...",
-  "in one basket"
- ],
- [
-  "When two elephants fight...",
-  "it is the grass that suffers"
- ],
- [
-  "A journey of a thousand miles...",
-  "begins with a single step"
- ],
- [
-  "Trust in the Lord with all your heart...",
-  "and lean not on your own understanding (Proverbs 3:5)"
- ],
- [
-  "Too many cooks...",
-  "spoil the broth"
- ],
- [
-  "He who is carried on another's back...",
-  "does not know how far the town is"
- ],
- [
-  "Where there's a will...",
-  "there's a way"
- ],
- [
-  "However long the night...",
-  "the dawn will break"
- ],
- [
-  "A stitch in time...",
-  "saves nine"
- ],
- [
-  "All that glitters...",
-  "is not gold"
- ],
- [
-  "Every cloud has...",
-  "a silver lining"
- ],
- [
-  "Familiarity breeds...",
-  "contempt"
- ],
- [
-  "Fortune favours...",
-  "the brave"
- ],
- [
-  "Look before...",
-  "you leap"
- ],
- [
-  "Many hands...",
-  "make light work"
- ],
- [
-  "Necessity is...",
-  "the mother of invention"
- ],
- [
-  "No pain...",
-  "no gain"
- ],
- [
-  "One man's trash...",
-  "is another man's treasure"
- ],
- [
-  "Practice makes...",
-  "perfect"
- ],
- [
-  "The pen is...",
-  "mightier than the sword"
- ],
- [
-  "There's no place...",
-  "like home"
- ],
- [
-  "When in Rome...",
-  "do as the Romans do"
- ],
- [
-  "You can't judge a book...",
-  "by its cover"
- ],
- [
-  "You can't teach an old dog...",
-  "new tricks"
- ],
- [
-  "A friend in need...",
-  "is a friend indeed"
- ],
- [
-  "Absence makes...",
-  "the heart grow fonder"
- ],
- [
-  "Beggars can't...",
-  "be choosers"
- ],
- [
-  "Better late...",
-  "than never"
- ],
- [
-  "Birds of a feather...",
-  "flock together"
- ],
- [
-  "Blood is...",
-  "thicker than water"
- ],
- [
-  "Curiosity killed...",
-  "the cat"
- ],
- [
-  "Don't bite the hand...",
-  "that feeds you"
- ],
- [
-  "Don't cry over...",
-  "spilled milk"
- ],
- [
-  "Easy come...",
-  "easy go"
- ],
- [
-  "Great minds...",
-  "think alike"
- ],
- [
-  "Haste makes...",
-  "waste"
- ],
- [
-  "He who laughs last...",
-  "laughs longest"
- ],
- [
-  "Honesty is...",
-  "the best policy"
- ],
- [
-  "If it ain't broke...",
-  "don't fix it"
- ],
- [
-  "It takes two...",
-  "to tango"
- ],
- [
-  "Kill two birds...",
-  "with one stone"
- ],
- [
-  "Laughter is...",
-  "the best medicine"
- ],
- [
-  "Let sleeping dogs...",
-  "lie"
- ],
- [
-  "Money doesn't...",
-  "grow on trees"
- ],
- [
-  "Out of sight...",
-  "out of mind"
- ],
- [
-  "Slow and steady...",
-  "wins the race"
- ],
- [
-  "Strike while...",
-  "the iron is hot"
- ],
- [
-  "The grass is always greener...",
-  "on the other side"
- ],
- [
-  "Two wrongs...",
-  "don't make a right"
- ],
- [
-  "Where there's smoke...",
-  "there's fire"
- ],
- [
-  "You reap...",
-  "what you sow"
- ],
- [
-  "You can lead a horse to water...",
-  "but you can't make it drink"
- ],
- [
-  "A rolling stone...",
-  "gathers no moss"
- ],
- [
-  "A penny saved...",
-  "is a penny earned"
- ],
- [
-  "Barking dogs...",
-  "seldom bite"
- ],
- [
-  "Charity begins...",
-  "at home"
- ],
- [
-  "Cut your coat...",
-  "according to your cloth"
- ],
- [
-  "Don't judge a man...",
-  "until you've walked a mile in his shoes"
- ],
- [
-  "Empty vessels...",
-  "make the most noise"
- ],
- [
-  "Every dog...",
-  "has its day"
- ],
- [
-  "Fools rush in...",
-  "where angels fear to tread"
- ],
- [
-  "Hope for the best...",
-  "prepare for the worst"
- ],
- [
-  "It's no use locking the stable door...",
-  "after the horse has bolted"
- ],
- [
-  "Judge not...",
-  "lest ye be judged"
- ],
- [
-  "Knowledge is...",
-  "power"
- ],
- [
-  "Least said...",
-  "soonest mended"
- ],
- [
-  "Make hay...",
-  "while the sun shines"
- ],
- [
-  "Misery loves...",
-  "company"
- ],
- [
-  "Never look a gift horse...",
-  "in the mouth"
- ],
- [
-  "Once bitten...",
-  "twice shy"
- ],
- [
-  "People who live in glass houses...",
-  "shouldn't throw stones"
- ],
- [
-  "Silence is...",
-  "golden"
- ],
- [
-  "The apple doesn't fall...",
-  "far from the tree"
- ],
- [
-  "The squeaky wheel...",
-  "gets the grease"
- ],
- [
-  "There's no smoke...",
-  "without fire"
- ],
- [
-  "Time and tide...",
-  "wait for no man"
- ],
- [
-  "Variety is...",
-  "the spice of life"
- ],
- [
-  "Walk softly...",
-  "and carry a big stick"
- ],
- [
-  "When the cat's away...",
-  "the mice will play"
- ],
- [
-  "A watched pot...",
-  "never boils"
- ],
- [
-  "Cheats never...",
-  "prosper"
- ],
- [
-  "Do unto others...",
-  "as you would have them do unto you"
- ],
- [
-  "The cow that has no tail...",
-  "should not try to chase flies"
- ],
- [
-  "Rain does not fall...",
-  "on one roof alone"
- ],
- [
-  "The one who asks questions...",
-  "doesn't lose his way"
- ],
- [
-  "A child who is carried...",
-  "does not know how far the town is"
- ],
- [
-  "Wisdom is like a baobab tree...",
-  "no one individual can embrace it"
- ],
- [
-  "If you want to go fast...",
-  "go alone, if you want to go far, go together"
- ],
- [
-  "Smooth seas...",
-  "do not make skilful sailors"
- ],
- [
-  "He who learns...",
-  "teaches"
- ]
+  ["Early to bed, early to rise...", "makes a man healthy, wealthy and wise"],
+  ["A bird in the hand...", "is worth two in the bush"],
+  ["Don't count your chickens...", "before they hatch"],
+  ["If you want to go fast, go alone...", "if you want to go far, go together"],
+  ["It takes a village...", "to raise a child"],
+  ["Pride goes before destruction...", "and a haughty spirit before a fall (Proverbs 16:18)"],
+  ["Train up a child in the way he should go...", "and when he is old he will not depart from it (Proverbs 22:6)"],
+  ["A soft answer turns away wrath...", "but a harsh word stirs up anger (Proverbs 15:1)"],
+  ["As iron sharpens iron...", "so one person sharpens another (Proverbs 27:17)"],
+  ["The early bird...", "catches the worm"],
+  ["Rome wasn't...", "built in a day"],
+  ["Actions speak...", "louder than words"],
+  ["Don't put all your eggs...", "in one basket"],
+  ["When two elephants fight...", "it is the grass that suffers"],
+  ["A journey of a thousand miles...", "begins with a single step"],
+  ["Trust in the Lord with all your heart...", "and lean not on your own understanding (Proverbs 3:5)"],
+  ["Too many cooks...", "spoil the broth"],
+  ["He who is carried on another's back...", "does not know how far the town is"],
+  ["Where there's a will...", "there's a way"],
+  ["However long the night...", "the dawn will break"],
+  ["A stitch in time...", "saves nine"],
+  ["All that glitters...", "is not gold"],
+  ["Every cloud has...", "a silver lining"],
+  ["Familiarity breeds...", "contempt"],
+  ["Fortune favours...", "the brave"],
+  ["Look before...", "you leap"],
+  ["Many hands...", "make light work"],
+  ["Necessity is...", "the mother of invention"],
+  ["No pain...", "no gain"],
+  ["One man's trash...", "is another man's treasure"],
+  ["Practice makes...", "perfect"],
+  ["The pen is...", "mightier than the sword"],
+  ["There's no place...", "like home"],
+  ["When in Rome...", "do as the Romans do"],
+  ["You can't judge a book...", "by its cover"],
+  ["You can't teach an old dog...", "new tricks"],
+  ["A friend in need...", "is a friend indeed"],
+  ["Absence makes...", "the heart grow fonder"],
+  ["Beggars can't...", "be choosers"],
+  ["Better late...", "than never"],
+  ["Birds of a feather...", "flock together"],
+  ["Blood is...", "thicker than water"],
+  ["Curiosity killed...", "the cat"],
+  ["Don't bite the hand...", "that feeds you"],
+  ["Don't cry over...", "spilled milk"],
+  ["Easy come...", "easy go"],
+  ["Great minds...", "think alike"],
+  ["Haste makes...", "waste"],
+  ["He who laughs last...", "laughs longest"],
+  ["Honesty is...", "the best policy"],
+  ["If it ain't broke...", "don't fix it"],
+  ["It takes two...", "to tango"],
+  ["Kill two birds...", "with one stone"],
+  ["Laughter is...", "the best medicine"],
+  ["Let sleeping dogs...", "lie"],
+  ["Money doesn't...", "grow on trees"],
+  ["Out of sight...", "out of mind"],
+  ["Slow and steady...", "wins the race"],
+  ["Strike while...", "the iron is hot"],
+  ["The grass is always greener...", "on the other side"],
+  ["Two wrongs...", "don't make a right"],
+  ["Where there's smoke...", "there's fire"],
+  ["You reap...", "what you sow"],
+  ["You can lead a horse to water...", "but you can't make it drink"],
+  ["A rolling stone...", "gathers no moss"],
+  ["A penny saved...", "is a penny earned"],
+  ["Barking dogs...", "seldom bite"],
+  ["Charity begins...", "at home"],
+  ["Cut your coat...", "according to your cloth"],
+  ["Don't judge a man...", "until you've walked a mile in his shoes"],
+  ["Empty vessels...", "make the most noise"],
+  ["Every dog...", "has its day"],
+  ["Fools rush in...", "where angels fear to tread"],
+  ["Hope for the best...", "prepare for the worst"],
+  ["It's no use locking the stable door...", "after the horse has bolted"],
+  ["Judge not...", "lest ye be judged"],
+  ["Knowledge is...", "power"],
+  ["Least said...", "soonest mended"],
+  ["Make hay...", "while the sun shines"],
+  ["Misery loves...", "company"],
+  ["Never look a gift horse...", "in the mouth"],
+  ["Once bitten...", "twice shy"],
+  ["People who live in glass houses...", "shouldn't throw stones"],
+  ["Silence is...", "golden"],
+  ["The apple doesn't fall...", "far from the tree"],
+  ["The squeaky wheel...", "gets the grease"],
+  ["There's no smoke...", "without fire"],
+  ["Time and tide...", "wait for no man"],
+  ["Variety is...", "the spice of life"],
+  ["Walk softly...", "and carry a big stick"],
+  ["When the cat's away...", "the mice will play"],
+  ["A watched pot...", "never boils"],
+  ["Cheats never...", "prosper"],
+  ["Do unto others...", "as you would have them do unto you"],
+  ["The cow that has no tail...", "should not try to chase flies"],
+  ["Rain does not fall...", "on one roof alone"],
+  ["The one who asks questions...", "doesn't lose his way"],
+  ["A child who is carried...", "does not know how far the town is"],
+  ["Wisdom is like a baobab tree...", "no one individual can embrace it"],
+  ["If you want to go fast...", "go alone, if you want to go far, go together"],
+  ["Smooth seas...", "do not make skilful sailors"],
+  ["He who learns...", "teaches"]
 ]

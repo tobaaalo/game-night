@@ -1,512 +1,104 @@
 [
- [
-  1,
-  "gen",
-  "Colours"
- ],
- [
-  1,
-  "gen",
-  "Animals"
- ],
- [
-  1,
-  "gen",
-  "Things in a kitchen"
- ],
- [
-  1,
-  "gen",
-  "Body parts"
- ],
- [
-  1,
-  "gen",
-  "Things in a bathroom"
- ],
- [
-  1,
-  "gen",
-  "Things that fly"
- ],
- [
-  1,
-  "gen",
-  "Clothes"
- ],
- [
-  1,
-  "gen",
-  "Pets"
- ],
- [
-  1,
-  "gen",
-  "Jobs"
- ],
- [
-  1,
-  "gen",
-  "Things in a school"
- ],
- [
-  1,
-  "gen",
-  "Shapes"
- ],
- [
-  1,
-  "gen",
-  "Things at a party"
- ],
- [
-  1,
-  "food",
-  "Fruits"
- ],
- [
-  1,
-  "food",
-  "Vegetables"
- ],
- [
-  1,
-  "food",
-  "Drinks"
- ],
- [
-  1,
-  "food",
-  "Breakfast foods"
- ],
- [
-  1,
-  "place",
-  "Countries"
- ],
- [
-  1,
-  "sport",
-  "Ball sports"
- ],
- [
-  1,
-  "ent",
-  "Musical instruments"
- ],
- [
-  1,
-  "gen",
-  "Car brands"
- ],
- [
-  2,
-  "sport",
-  "Premier League clubs"
- ],
- [
-  2,
-  "place",
-  "Cities in the UK"
- ],
- [
-  2,
-  "food",
-  "Nigerian dishes"
- ],
- [
-  2,
-  "ent",
-  "Afrobeats artists"
- ],
- [
-  2,
-  "bible",
-  "Books of the Bible"
- ],
- [
-  2,
-  "bible",
-  "Disciples of Jesus"
- ],
- [
-  2,
-  "place",
-  "Countries in Africa"
- ],
- [
-  2,
-  "gen",
-  "Supermarkets"
- ],
- [
-  2,
-  "food",
-  "Pizza toppings"
- ],
- [
-  2,
-  "gen",
-  "Shoe brands"
- ],
- [
-  2,
-  "gen",
-  "Board games"
- ],
- [
-  2,
-  "gen",
-  "Apps on your phone"
- ],
- [
-  2,
-  "ent",
-  "Superheroes"
- ],
- [
-  2,
-  "ent",
-  "Disney films"
- ],
- [
-  2,
-  "gen",
-  "Things in a hospital"
- ],
- [
-  2,
-  "gen",
-  "Phone brands"
- ],
- [
-  2,
-  "gen",
-  "Dog breeds"
- ],
- [
-  2,
-  "food",
-  "Ice cream flavours"
- ],
- [
-  2,
-  "food",
-  "Fast food chains"
- ],
- [
-  2,
-  "gen",
-  "Things at a wedding"
- ],
- [
-  2,
-  "sport",
-  "Olympic sports"
- ],
- [
-  2,
-  "ent",
-  "Cartoon characters"
- ],
- [
-  2,
-  "food",
-  "Fizzy drinks"
- ],
- [
-  2,
-  "gen",
-  "Body organs"
- ],
- [
-  2,
-  "bible",
-  "Animals in the Bible"
- ],
- [
-  3,
-  "place",
-  "Capital cities in Europe"
- ],
- [
-  3,
-  "place",
-  "US states"
- ],
- [
-  3,
-  "place",
-  "Nigerian states"
- ],
- [
-  3,
-  "bible",
-  "Old Testament prophets"
- ],
- [
-  3,
-  "bible",
-  "Women in the Bible"
- ],
- [
-  3,
-  "sci",
-  "Planets"
- ],
- [
-  3,
-  "sport",
-  "Countries that have won the football World Cup"
- ],
- [
-  3,
-  "sci",
-  "Chemical elements"
- ],
- [
-  3,
-  "place",
-  "Languages spoken in Nigeria"
- ],
- [
-  3,
-  "sci",
-  "Famous scientists"
- ],
- [
-  3,
-  "sci",
-  "Bones in the body"
- ],
- [
-  3,
-  "food",
-  "Herbs and spices"
- ],
- [
-  3,
-  "ent",
-  "Nollywood actors"
- ],
- [
-  3,
-  "ent",
-  "Gospel artists"
- ],
- [
-  3,
-  "sport",
-  "Tennis Grand Slam champions"
- ],
- [
-  3,
-  "ent",
-  "Shakespeare plays"
- ],
- [
-  3,
-  "bible",
-  "Kings of Israel or Judah"
- ],
- [
-  3,
-  "place",
-  "African capital cities"
- ],
- [
-  3,
-  "ent",
-  "Classical composers"
- ],
- [
-  3,
-  "food",
-  "Types of cheese"
- ],
- [
-  3,
-  "bible",
-  "Letters written by Paul"
- ],
- [
-  3,
-  "ent",
-  "Famous painters"
- ],
- [
-  3,
-  "gen",
-  "Car models (not brands)"
- ],
- [
-  3,
-  "sport",
-  "Formula 1 drivers"
- ],
- [
-  3,
-  "ent",
-  "Oscar-winning actors"
- ],
- [
-  4,
-  "place",
-  "Countries ending in -stan"
- ],
- [
-  4,
-  "place",
-  "Countries beginning with M"
- ],
- [
-  4,
-  "sci",
-  "Nobel Peace Prize winners"
- ],
- [
-  4,
-  "sci",
-  "Elements whose symbol doesn't match their English name"
- ],
- [
-  4,
-  "bible",
-  "Judges of Israel"
- ],
- [
-  4,
-  "bible",
-  "Sons of Jacob"
- ],
- [
-  4,
-  "bible",
-  "Minor prophets"
- ],
- [
-  4,
-  "sci",
-  "Former UK prime ministers"
- ],
- [
-  4,
-  "sci",
-  "Former US presidents"
- ],
- [
-  4,
-  "sci",
-  "Former Nigerian heads of state"
- ],
- [
-  4,
-  "place",
-  "Currencies of the world"
- ],
- [
-  4,
-  "sport",
-  "Ballon d'Or winners"
- ],
- [
-  4,
-  "ent",
-  "Oscar Best Picture winners"
- ],
- [
-  4,
-  "place",
-  "Capital cities in South America"
- ],
- [
-  4,
-  "place",
-  "Countries that border Germany"
- ],
- [
-  4,
-  "sci",
-  "Greek gods"
- ],
- [
-  4,
-  "place",
-  "Rivers in Africa"
- ],
- [
-  4,
-  "place",
-  "Mountains over 8,000 metres"
- ],
- [
-  4,
-  "sci",
-  "Programming languages"
- ],
- [
-  4,
-  "place",
-  "Caribbean islands"
- ],
- [
-  4,
-  "bible",
-  "Fruits of the Spirit"
- ],
- [
-  4,
-  "bible",
-  "Plagues of Egypt"
- ],
- [
-  4,
-  "sci",
-  "Constellations"
- ],
- [
-  4,
-  "sci",
-  "Bones in the hand or foot"
- ],
- [
-  4,
-  "place",
-  "Cities that have hosted the Olympics"
- ],
- [
-  1,
-  "gen",
-  "Fruits"
- ],
- [
-  2,
-  "gen",
-  "Things in a kitchen"
- ],
- [
-  2,
-  "gen",
-  "School subjects"
- ],
- [
-  3,
-  "gen",
-  "Things in a bathroom"
- ],
- [
-  3,
-  "gen",
-  "Musical instruments"
- ],
- [
-  3,
-  "gen",
-  "Famous rivers"
- ],
- [
-  4,
-  "gen",
-  "Famous painters"
- ]
+  [1, "gen", "Colours"],
+  [1, "gen", "Animals"],
+  [1, "gen", "Things in a kitchen"],
+  [1, "gen", "Body parts"],
+  [1, "gen", "Things in a bathroom"],
+  [1, "gen", "Things that fly"],
+  [1, "gen", "Clothes"],
+  [1, "gen", "Pets"],
+  [1, "gen", "Jobs"],
+  [1, "gen", "Things in a school"],
+  [1, "gen", "Shapes"],
+  [1, "gen", "Things at a party"],
+  [1, "food", "Fruits"],
+  [1, "food", "Vegetables"],
+  [1, "food", "Drinks"],
+  [1, "food", "Breakfast foods"],
+  [1, "place", "Countries"],
+  [1, "sport", "Ball sports"],
+  [1, "ent", "Musical instruments"],
+  [1, "gen", "Car brands"],
+  [2, "sport", "Premier League clubs"],
+  [2, "place", "Cities in the UK"],
+  [2, "food", "Nigerian dishes"],
+  [2, "ent", "Afrobeats artists"],
+  [2, "bible", "Books of the Bible"],
+  [2, "bible", "Disciples of Jesus"],
+  [2, "place", "Countries in Africa"],
+  [2, "gen", "Supermarkets"],
+  [2, "food", "Pizza toppings"],
+  [2, "gen", "Shoe brands"],
+  [2, "gen", "Board games"],
+  [2, "gen", "Apps on your phone"],
+  [2, "ent", "Superheroes"],
+  [2, "ent", "Disney films"],
+  [2, "gen", "Things in a hospital"],
+  [2, "gen", "Phone brands"],
+  [2, "gen", "Dog breeds"],
+  [2, "food", "Ice cream flavours"],
+  [2, "food", "Fast food chains"],
+  [2, "gen", "Things at a wedding"],
+  [2, "sport", "Olympic sports"],
+  [2, "ent", "Cartoon characters"],
+  [2, "food", "Fizzy drinks"],
+  [2, "gen", "Body organs"],
+  [2, "bible", "Animals in the Bible"],
+  [3, "place", "Capital cities in Europe"],
+  [3, "place", "US states"],
+  [3, "place", "Nigerian states"],
+  [3, "bible", "Old Testament prophets"],
+  [3, "bible", "Women in the Bible"],
+  [3, "sci", "Planets"],
+  [3, "sport", "Countries that have won the football World Cup"],
+  [3, "sci", "Chemical elements"],
+  [3, "place", "Languages spoken in Nigeria"],
+  [3, "sci", "Famous scientists"],
+  [3, "sci", "Bones in the body"],
+  [3, "food", "Herbs and spices"],
+  [3, "ent", "Nollywood actors"],
+  [3, "ent", "Gospel artists"],
+  [3, "sport", "Tennis Grand Slam champions"],
+  [3, "ent", "Shakespeare plays"],
+  [3, "bible", "Kings of Israel or Judah"],
+  [3, "place", "African capital cities"],
+  [3, "ent", "Classical composers"],
+  [3, "food", "Types of cheese"],
+  [3, "bible", "Letters written by Paul"],
+  [3, "ent", "Famous painters"],
+  [3, "gen", "Car models (not brands)"],
+  [3, "sport", "Formula 1 drivers"],
+  [3, "ent", "Oscar-winning actors"],
+  [4, "place", "Countries ending in -stan"],
+  [4, "place", "Countries beginning with M"],
+  [4, "sci", "Nobel Peace Prize winners"],
+  [4, "sci", "Elements whose symbol doesn't match their English name"],
+  [4, "bible", "Judges of Israel"],
+  [4, "bible", "Sons of Jacob"],
+  [4, "bible", "Minor prophets"],
+  [4, "sci", "Former UK prime ministers"],
+  [4, "sci", "Former US presidents"],
+  [4, "sci", "Former Nigerian heads of state"],
+  [4, "place", "Currencies of the world"],
+  [4, "sport", "Ballon d'Or winners"],
+  [4, "ent", "Oscar Best Picture winners"],
+  [4, "place", "Capital cities in South America"],
+  [4, "place", "Countries that border Germany"],
+  [4, "sci", "Greek gods"],
+  [4, "place", "Rivers in Africa"],
+  [4, "place", "Mountains over 8,000 metres"],
+  [4, "sci", "Programming languages"],
+  [4, "place", "Caribbean islands"],
+  [4, "bible", "Fruits of the Spirit"],
+  [4, "bible", "Plagues of Egypt"],
+  [4, "sci", "Constellations"],
+  [4, "sci", "Bones in the hand or foot"],
+  [4, "place", "Cities that have hosted the Olympics"],
+  [1, "gen", "Fruits"],
+  [2, "gen", "Things in a kitchen"],
+  [2, "gen", "School subjects"],
+  [3, "gen", "Things in a bathroom"],
+  [3, "gen", "Musical instruments"],
+  [3, "gen", "Famous rivers"],
+  [4, "gen", "Famous painters"]
 ]

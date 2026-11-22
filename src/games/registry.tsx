@@ -49,6 +49,7 @@ import { ClueRun } from "./clues";
 import { WordLadder, BucketList, CharadesBingo, DrawGuess, MemoryMatch, WordChain } from "./extra";
 import { CLUES, DRAWWORDS, LADDER } from "../content";
 import type { LiveCfg } from "../shared/live";
+import { EMOJI_THEMES, emojiPool } from "./emojisets";
 import { STARTS } from "./extra";
 import { loadCustom, customToGame } from "../lib/custom";
 
@@ -335,24 +336,6 @@ const timeField = (key: string, legend: string, opts: [number, string][], def: n
   options: opts.map(([value, label]) => ({ value, label })),
   def,
 });
-const EMOJI_PAIRS: [string, string][] = [
-  ["🐘", "Elephant"],
-  ["🚀", "Rocket"],
-  ["🍕", "Pizza"],
-  ["🌋", "Volcano"],
-  ["🎸", "Guitar"],
-  ["⚽", "Football"],
-  ["🦁", "Lion"],
-  ["🏰", "Castle"],
-  ["🚲", "Bicycle"],
-  ["🌈", "Rainbow"],
-  ["🍌", "Banana"],
-  ["🔑", "Key"],
-  ["🐢", "Tortoise"],
-  ["🎂", "Cake"],
-  ["🌙", "Moon"],
-  ["🚂", "Train"],
-];
 const LADDER_RULES = {
   1: "Three-letter words and short ladders.",
   2: "Four-letter words, about five moves.",
@@ -368,7 +351,7 @@ const matchFields: Field[] = [
       { value: "faces", label: "Famous faces" },
       { value: "sports", label: "Sports stars" },
       { value: "flags", label: "Flags" },
-      { value: "emoji", label: "Emoji" },
+      ...EMOJI_THEMES.map(([k, l]) => ({ value: `e-${k}`, label: `Emoji: ${l}` })),
     ],
     def: "flags",
   },
@@ -402,7 +385,11 @@ async function matchPairs(v: SetupValues): Promise<[string, string | undefined, 
       ]);
     }
     default:
-      return drawMany("match-emoji", EMOJI_PAIRS, n).map(([e, t]) => [e, undefined, t]);
+      return drawMany(`match-${String(v.theme)}`, emojiPool(String(v.theme).replace(/^e-/, "")), n).map(([e, t]) => [
+        e,
+        undefined,
+        t,
+      ]);
   }
 }
 
@@ -444,6 +431,21 @@ const emojiFields: Field[] = [
 
 /** Turns for the timed party games: each player gets the same number. */
 const turnFields: Field[] = [countField(6, [2, 4, 6, 10], "count", "How many turns", "turns in total")];
+
+const tabooFields: Field[] = [
+  {
+    key: "nb",
+    legend: "Banned words per card",
+    options: [
+      { value: 2, label: "Easy, 2" },
+      { value: 4, label: "Medium, 4" },
+      { value: 6, label: "Hard, 6" },
+      { value: 8, label: "Extreme, 8" },
+    ],
+    def: 4,
+  },
+  ...turnFields,
+];
 
 const name5Fields: Field[] = [
   {
@@ -887,6 +889,12 @@ export const GAMES: GameDef[] = [
     room: true,
     roomName: "Memory Match (shared board)",
     roomFields: [
+      {
+        key: "theme",
+        legend: "Pictures",
+        options: EMOJI_THEMES.map(([value, label]) => ({ value, label })),
+        def: "mixed",
+      },
       timeField(
         "pairs",
         "How many pairs",
@@ -894,13 +902,16 @@ export const GAMES: GameDef[] = [
           [6, "6"],
           [8, "8"],
           [10, "10"],
+          [12, "12"],
         ],
         8,
       ),
     ],
     liveBuild: (v) => ({
       kind: "memory",
-      symbols: drawMany("match-room", EMOJI_PAIRS, num(v.pairs) || 8).map((p) => p[0]),
+      symbols: drawMany(`match-room-${String(v.theme)}`, emojiPool(String(v.theme || "mixed")), num(v.pairs) || 8).map(
+        (p) => p[0],
+      ),
     }),
     Play: () => (
       <SetupThen
@@ -1261,10 +1272,10 @@ export const GAMES: GameDef[] = [
     minPlayers: 2,
     stat: "Describe without saying",
     room: true,
-    roomFields: turnFields,
+    roomFields: tabooFields,
     liveBuild: (v) => ({
       kind: "perform",
-      items: shuffle(TABOO).map((w) => ({ w: w[0], ban: w.slice(1) })),
+      items: shuffle(TABOO).map((w) => ({ w: w[0], ban: w.slice(1, 1 + (num(v.nb) || 4)) })),
       turns: num(v.count) || 6,
       seconds: 60,
       buzz: true,
@@ -1272,12 +1283,12 @@ export const GAMES: GameDef[] = [
     Play: () => (
       <SetupThen
         id="taboo"
-        fields={turnFields}
-        build={(v) => ({ total: num(v.count) })}
+        fields={tabooFields}
+        build={(v) => ({ total: num(v.count), nb: num(v.nb) || 4 })}
         run={(d, again) => (
           <TimedRun
             id="taboo"
-            items={TABOO}
+            items={TABOO.map((w) => w.slice(0, 1 + d.nb))}
             seconds={60}
             total={d.total}
             onAgain={again}
@@ -1373,11 +1384,13 @@ export const GAMES: GameDef[] = [
     roomFields: [countField(3, [3, 5, 8], "count", "How many rounds", "letters in total")],
     liveBuild: (v) => ({
       kind: "words",
-      rounds: shuffle("ABCDEFGHIJKLMNOPRSTW".split("")).slice(0, num(v.count) || 3).map((letter) => ({
-        prompt: "Fill them all in before time runs out.",
-        labels: ["Name", "Place", "Animal", "Thing", "Food"],
-        letter,
-      })),
+      rounds: shuffle("ABCDEFGHIJKLMNOPRSTW".split(""))
+        .slice(0, num(v.count) || 3)
+        .map((letter) => ({
+          prompt: "Fill them all in before time runs out.",
+          labels: ["Name", "Place", "Animal", "Thing", "Food"],
+          letter,
+        })),
       seconds: 60,
       hi: 10,
       lo: 5,

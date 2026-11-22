@@ -63,9 +63,21 @@ export type TeamMsg =
 export const TEAM_OPTIONS = {
   teams: [
     { value: 0, label: "Everyone alone", rule: "Everyone plays on their own phone with their own ladder." },
-    { value: 2, label: "2 teams", rule: "Players are split into 2 teams. Teammates see the same ladder on their phones." },
-    { value: 3, label: "3 teams", rule: "Players are split into 3 teams. Teammates see the same ladder on their phones." },
-    { value: 4, label: "4 teams", rule: "Players are split into 4 teams. Teammates see the same ladder on their phones." },
+    {
+      value: 2,
+      label: "2 teams",
+      rule: "Players are split into 2 teams. Teammates see the same ladder on their phones.",
+    },
+    {
+      value: 3,
+      label: "3 teams",
+      rule: "Players are split into 3 teams. Teammates see the same ladder on their phones.",
+    },
+    {
+      value: 4,
+      label: "4 teams",
+      rule: "Players are split into 4 teams. Teammates see the same ladder on their phones.",
+    },
   ],
   vs: [
     {
@@ -220,7 +232,11 @@ export function teamApply(t: TeamState, m: TeamMsg, by: string, here: Set<string
     t.status = "play";
     t.teams.forEach((x, k) => {
       x.gained = 0;
-      x.board = fresh(t.puzzles[t.i], x.members[t.i % x.members.length], t.vs === "race" || k === t.active ? "play" : "wait");
+      x.board = fresh(
+        t.puzzles[t.i],
+        x.members[t.i % x.members.length],
+        t.vs === "race" || k === t.active ? "play" : "wait",
+      );
     });
     t.rv++;
     return true;

@@ -1,182 +1,182 @@
 [
- {
-  "id": "lion",
-  "name": "Lion",
-  "src": "020 The lion king Snyggve in the Serengeti National Park Photo by Giles Laurent.jpg",
-  "aiTool": "Figma AI (Gemini)"
- },
- {
-  "id": "cheetah",
-  "name": "Cheetah",
-  "src": "Male cheetah facing left in South Africa.jpg",
-  "aiTool": "Figma AI (Gemini)"
- },
- {
-  "id": "colosseum",
-  "name": "Colosseum",
-  "src": "Colosseo 2020.jpg",
-  "aiTool": "Figma AI (Gemini)"
- },
- {
-  "id": "croissant",
-  "name": "Croissant",
-  "src": "Croissant-Petr Kratochvil.jpg",
-  "aiTool": "Figma AI (Gemini)"
- },
- {
-  "id": "eiffel-tower",
-  "name": "Eiffel Tower",
-  "src": "Tour Eiffel Wikimedia Commons (cropped).jpg",
-  "aiTool": "Figma AI (Gemini)"
- },
- {
-  "id": "flamingo",
-  "name": "Flamingo",
-  "src": "Flamingos Laguna Colorada.jpg",
-  "aiTool": "Figma AI (Gemini)"
- },
- {
-  "id": "giraffe",
-  "name": "Giraffe",
-  "src": "Giraffe Mikumi National Park.jpg",
-  "aiTool": "Figma AI (Gemini)"
- },
- {
-  "id": "golden-retriever",
-  "name": "Golden Retriever",
-  "src": "Golden Retriever Dukedestiny01 drvd.jpg",
-  "aiTool": "Figma AI (Gemini)"
- },
- {
-  "id": "hamburger",
-  "name": "Hamburger",
-  "src": "RedDot Burger.jpg",
-  "aiTool": "Figma AI (Gemini)"
- },
- {
-  "id": "hippopotamus",
-  "name": "Hippopotamus",
-  "src": "Portrait Hippopotamus in the water.jpg",
-  "aiTool": "Figma AI (Gemini)"
- },
- {
-  "id": "jollof-rice",
-  "name": "Jollof rice",
-  "src": "Jollof Rice with Stew.jpg",
-  "aiTool": "Gamma"
- },
- {
-  "id": "camel",
-  "name": "Camel",
-  "src": "07._Camel_Profile%2C_near_Silverton%2C_NSW%2C_07.07.2007.jpg",
-  "aiTool": "Figma AI (Gemini)"
- },
- {
-  "id": "bald-eagle",
-  "name": "Bald eagle",
-  "src": "Bald_eagle_about_to_fly_in_Alaska_(2016).jpg",
-  "aiTool": "Figma AI (Gemini)"
- },
- {
-  "id": "big-ben",
-  "name": "Big Ben",
-  "src": "Elizabeth_Tower_and_the_north_front_of_the_Palace_of_Westminster,_London.jpg",
-  "aiTool": "Figma AI (Gemini)"
- },
- {
-  "id": "chameleon",
-  "name": "Chameleon",
-  "src": "Panther_Chameleon_738367_%28cropped%29.jpg",
-  "aiTool": "Figma AI (Gemini)"
- },
- {
-  "id": "cow",
-  "name": "Cow",
-  "src": "Cow_(Fleckvieh_breed)_Oeschinensee_Slaunger_2009-07-07.jpg",
-  "aiTool": "Figma AI (Gemini)"
- },
- {
-  "id": "domestic-cat",
-  "name": "Siamese cat",
-  "src": "Siam_lilacpoint.jpg",
-  "aiTool": "Figma AI (Gemini)"
- },
- {
-  "id": "golden-gate",
-  "name": "Golden Gate Bridge",
-  "src": "Golden_Gate_Bridge_as_seen_from_Battery_East.jpg",
-  "aiTool": "Figma AI (Gemini)"
- },
- {
-  "id": "gorilla",
-  "name": "Gorilla",
-  "src": "Gorille_des_plaines_de_l%27ouest_%C3%A0_l%27Espace_Zoologique.jpg",
-  "aiTool": "Figma AI (Gemini)"
- },
- {
-  "id": "grand-piano",
-  "name": "Grand piano",
-  "src": "Steinway_Vienna_002.JPG",
-  "aiTool": "Figma AI (Gemini)"
- },
- {
-  "id": "hedgehog",
-  "name": "Hedgehog",
-  "src": "Igel.JPG",
-  "aiTool": "Figma AI (Gemini)"
- },
- {
-  "id": "humpback-whale",
-  "name": "Humpback whale",
-  "src": "Humpback_whale_breaching_off_Cabo_San_Lucas.jpg",
-  "aiTool": "Figma AI (Gemini)"
- },
- {
-  "id": "great-wall",
-  "name": "Great Wall of China",
-  "src": "The_Great_Wall_of_China_at_Jinshanling-edit.jpg",
-  "aiTool": "Figma AI (Gemini)"
- },
- {
-  "id": "kangaroo",
-  "name": "Kangaroo",
-  "src": "Forester_kangaroo_(Macropus_giganteus_tasmaniensis)_juvenile_hopping_Esk_Valley.jpg",
-  "aiTool": "Figma AI (Gemini)"
- },
- {
-  "id": "koala",
-  "name": "Koala",
-  "src": "Koala_climbing_tree.jpg",
-  "aiTool": "Figma AI (Gemini)"
- },
- {
-  "id": "ladybug",
-  "name": "Ladybug",
-  "src": "Coccinella-septempunctata-15-fws.jpg",
-  "aiTool": "Figma AI (Gemini)"
- },
- {
-  "id": "machu-picchu",
-  "name": "Machu Picchu",
-  "src": "Machu_Picchu,_2023_(012).jpg",
-  "aiTool": "Figma AI (Gemini)"
- },
- {
-  "id": "mango",
-  "name": "Mango",
-  "src": "Mangos_-_single_and_halved.jpg",
-  "aiTool": "Figma AI (Gemini)"
- },
- {
-  "id": "matterhorn",
-  "name": "Matterhorn",
-  "src": "Matterhorn_from_Domh%C3%BCtte_-_2.jpg",
-  "aiTool": "Figma AI (Gemini)"
- },
- {
-  "id": "mount-fuji",
-  "name": "Mount Fuji",
-  "src": "View_of_Mount_Fuji_from_Ōwakudani_20211202.jpg",
-  "aiTool": "Figma AI (Gemini)"
- }
+  {
+    "id": "lion",
+    "name": "Lion",
+    "src": "020 The lion king Snyggve in the Serengeti National Park Photo by Giles Laurent.jpg",
+    "aiTool": "Figma AI (Gemini)"
+  },
+  {
+    "id": "cheetah",
+    "name": "Cheetah",
+    "src": "Male cheetah facing left in South Africa.jpg",
+    "aiTool": "Figma AI (Gemini)"
+  },
+  {
+    "id": "colosseum",
+    "name": "Colosseum",
+    "src": "Colosseo 2020.jpg",
+    "aiTool": "Figma AI (Gemini)"
+  },
+  {
+    "id": "croissant",
+    "name": "Croissant",
+    "src": "Croissant-Petr Kratochvil.jpg",
+    "aiTool": "Figma AI (Gemini)"
+  },
+  {
+    "id": "eiffel-tower",
+    "name": "Eiffel Tower",
+    "src": "Tour Eiffel Wikimedia Commons (cropped).jpg",
+    "aiTool": "Figma AI (Gemini)"
+  },
+  {
+    "id": "flamingo",
+    "name": "Flamingo",
+    "src": "Flamingos Laguna Colorada.jpg",
+    "aiTool": "Figma AI (Gemini)"
+  },
+  {
+    "id": "giraffe",
+    "name": "Giraffe",
+    "src": "Giraffe Mikumi National Park.jpg",
+    "aiTool": "Figma AI (Gemini)"
+  },
+  {
+    "id": "golden-retriever",
+    "name": "Golden Retriever",
+    "src": "Golden Retriever Dukedestiny01 drvd.jpg",
+    "aiTool": "Figma AI (Gemini)"
+  },
+  {
+    "id": "hamburger",
+    "name": "Hamburger",
+    "src": "RedDot Burger.jpg",
+    "aiTool": "Figma AI (Gemini)"
+  },
+  {
+    "id": "hippopotamus",
+    "name": "Hippopotamus",
+    "src": "Portrait Hippopotamus in the water.jpg",
+    "aiTool": "Figma AI (Gemini)"
+  },
+  {
+    "id": "jollof-rice",
+    "name": "Jollof rice",
+    "src": "Jollof Rice with Stew.jpg",
+    "aiTool": "Gamma"
+  },
+  {
+    "id": "camel",
+    "name": "Camel",
+    "src": "07._Camel_Profile%2C_near_Silverton%2C_NSW%2C_07.07.2007.jpg",
+    "aiTool": "Figma AI (Gemini)"
+  },
+  {
+    "id": "bald-eagle",
+    "name": "Bald eagle",
+    "src": "Bald_eagle_about_to_fly_in_Alaska_(2016).jpg",
+    "aiTool": "Figma AI (Gemini)"
+  },
+  {
+    "id": "big-ben",
+    "name": "Big Ben",
+    "src": "Elizabeth_Tower_and_the_north_front_of_the_Palace_of_Westminster,_London.jpg",
+    "aiTool": "Figma AI (Gemini)"
+  },
+  {
+    "id": "chameleon",
+    "name": "Chameleon",
+    "src": "Panther_Chameleon_738367_%28cropped%29.jpg",
+    "aiTool": "Figma AI (Gemini)"
+  },
+  {
+    "id": "cow",
+    "name": "Cow",
+    "src": "Cow_(Fleckvieh_breed)_Oeschinensee_Slaunger_2009-07-07.jpg",
+    "aiTool": "Figma AI (Gemini)"
+  },
+  {
+    "id": "domestic-cat",
+    "name": "Siamese cat",
+    "src": "Siam_lilacpoint.jpg",
+    "aiTool": "Figma AI (Gemini)"
+  },
+  {
+    "id": "golden-gate",
+    "name": "Golden Gate Bridge",
+    "src": "Golden_Gate_Bridge_as_seen_from_Battery_East.jpg",
+    "aiTool": "Figma AI (Gemini)"
+  },
+  {
+    "id": "gorilla",
+    "name": "Gorilla",
+    "src": "Gorille_des_plaines_de_l%27ouest_%C3%A0_l%27Espace_Zoologique.jpg",
+    "aiTool": "Figma AI (Gemini)"
+  },
+  {
+    "id": "grand-piano",
+    "name": "Grand piano",
+    "src": "Steinway_Vienna_002.JPG",
+    "aiTool": "Figma AI (Gemini)"
+  },
+  {
+    "id": "hedgehog",
+    "name": "Hedgehog",
+    "src": "Igel.JPG",
+    "aiTool": "Figma AI (Gemini)"
+  },
+  {
+    "id": "humpback-whale",
+    "name": "Humpback whale",
+    "src": "Humpback_whale_breaching_off_Cabo_San_Lucas.jpg",
+    "aiTool": "Figma AI (Gemini)"
+  },
+  {
+    "id": "great-wall",
+    "name": "Great Wall of China",
+    "src": "The_Great_Wall_of_China_at_Jinshanling-edit.jpg",
+    "aiTool": "Figma AI (Gemini)"
+  },
+  {
+    "id": "kangaroo",
+    "name": "Kangaroo",
+    "src": "Forester_kangaroo_(Macropus_giganteus_tasmaniensis)_juvenile_hopping_Esk_Valley.jpg",
+    "aiTool": "Figma AI (Gemini)"
+  },
+  {
+    "id": "koala",
+    "name": "Koala",
+    "src": "Koala_climbing_tree.jpg",
+    "aiTool": "Figma AI (Gemini)"
+  },
+  {
+    "id": "ladybug",
+    "name": "Ladybug",
+    "src": "Coccinella-septempunctata-15-fws.jpg",
+    "aiTool": "Figma AI (Gemini)"
+  },
+  {
+    "id": "machu-picchu",
+    "name": "Machu Picchu",
+    "src": "Machu_Picchu,_2023_(012).jpg",
+    "aiTool": "Figma AI (Gemini)"
+  },
+  {
+    "id": "mango",
+    "name": "Mango",
+    "src": "Mangos_-_single_and_halved.jpg",
+    "aiTool": "Figma AI (Gemini)"
+  },
+  {
+    "id": "matterhorn",
+    "name": "Matterhorn",
+    "src": "Matterhorn_from_Domh%C3%BCtte_-_2.jpg",
+    "aiTool": "Figma AI (Gemini)"
+  },
+  {
+    "id": "mount-fuji",
+    "name": "Mount Fuji",
+    "src": "View_of_Mount_Fuji_from_Ōwakudani_20211202.jpg",
+    "aiTool": "Figma AI (Gemini)"
+  }
 ]

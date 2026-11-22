@@ -1,414 +1,105 @@
 [
- [
-  1,
-  "cat"
- ],
- [
-  1,
-  "dog"
- ],
- [
-  1,
-  "house"
- ],
- [
-  1,
-  "sun"
- ],
- [
-  1,
-  "tree"
- ],
- [
-  1,
-  "fish"
- ],
- [
-  1,
-  "car"
- ],
- [
-  1,
-  "flower"
- ],
- [
-  1,
-  "boat"
- ],
- [
-  1,
-  "book"
- ],
- [
-  1,
-  "apple"
- ],
- [
-  1,
-  "star"
- ],
- [
-  1,
-  "bird"
- ],
- [
-  1,
-  "moon"
- ],
- [
-  1,
-  "cake"
- ],
- [
-  1,
-  "chair"
- ],
- [
-  1,
-  "phone"
- ],
- [
-  1,
-  "umbrella"
- ],
- [
-  1,
-  "pizza"
- ],
- [
-  1,
-  "bicycle"
- ],
- [
-  1,
-  "snowman"
- ],
- [
-  1,
-  "rainbow"
- ],
- [
-  1,
-  "key"
- ],
- [
-  1,
-  "clock"
- ],
- [
-  1,
-  "ball"
- ],
- [
-  2,
-  "elephant"
- ],
- [
-  2,
-  "guitar"
- ],
- [
-  2,
-  "lighthouse"
- ],
- [
-  2,
-  "rocket"
- ],
- [
-  2,
-  "bridge"
- ],
- [
-  2,
-  "butterfly"
- ],
- [
-  2,
-  "castle"
- ],
- [
-  2,
-  "camera"
- ],
- [
-  2,
-  "volcano"
- ],
- [
-  2,
-  "football"
- ],
- [
-  2,
-  "drum"
- ],
- [
-  2,
-  "airplane"
- ],
- [
-  2,
-  "ladder"
- ],
- [
-  2,
-  "candle"
- ],
- [
-  2,
-  "crown"
- ],
- [
-  2,
-  "tent"
- ],
- [
-  2,
-  "spider"
- ],
- [
-  2,
-  "tractor"
- ],
- [
-  2,
-  "giraffe"
- ],
- [
-  2,
-  "balloon"
- ],
- [
-  3,
-  "Noah's ark"
- ],
- [
-  3,
-  "jollof rice"
- ],
- [
-  3,
-  "traffic jam"
- ],
- [
-  3,
-  "family photo"
- ],
- [
-  3,
-  "power cut"
- ],
- [
-  3,
-  "wedding"
- ],
- [
-  3,
-  "thunderstorm"
- ],
- [
-  3,
-  "the Titanic"
- ],
- [
-  3,
-  "Big Ben"
- ],
- [
-  3,
-  "passport"
- ],
- [
-  3,
-  "Sunday service"
- ],
- [
-  3,
-  "Christmas tree"
- ],
- [
-  3,
-  "earthquake"
- ],
- [
-  3,
-  "birthday party"
- ],
- [
-  3,
-  "sleepwalking"
- ],
- [
-  3,
-  "microphone"
- ],
- [
-  3,
-  "fireworks"
- ],
- [
-  3,
-  "the Nile"
- ],
- [
-  3,
-  "shopping trolley"
- ],
- [
-  3,
-  "wheelbarrow"
- ],
- [
-  4,
-  "jealousy"
- ],
- [
-  4,
-  "democracy"
- ],
- [
-  4,
-  "gravity"
- ],
- [
-  4,
-  "Wi-Fi"
- ],
- [
-  4,
-  "Tower of Babel"
- ],
- [
-  4,
-  "the Prodigal Son"
- ],
- [
-  4,
-  "déjà vu"
- ],
- [
-  4,
-  "inflation"
- ],
- [
-  4,
-  "a good deal"
- ],
- [
-  4,
-  "time travel"
- ],
- [
-  4,
-  "peer pressure"
- ],
- [
-  4,
-  "Black Friday"
- ],
- [
-  4,
-  "homesickness"
- ],
- [
-  4,
-  "small talk"
- ],
- [
-  4,
-  "the weekend"
- ],
- [
-  1,
-  "banana"
- ],
- [
-  1,
-  "pencil"
- ],
- [
-  1,
-  "cup"
- ],
- [
-  1,
-  "bed"
- ],
- [
-  2,
-  "hot air balloon"
- ],
- [
-  2,
-  "piano"
- ],
- [
-  2,
-  "windmill"
- ],
- [
-  2,
-  "spider web"
- ],
- [
-  1,
-  "hat"
- ],
- [
-  1,
-  "door"
- ],
- [
-  1,
-  "snake"
- ],
- [
-  1,
-  "sock"
- ],
- [
-  2,
-  "robot"
- ],
- [
-  2,
-  "mermaid"
- ],
- [
-  2,
-  "pirate ship"
- ],
- [
-  3,
-  "a snowy mountain"
- ],
- [
-  3,
-  "a birthday party"
- ],
- [
-  1,
-  "spoon"
- ],
- [
-  1,
-  "egg"
- ],
- [
-  2,
-  "scarecrow"
- ],
- [
-  3,
-  "a market stall"
- ],
- [
-  4,
-  "patience"
- ],
- [
-  3,
-  "a thunderstorm"
- ]
+  [1, "cat"],
+  [1, "dog"],
+  [1, "house"],
+  [1, "sun"],
+  [1, "tree"],
+  [1, "fish"],
+  [1, "car"],
+  [1, "flower"],
+  [1, "boat"],
+  [1, "book"],
+  [1, "apple"],
+  [1, "star"],
+  [1, "bird"],
+  [1, "moon"],
+  [1, "cake"],
+  [1, "chair"],
+  [1, "phone"],
+  [1, "umbrella"],
+  [1, "pizza"],
+  [1, "bicycle"],
+  [1, "snowman"],
+  [1, "rainbow"],
+  [1, "key"],
+  [1, "clock"],
+  [1, "ball"],
+  [2, "elephant"],
+  [2, "guitar"],
+  [2, "lighthouse"],
+  [2, "rocket"],
+  [2, "bridge"],
+  [2, "butterfly"],
+  [2, "castle"],
+  [2, "camera"],
+  [2, "volcano"],
+  [2, "football"],
+  [2, "drum"],
+  [2, "airplane"],
+  [2, "ladder"],
+  [2, "candle"],
+  [2, "crown"],
+  [2, "tent"],
+  [2, "spider"],
+  [2, "tractor"],
+  [2, "giraffe"],
+  [2, "balloon"],
+  [3, "Noah's ark"],
+  [3, "jollof rice"],
+  [3, "traffic jam"],
+  [3, "family photo"],
+  [3, "power cut"],
+  [3, "wedding"],
+  [3, "thunderstorm"],
+  [3, "the Titanic"],
+  [3, "Big Ben"],
+  [3, "passport"],
+  [3, "Sunday service"],
+  [3, "Christmas tree"],
+  [3, "earthquake"],
+  [3, "birthday party"],
+  [3, "sleepwalking"],
+  [3, "microphone"],
+  [3, "fireworks"],
+  [3, "the Nile"],
+  [3, "shopping trolley"],
+  [3, "wheelbarrow"],
+  [4, "jealousy"],
+  [4, "democracy"],
+  [4, "gravity"],
+  [4, "Wi-Fi"],
+  [4, "Tower of Babel"],
+  [4, "the Prodigal Son"],
+  [4, "déjà vu"],
+  [4, "inflation"],
+  [4, "a good deal"],
+  [4, "time travel"],
+  [4, "peer pressure"],
+  [4, "Black Friday"],
+  [4, "homesickness"],
+  [4, "small talk"],
+  [4, "the weekend"],
+  [1, "banana"],
+  [1, "pencil"],
+  [1, "cup"],
+  [1, "bed"],
+  [2, "hot air balloon"],
+  [2, "piano"],
+  [2, "windmill"],
+  [2, "spider web"],
+  [1, "hat"],
+  [1, "door"],
+  [1, "snake"],
+  [1, "sock"],
+  [2, "robot"],
+  [2, "mermaid"],
+  [2, "pirate ship"],
+  [3, "a snowy mountain"],
+  [3, "a birthday party"],
+  [1, "spoon"],
+  [1, "egg"],
+  [2, "scarecrow"],
+  [3, "a market stall"],
+  [4, "patience"],
+  [3, "a thunderstorm"]
 ]

@@ -139,14 +139,20 @@ export class Room extends DurableObject<Env> {
       return json({ state: this.view(pid), you: pid || undefined });
     }
     if (url.pathname === "/msg" && req.method === "POST") {
-      const b = (await req.json().catch(() => null)) as { role?: string; key?: string; pid?: string; msg?: ClientMsg } | null;
+      const b = (await req.json().catch(() => null)) as {
+        role?: string;
+        key?: string;
+        pid?: string;
+        msg?: ClientMsg;
+      } | null;
       if (!b?.msg) return json({ error: "Bad request." }, 400);
       let tag: Tag;
       if (b.role === "host") {
         if (b.key !== this.s.hostKey) return json({ error: "Only the host can do that." }, 403);
         tag = { role: "host" };
       } else {
-        if (!this.s.players.some((p) => p.pid === b.pid)) return json({ error: "You're not in this room any more." }, 404);
+        if (!this.s.players.some((p) => p.pid === b.pid))
+          return json({ error: "You're not in this room any more." }, 404);
         tag = { role: "player", pid: b.pid };
       }
       await this.handle(b.msg, tag, () => undefined);
@@ -445,7 +451,13 @@ export class Room extends DurableObject<Env> {
     }
     if (msg.t === "live") {
       if (s.phase !== "live" || !s.live) return;
-      const r = liveApply(s.live, msg, tag.role === "host" ? "host" : (tag.pid ?? ""), tag.role === "host", this.liveCtx());
+      const r = liveApply(
+        s.live,
+        msg,
+        tag.role === "host" ? "host" : (tag.pid ?? ""),
+        tag.role === "host",
+        this.liveCtx(),
+      );
       if (r.error) reply({ t: "error", message: r.error });
       if (r.end) this.liveAdvance(true);
       else if (r.changed) this.liveAdvance(false);

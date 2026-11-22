@@ -355,7 +355,9 @@ export function LiveGame({ state, me, send, skew }: Props) {
         {v.step === "reveal" ? (
           <>
             <Results v={v} nm={nm} me={me} flag={(pid, i) => send({ t: "live", a: "flag", pid, i })} />
-            <p className="muted small">Tap "Not valid" on any answer that does not fit. Most players agreeing removes it.</p>
+            <p className="muted small">
+              Tap "Not valid" on any answer that does not fit. Most players agreeing removes it.
+            </p>
             {next}
           </>
         ) : isHost ? (
@@ -409,9 +411,7 @@ export function LiveGame({ state, me, send, skew }: Props) {
         {head}
         <p className="turn">{isActor ? "You are drawing" : `${nm(v.actor)} is drawing`}</p>
         {isActor && v.step === "play" && <h2 className="qprompt">Draw: {v.secret}</h2>}
-        {!isActor && v.step === "play" && (
-          <p className="muted">{`${v.wordLen} letters`}</p>
-        )}
+        {!isActor && v.step === "play" && <p className="muted">{`${v.wordLen} letters`}</p>}
         {v.step === "reveal" && <h2 className="qprompt">{v.note}</h2>}
         <Board
           key={v.round}
@@ -520,7 +520,10 @@ export function LiveGame({ state, me, send, skew }: Props) {
       <div className="qcard live">
         {head}
         <p className="turn">{isActor ? "Your turn. Flip two cards." : `${nm(v.actor)} is flipping`}</p>
-        <div className="mem-grid" style={{ gridTemplateColumns: `repeat(${cards.length > 16 ? 5 : 4}, minmax(0, 1fr))` }}>
+        <div
+          className="mem-grid"
+          style={{ gridTemplateColumns: `repeat(${cards.length > 16 ? 5 : 4}, minmax(0, 1fr))` }}
+        >
           {cards.map((c, i) => (
             <button
               key={i}
@@ -533,9 +536,7 @@ export function LiveGame({ state, me, send, skew }: Props) {
             </button>
           ))}
         </div>
-        <p className="muted">
-          Pairs: {state.players.map((p) => `${p.name} ${v.pairs?.[p.pid] ?? 0}`).join(" · ")}
-        </p>
+        <p className="muted">Pairs: {state.players.map((p) => `${p.name} ${v.pairs?.[p.pid] ?? 0}`).join(" · ")}</p>
       </div>
     );
   }

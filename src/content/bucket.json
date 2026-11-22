@@ -1,562 +1,142 @@
 [
- [
-  "Travel",
-  "Watch the sunrise somewhere we have never been"
- ],
- [
-  "Travel",
-  "Take a road trip with no fixed plan"
- ],
- [
-  "Travel",
-  "Visit a country on every continent"
- ],
- [
-  "Travel",
-  "Spend a week somewhere hot"
- ],
- [
-  "Travel",
-  "See the northern lights"
- ],
- [
-  "Travel",
-  "Go back to where we first met"
- ],
- [
-  "Travel",
-  "Take a train journey across a country"
- ],
- [
-  "Travel",
-  "Visit Africa together"
- ],
- [
-  "Food",
-  "Cook a meal from a country we have never visited"
- ],
- [
-  "Food",
-  "Learn to make each other's favourite dish"
- ],
- [
-  "Food",
-  "Eat at a fancy restaurant for no reason"
- ],
- [
-  "Food",
-  "Have a picnic somewhere beautiful"
- ],
- [
-  "Food",
-  "Do a food tour of our city"
- ],
- [
-  "Food",
-  "Bake a cake from scratch together"
- ],
- [
-  "Adventure",
-  "Try a new sport together"
- ],
- [
-  "Adventure",
-  "Go hot air ballooning"
- ],
- [
-  "Adventure",
-  "Camp under the stars"
- ],
- [
-  "Adventure",
-  "Hike to the top of a mountain"
- ],
- [
-  "Adventure",
-  "Learn to swim properly, or dive"
- ],
- [
-  "Adventure",
-  "Go on a boat trip"
- ],
- [
-  "Adventure",
-  "Do a charity run together"
- ],
- [
-  "Home",
-  "Build a home we love"
- ],
- [
-  "Home",
-  "Plant a garden together"
- ],
- [
-  "Home",
-  "Have a movie night every week for a month"
- ],
- [
-  "Home",
-  "Redecorate a room ourselves"
- ],
- [
-  "Home",
-  "Host a dinner for all our friends"
- ],
- [
-  "Home",
-  "Adopt a pet"
- ],
- [
-  "Together",
-  "Renew our vows"
- ],
- [
-  "Together",
-  "Write each other a letter to open in ten years"
- ],
- [
-  "Together",
-  "Take a dance class"
- ],
- [
-  "Together",
-  "Learn a language together"
- ],
- [
-  "Together",
-  "Take a professional photo shoot"
- ],
- [
-  "Together",
-  "Start a tradition for every anniversary"
- ],
- [
-  "Together",
-  "Go a whole weekend without phones"
- ],
- [
-  "Together",
-  "Have a date night every month for a year"
- ],
- [
-  "Growth",
-  "Pray or read the Bible together every day for a month"
- ],
- [
-  "Growth",
-  "Volunteer together"
- ],
- [
-  "Growth",
-  "Start a business together"
- ],
- [
-  "Growth",
-  "Save for something big and reach it"
- ],
- [
-  "Growth",
-  "Go to a conference or retreat together"
- ],
- [
-  "Growth",
-  "Take a course together"
- ],
- [
-  "Fun",
-  "Go to a big concert or festival"
- ],
- [
-  "Fun",
-  "See a match in a famous stadium"
- ],
- [
-  "Fun",
-  "Go to a theme park and ride everything"
- ],
- [
-  "Fun",
-  "Visit a theatre or West End show"
- ],
- [
-  "Fun",
-  "Have a games tournament with a prize"
- ],
- [
-  "Fun",
-  "Make a time capsule"
- ],
- [
-  "Dreams",
-  "Learn to dance salsa together"
- ],
- [
-  "Dreams",
-  "Watch the sunrise from a mountain top"
- ],
- [
-  "Dreams",
-  "Ride in a hot air balloon"
- ],
- [
-  "Dreams",
-  "See the northern lights"
- ],
- [
-  "Dreams",
-  "Sleep under the stars"
- ],
- [
-  "Dreams",
-  "Swim with dolphins"
- ],
- [
-  "Dreams",
-  "Go on a safari"
- ],
- [
-  "Dreams",
-  "Visit every continent"
- ],
- [
-  "Dreams",
-  "Walk the Great Wall of China"
- ],
- [
-  "Dreams",
-  "Spend a week on a tropical island"
- ],
- [
-  "Dreams",
-  "Take a road trip with no plan"
- ],
- [
-  "Dreams",
-  "Learn to sail"
- ],
- [
-  "Dreams",
-  "Go to a music festival"
- ],
- [
-  "Dreams",
-  "Own a house together"
- ],
- [
-  "Dreams",
-  "Renew our vows in a beautiful place"
- ],
- [
-  "Food",
-  "Cook a three course meal together"
- ],
- [
-  "Food",
-  "Try street food in another country"
- ],
- [
-  "Food",
-  "Have a picnic at sunset"
- ],
- [
-  "Food",
-  "Visit a vineyard"
- ],
- [
-  "Food",
-  "Learn to make sushi"
- ],
- [
-  "Food",
-  "Eat at a restaurant with a Michelin star"
- ],
- [
-  "Food",
-  "Grow our own vegetables"
- ],
- [
-  "Food",
-  "Host a dinner party for friends"
- ],
- [
-  "Food",
-  "Try a food we have never heard of"
- ],
- [
-  "Food",
-  "Do a cooking class together"
- ],
- [
-  "Food",
-  "Make homemade pizza"
- ],
- [
-  "Food",
-  "Have breakfast in bed"
- ],
- [
-  "Food",
-  "Attempt a spicy food challenge"
- ],
- [
-  "Food",
-  "Make jollof rice together"
- ],
- [
-  "Adventure",
-  "Go skydiving"
- ],
- [
-  "Adventure",
-  "Try bungee jumping"
- ],
- [
-  "Adventure",
-  "Go zip lining"
- ],
- [
-  "Adventure",
-  "Hike a mountain together"
- ],
- [
-  "Adventure",
-  "Go white water rafting"
- ],
- [
-  "Adventure",
-  "Try scuba diving"
- ],
- [
-  "Adventure",
-  "Go camping"
- ],
- [
-  "Adventure",
-  "Take a surf lesson"
- ],
- [
-  "Adventure",
-  "Go horse riding on a beach"
- ],
- [
-  "Adventure",
-  "Try an escape room"
- ],
- [
-  "Adventure",
-  "Go quad biking"
- ],
- [
-  "Adventure",
-  "Explore a cave"
- ],
- [
-  "Adventure",
-  "Go kayaking"
- ],
- [
-  "Adventure",
-  "Try paintballing"
- ],
- [
-  "Adventure",
-  "Go ice skating"
- ],
- [
-  "Romance",
-  "Write each other love letters"
- ],
- [
-  "Romance",
-  "Dance in the rain"
- ],
- [
-  "Romance",
-  "Have a candlelit dinner at home"
- ],
- [
-  "Romance",
-  "Recreate our first date"
- ],
- [
-  "Romance",
-  "Take a couples massage"
- ],
- [
-  "Romance",
-  "Watch the stars together"
- ],
- [
-  "Romance",
-  "Take a moonlit walk on a beach"
- ],
- [
-  "Romance",
-  "Plan a surprise day for each other"
- ],
- [
-  "Romance",
-  "Make a playlist of our songs"
- ],
- [
-  "Romance",
-  "Take a photo in every place we visit"
- ],
- [
-  "Romance",
-  "Spend a whole day with no phones"
- ],
- [
-  "Romance",
-  "Stay a night in a fancy hotel"
- ],
- [
-  "Romance",
-  "Have a couples photoshoot"
- ],
- [
-  "Romance",
-  "Take a gondola ride"
- ],
- [
-  "Home",
-  "Redecorate a room together"
- ],
- [
-  "Home",
-  "Build something together"
- ],
- [
-  "Home",
-  "Start a garden"
- ],
- [
-  "Home",
-  "Have a movie marathon night"
- ],
- [
-  "Home",
-  "Build a blanket fort"
- ],
- [
-  "Home",
-  "Have a game night every week"
- ],
- [
-  "Home",
-  "Create a scrapbook of our memories"
- ],
- [
-  "Home",
-  "Declutter and donate things together"
- ],
- [
-  "Home",
-  "Learn a new language together"
- ],
- [
-  "Home",
-  "Start a tradition for every year"
- ],
- [
-  "Home",
-  "Plant a tree together"
- ],
- [
-  "Home",
-  "Do a jigsaw puzzle"
- ],
- [
-  "Culture",
-  "Visit a famous museum"
- ],
- [
-  "Culture",
-  "See a show on Broadway or the West End"
- ],
- [
-  "Culture",
-  "Go to a live concert"
- ],
- [
-  "Culture",
-  "Attend a wedding abroad"
- ],
- [
-  "Culture",
-  "Visit a historic castle"
- ],
- [
-  "Culture",
-  "Go to a football match"
- ],
- [
-  "Culture",
-  "Attend a local festival"
- ],
- [
-  "Culture",
-  "Visit the pyramids"
- ],
- [
-  "Culture",
-  "Take a painting class"
- ],
- [
-  "Culture",
-  "See a famous landmark in person"
- ],
- [
-  "Culture",
-  "Visit a place of our heritage"
- ],
- [
-  "Culture",
-  "Go to a carnival"
- ],
- [
-  "Culture",
-  "See a film at an outdoor cinema"
- ],
- [
-  "Fitness",
-  "Run a 5k together"
- ],
- [
-  "Fitness",
-  "Join a dance class"
- ],
- [
-  "Fitness",
-  "Try yoga together"
- ],
- [
-  "Fitness",
-  "Learn to rock climb"
- ],
- [
-  "Fitness",
-  "Go cycling for a whole day"
- ],
- [
-  "Fitness",
-  "Do a sunrise hike"
- ],
- [
-  "Fitness",
-  "Try paddle boarding"
- ],
- [
-  "Fitness",
-  "Play tennis together"
- ],
- [
-  "Fitness",
-  "Swim in the sea at dawn"
- ],
- [
-  "Fitness",
-  "Complete a fitness challenge for a month"
- ]
+  ["Travel", "Watch the sunrise somewhere we have never been"],
+  ["Travel", "Take a road trip with no fixed plan"],
+  ["Travel", "Visit a country on every continent"],
+  ["Travel", "Spend a week somewhere hot"],
+  ["Travel", "See the northern lights"],
+  ["Travel", "Go back to where we first met"],
+  ["Travel", "Take a train journey across a country"],
+  ["Travel", "Visit Africa together"],
+  ["Food", "Cook a meal from a country we have never visited"],
+  ["Food", "Learn to make each other's favourite dish"],
+  ["Food", "Eat at a fancy restaurant for no reason"],
+  ["Food", "Have a picnic somewhere beautiful"],
+  ["Food", "Do a food tour of our city"],
+  ["Food", "Bake a cake from scratch together"],
+  ["Adventure", "Try a new sport together"],
+  ["Adventure", "Go hot air ballooning"],
+  ["Adventure", "Camp under the stars"],
+  ["Adventure", "Hike to the top of a mountain"],
+  ["Adventure", "Learn to swim properly, or dive"],
+  ["Adventure", "Go on a boat trip"],
+  ["Adventure", "Do a charity run together"],
+  ["Home", "Build a home we love"],
+  ["Home", "Plant a garden together"],
+  ["Home", "Have a movie night every week for a month"],
+  ["Home", "Redecorate a room ourselves"],
+  ["Home", "Host a dinner for all our friends"],
+  ["Home", "Adopt a pet"],
+  ["Together", "Renew our vows"],
+  ["Together", "Write each other a letter to open in ten years"],
+  ["Together", "Take a dance class"],
+  ["Together", "Learn a language together"],
+  ["Together", "Take a professional photo shoot"],
+  ["Together", "Start a tradition for every anniversary"],
+  ["Together", "Go a whole weekend without phones"],
+  ["Together", "Have a date night every month for a year"],
+  ["Growth", "Pray or read the Bible together every day for a month"],
+  ["Growth", "Volunteer together"],
+  ["Growth", "Start a business together"],
+  ["Growth", "Save for something big and reach it"],
+  ["Growth", "Go to a conference or retreat together"],
+  ["Growth", "Take a course together"],
+  ["Fun", "Go to a big concert or festival"],
+  ["Fun", "See a match in a famous stadium"],
+  ["Fun", "Go to a theme park and ride everything"],
+  ["Fun", "Visit a theatre or West End show"],
+  ["Fun", "Have a games tournament with a prize"],
+  ["Fun", "Make a time capsule"],
+  ["Dreams", "Learn to dance salsa together"],
+  ["Dreams", "Watch the sunrise from a mountain top"],
+  ["Dreams", "Ride in a hot air balloon"],
+  ["Dreams", "See the northern lights"],
+  ["Dreams", "Sleep under the stars"],
+  ["Dreams", "Swim with dolphins"],
+  ["Dreams", "Go on a safari"],
+  ["Dreams", "Visit every continent"],
+  ["Dreams", "Walk the Great Wall of China"],
+  ["Dreams", "Spend a week on a tropical island"],
+  ["Dreams", "Take a road trip with no plan"],
+  ["Dreams", "Learn to sail"],
+  ["Dreams", "Go to a music festival"],
+  ["Dreams", "Own a house together"],
+  ["Dreams", "Renew our vows in a beautiful place"],
+  ["Food", "Cook a three course meal together"],
+  ["Food", "Try street food in another country"],
+  ["Food", "Have a picnic at sunset"],
+  ["Food", "Visit a vineyard"],
+  ["Food", "Learn to make sushi"],
+  ["Food", "Eat at a restaurant with a Michelin star"],
+  ["Food", "Grow our own vegetables"],
+  ["Food", "Host a dinner party for friends"],
+  ["Food", "Try a food we have never heard of"],
+  ["Food", "Do a cooking class together"],
+  ["Food", "Make homemade pizza"],
+  ["Food", "Have breakfast in bed"],
+  ["Food", "Attempt a spicy food challenge"],
+  ["Food", "Make jollof rice together"],
+  ["Adventure", "Go skydiving"],
+  ["Adventure", "Try bungee jumping"],
+  ["Adventure", "Go zip lining"],
+  ["Adventure", "Hike a mountain together"],
+  ["Adventure", "Go white water rafting"],
+  ["Adventure", "Try scuba diving"],
+  ["Adventure", "Go camping"],
+  ["Adventure", "Take a surf lesson"],
+  ["Adventure", "Go horse riding on a beach"],
+  ["Adventure", "Try an escape room"],
+  ["Adventure", "Go quad biking"],
+  ["Adventure", "Explore a cave"],
+  ["Adventure", "Go kayaking"],
+  ["Adventure", "Try paintballing"],
+  ["Adventure", "Go ice skating"],
+  ["Romance", "Write each other love letters"],
+  ["Romance", "Dance in the rain"],
+  ["Romance", "Have a candlelit dinner at home"],
+  ["Romance", "Recreate our first date"],
+  ["Romance", "Take a couples massage"],
+  ["Romance", "Watch the stars together"],
+  ["Romance", "Take a moonlit walk on a beach"],
+  ["Romance", "Plan a surprise day for each other"],
+  ["Romance", "Make a playlist of our songs"],
+  ["Romance", "Take a photo in every place we visit"],
+  ["Romance", "Spend a whole day with no phones"],
+  ["Romance", "Stay a night in a fancy hotel"],
+  ["Romance", "Have a couples photoshoot"],
+  ["Romance", "Take a gondola ride"],
+  ["Home", "Redecorate a room together"],
+  ["Home", "Build something together"],
+  ["Home", "Start a garden"],
+  ["Home", "Have a movie marathon night"],
+  ["Home", "Build a blanket fort"],
+  ["Home", "Have a game night every week"],
+  ["Home", "Create a scrapbook of our memories"],
+  ["Home", "Declutter and donate things together"],
+  ["Home", "Learn a new language together"],
+  ["Home", "Start a tradition for every year"],
+  ["Home", "Plant a tree together"],
+  ["Home", "Do a jigsaw puzzle"],
+  ["Culture", "Visit a famous museum"],
+  ["Culture", "See a show on Broadway or the West End"],
+  ["Culture", "Go to a live concert"],
+  ["Culture", "Attend a wedding abroad"],
+  ["Culture", "Visit a historic castle"],
+  ["Culture", "Go to a football match"],
+  ["Culture", "Attend a local festival"],
+  ["Culture", "Visit the pyramids"],
+  ["Culture", "Take a painting class"],
+  ["Culture", "See a famous landmark in person"],
+  ["Culture", "Visit a place of our heritage"],
+  ["Culture", "Go to a carnival"],
+  ["Culture", "See a film at an outdoor cinema"],
+  ["Fitness", "Run a 5k together"],
+  ["Fitness", "Join a dance class"],
+  ["Fitness", "Try yoga together"],
+  ["Fitness", "Learn to rock climb"],
+  ["Fitness", "Go cycling for a whole day"],
+  ["Fitness", "Do a sunrise hike"],
+  ["Fitness", "Try paddle boarding"],
+  ["Fitness", "Play tennis together"],
+  ["Fitness", "Swim in the sea at dawn"],
+  ["Fitness", "Complete a fitness challenge for a month"]
 ]

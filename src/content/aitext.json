@@ -1,626 +1,626 @@
 [
- [
-  "Sunday lunch",
-  "Mum burnt the dodo again but nobody said anything because she'd been up since 6 making stew. Uncle Femi ate four pieces anyway.",
-  "Dad carved the chicken while my aunt argued about the football. Someone dropped a spoon, the dog got a roast potato, and we were still at the table at four.",
-  1
- ],
- [
-  "A rainy commute",
-  "Bus didn't come for 25 mins, then two came at once. Got soaked walking from the stop and my left sock is still wet.",
-  "The 8:15 was cancelled, so I stood under the shelter with six strangers and one umbrella between us.",
-  1
- ],
- [
-  "First flat",
-  "Our first flat had a boiler that only worked if you kicked it. We called it Bola. We still talk about Bola.",
-  "Our first flat had one working socket and a window that wouldn't close. We ate noodles on the floor for a month and thought it was the best place ever.",
-  1
- ],
- [
-  "Airport delay",
-  "Flight pushed back 3 hours. Ate a £9 sandwich, charged my phone on the floor next to a man asleep on his suitcase.",
-  "Our gate changed twice and the board kept saying 'delayed' with no reason.",
-  1
- ],
- [
-  "Birthday cake",
-  "Sister forgot the candles so we stuck a sparkler in it. Smoke alarm went off. Best birthday honestly.",
-  "Mum ordered a lemon cake but the shop wrote the wrong name on it. We kept it anyway and he spent the evening answering to 'Dave'.",
-  1
- ],
- [
-  "The group chat",
-  "My cousins' group chat is 90% voice notes and one guy who only replies with a thumbs up. Nobody has ever left.",
-  "The family group chat has three rules: no politics, no spoilers, and everyone must reply to birthday messages within the hour. Only the last one is enforced.",
-  1
- ],
- [
-  "Gym in January",
-  "Gym was rammed on the 2nd. By the 20th I had my pick of treadmills again. I'm not judging, I was in the crowd.",
-  "The gym was full on the second of January and half empty by the end of the month. I stayed on the same machine, mostly out of stubbornness.",
-  1
- ],
- [
-  "Lost keys",
-  "Spent 20 minutes turning the flat upside down for my keys. They were in the door. On the outside. All night.",
-  "I searched the coat pockets, the sofa and the bin before finding the keys in the fridge next to the milk.",
-  1
- ],
- [
-  "Late night shop",
-  "Corner shop guy knows my order now. Two bananas, a Twix, whatever's left of the bread. He just nods.",
-  "The man at the corner shop remembers that I buy oat milk on Thursdays and says nothing about it. I like how he understands without asking.",
-  1
- ],
- [
-  "Moving house",
-  "Third box I opened was just cables. Nobody knows what they connect to. We're keeping them anyway.",
-  "The removal van arrived early, so I was still in pyjamas holding a kettle.",
-  1
- ],
- [
-  "Wedding speech",
-  "My brother's best man speech had a slide of his ex. Nobody breathed. Then the bride laughed and everyone relaxed.",
-  "The best man spoke for twelve minutes, mostly about a camping trip. He forgot the groom's surname once and recovered by pretending it was a joke.",
-  1
- ],
- [
-  "Street food",
-  "Jollof from the van near the station, paid cash, sat on a wall. Burnt my tongue on the first bite, no regrets.",
-  "The stall by the station sells suya wrapped in paper, and the queue moves fast.",
-  1
- ],
- [
-  "Bad haircut",
-  "Asked for a trim, got a fade I did not request. Wore a hat for a week, then it grew out and I'm fine.",
-  "The barber was chatting about the cricket and kept cutting. By the time I looked up, my fringe had gone. It grew back, and I learned to watch the mirror.",
-  1
- ],
- [
-  "Charity run",
-  "Did the 5k for charity. Walked the last bit, got a banana and a medal that is clearly plastic. Proud of it.",
-  "I signed up for the 5k on a whim and trained for two weeks.",
-  1
- ],
- [
-  "Phone battery",
-  "Phone died at 4% on the way home, so I navigated by vibes and a vague memory of the bus route. Got there eventually.",
-  "My phone shut down halfway through the journey, so I asked a stranger for directions and ended up in a ten-minute conversation about her allotment.",
-  1
- ],
- [
-  "School reunion",
-  "Went to the reunion expecting to feel old. Mostly felt relieved nobody remembered the thing with the fire extinguisher.",
-  "At the reunion everyone had less hair and better stories. The quiet boy from the back row now runs a bakery, and he brought the cake.",
-  1
- ],
- [
-  "Night shift",
-  "Finished at 7am, got on a bus full of people just starting their day. Felt like I was in a different timezone to everyone.",
-  "Finished at seven, walked out into the morning rush with my lanyard still on.",
-  2
- ],
- [
-  "Cooking for in-laws",
-  "Made egusi for the first time for her parents. Too much salt but her dad had seconds, so either it was good or he's polite.",
-  "Cooked stew for my in-laws and watched their faces for the first spoonful. Her mum said it was lovely, and I'm still trying to decode her tone.",
-  2
- ],
- [
-  "Learning to drive",
-  "Third attempt at the test. Examiner said nothing the whole time, which felt worse than if he'd told me off. Passed, somehow.",
-  "Failed on a roundabout the first time, then passed on the second with two minors. The examiner shook my hand, which I did not expect.",
-  2
- ],
- [
-  "New job nerves",
-  "Day one, got lost looking for the kitchen, met half the team in the stairwell. They've since decided I'm 'the lost guy'.",
-  "First day, I spent ten minutes in the wrong lift and arrived to a meeting already in progress.",
-  2
- ],
- [
-  "Football on Saturday",
-  "Lost 4-1, still went to the pub after. Someone said 'at least we had the better kit' and honestly that's all we had.",
-  "We lost two-nil in the rain and then stood around the pub talking about next week like it was a title decider. It was the fourth division.",
-  2
- ],
- [
-  "Quiet library",
-  "The library had a man humming the whole time and a woman who kept glaring at him. I came for peace and got a drama.",
-  "The reading room was silent except for one chair with a squeak. Every time someone shifted, the whole room looked up, then pretended it hadn't.",
-  2
- ],
- [
-  "Grocery receipt",
-  "Went in for milk, came out with £47 of stuff and no milk. I don't know how this keeps happening.",
-  "I went in for bread and left with olives, candles and a tiny lamp. The bread was apparently sold out, or I forgot to look.",
-  2
- ],
- [
-  "Old photographs",
-  "Found a shoebox of photos at my mum's. Me at 8 with a missing tooth, holding a fish nearly as big as me. No idea where.",
-  "Found a box of old photographs under the stairs. There was one of my dad as a teenager, grinning in a jacket three sizes too big.",
-  2
- ],
- [
-  "Hospital waiting room",
-  "Waited 3 hours. The vending machine ate my pound. A little kid kept offering everyone his crisps, which was the best bit.",
-  "The waiting room clock was ten minutes slow, so everyone had a different idea of how long we'd been there. A child shared biscuits around.",
-  2
- ],
- [
-  "Neighbour dispute",
-  "Neighbour's bins have been on my side for a week. I left a note. He left a longer note. We're now in a note situation.",
-  "My neighbour parks half on my drive, and I've started leaving polite notes.",
-  2
- ],
- [
-  "Birthday voice note",
-  "Sent my brother a 4 minute birthday voice note and it got cut off mid-sentence. He replied 'love you too' anyway.",
-  "My sister sends birthday voice notes so long they need chapters. This year's had a cough, a dog, and a recipe in the middle.",
-  2
- ],
- [
-  "Snow day",
-  "Woke up to snow, school shut, kids lost it. Spent the day sledging on a tray. Knees will recover eventually.",
-  "It snowed overnight and by eight the street was full of people in pyjamas and wellies. Someone had already made a snowman out of a bin.",
-  2
- ],
- [
-  "Late train",
-  "Train said 12 mins late, then 25, then 'cancelled'. Everyone on the platform made eye contact like we'd survived something.",
-  "The 18:42 was cancelled, then reinstated, then cancelled again. We all drifted to the bench together like it was a support group.",
-  2
- ],
- [
-  "First snow of winter",
-  "First snow and my coat is somehow still in the loft. Wore two jumpers and my mum's scarf. I looked like a lamp.",
-  "The first snow came before I'd dug out my gloves. I borrowed a pair from a colleague and wore them all day like a trophy.",
-  2
- ],
- [
-  "Market stall",
-  "Sold out of plantain chips by noon, then spent the afternoon refusing to admit I'd underpriced them. Next week, £3.",
-  "The stall opened at nine and I'd sold the first batch by eleven. The woman next door told me to double the price, and she was right.",
-  2
- ],
- [
-  "Gym buddy",
-  "My gym buddy cancels every other week. I go anyway and pretend it's his fault when I skip the heavy stuff.",
-  "My gym partner texts 'running late' and arrives forty minutes later with snacks.",
-  2
- ],
- [
-  "Walking at dusk",
-  "There's a stretch of the canal path where the lamps come on one at a time, a little late, as if the street is clearing its throat. I walk it slower than I need to.",
-  "There is a stretch of the towpath where the lamps flicker on one by one, each a moment later than the last. I find myself walking more slowly there, in no hurry to arrive.",
-  3
- ],
- [
-  "My grandmother's kitchen",
-  "Her kitchen smelled of onions and Dettol, and the radio was always half a station off. I never asked her why. Now I'd give a lot to hear the static.",
-  "Her kitchen smelled of onions and disinfectant, and the radio was never quite tuned. I never asked why. Now I would give a great deal to hear that static again.",
-  3
- ],
- [
-  "Letters not sent",
-  "I wrote him a letter and never posted it. It's in a drawer with the takeaway menus and the spare keys, between the ordinary things.",
-  "I wrote him a letter and never sent it. It sits in a drawer among the takeaway menus and spare keys, an unsent thing amid the ordinary ones.",
-  3
- ],
- [
-  "The last train",
-  "The last train was almost empty. A man was asleep with his head against the glass, and I kept my eyes on the dark so I wouldn't wake him.",
-  "The last train was nearly empty. One passenger slept against the window, and I kept watching the dark outside to avoid disturbing him.",
-  3
- ],
- [
-  "Hospital corridor",
-  "The corridor smelled of floor polish. I counted the ceiling tiles twice, as if the number might change if I got it right.",
-  "The corridor smelled of polish and something sharper underneath. I counted the ceiling tiles, then counted them again, hoping the total would change.",
-  3
- ],
- [
-  "Leaving home",
-  "I packed in a hurry and forgot the charger. My mother handed me hers at the door without a word, and I carried it for years.",
-  "I packed in a rush and forgot my charger. At the door, my mother placed hers in my hand, and I kept it long after it stopped working.",
-  3
- ],
- [
-  "After the argument",
-  "We didn't speak in the car. The indicator ticked for what felt like a week, and I wondered who would break first.",
-  "We drove home in silence, the indicator ticking like a clock between us.",
-  3
- ],
- [
-  "The empty chair",
-  "Nobody sat in his chair at the next Christmas. We laid the table around it, as one does with a thing you can't quite say.",
-  "At the next Christmas no one sat in his chair. We set the table around it carefully, the way you walk round something you cannot say aloud.",
-  3
- ],
- [
-  "A city at six a.m.",
-  "At six the city belongs to street sweepers and bakers. I walked through it with my coat open, feeling like a guest who had arrived too early.",
-  "At six the city is all street sweepers and bakeries, and I moved through it with my coat undone, an early guest at a party not yet begun.",
-  3
- ],
- [
-  "Old friend",
-  "We hadn't spoken in ten years, yet she picked up the conversation mid-sentence, as if I'd only gone to the kettle.",
-  "We hadn't spoken in a decade, but she continued mid-sentence, as though I had simply stepped out to make tea.",
-  3
- ],
- [
-  "First snowfall in the city",
-  "The snow arrived overnight. By morning even the traffic had gone gentle, and a man was photographing a bin as though it were a cathedral.",
-  "Snow arrived overnight, and by morning the traffic had softened. A man was photographing a bin with great care, as though it were a cathedral.",
-  3
- ],
- [
-  "Mother's voice",
-  "Her voice on the answerphone is still there. I don't play it, but I haven't deleted it. It's enough to know it exists.",
-  "Her voice is still on my old answerphone. I don't play it, but I haven't deleted it either. It is enough to know it is there.",
-  3
- ],
- [
-  "Small kindness",
-  "A stranger held the door and then, noticing my shopping, held it again for my second trip. It was the smallest thing and it carried me home.",
-  "A stranger held the door open, then waited as I came back for the second bag. It was a tiny thing, yet it carried me all the way home.",
-  3
- ],
- [
-  "The pier in winter",
-  "The pier was closed, the arcade shuttered, and gulls stood about like off-duty staff. I stayed longer than the cold advised.",
-  "In winter the pier is shuttered and the gulls loiter like staff on a break. I stayed far longer than the weather suggested.",
-  3
- ],
- [
-  "Handwriting",
-  "Her handwriting leaned backwards, as if resisting the page. I found it on a recipe card and read it three times without cooking anything.",
-  "Her handwriting slanted backwards, as though resisting the page. I found it on a recipe card and read it again and again, never cooking a thing.",
-  3
- ],
- [
-  "Waiting for results",
-  "I refreshed the page until my thumb ached. When it finally loaded, I closed my eyes, then felt faintly ridiculous and opened them.",
-  "I kept refreshing the page until my thumb hurt. When the result appeared, I shut my eyes, felt a little silly, and opened them again.",
-  3
- ],
- [
-  "Barbecue",
-  "Dad guards the grill like it's a nuclear reactor. Nobody else is allowed to touch the tongs. The sausages were raw in the middle again.",
-  "Dad runs the barbecue with total authority while the rest of us hover with plates. This year the burgers were perfect, the sausages were not, and nobody said a word.",
-  1
- ],
- [
-  "Supermarket queue",
-  "Picked the shortest queue, obviously the wrong one. Woman in front had 40 coupons and a long story about her cat.",
-  "I chose the shortest queue and it turned out to be the slowest.",
-  1
- ],
- [
-  "Barber shop",
-  "Barber talked about his holiday in Tenerife for the whole cut. I now know more about his hotel than my own street.",
-  "My barber narrated his entire holiday while trimming my hair, down to the breakfast buffet. I nodded politely and left with a good cut and a lot of knowledge about sunbeds.",
-  1
- ],
- [
-  "Pub quiz",
-  "We came last. Our team name was 'Quizzy Rascals'. We got the geography round right and nothing else, but the chips were good.",
-  "Our team came dead last at the pub quiz, though we did win the picture round.",
-  1
- ],
- [
-  "Car boot sale",
-  "Went to the car boot sale for one lamp, came back with a lamp, a bread maker, and a box of VHS tapes. Nobody owns a VHS player.",
-  "At the car boot sale I haggled a man down from five pounds to four for a vase. I felt like a champion and then noticed it had a chip.",
-  1
- ],
- [
-  "Bus driver",
-  "The driver waited while a lady ran for the bus, even though we were late. Everyone clapped when she got on. Faith in people restored.",
-  "The bus driver saw a woman sprinting down the road and waited for her, holding up the whole route. She thanked him twice, and a few passengers smiled.",
-  1
- ],
- [
-  "Family WhatsApp",
-  "My aunt sends 'Good morning' with a glitter picture every day at 5am. Nobody replies. Nobody wants her to stop.",
-  "My aunt posts a sparkly good morning picture every day at dawn, and no one has the heart to mute her.",
-  1
- ],
- [
-  "Camping trip",
-  "Pitched the tent in the dark, woke up on a slope. Spent the night rolling into my brother. Midges ate us alive.",
-  "We pitched the tent in the rain, discovered we'd brought the wrong poles, and spent the night under a flapping sheet. By morning we were laughing about it.",
-  1
- ],
- [
-  "Rainy picnic",
-  "Packed a full picnic, sat in the car with the heater on and ate sandwiches watching raindrops race down the windscreen.",
-  "It started raining just as we unpacked the picnic, so we squeezed into the car with the sandwiches and a flask.",
-  1
- ],
- [
-  "Lift small talk",
-  "Stood in a lift with my boss for twelve floors. We discussed the weather in great detail. Neither of us enjoyed it.",
-  "In the lift, a colleague and I discussed the weather for four floors, then went quiet. When the doors opened, we both said 'Have a good one' and walked opposite ways.",
-  1
- ],
- [
-  "Stuck umbrella",
-  "My umbrella flipped inside out in the wind. I walked three streets holding a mangled metal flower and trying to look dignified.",
-  "The wind snapped my umbrella the moment I stepped outside. I carried it to the bin like a fallen soldier and went on getting soaked.",
-  1
- ],
- [
-  "Shopping trolley",
-  "Trolley with the wobbly wheel again. It's always me. I think it recognises me and goes for the worst one on purpose.",
-  "I picked a trolley with a squeaky wheel and spent the whole shop apologising to the aisles.",
-  1
- ],
- [
-  "Doorbell",
-  "Doorbell rang, courier dumped a parcel and legged it before I got downstairs. It was for next door. Of course it was.",
-  "The doorbell rang twice, and by the time I opened it there was only a parcel and a cloud of exhaust. The label had the wrong flat number, naturally.",
-  1
- ],
- [
-  "Taxi ride",
-  "Taxi driver played music so loud the window rattled. He knew every word. By the end I knew a few and tipped him double.",
-  "The taxi driver sang along to the radio the whole journey, and I found myself humming too.",
-  1
- ],
- [
-  "Packed lunch",
-  "Mum packed jollof and a banana. Everyone at school had crisps. By Friday three people wanted my jollof, so I'd say it worked out.",
-  "My mum packed rice and plantain every day and I used to be embarrassed by it. These days I'd give almost anything for one of those lunch boxes.",
-  1
- ],
- [
-  "Old trainers",
-  "My trainers have a hole in the toe and one lace is knotted four times. I refuse to retire them. They know me.",
-  "My oldest trainers have a split sole and a lace tied in a bow of defeat.",
-  1
- ],
- [
-  "Waiting for the kettle",
-  "Kettle takes four minutes to boil. I've learned to use the time to check the post, find a mug, and have a small argument with myself.",
-  "Our kettle takes ages to boil, so I tidy the worktop and stare out of the window. It's the closest thing I get to meditation.",
-  2
- ],
- [
-  "Home DIY",
-  "Put up a shelf, it was crooked, so I put up a second one at the same angle to look intentional. It now looks like a design choice.",
-  "Hung a shelf and it came out slightly off, so I added a second to match the slope. Everyone now thinks I planned it, and I've stopped correcting them.",
-  2
- ],
- [
-  "Cold house",
-  "The heating's been off since Tuesday and I'm typing this wearing a hat indoors. The cat has decided my lap is the only warm place.",
-  "Our heating packed up and we've been living in layers. The dog sleeps on my feet, and I've started drinking tea purely for the warmth.",
-  2
- ],
- [
-  "Wrong number",
-  "Got a wrong-number text from a stranger who's now telling me about their day. I haven't had the heart to correct them.",
-  "A stranger texted me by mistake and we've exchanged four messages about their lunch.",
-  2
- ],
- [
-  "Fish and chips",
-  "Chips on the seafront, wind trying to steal them, gull watching from the wall with total intent. I lost one chip, defended the rest.",
-  "Ate fish and chips on the seafront, guarding the bag from a gull with a very personal interest. It cost me two chips and a little dignity.",
-  2
- ],
- [
-  "Library card",
-  "Renewed my library card and the woman at the desk said I hadn't borrowed anything in six years. I was a little ashamed. Borrowed three books.",
-  "I renewed my library card after years away and left with five books I'll probably return late. The librarian just smiled and stamped them.",
-  2
- ],
- [
-  "Broken zip",
-  "My coat zip died on the coldest day. Walked home holding it shut with one hand and carrying shopping with the other.",
-  "The zip gave out on my favourite coat, so I've spent the week holding it closed with a safety pin and some stubbornness.",
-  2
- ],
- [
-  "Sunday cleaning",
-  "Cleaning the flat on a Sunday means finding things I lost months ago. Found a tenner, a sock, and the remote. No regrets.",
-  "On Sunday I cleaned the flat and found a missing earring, two pens and a receipt from 2022. I felt unreasonably proud.",
-  2
- ],
- [
-  "Public speaking",
-  "Gave a talk to forty people. My hands shook so much the slides looked like they had a pulse. Someone said it was fine afterwards.",
-  "My first talk in front of the team went fine until a slide wouldn't load. I filled the gap with a joke and, to my surprise, it landed.",
-  2
- ],
- [
-  "Rooftop view",
-  "Went up to the roof with a flask of tea. The whole city looked weirdly quiet, like someone had turned down the volume.",
-  "From the roof the city looked small and slow, and for once I wasn't in a hurry. I stayed until the tea was cold.",
-  2
- ],
- [
-  "Lost phone",
-  "Rang my phone from my partner's, heard it buzzing from inside the sofa. Relief, then a quiet feeling of being an idiot.",
-  "I panicked, searched the car, and borrowed a phone to ring mine. It was in my coat pocket the whole time, and I'm leaving that out of the story.",
-  2
- ],
- [
-  "School run",
-  "Did the school run in my slippers by accident. Nobody said anything, but one dad nodded at them with what I'd call respect.",
-  "I realised halfway to school that I was wearing two different shoes. A mum nodded at me kindly, like it happens to everyone.",
-  2
- ],
- [
-  "Cooking disaster",
-  "Tried making pancakes for the family. First one stuck, second burned, third landed on the floor. We had cereal.",
-  "I tried a new recipe from a video and it went wrong in several creative ways.",
-  2
- ],
- [
-  "Tea round",
-  "In our office the tea round is a political act. If you skip someone, it'll be remembered for months.",
-  "At work the tea round has unwritten rules, and everyone knows who's been missed. I'm now very careful about whose mug I overlook.",
-  2
- ],
- [
-  "Raining at the market",
-  "The stall holders pulled tarps over everything and carried on, like rain was just another customer. I bought a scarf I didn't need.",
-  "It rained the whole morning at the market, but the traders kept shouting prices from under their tarpaulins. I bought plums out of respect.",
-  2
- ],
- [
-  "Neighbour's dog",
-  "The neighbour's dog barks at everything, including its own reflection. Last night it barked at a leaf. A single leaf.",
-  "The dog next door barks at the postman, the wind and the moon. I've started to like it, as it makes me feel like the street is guarded.",
-  2
- ],
- [
-  "Cinema trip",
-  "Went to the cinema, someone behind me explained the film to their friend throughout. I didn't need the commentary but I got it.",
-  "The cinema was almost empty, but a man chose the seat directly behind me and ate crisps through the whole film. It was a very loud film too.",
-  2
- ],
- [
-  "Evening walk",
-  "Evening walks have become the best part of my day. No phone, just the streetlights coming on and other people's windows glowing.",
-  "I started taking an evening walk and now I look forward to it. Nobody needs me, and the windows along the road are like small stories.",
-  2
- ],
- [
-  "Birthday dinner",
-  "Booked a restaurant for her birthday, they put 'Happy Anniversary' on the dessert. She ate it anyway and laughed. Good sport.",
-  "We celebrated at a small Italian place where the waiter sang loudly and slightly off key. She went red, then asked him to do it again.",
-  2
- ],
- [
-  "Autumn leaves",
-  "Walking to work through piles of leaves, kicking them like a kid. A woman gave me a look, then kicked one herself.",
-  "The path was thick with leaves and I couldn't resist a few good kicks. A runner went by and grinned, and I felt twelve again.",
-  2
- ],
- [
-  "Quiet morning",
-  "The house is quiet in a way I only notice when I'm not in it. The tap drips, the radiator ticks, and a lorry downshifts somewhere far off.",
-  "The house holds a particular quiet in the mornings. I hear the tap, the radiator settling, a distant lorry changing gear, and somehow it feels like company.",
-  3
- ],
- [
-  "Old coat",
-  "I still wear his coat, though the sleeves are too long. In the pockets I find tissues, a bus ticket, a pen that doesn't work. I don't throw them out.",
-  "I wear my father's coat even though it is too big. The pockets still hold a bus ticket, a pen with no ink, and a crumpled tissue, and I leave them there.",
-  3
- ],
- [
-  "Station goodbye",
-  "We said goodbye on the platform with our usual small jokes. The train pulled out and I stood there a moment, waving at nobody in particular.",
-  "We said goodbye on the platform the way we always do, with a joke. When the train left I kept waving a little too long at the empty track.",
-  3
- ],
- [
-  "New town",
-  "In a new town you learn the streets by the people you pass. The man with the dog, the woman with the red door. Slowly it becomes a map.",
-  "A new town becomes familiar through repetition: the same man walking the same dog, the same woman on the same step. Gradually you start to belong.",
-  3
- ],
- [
-  "Winter evening",
-  "By four it's dark and the windows turn into mirrors. I draw the curtains and the room becomes smaller and kinder.",
-  "By four o'clock the dark has arrived and the windows reflect the room back. I close the curtains, and the house seems to draw closer around me.",
-  3
- ],
- [
-  "A borrowed book",
-  "The book I borrowed from her still has her pencil marks in the margins. I read it slowly, like a conversation I've been invited into.",
-  "The book I borrowed has her pencilled notes in the margins. I read slowly, partly for the story and partly to hear her voice again.",
-  3
- ],
- [
-  "Grandfather's watch",
-  "His watch runs four minutes fast. I've never corrected it. Somehow I like arriving early on his time.",
-  "My grandfather's watch runs a few minutes ahead, and I have never set it right.",
-  3
- ],
- [
-  "Funeral flowers",
-  "The flowers were too bright for the day. A cousin said so quietly, and we both laughed, then stopped, then held onto each other.",
-  "The flowers were far too cheerful for the occasion. A cousin whispered it, and we laughed, then went quiet, then reached for each other's hands.",
-  3
- ],
- [
-  "First day of term",
-  "The uniform was a size too big, 'to grow into'. I pulled the sleeves over my hands and walked in as if I belonged to the building.",
-  "My blazer was a size too large, bought to be grown into. I rolled the sleeves back and walked through the gates, hoping no one would look.",
-  3
- ],
- [
-  "Night bus",
-  "The night bus hums like a refrigerator. Everyone on it is tired in a different way, and nobody pretends otherwise.",
-  "The night bus hums quietly through the empty streets. Each passenger is tired in their own way, and there is a strange comfort in it.",
-  3
- ],
- [
-  "Handwritten recipe",
-  "Her recipe says 'cook until it smells right'. I've made it forty times and I think I'm finally getting close.",
-  "Her recipe says to cook it until it smells right. I have made it many times, and only now do I think I understand what she meant.",
-  3
- ],
- [
-  "Bridge at night",
-  "The bridge is lit orange and the river underneath is black. I stop halfway, the way everybody does, and look at nothing for a while.",
-  "The bridge glows orange above the dark river. Halfway across I stop, like everyone does, and look at the water for no good reason.",
-  3
- ],
- [
-  "Missed call",
-  "I saw her name on the missed calls and didn't ring back that night. The next morning it was too late. I keep the phone charged anyway.",
-  "Her name appeared among the missed calls and I told myself I would ring tomorrow. I still keep that phone charged, in case it rings.",
-  3
- ],
- [
-  "The long way home",
-  "I take the long way home on Fridays, through the park, past the closed café. It adds nine minutes and removes the week.",
-  "On Fridays I walk the long way home, through the park and past the shuttered café. It adds ten minutes and takes the week away.",
-  3
- ],
- [
-  "Radio at night",
-  "The radio was on low, a man reading out football scores to no one. I fell asleep halfway through Leicester.",
-  "I fell asleep to the radio, a quiet voice reading scores to an empty kitchen. By the end it was only a murmur.",
-  3
- ],
- [
-  "Moving out",
-  "I left the key on the counter and stood in the doorway longer than I needed to. The room looked smaller without us in it.",
-  "I put the key on the kitchen counter and lingered at the door. Without our things, the room seemed to shrink back into itself.",
-  3
- ],
- [
-  "Sea in November",
-  "The sea in November is the colour of old pewter. A few dogs, a man with a metal detector, and the wind going right through my coat.",
-  "In November the sea turns a flat grey. Only a few dog walkers and a lone man with a metal detector remain, and the wind finds every gap in my coat.",
-  3
- ],
- [
-  "Old friend's house",
-  "Her house still smells of toast and lavender polish. I sat in the same chair I used to at fifteen and nobody said a word about it.",
-  "Her house smelled of toast and lavender, exactly as I remembered. I sat in my old chair and, for a minute, I was fifteen again.",
-  3
- ],
- [
-  "Letter from home",
-  "The envelope had her shaky handwriting and a stamp stuck on crooked. I opened it carefully, to make it last.",
-  "The envelope was addressed in her unsteady handwriting, the stamp slightly crooked. I opened it slowly, wanting the moment to last.",
-  3
- ],
- [
-  "The last customer",
-  "The cafe was closing and the owner kept the lights on for me. I finished my tea slowly, grateful, and left a bigger tip than I could afford.",
-  "The café was shutting, but the owner let me stay and finish my tea. I left too much money on the table and felt only slightly foolish.",
-  3
- ]
+  [
+    "Sunday lunch",
+    "Mum burnt the dodo again but nobody said anything because she'd been up since 6 making stew. Uncle Femi ate four pieces anyway.",
+    "Dad carved the chicken while my aunt argued about the football. Someone dropped a spoon, the dog got a roast potato, and we were still at the table at four.",
+    1
+  ],
+  [
+    "A rainy commute",
+    "Bus didn't come for 25 mins, then two came at once. Got soaked walking from the stop and my left sock is still wet.",
+    "The 8:15 was cancelled, so I stood under the shelter with six strangers and one umbrella between us.",
+    1
+  ],
+  [
+    "First flat",
+    "Our first flat had a boiler that only worked if you kicked it. We called it Bola. We still talk about Bola.",
+    "Our first flat had one working socket and a window that wouldn't close. We ate noodles on the floor for a month and thought it was the best place ever.",
+    1
+  ],
+  [
+    "Airport delay",
+    "Flight pushed back 3 hours. Ate a £9 sandwich, charged my phone on the floor next to a man asleep on his suitcase.",
+    "Our gate changed twice and the board kept saying 'delayed' with no reason.",
+    1
+  ],
+  [
+    "Birthday cake",
+    "Sister forgot the candles so we stuck a sparkler in it. Smoke alarm went off. Best birthday honestly.",
+    "Mum ordered a lemon cake but the shop wrote the wrong name on it. We kept it anyway and he spent the evening answering to 'Dave'.",
+    1
+  ],
+  [
+    "The group chat",
+    "My cousins' group chat is 90% voice notes and one guy who only replies with a thumbs up. Nobody has ever left.",
+    "The family group chat has three rules: no politics, no spoilers, and everyone must reply to birthday messages within the hour. Only the last one is enforced.",
+    1
+  ],
+  [
+    "Gym in January",
+    "Gym was rammed on the 2nd. By the 20th I had my pick of treadmills again. I'm not judging, I was in the crowd.",
+    "The gym was full on the second of January and half empty by the end of the month. I stayed on the same machine, mostly out of stubbornness.",
+    1
+  ],
+  [
+    "Lost keys",
+    "Spent 20 minutes turning the flat upside down for my keys. They were in the door. On the outside. All night.",
+    "I searched the coat pockets, the sofa and the bin before finding the keys in the fridge next to the milk.",
+    1
+  ],
+  [
+    "Late night shop",
+    "Corner shop guy knows my order now. Two bananas, a Twix, whatever's left of the bread. He just nods.",
+    "The man at the corner shop remembers that I buy oat milk on Thursdays and says nothing about it. I like how he understands without asking.",
+    1
+  ],
+  [
+    "Moving house",
+    "Third box I opened was just cables. Nobody knows what they connect to. We're keeping them anyway.",
+    "The removal van arrived early, so I was still in pyjamas holding a kettle.",
+    1
+  ],
+  [
+    "Wedding speech",
+    "My brother's best man speech had a slide of his ex. Nobody breathed. Then the bride laughed and everyone relaxed.",
+    "The best man spoke for twelve minutes, mostly about a camping trip. He forgot the groom's surname once and recovered by pretending it was a joke.",
+    1
+  ],
+  [
+    "Street food",
+    "Jollof from the van near the station, paid cash, sat on a wall. Burnt my tongue on the first bite, no regrets.",
+    "The stall by the station sells suya wrapped in paper, and the queue moves fast.",
+    1
+  ],
+  [
+    "Bad haircut",
+    "Asked for a trim, got a fade I did not request. Wore a hat for a week, then it grew out and I'm fine.",
+    "The barber was chatting about the cricket and kept cutting. By the time I looked up, my fringe had gone. It grew back, and I learned to watch the mirror.",
+    1
+  ],
+  [
+    "Charity run",
+    "Did the 5k for charity. Walked the last bit, got a banana and a medal that is clearly plastic. Proud of it.",
+    "I signed up for the 5k on a whim and trained for two weeks.",
+    1
+  ],
+  [
+    "Phone battery",
+    "Phone died at 4% on the way home, so I navigated by vibes and a vague memory of the bus route. Got there eventually.",
+    "My phone shut down halfway through the journey, so I asked a stranger for directions and ended up in a ten-minute conversation about her allotment.",
+    1
+  ],
+  [
+    "School reunion",
+    "Went to the reunion expecting to feel old. Mostly felt relieved nobody remembered the thing with the fire extinguisher.",
+    "At the reunion everyone had less hair and better stories. The quiet boy from the back row now runs a bakery, and he brought the cake.",
+    1
+  ],
+  [
+    "Night shift",
+    "Finished at 7am, got on a bus full of people just starting their day. Felt like I was in a different timezone to everyone.",
+    "Finished at seven, walked out into the morning rush with my lanyard still on.",
+    2
+  ],
+  [
+    "Cooking for in-laws",
+    "Made egusi for the first time for her parents. Too much salt but her dad had seconds, so either it was good or he's polite.",
+    "Cooked stew for my in-laws and watched their faces for the first spoonful. Her mum said it was lovely, and I'm still trying to decode her tone.",
+    2
+  ],
+  [
+    "Learning to drive",
+    "Third attempt at the test. Examiner said nothing the whole time, which felt worse than if he'd told me off. Passed, somehow.",
+    "Failed on a roundabout the first time, then passed on the second with two minors. The examiner shook my hand, which I did not expect.",
+    2
+  ],
+  [
+    "New job nerves",
+    "Day one, got lost looking for the kitchen, met half the team in the stairwell. They've since decided I'm 'the lost guy'.",
+    "First day, I spent ten minutes in the wrong lift and arrived to a meeting already in progress.",
+    2
+  ],
+  [
+    "Football on Saturday",
+    "Lost 4-1, still went to the pub after. Someone said 'at least we had the better kit' and honestly that's all we had.",
+    "We lost two-nil in the rain and then stood around the pub talking about next week like it was a title decider. It was the fourth division.",
+    2
+  ],
+  [
+    "Quiet library",
+    "The library had a man humming the whole time and a woman who kept glaring at him. I came for peace and got a drama.",
+    "The reading room was silent except for one chair with a squeak. Every time someone shifted, the whole room looked up, then pretended it hadn't.",
+    2
+  ],
+  [
+    "Grocery receipt",
+    "Went in for milk, came out with £47 of stuff and no milk. I don't know how this keeps happening.",
+    "I went in for bread and left with olives, candles and a tiny lamp. The bread was apparently sold out, or I forgot to look.",
+    2
+  ],
+  [
+    "Old photographs",
+    "Found a shoebox of photos at my mum's. Me at 8 with a missing tooth, holding a fish nearly as big as me. No idea where.",
+    "Found a box of old photographs under the stairs. There was one of my dad as a teenager, grinning in a jacket three sizes too big.",
+    2
+  ],
+  [
+    "Hospital waiting room",
+    "Waited 3 hours. The vending machine ate my pound. A little kid kept offering everyone his crisps, which was the best bit.",
+    "The waiting room clock was ten minutes slow, so everyone had a different idea of how long we'd been there. A child shared biscuits around.",
+    2
+  ],
+  [
+    "Neighbour dispute",
+    "Neighbour's bins have been on my side for a week. I left a note. He left a longer note. We're now in a note situation.",
+    "My neighbour parks half on my drive, and I've started leaving polite notes.",
+    2
+  ],
+  [
+    "Birthday voice note",
+    "Sent my brother a 4 minute birthday voice note and it got cut off mid-sentence. He replied 'love you too' anyway.",
+    "My sister sends birthday voice notes so long they need chapters. This year's had a cough, a dog, and a recipe in the middle.",
+    2
+  ],
+  [
+    "Snow day",
+    "Woke up to snow, school shut, kids lost it. Spent the day sledging on a tray. Knees will recover eventually.",
+    "It snowed overnight and by eight the street was full of people in pyjamas and wellies. Someone had already made a snowman out of a bin.",
+    2
+  ],
+  [
+    "Late train",
+    "Train said 12 mins late, then 25, then 'cancelled'. Everyone on the platform made eye contact like we'd survived something.",
+    "The 18:42 was cancelled, then reinstated, then cancelled again. We all drifted to the bench together like it was a support group.",
+    2
+  ],
+  [
+    "First snow of winter",
+    "First snow and my coat is somehow still in the loft. Wore two jumpers and my mum's scarf. I looked like a lamp.",
+    "The first snow came before I'd dug out my gloves. I borrowed a pair from a colleague and wore them all day like a trophy.",
+    2
+  ],
+  [
+    "Market stall",
+    "Sold out of plantain chips by noon, then spent the afternoon refusing to admit I'd underpriced them. Next week, £3.",
+    "The stall opened at nine and I'd sold the first batch by eleven. The woman next door told me to double the price, and she was right.",
+    2
+  ],
+  [
+    "Gym buddy",
+    "My gym buddy cancels every other week. I go anyway and pretend it's his fault when I skip the heavy stuff.",
+    "My gym partner texts 'running late' and arrives forty minutes later with snacks.",
+    2
+  ],
+  [
+    "Walking at dusk",
+    "There's a stretch of the canal path where the lamps come on one at a time, a little late, as if the street is clearing its throat. I walk it slower than I need to.",
+    "There is a stretch of the towpath where the lamps flicker on one by one, each a moment later than the last. I find myself walking more slowly there, in no hurry to arrive.",
+    3
+  ],
+  [
+    "My grandmother's kitchen",
+    "Her kitchen smelled of onions and Dettol, and the radio was always half a station off. I never asked her why. Now I'd give a lot to hear the static.",
+    "Her kitchen smelled of onions and disinfectant, and the radio was never quite tuned. I never asked why. Now I would give a great deal to hear that static again.",
+    3
+  ],
+  [
+    "Letters not sent",
+    "I wrote him a letter and never posted it. It's in a drawer with the takeaway menus and the spare keys, between the ordinary things.",
+    "I wrote him a letter and never sent it. It sits in a drawer among the takeaway menus and spare keys, an unsent thing amid the ordinary ones.",
+    3
+  ],
+  [
+    "The last train",
+    "The last train was almost empty. A man was asleep with his head against the glass, and I kept my eyes on the dark so I wouldn't wake him.",
+    "The last train was nearly empty. One passenger slept against the window, and I kept watching the dark outside to avoid disturbing him.",
+    3
+  ],
+  [
+    "Hospital corridor",
+    "The corridor smelled of floor polish. I counted the ceiling tiles twice, as if the number might change if I got it right.",
+    "The corridor smelled of polish and something sharper underneath. I counted the ceiling tiles, then counted them again, hoping the total would change.",
+    3
+  ],
+  [
+    "Leaving home",
+    "I packed in a hurry and forgot the charger. My mother handed me hers at the door without a word, and I carried it for years.",
+    "I packed in a rush and forgot my charger. At the door, my mother placed hers in my hand, and I kept it long after it stopped working.",
+    3
+  ],
+  [
+    "After the argument",
+    "We didn't speak in the car. The indicator ticked for what felt like a week, and I wondered who would break first.",
+    "We drove home in silence, the indicator ticking like a clock between us.",
+    3
+  ],
+  [
+    "The empty chair",
+    "Nobody sat in his chair at the next Christmas. We laid the table around it, as one does with a thing you can't quite say.",
+    "At the next Christmas no one sat in his chair. We set the table around it carefully, the way you walk round something you cannot say aloud.",
+    3
+  ],
+  [
+    "A city at six a.m.",
+    "At six the city belongs to street sweepers and bakers. I walked through it with my coat open, feeling like a guest who had arrived too early.",
+    "At six the city is all street sweepers and bakeries, and I moved through it with my coat undone, an early guest at a party not yet begun.",
+    3
+  ],
+  [
+    "Old friend",
+    "We hadn't spoken in ten years, yet she picked up the conversation mid-sentence, as if I'd only gone to the kettle.",
+    "We hadn't spoken in a decade, but she continued mid-sentence, as though I had simply stepped out to make tea.",
+    3
+  ],
+  [
+    "First snowfall in the city",
+    "The snow arrived overnight. By morning even the traffic had gone gentle, and a man was photographing a bin as though it were a cathedral.",
+    "Snow arrived overnight, and by morning the traffic had softened. A man was photographing a bin with great care, as though it were a cathedral.",
+    3
+  ],
+  [
+    "Mother's voice",
+    "Her voice on the answerphone is still there. I don't play it, but I haven't deleted it. It's enough to know it exists.",
+    "Her voice is still on my old answerphone. I don't play it, but I haven't deleted it either. It is enough to know it is there.",
+    3
+  ],
+  [
+    "Small kindness",
+    "A stranger held the door and then, noticing my shopping, held it again for my second trip. It was the smallest thing and it carried me home.",
+    "A stranger held the door open, then waited as I came back for the second bag. It was a tiny thing, yet it carried me all the way home.",
+    3
+  ],
+  [
+    "The pier in winter",
+    "The pier was closed, the arcade shuttered, and gulls stood about like off-duty staff. I stayed longer than the cold advised.",
+    "In winter the pier is shuttered and the gulls loiter like staff on a break. I stayed far longer than the weather suggested.",
+    3
+  ],
+  [
+    "Handwriting",
+    "Her handwriting leaned backwards, as if resisting the page. I found it on a recipe card and read it three times without cooking anything.",
+    "Her handwriting slanted backwards, as though resisting the page. I found it on a recipe card and read it again and again, never cooking a thing.",
+    3
+  ],
+  [
+    "Waiting for results",
+    "I refreshed the page until my thumb ached. When it finally loaded, I closed my eyes, then felt faintly ridiculous and opened them.",
+    "I kept refreshing the page until my thumb hurt. When the result appeared, I shut my eyes, felt a little silly, and opened them again.",
+    3
+  ],
+  [
+    "Barbecue",
+    "Dad guards the grill like it's a nuclear reactor. Nobody else is allowed to touch the tongs. The sausages were raw in the middle again.",
+    "Dad runs the barbecue with total authority while the rest of us hover with plates. This year the burgers were perfect, the sausages were not, and nobody said a word.",
+    1
+  ],
+  [
+    "Supermarket queue",
+    "Picked the shortest queue, obviously the wrong one. Woman in front had 40 coupons and a long story about her cat.",
+    "I chose the shortest queue and it turned out to be the slowest.",
+    1
+  ],
+  [
+    "Barber shop",
+    "Barber talked about his holiday in Tenerife for the whole cut. I now know more about his hotel than my own street.",
+    "My barber narrated his entire holiday while trimming my hair, down to the breakfast buffet. I nodded politely and left with a good cut and a lot of knowledge about sunbeds.",
+    1
+  ],
+  [
+    "Pub quiz",
+    "We came last. Our team name was 'Quizzy Rascals'. We got the geography round right and nothing else, but the chips were good.",
+    "Our team came dead last at the pub quiz, though we did win the picture round.",
+    1
+  ],
+  [
+    "Car boot sale",
+    "Went to the car boot sale for one lamp, came back with a lamp, a bread maker, and a box of VHS tapes. Nobody owns a VHS player.",
+    "At the car boot sale I haggled a man down from five pounds to four for a vase. I felt like a champion and then noticed it had a chip.",
+    1
+  ],
+  [
+    "Bus driver",
+    "The driver waited while a lady ran for the bus, even though we were late. Everyone clapped when she got on. Faith in people restored.",
+    "The bus driver saw a woman sprinting down the road and waited for her, holding up the whole route. She thanked him twice, and a few passengers smiled.",
+    1
+  ],
+  [
+    "Family WhatsApp",
+    "My aunt sends 'Good morning' with a glitter picture every day at 5am. Nobody replies. Nobody wants her to stop.",
+    "My aunt posts a sparkly good morning picture every day at dawn, and no one has the heart to mute her.",
+    1
+  ],
+  [
+    "Camping trip",
+    "Pitched the tent in the dark, woke up on a slope. Spent the night rolling into my brother. Midges ate us alive.",
+    "We pitched the tent in the rain, discovered we'd brought the wrong poles, and spent the night under a flapping sheet. By morning we were laughing about it.",
+    1
+  ],
+  [
+    "Rainy picnic",
+    "Packed a full picnic, sat in the car with the heater on and ate sandwiches watching raindrops race down the windscreen.",
+    "It started raining just as we unpacked the picnic, so we squeezed into the car with the sandwiches and a flask.",
+    1
+  ],
+  [
+    "Lift small talk",
+    "Stood in a lift with my boss for twelve floors. We discussed the weather in great detail. Neither of us enjoyed it.",
+    "In the lift, a colleague and I discussed the weather for four floors, then went quiet. When the doors opened, we both said 'Have a good one' and walked opposite ways.",
+    1
+  ],
+  [
+    "Stuck umbrella",
+    "My umbrella flipped inside out in the wind. I walked three streets holding a mangled metal flower and trying to look dignified.",
+    "The wind snapped my umbrella the moment I stepped outside. I carried it to the bin like a fallen soldier and went on getting soaked.",
+    1
+  ],
+  [
+    "Shopping trolley",
+    "Trolley with the wobbly wheel again. It's always me. I think it recognises me and goes for the worst one on purpose.",
+    "I picked a trolley with a squeaky wheel and spent the whole shop apologising to the aisles.",
+    1
+  ],
+  [
+    "Doorbell",
+    "Doorbell rang, courier dumped a parcel and legged it before I got downstairs. It was for next door. Of course it was.",
+    "The doorbell rang twice, and by the time I opened it there was only a parcel and a cloud of exhaust. The label had the wrong flat number, naturally.",
+    1
+  ],
+  [
+    "Taxi ride",
+    "Taxi driver played music so loud the window rattled. He knew every word. By the end I knew a few and tipped him double.",
+    "The taxi driver sang along to the radio the whole journey, and I found myself humming too.",
+    1
+  ],
+  [
+    "Packed lunch",
+    "Mum packed jollof and a banana. Everyone at school had crisps. By Friday three people wanted my jollof, so I'd say it worked out.",
+    "My mum packed rice and plantain every day and I used to be embarrassed by it. These days I'd give almost anything for one of those lunch boxes.",
+    1
+  ],
+  [
+    "Old trainers",
+    "My trainers have a hole in the toe and one lace is knotted four times. I refuse to retire them. They know me.",
+    "My oldest trainers have a split sole and a lace tied in a bow of defeat.",
+    1
+  ],
+  [
+    "Waiting for the kettle",
+    "Kettle takes four minutes to boil. I've learned to use the time to check the post, find a mug, and have a small argument with myself.",
+    "Our kettle takes ages to boil, so I tidy the worktop and stare out of the window. It's the closest thing I get to meditation.",
+    2
+  ],
+  [
+    "Home DIY",
+    "Put up a shelf, it was crooked, so I put up a second one at the same angle to look intentional. It now looks like a design choice.",
+    "Hung a shelf and it came out slightly off, so I added a second to match the slope. Everyone now thinks I planned it, and I've stopped correcting them.",
+    2
+  ],
+  [
+    "Cold house",
+    "The heating's been off since Tuesday and I'm typing this wearing a hat indoors. The cat has decided my lap is the only warm place.",
+    "Our heating packed up and we've been living in layers. The dog sleeps on my feet, and I've started drinking tea purely for the warmth.",
+    2
+  ],
+  [
+    "Wrong number",
+    "Got a wrong-number text from a stranger who's now telling me about their day. I haven't had the heart to correct them.",
+    "A stranger texted me by mistake and we've exchanged four messages about their lunch.",
+    2
+  ],
+  [
+    "Fish and chips",
+    "Chips on the seafront, wind trying to steal them, gull watching from the wall with total intent. I lost one chip, defended the rest.",
+    "Ate fish and chips on the seafront, guarding the bag from a gull with a very personal interest. It cost me two chips and a little dignity.",
+    2
+  ],
+  [
+    "Library card",
+    "Renewed my library card and the woman at the desk said I hadn't borrowed anything in six years. I was a little ashamed. Borrowed three books.",
+    "I renewed my library card after years away and left with five books I'll probably return late. The librarian just smiled and stamped them.",
+    2
+  ],
+  [
+    "Broken zip",
+    "My coat zip died on the coldest day. Walked home holding it shut with one hand and carrying shopping with the other.",
+    "The zip gave out on my favourite coat, so I've spent the week holding it closed with a safety pin and some stubbornness.",
+    2
+  ],
+  [
+    "Sunday cleaning",
+    "Cleaning the flat on a Sunday means finding things I lost months ago. Found a tenner, a sock, and the remote. No regrets.",
+    "On Sunday I cleaned the flat and found a missing earring, two pens and a receipt from 2022. I felt unreasonably proud.",
+    2
+  ],
+  [
+    "Public speaking",
+    "Gave a talk to forty people. My hands shook so much the slides looked like they had a pulse. Someone said it was fine afterwards.",
+    "My first talk in front of the team went fine until a slide wouldn't load. I filled the gap with a joke and, to my surprise, it landed.",
+    2
+  ],
+  [
+    "Rooftop view",
+    "Went up to the roof with a flask of tea. The whole city looked weirdly quiet, like someone had turned down the volume.",
+    "From the roof the city looked small and slow, and for once I wasn't in a hurry. I stayed until the tea was cold.",
+    2
+  ],
+  [
+    "Lost phone",
+    "Rang my phone from my partner's, heard it buzzing from inside the sofa. Relief, then a quiet feeling of being an idiot.",
+    "I panicked, searched the car, and borrowed a phone to ring mine. It was in my coat pocket the whole time, and I'm leaving that out of the story.",
+    2
+  ],
+  [
+    "School run",
+    "Did the school run in my slippers by accident. Nobody said anything, but one dad nodded at them with what I'd call respect.",
+    "I realised halfway to school that I was wearing two different shoes. A mum nodded at me kindly, like it happens to everyone.",
+    2
+  ],
+  [
+    "Cooking disaster",
+    "Tried making pancakes for the family. First one stuck, second burned, third landed on the floor. We had cereal.",
+    "I tried a new recipe from a video and it went wrong in several creative ways.",
+    2
+  ],
+  [
+    "Tea round",
+    "In our office the tea round is a political act. If you skip someone, it'll be remembered for months.",
+    "At work the tea round has unwritten rules, and everyone knows who's been missed. I'm now very careful about whose mug I overlook.",
+    2
+  ],
+  [
+    "Raining at the market",
+    "The stall holders pulled tarps over everything and carried on, like rain was just another customer. I bought a scarf I didn't need.",
+    "It rained the whole morning at the market, but the traders kept shouting prices from under their tarpaulins. I bought plums out of respect.",
+    2
+  ],
+  [
+    "Neighbour's dog",
+    "The neighbour's dog barks at everything, including its own reflection. Last night it barked at a leaf. A single leaf.",
+    "The dog next door barks at the postman, the wind and the moon. I've started to like it, as it makes me feel like the street is guarded.",
+    2
+  ],
+  [
+    "Cinema trip",
+    "Went to the cinema, someone behind me explained the film to their friend throughout. I didn't need the commentary but I got it.",
+    "The cinema was almost empty, but a man chose the seat directly behind me and ate crisps through the whole film. It was a very loud film too.",
+    2
+  ],
+  [
+    "Evening walk",
+    "Evening walks have become the best part of my day. No phone, just the streetlights coming on and other people's windows glowing.",
+    "I started taking an evening walk and now I look forward to it. Nobody needs me, and the windows along the road are like small stories.",
+    2
+  ],
+  [
+    "Birthday dinner",
+    "Booked a restaurant for her birthday, they put 'Happy Anniversary' on the dessert. She ate it anyway and laughed. Good sport.",
+    "We celebrated at a small Italian place where the waiter sang loudly and slightly off key. She went red, then asked him to do it again.",
+    2
+  ],
+  [
+    "Autumn leaves",
+    "Walking to work through piles of leaves, kicking them like a kid. A woman gave me a look, then kicked one herself.",
+    "The path was thick with leaves and I couldn't resist a few good kicks. A runner went by and grinned, and I felt twelve again.",
+    2
+  ],
+  [
+    "Quiet morning",
+    "The house is quiet in a way I only notice when I'm not in it. The tap drips, the radiator ticks, and a lorry downshifts somewhere far off.",
+    "The house holds a particular quiet in the mornings. I hear the tap, the radiator settling, a distant lorry changing gear, and somehow it feels like company.",
+    3
+  ],
+  [
+    "Old coat",
+    "I still wear his coat, though the sleeves are too long. In the pockets I find tissues, a bus ticket, a pen that doesn't work. I don't throw them out.",
+    "I wear my father's coat even though it is too big. The pockets still hold a bus ticket, a pen with no ink, and a crumpled tissue, and I leave them there.",
+    3
+  ],
+  [
+    "Station goodbye",
+    "We said goodbye on the platform with our usual small jokes. The train pulled out and I stood there a moment, waving at nobody in particular.",
+    "We said goodbye on the platform the way we always do, with a joke. When the train left I kept waving a little too long at the empty track.",
+    3
+  ],
+  [
+    "New town",
+    "In a new town you learn the streets by the people you pass. The man with the dog, the woman with the red door. Slowly it becomes a map.",
+    "A new town becomes familiar through repetition: the same man walking the same dog, the same woman on the same step. Gradually you start to belong.",
+    3
+  ],
+  [
+    "Winter evening",
+    "By four it's dark and the windows turn into mirrors. I draw the curtains and the room becomes smaller and kinder.",
+    "By four o'clock the dark has arrived and the windows reflect the room back. I close the curtains, and the house seems to draw closer around me.",
+    3
+  ],
+  [
+    "A borrowed book",
+    "The book I borrowed from her still has her pencil marks in the margins. I read it slowly, like a conversation I've been invited into.",
+    "The book I borrowed has her pencilled notes in the margins. I read slowly, partly for the story and partly to hear her voice again.",
+    3
+  ],
+  [
+    "Grandfather's watch",
+    "His watch runs four minutes fast. I've never corrected it. Somehow I like arriving early on his time.",
+    "My grandfather's watch runs a few minutes ahead, and I have never set it right.",
+    3
+  ],
+  [
+    "Funeral flowers",
+    "The flowers were too bright for the day. A cousin said so quietly, and we both laughed, then stopped, then held onto each other.",
+    "The flowers were far too cheerful for the occasion. A cousin whispered it, and we laughed, then went quiet, then reached for each other's hands.",
+    3
+  ],
+  [
+    "First day of term",
+    "The uniform was a size too big, 'to grow into'. I pulled the sleeves over my hands and walked in as if I belonged to the building.",
+    "My blazer was a size too large, bought to be grown into. I rolled the sleeves back and walked through the gates, hoping no one would look.",
+    3
+  ],
+  [
+    "Night bus",
+    "The night bus hums like a refrigerator. Everyone on it is tired in a different way, and nobody pretends otherwise.",
+    "The night bus hums quietly through the empty streets. Each passenger is tired in their own way, and there is a strange comfort in it.",
+    3
+  ],
+  [
+    "Handwritten recipe",
+    "Her recipe says 'cook until it smells right'. I've made it forty times and I think I'm finally getting close.",
+    "Her recipe says to cook it until it smells right. I have made it many times, and only now do I think I understand what she meant.",
+    3
+  ],
+  [
+    "Bridge at night",
+    "The bridge is lit orange and the river underneath is black. I stop halfway, the way everybody does, and look at nothing for a while.",
+    "The bridge glows orange above the dark river. Halfway across I stop, like everyone does, and look at the water for no good reason.",
+    3
+  ],
+  [
+    "Missed call",
+    "I saw her name on the missed calls and didn't ring back that night. The next morning it was too late. I keep the phone charged anyway.",
+    "Her name appeared among the missed calls and I told myself I would ring tomorrow. I still keep that phone charged, in case it rings.",
+    3
+  ],
+  [
+    "The long way home",
+    "I take the long way home on Fridays, through the park, past the closed café. It adds nine minutes and removes the week.",
+    "On Fridays I walk the long way home, through the park and past the shuttered café. It adds ten minutes and takes the week away.",
+    3
+  ],
+  [
+    "Radio at night",
+    "The radio was on low, a man reading out football scores to no one. I fell asleep halfway through Leicester.",
+    "I fell asleep to the radio, a quiet voice reading scores to an empty kitchen. By the end it was only a murmur.",
+    3
+  ],
+  [
+    "Moving out",
+    "I left the key on the counter and stood in the doorway longer than I needed to. The room looked smaller without us in it.",
+    "I put the key on the kitchen counter and lingered at the door. Without our things, the room seemed to shrink back into itself.",
+    3
+  ],
+  [
+    "Sea in November",
+    "The sea in November is the colour of old pewter. A few dogs, a man with a metal detector, and the wind going right through my coat.",
+    "In November the sea turns a flat grey. Only a few dog walkers and a lone man with a metal detector remain, and the wind finds every gap in my coat.",
+    3
+  ],
+  [
+    "Old friend's house",
+    "Her house still smells of toast and lavender polish. I sat in the same chair I used to at fifteen and nobody said a word about it.",
+    "Her house smelled of toast and lavender, exactly as I remembered. I sat in my old chair and, for a minute, I was fifteen again.",
+    3
+  ],
+  [
+    "Letter from home",
+    "The envelope had her shaky handwriting and a stamp stuck on crooked. I opened it carefully, to make it last.",
+    "The envelope was addressed in her unsteady handwriting, the stamp slightly crooked. I opened it slowly, wanting the moment to last.",
+    3
+  ],
+  [
+    "The last customer",
+    "The cafe was closing and the owner kept the lights on for me. I finished my tea slowly, grateful, and left a bigger tip than I could afford.",
+    "The café was shutting, but the owner let me stay and finish my tea. I left too much money on the table and felt only slightly foolish.",
+    3
+  ]
 ]
