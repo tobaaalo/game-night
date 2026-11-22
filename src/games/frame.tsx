@@ -1,4 +1,5 @@
 import { useEffect, useState, type ReactNode } from "react";
+import type { CSSProperties } from "react";
 import clsx from "clsx";
 import { Icon, Scoreboard, Sheet } from "../components/ui";
 import { nameOf, useApp } from "../lib/app";
@@ -66,6 +67,17 @@ export function Turn({ id }: { id: string }) {
   return <p className="turn">{nameOf(players[i], i)}&rsquo;s turn</p>;
 }
 
+/** Sizes big text from its longest word so a long name never runs off the screen. */
+export const fitLen = (t: string) =>
+  ({
+    "--len": Math.max(
+      4,
+      ...String(t)
+        .split(/\s+/)
+        .map((w) => w.length),
+    ),
+  }) as CSSProperties;
+
 export function MediaView({
   media,
   revealed,
@@ -103,7 +115,9 @@ export function MediaView({
       return (
         <>
           {media.sub && <p className="bigsub">{media.sub}</p>}
-          <p className="bigtext">{media.text}</p>
+          <p className="bigtext" style={fitLen(media.text)}>
+            {media.text}
+          </p>
         </>
       );
     case "pair":

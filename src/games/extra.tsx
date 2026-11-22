@@ -6,7 +6,7 @@ import { nameOf, useApp } from "../lib/app";
 import { draw, drawFresh, shuffle, startIndex } from "../lib/deck";
 import { load, save } from "../lib/store";
 import { BINGO, BUCKET, LADDER } from "../content";
-import { Finish, Img } from "./frame";
+import { Finish, Img, fitLen } from "./frame";
 
 function Clock({ seconds, onEnd }: { seconds: number; onEnd: () => void }) {
   const [left] = useCountdown(seconds, true, onEnd);
@@ -238,7 +238,9 @@ export function WordChain({ seconds, onAgain }: { seconds: number; onAgain: () =
         </p>
       )}
       {!cur.bot && <Clock key={`${chain.length}-${out.length}`} seconds={seconds} onEnd={knockOut} />}
-      <p className="bigtext">{last}</p>
+      <p className="bigtext" style={fitLen(last)}>
+        {last}
+      </p>
       {cur.bot && (
         <p className="hint">
           {nameOf(
@@ -495,7 +497,9 @@ export function DrawGuess({
       )}
       {phase === "peek" && (
         <>
-          <p className="bigtext">{word[1]}</p>
+          <p className="bigtext" style={fitLen(word[1])}>
+            {word[1]}
+          </p>
           <p className="hint">Draw it without writing letters or numbers.</p>
           <button className="btn" onClick={() => setPhase("draw")}>
             Start drawing
