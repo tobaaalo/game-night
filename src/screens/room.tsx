@@ -4,7 +4,8 @@ import QRCode from "qrcode";
 import { Flaps, Icon, PromptText } from "../components/ui";
 import { useApp } from "../lib/app";
 import { load, save } from "../lib/store";
-import { gamesFor, type GameDef } from "../games/registry";
+import { SECTIONS, gamesFor, type GameDef, type Section } from "../games/registry";
+import { Ticket } from "./library";
 import { MediaView, useKeys } from "../games/frame";
 import { Setup } from "../games/quiz";
 import { TeamLadder } from "../games/team";
@@ -349,12 +350,9 @@ function HostLive({
   const playKey = `gn.hostplay.${room.code}`;
   const [play, setPlay] = useState<string | null>(() => load<string | null>(playKey, null));
   const [playName, setPlayName] = useState(() => load("gn.joinname", appPlayers[0]?.name ?? ""));
-  const [tab, setTab] = useState<"run" | "play">("run");
-  const livePhase = state?.phase ?? "lobby";
-  useEffect(() => {
-    if (!play) return;
-    setTab(livePhase === "lobby" || livePhase === "ended" ? "run" : "play");
-  }, [livePhase, play]);
+  const [asking, setAsking] = useState(false);
+  const [showHand, setShowHand] = useState(false);
+  const [confirmLeave, setConfirmLeave] = useState(false);
   const joinUrl = `${location.origin}/join/${room.code}`;
   const selfPid = play ? load<string>(`gn.pid.${room.code}`, "") : "";
   const myName = play || playName.trim() || "Host";
@@ -378,6 +376,7 @@ function HostLive({
     );
   const players = state?.players ?? [];
   const phase = state?.phase ?? "lobby";
+  const others = players.filter((p) => p.pid !== selfPid);
   const endRoom = () => {
     let undone = false;
     toast("Ending the game for everyone…", () => (undone = true));
@@ -437,20 +436,41 @@ function HostLive({
         </div>
       </div>
 
-      {!play && phase === "lobby" && (
-        <form
-          className="panel host-play"
-          onSubmit={(e) => {
-            e.preventDefault();
-            if (!playName.trim()) return;
-            save("gn.joinname", playName.trim());
-            save(playKey, playName.trim());
-            setPlay(playName.trim());
-          }}
-        >
-          <p className="h3">Want to play too?</p>
-          <p className="muted small">Join on this device. You switch between running the game and playing.</p>
-          <div className="row-form">
+      <div className="panel host-play">
+        <div className="switch-row">
+          <span>
+            <span className="h3">I&rsquo;ll play too</span>
+            <span className="muted small">{play ? `Playing as ${play}` : "Answer on this device as well"}</span>
+          </span>
+          <button
+            role="switch"
+            aria-checked={!!play}
+            aria-label="I'll play too"
+            className={clsx("switch", play && "on")}
+            disabled={!play && phase !== "lobby"}
+            onClick={() => {
+              if (play) {
+                if (selfPid) send({ t: "kick", pid: selfPid });
+                save(playKey, null);
+                setPlay(null);
+              } else setAsking((v) => !v);
+            }}
+          >
+            <span />
+          </button>
+        </div>
+        {!play && asking && phase === "lobby" && (
+          <form
+            className="row-form"
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (!playName.trim()) return;
+              save("gn.joinname", playName.trim());
+              save(playKey, playName.trim());
+              setPlay(playName.trim());
+              setAsking(false);
+            }}
+          >
             <input
               className="input"
               aria-label="Your name"
@@ -460,32 +480,41 @@ function HostLive({
               onChange={(e) => setPlayName(e.target.value)}
             />
             <button className="btn" type="submit" disabled={!playName.trim()}>
-              I&rsquo;ll play too
+              Join
             </button>
-          </div>
-        </form>
-      )}
-      {play && (
-        <div className="host-tabs" role="tablist" aria-label="This device">
-          <button
-            role="tab"
-            aria-selected={tab === "run"}
-            className={clsx(tab === "run" && "on")}
-            onClick={() => setTab("run")}
-          >
-            Run the game
+          </form>
+        )}
+      </div>
+      {others.length > 0 && (
+        <section className="stack">
+          <button className="btn quiet block" aria-expanded={showHand} onClick={() => setShowHand((v) => !v)}>
+            Make someone else host
           </button>
-          <button
-            role="tab"
-            aria-selected={tab === "play"}
-            className={clsx(tab === "play" && "on")}
-            onClick={() => setTab("play")}
-          >
-            Play as {play}
-          </button>
-        </div>
+          {showHand && (
+            <div className="panel stack host-tools">
+              <p className="muted small">They get a request on their phone. When they say yes, they run the game.</p>
+              <ul className="joined">
+                {others.map((p) => (
+                  <li key={p.pid} className={clsx(!p.connected && "away")}>
+                    <span>{p.name}</span>
+                    <button
+                      className="btn quiet small"
+                      disabled={!!state?.offer}
+                      onClick={() => {
+                        send({ t: "host-offer", pid: p.pid, self: selfPid || undefined, name: myName });
+                        setShowHand(false);
+                      }}
+                    >
+                      Make host
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </section>
       )}
-      <div hidden={!!play && tab === "play"}>
+      <div>
         {phase === "lobby" && (
           <div className="room-lobby">
             <div className="panel join-panel">
@@ -545,25 +574,7 @@ function HostLive({
               <h2 className="h3" id="pickg">
                 Pick a game
               </h2>
-              <div className="room-games" role="radiogroup" aria-labelledby="pickg">
-                {ROOM_GAMES().map((g, i) => (
-                  <button
-                    key={g.id}
-                    className={clsx("ticket", game?.id === g.id && "selected")}
-                    role="radio"
-                    aria-checked={game?.id === g.id}
-                    onClick={() => setGame(g)}
-                  >
-                    <span className="stub" aria-hidden="true">
-                      <span className="stub-no">{String(i + 1).padStart(2, "0")}</span>
-                    </span>
-                    <span className="ticket-body">
-                      <span className="ticket-title">{g.roomName ?? g.name}</span>
-                      <span className="ticket-blurb">{g.roomBlurb ?? g.blurb}</span>
-                    </span>
-                  </button>
-                ))}
-              </div>
+              <RoomPicker game={game} setGame={setGame} />
             </section>
             {!game ? (
               <div className="dock">
@@ -663,36 +674,33 @@ function HostLive({
             End the game for everyone
           </button>
         </div>
-        {players.some((p) => p.pid !== selfPid) && (
-          <section className="panel stack host-tools" aria-labelledby="handover">
-            <h2 className="h3" id="handover">
-              Hand over the host
-            </h2>
-            <p className="muted small">They get a request on their phone. When they say yes, they run the game.</p>
-            <ul className="joined">
-              {players
-                .filter((p) => p.pid !== selfPid)
-                .map((p) => (
-                  <li key={p.pid} className={clsx(!p.connected && "away")}>
-                    <span>{p.name}</span>
-                    <button
-                      className="btn quiet small"
-                      disabled={!!state?.offer}
-                      onClick={() => send({ t: "host-offer", pid: p.pid, self: selfPid || undefined, name: myName })}
-                    >
-                      Make host
-                    </button>
-                  </li>
-                ))}
-            </ul>
-            <button
-              className="btn ghost"
-              disabled={!!state?.offer}
-              onClick={() => send({ t: "host-leave", self: selfPid || undefined, name: myName })}
-            >
-              Leave and pass the host on
-            </button>
-          </section>
+        {others.length > 0 && (
+          <div className="actions center">
+            {!confirmLeave ? (
+              <button className="link" onClick={() => setConfirmLeave(true)}>
+                Leave room
+              </button>
+            ) : (
+              <div className="panel ask stack">
+                <p className="h3">Leave and pass the host on?</p>
+                <div className="actions">
+                  <button
+                    className="btn small"
+                    disabled={!!state?.offer}
+                    onClick={() => {
+                      send({ t: "host-leave", self: selfPid || undefined, name: myName });
+                      setConfirmLeave(false);
+                    }}
+                  >
+                    Leave and pass the host on
+                  </button>
+                  <button className="btn ghost small" onClick={() => setConfirmLeave(false)}>
+                    Stay
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
         )}
 
         {phase === "ended" && (
@@ -710,7 +718,8 @@ function HostLive({
         )}
       </div>
       {play && (
-        <div hidden={tab !== "play"}>
+        <div className="host-player" hidden={phase === "lobby" || phase === "ended"}>
+          <h2 className="h3">Your answers</h2>
           <PlayerLive
             code={room.code}
             name={play}
@@ -718,7 +727,6 @@ function HostLive({
             onLeave={() => {
               save(playKey, null);
               setPlay(null);
-              setTab("run");
             }}
           />
         </div>
@@ -1210,22 +1218,95 @@ function PlayerLive({
       {state.phase === "live" && state.live && you && <LiveGame state={state} me={you} send={send} skew={skew} />}
       {state.phase === "team" && state.team && you && <TeamLadder team={state.team} me={you} send={send} />}
       {state.phase === "ended" && <Leaderboard state={state} title="Final scores" you={you} />}
-      <div className="actions center room-end">
-        {asked === 0 && (
-          <button className="link" onClick={leave}>
-            Leave room
-          </button>
-        )}
-        {asked > 0 && <p className="muted small">Asked the host to let you leave…</p>}
-        {asked < 0 && (
-          <>
-            <p className="muted small">The host hasn&rsquo;t answered yet.</p>
-            <button className="btn ghost small" onClick={leaveNow}>
-              Leave anyway
+      {!direct && (
+        <div className="actions center room-end">
+          {asked === 0 && (
+            <button className="link" onClick={leave}>
+              Leave room
             </button>
-          </>
-        )}
+          )}
+          {asked > 0 && <p className="muted small">Asked the host to let you leave…</p>}
+          {asked < 0 && (
+            <>
+              <p className="muted small">The host hasn&rsquo;t answered yet.</p>
+              <button className="btn ghost small" onClick={leaveNow}>
+                Leave anyway
+              </button>
+            </>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function RoomPicker({ game, setGame }: { game: GameDef | null; setGame: (g: GameDef) => void }) {
+  const [view, setViewState] = useState<"list" | "grid">(() =>
+    load<"list" | "grid">("gn.libview", matchMedia("(max-width: 600px)").matches ? "grid" : "list"),
+  );
+  const [shut, setShut] = useState<string[]>(() => load<string[]>("gn.libshut", []));
+  const setView = (v: "list" | "grid") => {
+    setViewState(v);
+    save("gn.libview", v);
+  };
+  const toggle = (id: string) =>
+    setShut((a) => {
+      const n = a.includes(id) ? a.filter((x) => x !== id) : [...a, id];
+      save("gn.libshut", n);
+      return n;
+    });
+  const all = ROOM_GAMES();
+  const sections = (Object.keys(SECTIONS) as Section[])
+    .map((s) => ({ s, list: all.filter((g) => g.section === s) }))
+    .filter((x) => x.list.length);
+  let n = 0;
+  return (
+    <div className="stack">
+      <div className="view-toggle" role="group" aria-label="How to show games">
+        <button aria-pressed={view === "grid"} onClick={() => setView("grid")}>
+          Grid
+        </button>
+        <button aria-pressed={view === "list"} onClick={() => setView("list")}>
+          List
+        </button>
       </div>
+      {sections.map(({ s, list }) => (
+        <section key={s} className="lib-section" aria-labelledby={`rsec-${s}`}>
+          <h3 id={`rsec-${s}`} className="sec-sign h3">
+            <button
+              className="sec-toggle"
+              aria-expanded={!shut.includes(s)}
+              aria-controls={`rlist-${s}`}
+              onClick={() => toggle(s)}
+            >
+              <span>{SECTIONS[s].title}</span>
+              <span className="sec-count">{list.length}</span>
+              <span className={clsx("sec-chev", shut.includes(s) && "shut")}>
+                <Icon.chevron />
+              </span>
+            </button>
+          </h3>
+          <ul id={`rlist-${s}`} className={clsx("tickets", view)} hidden={shut.includes(s)}>
+            {list.map((g) => {
+              n += 1;
+              return (
+                <li key={g.id}>
+                  <Ticket
+                    g={g}
+                    n={n}
+                    view={view}
+                    showRoom={false}
+                    selected={game?.id === g.id}
+                    title={g.roomName}
+                    blurb={g.roomBlurb}
+                    onOpen={() => setGame(g)}
+                  />
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+      ))}
     </div>
   );
 }

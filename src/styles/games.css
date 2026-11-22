@@ -2851,3 +2851,57 @@
   word-break: normal;
   hyphens: auto;
 }
+
+/* Host screen: play-too switch, game picker selection */
+.switch-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.switch-row > span:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.switch {
+  flex: none;
+  position: relative;
+  width: 56px;
+  height: 44px;
+  border-radius: 999px;
+  border: 2px solid var(--line, #5a2038);
+  background: transparent;
+  cursor: pointer;
+}
+.switch span {
+  position: absolute;
+  top: 9px;
+  left: 6px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #8a6a74;
+  transition: transform 0.15s;
+}
+.switch.on {
+  background: var(--bulb, #ffd166);
+}
+.switch.on span {
+  transform: translateX(22px);
+  background: #2a0a16;
+}
+.switch:disabled {
+  opacity: 0.45;
+}
+.host-play .row-form {
+  margin-top: 10px;
+}
+.tile.selected,
+.ticket.selected {
+  outline: 3px solid var(--bulb, #ffd166);
+  outline-offset: -3px;
+}
+.host-player {
+  margin-top: 16px;
+}

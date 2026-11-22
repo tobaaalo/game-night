@@ -26,7 +26,7 @@ async function room(names) {
 // 1. Quiz: change answer once, auto reveal, auto next
 {
   const { host, mates } = await room(["Dayo", "Femi"]);
-  await host.locator(".ticket", { hasText: "Bible Trivia" }).click();
+  await host.locator(".ticket, .tile", { hasText: "Bible Trivia" }).click();
   await host.getByRole("group", { name: "How many" }).locator(".chip").first().click();
   await host.getByRole("button", { name: /Start with/ }).click();
   const [d, f] = mates;
@@ -50,9 +50,9 @@ async function room(names) {
 {
   const { host, mates } = await room(["Dayo"]);
   for (const g of ["Name 5 in 10", "Emoji Decode", "Finish the Proverb", "Three Clues"])
-    if (!(await host.locator(".ticket", { hasText: g }).count())) fail(`${g} missing from rooms`);
+    if (!(await host.locator(".ticket, .tile", { hasText: g }).count())) fail(`${g} missing from rooms`);
   ok("more games in rooms");
-  await host.locator(".ticket", { hasText: "Three Clues" }).click();
+  await host.locator(".ticket, .tile", { hasText: "Three Clues" }).click();
   await host.getByRole("button", { name: /Start with/ }).click();
   const d = mates[0];
   await d.locator(".clue").first().waitFor({ timeout: 10000 });
@@ -67,7 +67,7 @@ async function room(names) {
 // 3. Word ladder race: boards are independent, first to finish wins
 {
   const { host, mates } = await room(["Dayo"]);
-  await host.locator(".ticket", { hasText: "Word Ladder" }).click();
+  await host.locator(".ticket, .tile", { hasText: "Word Ladder" }).click();
   await host.getByRole("button", { name: /Start with/ }).click();
   const d = mates[0];
   await host.locator(".ladder-now").waitFor({ timeout: 10000 });

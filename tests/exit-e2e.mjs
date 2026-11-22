@@ -27,7 +27,7 @@ const code = (await host.locator(".room-code").textContent()).replace(/\s/g, "")
 const dayo = await join(code, "Dayo");
 const femi = await join(code, "Femi");
 await host.locator(".joined li").nth(1).waitFor();
-await host.locator(".ticket", { hasText: "Bible Trivia" }).click();
+await host.locator(".ticket, .tile", { hasText: "Bible Trivia" }).click();
 await host.getByRole("group", { name: "How many" }).locator(".chip").last().click();
 await host.getByRole("button", { name: /Start with/ }).click();
 await dayo.locator(".option").first().waitFor({ timeout: 10000 });
@@ -54,7 +54,8 @@ await dayo.getByRole("button", { name: "Join" }).click();
 await dayo.locator(".room.player").waitFor();
 ok("player can rejoin the same room");
 // 3. Host hands over to Femi
-await host.getByRole("button", { name: "Make host" }).nth(1).click().catch(() => undefined);
+await host.getByRole("button", { name: "Make someone else host" }).click();
+await host.getByRole("button", { name: "Make host" }).nth(1).click();
 await host.getByText(/Waiting for .* to accept/).waitFor();
 const who = (await host.getByText(/Waiting for .* to accept/).textContent()).match(/for (\w+)/)[1];
 const newHost = who === "Femi" ? femi : dayo;
@@ -64,6 +65,7 @@ await shot(newHost, "offer");
 await newHost.getByRole("button", { name: "No thanks" }).click();
 await host.getByText(/Waiting for .* to accept/).waitFor({ state: "detached" });
 ok("a declined offer leaves the host in place");
+await host.getByRole("button", { name: "Make someone else host" }).click();
 await host.getByRole("button", { name: "Make host" }).first().click();
 const who2 = (await host.getByText(/Waiting for .* to accept/).textContent()).match(/for (\w+)/)[1];
 const nh = who2 === "Femi" ? femi : dayo;
@@ -78,7 +80,7 @@ await host.locator(".room.player").waitFor({ timeout: 10000 });
 ok("the old host is a player now");
 await shot(host, "old-host-as-player");
 // 4. New host leaves: the next person is asked; if all say no, the room is still handed on
-await nh.getByRole("tab", { name: "Run the game" }).click();
+await nh.getByRole("button", { name: "Leave room" }).click();
 await nh.getByRole("button", { name: "Leave and pass the host on" }).click();
 const askee = [host, ot];
 let asked;

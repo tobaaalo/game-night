@@ -223,24 +223,34 @@ export function Library() {
   );
 }
 
-function Ticket({
+export function Ticket({
   g,
   n,
   view,
   onOpen,
   showRoom = true,
+  selected,
+  title,
+  blurb,
 }: {
   g: GameDef;
   n: number;
   view: "list" | "grid";
   onOpen: () => void;
   showRoom?: boolean;
+  selected?: boolean;
+  title?: string;
+  blurb?: string;
 }) {
   const room = g.room && showRoom;
   if (view === "grid")
     return (
-      <button className={clsx("tile", room && "inroom")} onClick={onOpen}>
-        <span className="tile-title">{g.name}</span>
+      <button
+        className={clsx("tile", room && "inroom", selected && "selected")}
+        aria-pressed={selected}
+        onClick={onOpen}
+      >
+        <span className="tile-title">{title ?? g.name}</span>
         <span className="tile-stat">{g.stat}</span>
         {room && (
           <span className="tile-room" role="img" aria-label="Can also be played on everyone's phones">
@@ -250,14 +260,18 @@ function Ticket({
       </button>
     );
   return (
-    <button className={clsx("ticket", room && "inroom")} onClick={onOpen}>
+    <button
+      className={clsx("ticket", room && "inroom", selected && "selected")}
+      aria-pressed={selected}
+      onClick={onOpen}
+    >
       <span className="stub" aria-hidden="true">
         <span className="stub-no">{String(n).padStart(2, "0")}</span>
         {room && <Icon.phones />}
       </span>
       <span className="ticket-body">
-        <span className="ticket-title">{g.name}</span>
-        <span className="ticket-blurb">{g.blurb}</span>
+        <span className="ticket-title">{title ?? g.name}</span>
+        <span className="ticket-blurb">{blurb ?? g.blurb}</span>
         <span className="ticket-meta">
           {g.stat}
           {room && <span className="sr-only"> Can also be played in a room</span>}
