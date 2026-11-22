@@ -318,6 +318,17 @@ function HostLive({
   });
   const [qr, setQr] = useState("");
   const [ctlCopied, setCtlCopied] = useState(false);
+  const { players: appPlayers } = useApp();
+  // The host can play too: this same device joins the room as a player and flips between the two views.
+  const playKey = `gn.hostplay.${room.code}`;
+  const [play, setPlay] = useState<string | null>(() => load<string | null>(playKey, null));
+  const [playName, setPlayName] = useState(() => load("gn.joinname", appPlayers[0]?.name ?? ""));
+  const [tab, setTab] = useState<"run" | "play">("run");
+  const livePhase = state?.phase ?? "lobby";
+  useEffect(() => {
+    if (!play) return;
+    setTab(livePhase === "lobby" || livePhase === "ended" ? "run" : "play");
+  }, [livePhase, play]);
   const joinUrl = `${location.origin}/join/${room.code}`;
   useEffect(() => {
     QRCode.toDataURL(joinUrl, { margin: 1, width: 360, color: { dark: "#1c0610", light: "#efe6d8" } }).then(setQr, () =>
@@ -371,195 +382,258 @@ function HostLive({
         </div>
       </div>
 
-      {phase === "lobby" && (
-        <div className="room-lobby">
-          <div className="panel join-panel">
-            {qr ? (
-              <img src={qr} alt={`QR code to join room ${room.code}`} width={180} height={180} className="qr" />
-            ) : (
-              <div className="qr skeleton" />
-            )}
-            <div className="stack">
-              <p className="h3">Friends: open this site and tap &ldquo;Join a room&rdquo;, or scan.</p>
-              <p className="mono small">{joinUrl.replace(/^https?:\/\//, "")}</p>
-              <div className="actions">
-                <button className="btn quiet small" onClick={copy}>
-                  Copy invite link
-                </button>
-                <button
-                  className="btn quiet small"
-                  onClick={() => {
-                    const link = `${location.origin}/room?host=${room.code}.${room.hostKey}`;
-                    void navigator.clipboard?.writeText(link);
-                    setCtlCopied(true);
-                  }}
-                >
-                  {ctlCopied ? "Control link copied" : "Control from a phone"}
-                </button>
+      {!play && phase === "lobby" && (
+        <form
+          className="panel host-play"
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (!playName.trim()) return;
+            save("gn.joinname", playName.trim());
+            save(playKey, playName.trim());
+            setPlay(playName.trim());
+          }}
+        >
+          <p className="h3">Want to play too?</p>
+          <p className="muted small">Join on this device. You switch between running the game and playing.</p>
+          <div className="row-form">
+            <input
+              className="input"
+              aria-label="Your name"
+              placeholder="Your name"
+              value={playName}
+              maxLength={20}
+              onChange={(e) => setPlayName(e.target.value)}
+            />
+            <button className="btn" type="submit" disabled={!playName.trim()}>
+              I&rsquo;ll play too
+            </button>
+          </div>
+        </form>
+      )}
+      {play && (
+        <div className="host-tabs" role="tablist" aria-label="This device">
+          <button
+            role="tab"
+            aria-selected={tab === "run"}
+            className={clsx(tab === "run" && "on")}
+            onClick={() => setTab("run")}
+          >
+            Run the game
+          </button>
+          <button
+            role="tab"
+            aria-selected={tab === "play"}
+            className={clsx(tab === "play" && "on")}
+            onClick={() => setTab("play")}
+          >
+            Play as {play}
+          </button>
+        </div>
+      )}
+      <div hidden={!!play && tab === "play"}>
+        {phase === "lobby" && (
+          <div className="room-lobby">
+            <div className="panel join-panel">
+              {qr ? (
+                <img src={qr} alt={`QR code to join room ${room.code}`} width={180} height={180} className="qr" />
+              ) : (
+                <div className="qr skeleton" />
+              )}
+              <div className="stack">
+                <p className="h3">Friends: open this site and tap &ldquo;Join a room&rdquo;, or scan.</p>
+                <p className="mono small">{joinUrl.replace(/^https?:\/\//, "")}</p>
+                <div className="actions">
+                  <button className="btn quiet small" onClick={copy}>
+                    Copy invite link
+                  </button>
+                  <button
+                    className="btn quiet small"
+                    onClick={() => {
+                      const link = `${location.origin}/room?host=${room.code}.${room.hostKey}`;
+                      void navigator.clipboard?.writeText(link);
+                      setCtlCopied(true);
+                    }}
+                  >
+                    {ctlCopied ? "Control link copied" : "Control from a phone"}
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-          <section aria-labelledby="joined" className="stack">
-            <h2 className="h3" id="joined">
-              {players.length ? `${players.length} in the room` : "Waiting for players…"}
-            </h2>
-            {players.length === 0 ? (
-              <p className="muted">
-                Names appear here as people join. Want to play too? Join from your own phone with the same code. Want
-                the controls on a phone? Tap &ldquo;Control from a phone&rdquo; and send yourself the link.
-              </p>
+            <section aria-labelledby="joined" className="stack">
+              <h2 className="h3" id="joined">
+                {players.length ? `${players.length} in the room` : "Waiting for players…"}
+              </h2>
+              {players.length === 0 ? (
+                <p className="muted">
+                  Names appear here as people join. Want to play too? Join from your own phone with the same code. Want
+                  the controls on a phone? Tap &ldquo;Control from a phone&rdquo; and send yourself the link.
+                </p>
+              ) : (
+                <ul className="joined">
+                  {players.map((p) => (
+                    <li key={p.pid} className={clsx(!p.connected && "away")}>
+                      <span>{p.name}</span>
+                      {!p.connected && <span className="small muted">reconnecting…</span>}
+                      <button
+                        className="icon-btn"
+                        aria-label={`Remove ${p.name}`}
+                        onClick={() => send({ t: "kick", pid: p.pid })}
+                      >
+                        <Icon.close />
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </section>
+            <section aria-labelledby="pickg" className="stack">
+              <h2 className="h3" id="pickg">
+                Pick a game
+              </h2>
+              <div className="room-games" role="radiogroup" aria-labelledby="pickg">
+                {ROOM_GAMES().map((g, i) => (
+                  <button
+                    key={g.id}
+                    className={clsx("ticket", game?.id === g.id && "selected")}
+                    role="radio"
+                    aria-checked={game?.id === g.id}
+                    onClick={() => setGame(g)}
+                  >
+                    <span className="stub" aria-hidden="true">
+                      <span className="stub-no">{String(i + 1).padStart(2, "0")}</span>
+                    </span>
+                    <span className="ticket-body">
+                      <span className="ticket-title">{g.roomName ?? g.name}</span>
+                      <span className="ticket-blurb">{g.roomBlurb ?? g.blurb}</span>
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </section>
+            {!game ? (
+              <div className="dock">
+                <button className="btn block" disabled>
+                  Pick a game to start
+                </button>
+              </div>
             ) : (
-              <ul className="joined">
-                {players.map((p) => (
-                  <li key={p.pid} className={clsx(!p.connected && "away")}>
+              <section className="stack" aria-label={`${game.name} settings`}>
+                <Setup
+                  id={`room-${game.id}`}
+                  fields={game.roomFields ?? []}
+                  players={players.length}
+                  disabled={!players.length}
+                  startLabel={
+                    players.length
+                      ? `Start with ${players.length} ${players.length === 1 ? "player" : "players"}`
+                      : "Waiting for someone to join…"
+                  }
+                  onStart={async (v) => {
+                    if (!players.length) return;
+                    if (game.teamBuild) {
+                      const puzzles = game.teamBuild(v);
+                      send({
+                        t: "team-start",
+                        vs: v.vs === "after" ? "after" : "race",
+                        within: v.within === "turns" ? "turns" : "free",
+                        teams: Number(v.teams) || 0,
+                        puzzles,
+                      });
+                      return;
+                    }
+                    if (game.liveBuild) {
+                      const cfg = await game.liveBuild(
+                        v,
+                        players.map((p) => p.name),
+                      );
+                      send({ t: "live-start", game: game.name, cfg });
+                      return;
+                    }
+                    const list =
+                      (await game.buildQuestions?.(
+                        v,
+                        players.map((p) => p.name),
+                      )) ?? [];
+                    // The server runs the whole game from here: timers, reveals and the next question.
+                    send({ t: "setup", game: game.name, total: list.length, queue: list });
+                  }}
+                />
+              </section>
+            )}
+          </div>
+        )}
+
+        {(phase === "question" || phase === "reveal") && state?.question && (
+          <HostQuestionView
+            state={state}
+            skew={skew}
+            onReveal={() => send({ t: "reveal" })}
+            onNext={() => send({ t: "next" })}
+          />
+        )}
+
+        {phase === "live" && state?.live && (
+          <div className="stack">
+            <LiveGame state={state} me="host" send={send} skew={skew} />
+            <ul className="live-scores" aria-label="Scores">
+              {[...players]
+                .sort((a, b) => b.score - a.score)
+                .map((p) => (
+                  <li key={p.pid}>
                     <span>{p.name}</span>
-                    {!p.connected && <span className="small muted">reconnecting…</span>}
-                    <button
-                      className="icon-btn"
-                      aria-label={`Remove ${p.name}`}
-                      onClick={() => send({ t: "kick", pid: p.pid })}
-                    >
-                      <Icon.close />
-                    </button>
+                    <strong className="mono">{p.score}</strong>
                   </li>
                 ))}
-              </ul>
-            )}
-          </section>
-          <section aria-labelledby="pickg" className="stack">
-            <h2 className="h3" id="pickg">
-              Pick a game
-            </h2>
-            <div className="room-games" role="radiogroup" aria-labelledby="pickg">
-              {ROOM_GAMES().map((g, i) => (
-                <button
-                  key={g.id}
-                  className={clsx("ticket", game?.id === g.id && "selected")}
-                  role="radio"
-                  aria-checked={game?.id === g.id}
-                  onClick={() => setGame(g)}
-                >
-                  <span className="stub" aria-hidden="true">
-                    <span className="stub-no">{String(i + 1).padStart(2, "0")}</span>
-                  </span>
-                  <span className="ticket-body">
-                    <span className="ticket-title">{g.roomName ?? g.name}</span>
-                    <span className="ticket-blurb">{g.roomBlurb ?? g.blurb}</span>
-                  </span>
-                </button>
-              ))}
-            </div>
-          </section>
-          {!game ? (
-            <div className="dock">
-              <button className="btn block" disabled>
-                Pick a game to start
+            </ul>
+          </div>
+        )}
+
+        {phase === "team" && state?.team && (
+          <TeamLadder
+            team={state.team}
+            me="host"
+            send={send}
+            onFinish={{
+              label: "Play another game",
+              run: () => {
+                send({ t: "lobby" });
+                setGame(null);
+              },
+            }}
+          />
+        )}
+
+        <div className="actions center room-end">
+          <button className="link" onClick={endRoom}>
+            End the game for everyone
+          </button>
+        </div>
+
+        {phase === "ended" && (
+          <div className="stack">
+            <Leaderboard state={state!} title="Final scores" />
+            <div className="actions center">
+              <button className="btn" onClick={() => (send({ t: "lobby" }), setGame(null))}>
+                Play another game
+              </button>
+              <button className="btn ghost" onClick={endRoom}>
+                Close the room
               </button>
             </div>
-          ) : (
-            <section className="stack" aria-label={`${game.name} settings`}>
-              <Setup
-                id={`room-${game.id}`}
-                fields={game.roomFields ?? []}
-                players={players.length}
-                disabled={!players.length}
-                startLabel={
-                  players.length
-                    ? `Start with ${players.length} ${players.length === 1 ? "player" : "players"}`
-                    : "Waiting for someone to join…"
-                }
-                onStart={async (v) => {
-                  if (!players.length) return;
-                  if (game.teamBuild) {
-                    const puzzles = game.teamBuild(v);
-                    send({
-                      t: "team-start",
-                      vs: v.vs === "after" ? "after" : "race",
-                      within: v.within === "turns" ? "turns" : "free",
-                      teams: Number(v.teams) || 0,
-                      puzzles,
-                    });
-                    return;
-                  }
-                  if (game.liveBuild) {
-                    const cfg = await game.liveBuild(
-                      v,
-                      players.map((p) => p.name),
-                    );
-                    send({ t: "live-start", game: game.name, cfg });
-                    return;
-                  }
-                  const list =
-                    (await game.buildQuestions?.(
-                      v,
-                      players.map((p) => p.name),
-                    )) ?? [];
-                  // The server runs the whole game from here: timers, reveals and the next question.
-                  send({ t: "setup", game: game.name, total: list.length, queue: list });
-                }}
-              />
-            </section>
-          )}
-        </div>
-      )}
-
-      {(phase === "question" || phase === "reveal") && state?.question && (
-        <HostQuestionView
-          state={state}
-          skew={skew}
-          onReveal={() => send({ t: "reveal" })}
-          onNext={() => send({ t: "next" })}
-        />
-      )}
-
-      {phase === "live" && state?.live && (
-        <div className="stack">
-          <LiveGame state={state} me="host" send={send} skew={skew} />
-          <ul className="live-scores" aria-label="Scores">
-            {[...players]
-              .sort((a, b) => b.score - a.score)
-              .map((p) => (
-                <li key={p.pid}>
-                  <span>{p.name}</span>
-                  <strong className="mono">{p.score}</strong>
-                </li>
-              ))}
-          </ul>
-        </div>
-      )}
-
-      {phase === "team" && state?.team && (
-        <TeamLadder
-          team={state.team}
-          me="host"
-          send={send}
-          onFinish={{
-            label: "Play another game",
-            run: () => {
-              send({ t: "lobby" });
-              setGame(null);
-            },
-          }}
-        />
-      )}
-
-      <div className="actions center room-end">
-        <button className="link" onClick={endRoom}>
-          End the game for everyone
-        </button>
-      </div>
-
-      {phase === "ended" && (
-        <div className="stack">
-          <Leaderboard state={state!} title="Final scores" />
-          <div className="actions center">
-            <button className="btn" onClick={() => (send({ t: "lobby" }), setGame(null))}>
-              Play another game
-            </button>
-            <button className="btn ghost" onClick={endRoom}>
-              Close the room
-            </button>
           </div>
+        )}
+      </div>
+      {play && (
+        <div hidden={tab !== "play"}>
+          <PlayerLive
+            code={room.code}
+            name={play}
+            onLeave={() => {
+              save(playKey, null);
+              setPlay(null);
+              setTab("run");
+            }}
+          />
         </div>
       )}
     </div>
