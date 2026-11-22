@@ -1,0 +1,326 @@
+# start | ending | level
+A stitch in time...|saves nine|1
+A rolling stone...|gathers no moss|1
+Actions speak...|louder than words|1
+All that glitters...|is not gold|1
+Beggars can't...|be choosers|1
+Better late...|than never|1
+Birds of a feather...|flock together|1
+Don't judge a book...|by its cover|1
+Every cloud...|has a silver lining|1
+Honesty is...|the best policy|1
+Look before...|you leap|1
+Practice makes...|perfect|1
+The early bird...|catches the worm|1
+Too many cooks...|spoil the broth|1
+When in Rome...|do as the Romans do|1
+You can't have your cake...|and eat it too|1
+Two wrongs...|don't make a right|1
+Out of sight...|out of mind|1
+Easy come...|easy go|1
+Haste makes...|waste|1
+Laughter is...|the best medicine|1
+Money doesn't...|grow on trees|1
+No pain...|no gain|1
+Opposites...|attract|1
+Slow and steady...|wins the race|1
+The pen is...|mightier than the sword|1
+There's no place...|like home|1
+Time flies...|when you're having fun|1
+Where there's a will...|there's a way|1
+You can lead a horse to water...|but you can't make it drink|1
+A friend in need...|is a friend indeed|1
+An apple a day...|keeps the doctor away|1
+Curiosity killed...|the cat|1
+Don't put all your eggs...|in one basket|1
+Fortune favours...|the brave|2
+Great minds...|think alike|1
+If it ain't broke...|don't fix it|1
+Absence makes...|the heart grow fonder|1
+Blood is...|thicker than water|1
+Charity begins...|at home|2
+Cleanliness is next...|to godliness|2
+Don't bite the hand...|that feeds you|1
+Don't cry over...|spilt milk|1
+Don't throw the baby out...|with the bathwater|2
+Familiarity breeds...|contempt|2
+Finders keepers...|losers weepers|1
+Forgive and...|forget|1
+God helps those...|who help themselves|2
+Good things come...|to those who wait|1
+Half a loaf...|is better than none|2
+He who laughs last...|laughs longest|1
+Home is where...|the heart is|1
+It takes two...|to tango|1
+Knowledge is...|power|1
+Let sleeping dogs...|lie|1
+Make hay...|while the sun shines|2
+Many hands...|make light work|1
+Necessity is the mother...|of invention|2
+Never look a gift horse...|in the mouth|2
+No news is...|good news|1
+One man's trash...|is another man's treasure|1
+Rome wasn't...|built in a day|1
+Seeing is...|believing|1
+Silence is...|golden|1
+The grass is always greener...|on the other side|1
+The proof of the pudding...|is in the eating|2
+There's no smoke...|without fire|1
+Variety is...|the spice of life|2
+Waste not...|want not|2
+Where there's smoke...|there's fire|1
+You reap...|what you sow|1
+You can't teach an old dog...|new tricks|1
+A watched pot...|never boils|1
+A penny saved...|is a penny earned|1
+Don't cross the bridge...|until you come to it|2
+Empty vessels...|make the most noise|2
+Every dog...|has its day|1
+Fools rush in...|where angels fear to tread|2
+Give credit...|where credit is due|2
+Good fences...|make good neighbours|3
+Handsome is...|as handsome does|3
+Hindsight is...|twenty-twenty|2
+Idle hands...|are the devil's workshop|2
+It's no use crying...|over spilt milk|2
+Jack of all trades...|master of none|1
+Least said...|soonest mended|3
+Little strokes...|fell great oaks|3
+Look after the pennies...|and the pounds will look after themselves|2
+Love is...|blind|1
+Misery loves...|company|2
+Might is...|right|3
+Needs must...|when the devil drives|3
+Nothing ventured...|nothing gained|2
+One swallow...|does not make a summer|3
+Paddle your own...|canoe|3
+Patience is...|a virtue|1
+People who live in glass houses...|shouldn't throw stones|1
+Pride comes...|before a fall|1
+Prevention is...|better than cure|1
+Revenge is...|a dish best served cold|2
+Spare the rod...|and spoil the child|2
+Strike while...|the iron is hot|1
+The best things in life...|are free|1
+The devil makes work...|for idle hands|3
+The exception...|proves the rule|2
+The road to hell...|is paved with good intentions|2
+The squeaky wheel...|gets the grease|2
+There's more than one way...|to skin a cat|2
+Time and tide...|wait for no man|2
+Tomorrow never...|comes|3
+Too many chiefs...|and not enough Indians|4
+Truth is stranger...|than fiction|2
+United we stand...|divided we fall|2
+What goes around...|comes around|1
+When the cat's away...|the mice will play|1
+You can't make an omelette...|without breaking eggs|2
+You can't judge...|a book by its cover|1
+You can't run...|before you can walk|1
+A leopard cannot...|change its spots|2
+A fool and his money...|are soon parted|2
+A house divided...|against itself cannot stand|2
+A man is known...|by the company he keeps|2
+A problem shared...|is a problem halved|2
+A picture is worth...|a thousand words|1
+A chain is only as strong...|as its weakest link|2
+All good things...|must come to an end|1
+All's well...|that ends well|1
+An eye for an eye...|makes the whole world blind|3
+Better safe...|than sorry|1
+Better the devil you know...|than the devil you don't|2
+Birds in their little nests...|agree|4
+Cut your coat...|according to your cloth|3
+Discretion is the better part...|of valour|3
+Do unto others...|as you would have them do unto you|2
+Don't look a gift horse...|in the mouth|2
+Don't shoot...|the messenger|1
+Don't teach your grandmother...|to suck eggs|3
+Dead men...|tell no tales|2
+Distance lends...|enchantment to the view|4
+Enough is...|as good as a feast|3
+Every little...|helps|1
+Everything comes...|to those who wait|2
+Fight fire...|with fire|1
+First come...|first served|1
+Fish and visitors...|smell after three days|4
+Fool me once...|shame on you; fool me twice, shame on me|2
+From small acorns...|mighty oaks grow|2
+Gossip is the devil's...|radio|4
+He who hesitates...|is lost|2
+He who pays the piper...|calls the tune|3
+Hope for the best...|prepare for the worst|2
+Ignorance is...|bliss|2
+It never rains...|but it pours|2
+It's better to give...|than to receive|2
+It's the early bird...|that catches the worm|1
+Keep your friends close...|and your enemies closer|1
+Kill two birds...|with one stone|1
+Laugh and the world laughs with you...|weep and you weep alone|3
+Learn to walk...|before you run|1
+Let bygones...|be bygones|2
+Life begins...|at forty|3
+Live and...|let live|1
+Lightning never strikes...|twice in the same place|2
+Like father...|like son|1
+Like a bull...|in a china shop|1
+Look on the bright...|side|1
+Manners...|maketh man|3
+Many a true word...|is spoken in jest|3
+Measure twice...|cut once|2
+Mind your own...|business|1
+More haste...|less speed|2
+Never put off till tomorrow...|what you can do today|1
+Never say...|never|1
+Never judge a man...|until you've walked a mile in his shoes|2
+No man is...|an island|2
+Old habits...|die hard|1
+One good turn...|deserves another|2
+One man's meat...|is another man's poison|2
+Out of the frying pan...|into the fire|2
+Penny wise...|pound foolish|2
+Possession is...|nine-tenths of the law|3
+Rain before seven...|fine by eleven|4
+Red sky at night...|shepherd's delight|2
+Red sky in the morning...|shepherd's warning|2
+Short and sweet...|is best|4
+Sticks and stones...|may break my bones, but words will never hurt me|1
+Still waters...|run deep|2
+Stolen kisses...|are sweetest|4
+Take the bull...|by the horns|2
+The customer is...|always right|1
+The darkest hour...|is just before the dawn|2
+The end...|justifies the means|2
+The first step...|is the hardest|2
+The more things change...|the more they stay the same|3
+The nail that sticks out...|gets hammered down|4
+The pot calling...|the kettle black|2
+The way to a man's heart...|is through his stomach|2
+There's no fool...|like an old fool|3
+There is no such thing...|as a free lunch|2
+There are plenty more fish...|in the sea|1
+Third time...|lucky|1
+Those who live by the sword...|die by the sword|3
+Time heals...|all wounds|1
+To err is human...|to forgive divine|3
+Two heads...|are better than one|1
+Two's company...|three's a crowd|1
+Walls have...|ears|2
+What can't be cured...|must be endured|3
+What the eye doesn't see...|the heart doesn't grieve over|3
+When the going gets tough...|the tough get going|1
+When one door closes...|another opens|1
+While the cat's away...|the mice will play|1
+Whatever can go wrong...|will go wrong|2
+Where ignorance is bliss...|'tis folly to be wise|4
+Worrying is like a rocking chair...|it gives you something to do but gets you nowhere|3
+You can't please...|everyone|1
+You can't get blood...|from a stone|2
+You never know...|what you've got till it's gone|1
+You scratch my back...|and I'll scratch yours|1
+Youth is wasted...|on the young|3
+Cold hands...|warm heart|3
+Calm before...|the storm|1
+Birds of a feather flock together, and...|fish of a kind swim together|4
+Don't burn...|your bridges|1
+Don't change horses...|in midstream|3
+Don't count your chickens...|before they're hatched|1
+Don't look back...|in anger|3
+Early to bed and early to rise...|makes a man healthy, wealthy and wise|1
+Eat, drink and be merry...|for tomorrow we die|2
+Every man...|has his price|3
+Every picture...|tells a story|1
+Faint heart...|never won fair lady|3
+Fine words...|butter no parsnips|4
+Fish out of...|water|2
+Forewarned is...|forearmed|3
+Garbage in...|garbage out|2
+Genius is one percent inspiration...|and ninety-nine percent perspiration|3
+Good riddance...|to bad rubbish|3
+Great oaks...|from little acorns grow|2
+Handsome is as...|handsome does|3
+Hard work...|never killed anyone|3
+He that goes a-borrowing...|goes a-sorrowing|4
+If at first you don't succeed...|try, try again|1
+If the cap fits...|wear it|2
+If you can't beat them...|join them|1
+If you can't stand the heat...|get out of the kitchen|1
+If you play with fire...|you'll get burned|2
+In for a penny...|in for a pound|2
+It takes all sorts...|to make a world|2
+It's a small world...|after all|2
+It's easy to be wise...|after the event|3
+It's not over...|till the fat lady sings|1
+It's the squeaky wheel...|that gets the grease|2
+Jam tomorrow...|and jam yesterday, but never jam today|4
+Judge not...|lest ye be judged|3
+Least said...|soonest mended|3
+Life is...|what you make it|3
+Life is not a bed...|of roses|3
+Like begets...|like|4
+Look before you leap...|but don't forget to jump|4
+Lookers-on...|see most of the game|4
+Make love...|not war|2
+Many a mickle...|makes a muckle|4
+Marry in haste...|repent at leisure|2
+Money is...|the root of all evil|2
+Murder will...|out|3
+Nature abhors...|a vacuum|3
+Never...|say die|3
+Never speak ill...|of the dead|3
+Never trouble trouble...|till trouble troubles you|4
+No rest...|for the wicked|3
+No use...|crying over spilt milk|2
+Nothing succeeds...|like success|3
+Oil and water...|don't mix|1
+One rotten apple...|spoils the barrel|1
+Only the good...|die young|2
+Out of the mouths of babes...|and sucklings|3
+Practise what...|you preach|1
+Rats desert...|a sinking ship|3
+Rome was not...|built in a day|1
+Sauce for the goose...|is sauce for the gander|3
+Speak of the devil...|and he shall appear|1
+Speech is silver...|silence is golden|2
+Spare the rod...|spoil the child|2
+Tell the truth...|and shame the devil|3
+The apple doesn't fall...|far from the tree|1
+The bigger they are...|the harder they fall|1
+The cobbler's children...|have no shoes|3
+The devil is...|in the details|2
+The eyes are...|the window to the soul|1
+The family that prays together...|stays together|3
+The grass is greener...|on the other side of the fence|1
+The leopard cannot change...|its spots|2
+The lord helps...|those who help themselves|2
+The more the...|merrier|1
+The quickest way...|to a man's heart is through his stomach|2
+The show...|must go on|1
+The truth...|will set you free|2
+The wheel...|is come full circle|4
+There is honour...|among thieves|2
+There is no accounting...|for taste|2
+There's many a slip...|twixt cup and lip|3
+There's no place like...|home|1
+They that sow in the wind...|shall reap the whirlwind|4
+Time is...|money|1
+To the victor...|go the spoils|3
+Too good...|to be true|1
+Truth will...|out|3
+Two birds...|with one stone|1
+Under every stone...|a scorpion|4
+Variety...|is the spice of life|2
+Virtue is...|its own reward|3
+Walk softly...|and carry a big stick|4
+Well begun...|is half done|2
+What's good for the goose...|is good for the gander|2
+What's sauce for the goose...|is sauce for the gander|3
+When the blind lead the blind...|both shall fall into the ditch|3
+Where there's life...|there's hope|1
+Who dares...|wins|2
+Win some...|lose some|1
+You are what...|you eat|1
+You can't...|have it both ways|1
+You can't take it...|with you|2
+You get...|what you pay for|1
+You win...|some, you lose some|1

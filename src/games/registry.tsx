@@ -499,6 +499,15 @@ const CLUE_RULES: Record<number, string> = {
   0: "A mix of all four levels.",
 };
 const clueFields: Field[] = [levelField(1, CLUE_RULES), countField(5)];
+const PROVERB_RULES: Record<number, string> = {
+  1: "Sayings everyone knows.",
+  2: "Familiar, but you may have to think.",
+  3: "Older and less common sayings.",
+  4: "Rare sayings, Bible verses and deeper African proverbs.",
+  0: "A mix of all four levels.",
+};
+const proverbFields: Field[] = [levelField(1, PROVERB_RULES), countField(10)];
+const proverbPool = (v: SetupValues) => PROVERBS.filter((p) => !num(v.level) || p[0] === num(v.level));
 const cluePool = (v: SetupValues) => CLUES.filter((c) => !num(v.level) || c[0] === num(v.level));
 
 export const GAMES: GameDef[] = [
@@ -1083,27 +1092,33 @@ export const GAMES: GameDef[] = [
     groups: ["couple", "friends"],
     stat: "Finish the saying",
     room: true,
-    roomFields: [],
-    buildQuestions: async () =>
-      drawMany("proverbs", PROVERBS, PROVERBS.length).map<HostQuestion>(([q, a]) => {
-        const options = shuffle([
-          a,
-          ...shuffle(PROVERBS.filter((p) => p[1] !== a))
-            .slice(0, 3)
-            .map((p) => p[1]),
-        ]);
-        return { prompt: q, options, correct: options.indexOf(a), seconds: 15, points: 1 };
-      }),
-    Play: () => {
-      const [k, setK] = useState(0);
-      return (
-        <RevealRun
-          key={k}
-          onAgain={() => setK((x) => x + 1)}
-          items={drawMany("proverbs", PROVERBS, PROVERBS.length).map(([q, a]) => ({ prompt: q, answer: a, points: 1 }))}
-        />
-      );
-    },
+    roomFields: proverbFields,
+    buildQuestions: async (v) =>
+      drawFresh("proverbs-" + num(v.level), proverbPool(v), num(v.count), (p) => p[1] + p[2]).map<HostQuestion>(
+        ([lv, q, a]) => {
+          const options = shuffle([
+            a,
+            ...shuffle(PROVERBS.filter((p) => p[2] !== a))
+              .slice(0, 3)
+              .map((p) => p[2]),
+          ]);
+          return { prompt: q, options, correct: options.indexOf(a), seconds: 15, points: lv };
+        },
+      ),
+    Play: () => (
+      <SetupThen
+        id="proverbs"
+        fields={proverbFields}
+        build={(v) =>
+          drawFresh("proverbs-" + num(v.level), proverbPool(v), num(v.count), (p) => p[1] + p[2]).map(([lv, q, a]) => ({
+            prompt: q,
+            answer: a,
+            points: lv,
+          }))
+        }
+        run={(list, again) => <RevealRun onAgain={again} items={list} />}
+      />
+    ),
   },
   {
     id: "knowme",

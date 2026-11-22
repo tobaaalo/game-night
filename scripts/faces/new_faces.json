@@ -86,5 +86,148 @@
 "cat": "Leaders",
 "g": "m",
 "lic": "CC BY-SA 4.0"
+},
+{
+"id": "babatunde-fashola",
+"name": "Babatunde Fashola",
+"level": 3,
+"w": 349,
+"h": 445,
+"src": "Babatunde_Fashola.jpg",
+"cat": "Leaders",
+"g": "m",
+"lic": "CC BY-SA 2.0"
+},
+{
+"id": "nasir-el-rufai",
+"name": "Nasir El-Rufai",
+"level": 3,
+"w": 426,
+"h": 600,
+"src": "Nasir_Ahmed_el-Rufai_2023.jpg",
+"cat": "Leaders",
+"g": "m",
+"lic": "Public domain"
+},
+{
+"id": "godswill-akpabio",
+"name": "Godswill Akpabio",
+"level": 3,
+"w": 450,
+"h": 600,
+"src": "Godswill_Obot_Akpabio_(2012)_(cropped).jpg",
+"cat": "Leaders",
+"g": "m",
+"lic": "CC BY-SA 4.0"
+},
+{
+"id": "rabiu-kwankwaso",
+"name": "Rabiu Kwankwaso",
+"level": 3,
+"w": 457,
+"h": 576,
+"src": "Rabiu_Kwankwaso.jpg",
+"cat": "Leaders",
+"g": "m",
+"lic": "Public domain"
+},
+{
+"id": "aisha-buhari",
+"name": "Aisha Buhari",
+"level": 3,
+"w": 427,
+"h": 600,
+"src": "The_First_Lady_of_Nigeria_Her_Excellency_Aisha_Buhari.jpg",
+"cat": "Leaders",
+"g": "f",
+"lic": "CC BY 2.0"
+},
+{
+"id": "patience-jonathan",
+"name": "Patience Jonathan",
+"level": 3,
+"w": 668,
+"h": 600,
+"src": "Patience_Jonathan_2013.jpg",
+"cat": "Leaders",
+"g": "f",
+"lic": "CC BY 2.0"
+},
+{
+"id": "remi-tinubu",
+"name": "Remi Tinubu",
+"level": 3,
+"w": 553,
+"h": 600,
+"src": "Her_Excellency_Remi.jpg",
+"cat": "Leaders",
+"g": "f",
+"lic": "CC0"
+},
+{
+"id": "oby-ezekwesili",
+"name": "Oby Ezekwesili",
+"level": 3,
+"w": 992,
+"h": 600,
+"src": "Obiageli_Katryn_Ezekwesili,_2009_World_Economic_Forum_on_Africa.jpg",
+"cat": "Leaders",
+"g": "f",
+"lic": "CC BY-SA 2.0"
+},
+{
+"id": "leopold-senghor",
+"name": "Léopold Senghor",
+"level": 4,
+"w": 440,
+"h": 600,
+"src": "UNESCO_History,_Visite_de_S._Exc._M._Léopold_Sedar_Senghor,_Président_de_la_République_du_Sénégal_-_UNESCO_-_PHOTO0000002688_0001_(cropped).tiff",
+"cat": "Leaders",
+"g": "m",
+"lic": "CC BY-SA 3.0 igo"
+},
+{
+"id": "felix-houphouet-boigny",
+"name": "Félix Houphouët-Boigny",
+"level": 4,
+"w": 390,
+"h": 480,
+"src": "Félix_Houphouët-Boigny_1962-07-16.jpg",
+"cat": "Leaders",
+"g": "m",
+"lic": "Public domain"
+},
+{
+"id": "ahmed-sekou-toure",
+"name": "Ahmed Sékou Touré",
+"level": 4,
+"w": 482,
+"h": 600,
+"src": "Ahmed_Sekoú_in_1962_at_White_House_cropped.jpg",
+"cat": "Leaders",
+"g": "m",
+"lic": "Public domain"
+},
+{
+"id": "hastings-banda",
+"name": "Hastings Banda",
+"level": 4,
+"w": 443,
+"h": 600,
+"src": "Dr_HK_Banda,_first_president_of_Malawi.jpg",
+"cat": "Leaders",
+"g": "m",
+"lic": "CC BY-SA 4.0"
+},
+{
+"id": "seretse-khama",
+"name": "Seretse Khama",
+"level": 4,
+"w": 482,
+"h": 600,
+"src": "Seretse_Khama_1977_(2).png",
+"cat": "Leaders",
+"g": "m",
+"lic": "CC BY 4.0"
 }
 ]
