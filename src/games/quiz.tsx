@@ -74,7 +74,17 @@ export function Setup({
 }) {
   const { players: local } = useApp();
   const n = playerCount ?? local.length;
-  const fields = useMemo(() => fitToPlayers(rawFields, n), [rawFields, n]);
+  const vsBot = playerCount == null && local.some((p) => p.bot);
+  // The computer can't take part in "shout it out", so against it only the tap-an-answer mode is offered.
+  const fields = useMemo(() => {
+    const f = fitToPlayers(rawFields, n);
+    if (!vsBot) return f;
+    return f.map((x) =>
+      x.key === "mode" && x.options.some((o) => o.value === "shout")
+        ? { ...x, options: x.options.filter((o) => o.value !== "shout"), def: "pick" }
+        : x,
+    );
+  }, [rawFields, n, vsBot]);
   const [typed, setTyped] = useState<Record<string, string>>({});
   const [v, setV] = useState<SetupValues>(() => {
     const saved = load<SetupValues>(`gn.setup.${id}`, {});

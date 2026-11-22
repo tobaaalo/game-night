@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import clsx from "clsx";
 import { Icon, Scoreboard } from "../components/ui";
 import { WithPlayers, useApp } from "../lib/app";
-import { NEEDS, botMode, hasBot, humans } from "../lib/bot";
+import { NEEDS, SPOKEN, botMode, hasBot, humans } from "../lib/bot";
 import { pick } from "../lib/deck";
 import { SECTIONS, gamesFor, gameById, type GameDef, type Section } from "../games/registry";
 import { GameFrame } from "../games/frame";
@@ -291,11 +291,13 @@ export function PlayRoute({ id }: { id: string }) {
     return (
       <div className="screen empty">
         <h1 className="h2" tabIndex={-1}>
-          {g.name} needs other people
+          {SPOKEN.has(g.id) ? `${g.name} is played out loud` : `${g.name} needs other people`}
         </h1>
         <p className="lede">
-          The computer can&rsquo;t play this one because it&rsquo;s all about the people in the room. Pick another game,
-          or switch to a group.
+          {SPOKEN.has(g.id)
+            ? "You shout, act or draw this one, so the computer can't join in. It plays the games where you tap or type an answer."
+            : "The computer can't play this one because it's all about the people in the room."}{" "}
+          Pick another game, or switch to a group.
         </p>
         <div className="actions center">
           <button className="btn" onClick={() => go("/games")}>

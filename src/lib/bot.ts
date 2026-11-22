@@ -19,10 +19,37 @@ const MODE: Record<string, BotMode> = {
   hotseat: "people",
   couple: "people",
   bucket: "people",
+  emoji: "people",
+  proverbs: "people",
+  clues: "people",
+  charades: "people",
+  taboo: "people",
+  name5: "people",
+  bingo: "people",
+  draw: "people",
+  npat: "people",
 };
+/** Games that are shouted, acted or drawn out loud, so a computer can't take part. */
+export const SPOKEN = new Set(["emoji", "proverbs", "clues", "charades", "taboo", "name5", "bingo", "draw", "npat"]);
 export const botMode = (id: string): BotMode => MODE[id] ?? "play";
 /** Games where the computer cannot join in: how many people they need. */
-export const NEEDS: Record<string, number> = { knowme: 2, likely: 3, twotruths: 2, hotseat: 2, couple: 2, bucket: 2 };
+export const NEEDS: Record<string, number> = {
+  knowme: 2,
+  likely: 3,
+  twotruths: 2,
+  hotseat: 2,
+  couple: 2,
+  bucket: 2,
+  emoji: 2,
+  proverbs: 2,
+  clues: 2,
+  charades: 2,
+  taboo: 2,
+  name5: 2,
+  bingo: 2,
+  draw: 2,
+  npat: 2,
+};
 
 export const hasBot = (ps: Player[]) => ps.some((p) => p.bot);
 export const botOf = (ps: Player[]) => ps.find((p) => p.bot);
