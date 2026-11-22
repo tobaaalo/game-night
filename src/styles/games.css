@@ -2508,3 +2508,67 @@
     font-size: 0.82rem;
   }
 }
+
+/* ---------- Laptops and tablets on their side: keep a question on one screen too ---------- */
+@media (min-width: 720px) and (max-height: 900px) {
+  .stage {
+    min-height: 0;
+    padding: var(--s3) var(--s5);
+  }
+  .qcard {
+    gap: var(--s2);
+  }
+  .qmeta {
+    min-height: 30px;
+  }
+  .qprompt {
+    font-size: clamp(1.3rem, 3.4dvh, 1.8rem);
+  }
+  .qcard .link.small {
+    align-self: center;
+    min-height: 26px;
+    padding: 0;
+  }
+  .frame.flagbox {
+    width: min(320px, 29dvh);
+  }
+  .frame.portrait {
+    width: min(200px, 22dvh);
+  }
+  .shape {
+    max-height: 26dvh;
+    margin: 0 auto;
+  }
+  .pair {
+    max-width: min(640px, 52dvh);
+    margin: 0 auto;
+    gap: var(--s2);
+  }
+  .option {
+    min-height: 48px;
+    padding: 6px 12px;
+    font-size: var(--step-0);
+  }
+  .options {
+    gap: 8px;
+  }
+  .reveal-line {
+    min-height: 0;
+    gap: 6px;
+  }
+  .bingo-cell {
+    min-height: 56px;
+  }
+  .drawpad {
+    max-height: 36dvh;
+    width: auto;
+    margin: 0 auto;
+  }
+}
+
+/* Turn pills hug their text instead of stretching across wide screens */
+.qcard > .turn {
+  align-self: center;
+  width: fit-content;
+  max-width: 100%;
+}

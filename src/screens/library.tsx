@@ -131,13 +131,6 @@ export function Library() {
         }
       </div>
 
-      {
-        <p className="room-legend">
-          <span className="room-swatch" aria-hidden="true" />
-          Yellow tab: can also be played in a room, everyone on their own phone.
-        </p>
-      }
-
       {sections.map(({ s, list }) => (
         <section key={s} className="lib-section" aria-labelledby={`sec-${s}`}>
           <h2 id={`sec-${s}`} className="sec-sign h3">
