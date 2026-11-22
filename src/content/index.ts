@@ -53,7 +53,13 @@ export interface Country {
   n: string;
   cap: string;
   lv: number;
-  shape: string | null;
+  shape?: string | null;
+  /** Currencies, official languages, bordering countries (codes), region and landlocked, from a public country dataset. */
+  cur: string[];
+  lang: string[];
+  bor: string[];
+  reg: string;
+  ll: 0 | 1;
 }
 
 export const BIBLE = bible as QuizItem[];

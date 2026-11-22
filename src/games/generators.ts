@@ -183,65 +183,160 @@ export function realAiQuestions(s: QuizSetup): HostQuestion[] {
   });
 }
 
+type WKind = "flag" | "shape" | "cap" | "capr" | "fact" | "slang" | "cur" | "lang" | "bor" | "ll" | "reg";
+interface WItem {
+  k: World["countries"][number];
+  kind: WKind;
+  /** Extra detail: the neighbour for "bor", the currency or language for "cur" and "lang". */
+  x?: string;
+  lv: number;
+}
+const KINDS_BY_MODE: Record<string, WKind[]> = {
+  flag: ["flag"],
+  shape: ["shape"],
+  cap: ["cap", "capr"],
+  fact: ["fact", "cur", "lang", "bor", "ll", "reg"],
+  slang: ["slang"],
+};
+/** Countries with more than one capital in common use, so "the capital of X" has more than one right answer. */
+const SPLIT_CAPITAL = new Set(["za", "bo", "sz", "nl", "my", "lk", "tz", "ci", "bj", "il"]);
+
+/** Every question World Decoder can ask. Over two thousand, each with a level. */
+export function worldItems(w: World, mode: string): WItem[] {
+  const by = new Map(w.countries.map((c) => [c.c, c]));
+  const kinds = mode === "mix" ? Object.values(KINDS_BY_MODE).flat() : (KINDS_BY_MODE[mode] ?? ["flag"]);
+  const out: WItem[] = [];
+  for (const k of w.countries) {
+    for (const kind of kinds) {
+      const item = { k, kind, lv: k.lv };
+      if (kind === "capr") {
+        if (!SPLIT_CAPITAL.has(k.c)) out.push(item);
+      } else if (kind === "flag" || kind === "cap" || kind === "reg") out.push(item);
+      else if (kind === "shape") {
+        if (k.shape) out.push(item);
+      } else if (kind === "fact") {
+        if (w.facts[k.c]) out.push(item);
+      } else if (kind === "slang") {
+        if (w.slang[k.c]) out.push(item);
+      } else if (kind === "cur") {
+        if (k.cur.length === 1) out.push({ k, kind, x: k.cur[0], lv: k.lv });
+      } else if (kind === "lang") {
+        for (const l of k.lang.slice(0, 2)) out.push({ k, kind, x: l, lv: k.lv });
+      } else if (kind === "bor") {
+        for (const b of k.bor) {
+          const n = by.get(b);
+          if (n) out.push({ k, kind, x: n.c, lv: Math.max(k.lv, n.lv) });
+        }
+      } else if (kind === "ll") {
+        if (k.ll) out.push(item);
+      }
+    }
+  }
+  return out;
+}
+
 export function worldQuestions(w: World, s: QuizSetup): HostQuestion[] {
-  const mode = (s.mode ?? "flag") as WorldMode;
-  const okFor = (c: World["countries"][number], m: WorldMode) =>
-    m === "shape" ? !!c.shape : m === "fact" ? !!w.facts[c.c] : m === "slang" ? !!w.slang[c.c] : true;
-  let base = w.countries.filter((c) => (!s.level || c.lv === s.level) && (mode === "mix" || okFor(c, mode)));
-  if (mode === "slang" && base.length < s.count) base = w.countries.filter((c) => okFor(c, "slang"));
-  return drawMany(`world|${mode}`, base, s.count).map((k) => {
-    let m: WorldMode = mode;
-    if (m === "mix") m = pick((["flag", "shape", "cap", "fact", "slang"] as WorldMode[]).filter((x) => okFor(k, x)));
-    const cands = w.countries.filter((c) => c !== k && (m !== "slang" || w.slang[c.c]));
-    const same = shuffle(cands.filter((c) => c.lv === k.lv));
-    const other = shuffle(cands.filter((c) => c.lv !== k.lv));
-    const options = shuffle([k, ...same.slice(0, 3), ...other].slice(0, 4)).map((c) => c.n);
-    const sl = w.slang[k.c] ? pick(w.slang[k.c]) : null;
+  const mode = s.mode ?? "flag";
+  const all = worldItems(w, mode);
+  let pool = all.filter((i) => !s.level || i.lv === s.level);
+  if (pool.length < Math.max(s.count, 12)) pool = all;
+  const by = new Map(w.countries.map((c) => [c.c, c]));
+  const picked = drawFresh(`world|${mode}`, pool, s.count, (i) => `${i.kind}|${i.k.c}|${i.x ?? ""}`);
+  return picked.map((it) => {
+    const { k, kind } = it;
+    const others = w.countries.filter((c) => c !== k);
+    // Wrong answers of similar fame first, so the level of a country never gives the answer away.
+    const near = (list: typeof others, n: number) => {
+      const same = shuffle(list.filter((c) => c.lv === k.lv));
+      const rest = shuffle(list.filter((c) => c.lv !== k.lv));
+      return [...same, ...rest].slice(0, n);
+    };
     const base = {
-      options,
-      correct: options.indexOf(k.n),
       seconds: 20,
-      points: Math.max(1, k.lv),
-      label: levelName(k.lv),
+      points: Math.max(1, it.lv),
+      label: levelName(it.lv),
+    };
+    const ask = (
+      right: string,
+      wrong: string[],
+      extra: Omit<HostQuestion, "options" | "correct" | keyof typeof base>,
+    ) => {
+      const options = shuffle([right, ...wrong.slice(0, 3)]);
+      return { ...base, ...extra, options, correct: options.indexOf(right) } as HostQuestion;
     };
     const fact = w.facts[k.c];
     const tail = `Capital: ${k.cap}.`;
-    switch (m) {
+    const names = (list: typeof others) => near(list, 3).map((c) => c.n);
+    switch (kind) {
       case "shape":
-        return {
-          ...base,
+        return ask(k.n, names(others), {
           prompt: "Which country has this shape?",
           media: { type: "shape", d: k.shape ?? "" },
           explain: `It's ${k.n}. ${tail}`,
-        };
+        });
       case "cap":
-        return {
-          ...base,
+        return ask(k.n, names(others), {
           prompt: "Which country has this capital city?",
           media: { type: "big", text: k.cap },
           explain: `It's ${k.n}. ${fact ?? ""}`,
-        };
+        });
+      case "capr": {
+        const caps = near(
+          others.filter((c) => c.cap !== k.cap),
+          3,
+        ).map((c) => c.cap);
+        return ask(k.cap, caps, {
+          prompt: `What is the capital of ${k.n}?`,
+          explain: `${k.cap} is the capital of ${k.n}.`,
+        });
+      }
       case "fact":
-        return {
-          ...base,
+        return ask(k.n, names(others), {
           prompt: "Which country is this?",
           media: { type: "big", text: fact ?? "" },
           explain: `It's ${k.n}. ${tail}`,
-        };
-      case "slang":
-        return {
-          ...base,
+        });
+      case "slang": {
+        const sl = pick(w.slang[k.c]);
+        return ask(k.n, names(others.filter((c) => w.slang[c.c])), {
           prompt: "Where would you hear people say this?",
-          media: { type: "big", text: `“${sl?.[0] ?? ""}”` },
-          explain: `It's ${k.n}. “${sl?.[0]}” means ${sl?.[1]}.`,
-        };
+          media: { type: "big", text: `“${sl[0]}”` },
+          explain: `It's ${k.n}. “${sl[0]}” means ${sl[1]}.`,
+        });
+      }
+      case "cur":
+        return ask(k.n, names(others.filter((c) => !c.cur.includes(it.x ?? ""))), {
+          prompt: `Which of these countries uses the ${it.x}?`,
+          explain: `${k.n} uses the ${it.x}. ${tail}`,
+        });
+      case "lang":
+        return ask(k.n, names(others.filter((c) => !c.lang.includes(it.x ?? ""))), {
+          prompt: `Which of these countries has ${it.x} as an official language?`,
+          explain: `${it.x} is an official language of ${k.n}. ${tail}`,
+        });
+      case "bor": {
+        const n = by.get(it.x ?? "");
+        return ask(k.n, names(others.filter((c) => c !== n && !n?.bor.includes(c.c))), {
+          prompt: `Which of these countries shares a border with ${n?.n}?`,
+          explain: `${k.n} borders ${n?.n}. ${tail}`,
+        });
+      }
+      case "ll":
+        return ask(k.n, names(others.filter((c) => !c.ll)), {
+          prompt: "Which of these countries has no coastline?",
+          explain: `${k.n} is landlocked. ${tail}`,
+        });
+      case "reg":
+        return ask(k.n, names(others.filter((c) => c.reg !== k.reg)), {
+          prompt: `Which of these countries is in ${k.reg}?`,
+          explain: `${k.n} is in ${k.reg}. ${tail}`,
+        });
       default:
-        return {
-          ...base,
+        return ask(k.n, names(others), {
           prompt: "Which country's flag is this?",
           media: { type: "flag", code: k.c },
           explain: `It's ${k.n}. ${tail} ${fact ?? ""}`,
-        };
+        });
     }
   });
 }
