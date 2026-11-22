@@ -691,6 +691,7 @@ export const GAMES: GameDef[] = [
             answer: a,
             points: lv,
             big: true,
+            hint: `${a.trim().split(/\s+/).length} word${a.trim().split(/\s+/).length === 1 ? "" : "s"}, starts with ${a.trim()[0].toUpperCase()}`,
             label: `${EMOJI_CATS.find((c) => c[0] === cat)?.[1] ?? ""} · ${levelName(lv)}`,
           }));
         }}

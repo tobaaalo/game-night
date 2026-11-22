@@ -149,6 +149,7 @@ if (want("name5end")) {
     const nx = mates[0].getByRole("button", { name: "Next" });
     await nx.waitFor({ timeout: 8000 });
     await nx.click();
+    await sleep(1500);
   }
   await host
     .getByText(/wins!|It.s a tie|Game over/)
