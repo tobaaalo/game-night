@@ -2672,3 +2672,150 @@
   min-height: 0;
   overflow: auto;
 }
+
+/* Room: asks (leave requests, host handover) and tools */
+.panel.ask {
+  display: grid;
+  gap: 8px;
+  border: 2px solid var(--marquee, #ffd23f);
+}
+.host-tools .joined li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.host-tools .btn,
+.panel.ask .btn {
+  min-height: 44px;
+}
+
+/* Memory Match: flag cards are 4:3 so the whole flag fills the card */
+.memgrid.flags .memcard,
+.memgrid.flags .mem-card {
+  aspect-ratio: 4 / 3;
+}
+.memgrid.flags .memcard.flag img {
+  object-fit: contain;
+  object-position: 50% 50%;
+}
+.memgrid.flags .memcard span.name {
+  font-size: calc(var(--cw) * 0.2);
+}
+
+/* Bigger question text (about +12% on phones, larger again on tablet and desktop), and gold quotes */
+.qprompt .quote {
+  color: var(--bulb);
+  text-shadow: 0 0 14px rgba(255, 209, 102, 0.28);
+}
+.qprompt {
+  font-size: clamp(1.4rem, 6.5vw, 1.85rem);
+}
+.qcard.fixed .qprompt.long {
+  font-size: 1.22rem;
+}
+.qcard.fixed .qprompt.xlong {
+  font-size: 1.05rem;
+}
+.qcard.fixed.nomedia .qprompt.long {
+  font-size: 1.3rem;
+}
+.qcard.fixed.nomedia .qprompt.xlong {
+  font-size: 1.15rem;
+}
+.option {
+  font-size: 1.12rem;
+}
+.verdict {
+  font-size: 0.98rem;
+}
+.clue {
+  font-size: 1.05rem;
+}
+@media (max-width: 380px) {
+  .qprompt {
+    font-size: clamp(1.2rem, 6vw, 1.4rem);
+  }
+  .qcard.fixed .option {
+    font-size: 0.88rem;
+    padding: 8px 10px;
+  }
+  .qcard.fixed .qprompt.long,
+  .qcard.fixed.nomedia .qprompt.long {
+    font-size: 0.96rem;
+    line-height: 1.2;
+  }
+  .qcard.fixed .qprompt.xlong,
+  .qcard.fixed.nomedia .qprompt.xlong {
+    font-size: 0.84rem;
+    line-height: 1.2;
+  }
+}
+@media (min-width: 720px) {
+  .qprompt {
+    font-size: clamp(2rem, 3.4vw, 2.7rem);
+  }
+  .qcard.fixed .qprompt.long {
+    font-size: 1.6rem;
+  }
+  .qcard.fixed .qprompt.xlong {
+    font-size: 1.35rem;
+  }
+  .qcard.fixed.nomedia .qprompt.long {
+    font-size: 1.8rem;
+  }
+  .qcard.fixed.nomedia .qprompt.xlong {
+    font-size: 1.5rem;
+  }
+  .option,
+  .qcard.fixed .option {
+    font-size: 1.3rem;
+  }
+  .verdict {
+    font-size: 1.1rem;
+  }
+  .clue {
+    font-size: 1.2rem;
+  }
+}
+.host-tools .joined {
+  display: grid;
+  gap: 8px;
+}
+.host-tools .joined li {
+  width: 100%;
+}
+
+/* Short phones: tighter answer buttons so the question keeps all its room */
+@media (max-height: 720px) {
+  .qcard.fixed .option {
+    min-height: 44px;
+    padding-block: 6px;
+  }
+  .qcard.fixed .options {
+    gap: 6px;
+  }
+  .qcard.fixed {
+    gap: 6px;
+  }
+}
+@media (max-height: 700px) {
+  .qcard.fixed .qprompt.long,
+  .qcard.fixed.nomedia .qprompt.long {
+    font-size: 0.92rem;
+  }
+  .qcard.fixed .qprompt.xlong,
+  .qcard.fixed.nomedia .qprompt.xlong {
+    font-size: 0.78rem;
+    line-height: 1.15;
+  }
+}
+.qprompt .ptext {
+  display: block;
+  max-width: 100%;
+}
+@media (min-width: 720px) {
+  .memgrid.flags {
+    max-width: calc(var(--c, 4) * 150px);
+  }
+}

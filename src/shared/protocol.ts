@@ -68,6 +68,10 @@ export interface RoomState {
   team?: TeamState & { members: { id: string; name: string; here: boolean }[] };
   /** Live games: the shared state of the round in play. */
   live?: LiveView;
+  /** Players who asked to leave and are waiting for the host to say yes. */
+  leaveReq?: { pid: string; name: string }[];
+  /** A host handover waiting for this player to accept. */
+  offer?: { pid: string; name: string; leaving: boolean };
 }
 
 export type ClientMsg =
@@ -78,6 +82,13 @@ export type ClientMsg =
   | { t: "end" }
   | { t: "lobby" }
   | { t: "kick"; pid: string }
+  | { t: "leave"; force?: boolean }
+  | { t: "leave-ok"; pid: string }
+  | { t: "leave-no"; pid: string }
+  | { t: "host-offer"; pid: string; self?: string; name: string }
+  | { t: "host-leave"; self?: string; name: string }
+  | { t: "host-cancel" }
+  | { t: "host-answer"; accept: boolean }
   | { t: "answer"; idx: number }
   | { t: "ping" }
   | TeamMsg
@@ -86,7 +97,15 @@ export type ClientMsg =
 export type ServerMsg =
   | { t: "state"; state: RoomState; you?: string }
   | { t: "error"; message: string }
-  | { t: "pong" };
+  | { t: "pong" }
+  /** You are the host now. Keep this key. */
+  | { t: "host"; key: string }
+  /** You were the host; you are a player now. */
+  | { t: "demote"; code: string; pid: string; name: string }
+  /** The host said yes: you have left the room. */
+  | { t: "left" }
+  /** The host asked you to stay. */
+  | { t: "denied" };
 
 export const CODE_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ";
 export const normaliseCode = (s: string) =>

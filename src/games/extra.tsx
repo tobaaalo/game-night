@@ -382,7 +382,10 @@ export function MemoryMatch({
         {nameOf(cur, turn % players.length)}&rsquo;s turn{cur.bot ? " (thinking)" : ""} · {moves}{" "}
         {moves === 1 ? "move" : "moves"}
       </p>
-      <div className="memgrid" style={{ "--c": cols } as CSSProperties}>
+      <div
+        className={clsx("memgrid", cards.some((c) => c.img?.startsWith("/flags/")) && "flags")}
+        style={{ "--c": cols } as CSSProperties}
+      >
         {cards.map((c, i) => {
           const up = open.includes(i) || found.includes(c.pair);
           return (

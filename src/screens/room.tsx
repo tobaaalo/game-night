@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import clsx from "clsx";
 import QRCode from "qrcode";
-import { Flaps, Icon } from "../components/ui";
+import { Flaps, Icon, PromptText } from "../components/ui";
 import { useApp } from "../lib/app";
 import { load, save } from "../lib/store";
 import { gamesFor, type GameDef } from "../games/registry";
@@ -21,7 +21,12 @@ type Fallback = { code: string; role: "host" | "player"; key?: string; pid?: () 
  * - it notices a "zombie" connection (still open but silent) and replaces it;
  * - if live connections keep failing, it falls back to plain requests every couple of seconds, and sends answers that way too.
  */
-function useRoomSocket(url: string | null, onError: (m: string) => void, fb?: Fallback) {
+function useRoomSocket(
+  url: string | null,
+  onError: (m: string) => void,
+  fb?: Fallback,
+  onEvent?: (m: ServerMsg) => void,
+) {
   const [state, setState] = useState<RoomState | null>(null);
   const [you, setYou] = useState<string>();
   const [conn, setConn] = useState<Conn>("connecting");
@@ -32,6 +37,8 @@ function useRoomSocket(url: string | null, onError: (m: string) => void, fb?: Fa
   errRef.current = onError;
   const fbRef = useRef(fb);
   fbRef.current = fb;
+  const evRef = useRef(onEvent);
+  evRef.current = onEvent;
   const take = useCallback((m: { state: RoomState; you?: string }) => {
     setState(m.state);
     if (m.you) setYou(m.you);
@@ -100,6 +107,7 @@ function useRoomSocket(url: string | null, onError: (m: string) => void, fb?: Fa
         const m = JSON.parse(e.data as string) as ServerMsg;
         if (m.t === "state") take(m);
         else if (m.t === "error") errRef.current(m.message);
+        else evRef.current?.(m);
       };
       s.onclose = (e) => {
         clearInterval(ping);
@@ -293,6 +301,7 @@ export function RoomHost() {
       game={game}
       setGame={setGame}
       onClose={() => (save("gn.hostroom", null), setRoom(null), go("/games"))}
+      onDemoted={(code) => (setRoom(null), go(`/join/${code}`))}
     />
   );
 }
@@ -302,20 +311,37 @@ function HostLive({
   game,
   setGame,
   onClose,
+  onDemoted,
 }: {
   room: { code: string; hostKey: string };
   game: GameDef | null;
   setGame: (g: GameDef | null) => void;
   onClose: () => void;
+  onDemoted: (code: string) => void;
 }) {
   const { toast } = useApp();
   const [error, setError] = useState("");
   const url = useMemo(() => wsUrl(room.code, { role: "host", key: room.hostKey }), [room]);
-  const { state, conn, send, skew } = useRoomSocket(url, setError, {
-    code: room.code,
-    role: "host",
-    key: room.hostKey,
-  });
+  const { state, conn, send, skew } = useRoomSocket(
+    url,
+    setError,
+    {
+      code: room.code,
+      role: "host",
+      key: room.hostKey,
+    },
+    (m) => {
+      if (m.t !== "demote") return;
+      // Someone else is the host now. This device carries on as a player, in the same seat if it was already playing.
+      save("gn.hostroom", null);
+      save(`gn.hostplay.${m.code}`, null);
+      save(`gn.pid.${m.code}`, m.pid);
+      save("gn.joinname", m.name);
+      save("gn.session", { code: m.code, name: m.name, at: Date.now() });
+      toast("You passed on the host role. You're playing now.");
+      onDemoted(m.code);
+    },
+  );
   const [qr, setQr] = useState("");
   const [ctlCopied, setCtlCopied] = useState(false);
   const { players: appPlayers } = useApp();
@@ -330,6 +356,8 @@ function HostLive({
     setTab(livePhase === "lobby" || livePhase === "ended" ? "run" : "play");
   }, [livePhase, play]);
   const joinUrl = `${location.origin}/join/${room.code}`;
+  const selfPid = play ? load<string>(`gn.pid.${room.code}`, "") : "";
+  const myName = play || playName.trim() || "Host";
   useEffect(() => {
     QRCode.toDataURL(joinUrl, { margin: 1, width: 360, color: { dark: "#1c0610", light: "#efe6d8" } }).then(setQr, () =>
       setQr(""),
@@ -371,6 +399,33 @@ function HostLive({
   return (
     <div className="screen room">
       <ConnBanner conn={conn} />
+      {(state?.leaveReq ?? []).map((r) => (
+        <div className="panel ask" role="alert" key={r.pid}>
+          <p className="h3">{r.name} wants to leave</p>
+          <div className="actions">
+            <button className="btn small" onClick={() => send({ t: "leave-ok", pid: r.pid })}>
+              Let them go
+            </button>
+            <button className="btn ghost small" onClick={() => send({ t: "leave-no", pid: r.pid })}>
+              Ask them to stay
+            </button>
+          </div>
+        </div>
+      ))}
+      {state?.offer && (
+        <div className="panel ask" role="status">
+          <p className="h3">
+            {state.offer.leaving ? "Passing the host on to" : "Waiting for"} {state.offer.name}
+            {state.offer.leaving ? "…" : " to accept…"}
+          </p>
+          <p className="muted small">
+            If they say no or don&rsquo;t answer, {state.offer.leaving ? "the next person is asked." : "you stay host."}
+          </p>
+          <button className="btn ghost small" onClick={() => send({ t: "host-cancel" })}>
+            Cancel
+          </button>
+        </div>
+      )}
       <div className="room-head">
         <div>
           <p className="eyebrow">Room code</p>
@@ -608,6 +663,37 @@ function HostLive({
             End the game for everyone
           </button>
         </div>
+        {players.some((p) => p.pid !== selfPid) && (
+          <section className="panel stack host-tools" aria-labelledby="handover">
+            <h2 className="h3" id="handover">
+              Hand over the host
+            </h2>
+            <p className="muted small">They get a request on their phone. When they say yes, they run the game.</p>
+            <ul className="joined">
+              {players
+                .filter((p) => p.pid !== selfPid)
+                .map((p) => (
+                  <li key={p.pid} className={clsx(!p.connected && "away")}>
+                    <span>{p.name}</span>
+                    <button
+                      className="btn quiet small"
+                      disabled={!!state?.offer}
+                      onClick={() => send({ t: "host-offer", pid: p.pid, self: selfPid || undefined, name: myName })}
+                    >
+                      Make host
+                    </button>
+                  </li>
+                ))}
+            </ul>
+            <button
+              className="btn ghost"
+              disabled={!!state?.offer}
+              onClick={() => send({ t: "host-leave", self: selfPid || undefined, name: myName })}
+            >
+              Leave and pass the host on
+            </button>
+          </section>
+        )}
 
         {phase === "ended" && (
           <div className="stack">
@@ -628,6 +714,7 @@ function HostLive({
           <PlayerLive
             code={room.code}
             name={play}
+            direct={(pid) => pid && send({ t: "kick", pid })}
             onLeave={() => {
               save(playKey, null);
               setPlay(null);
@@ -695,7 +782,9 @@ function HostQuestionView({
           </p>
           {!revealed ? <Countdown deadline={pq.deadline} skew={skew} /> : <span className="tag">Answer</span>}
         </div>
-        <h2 className="qprompt">{pq.prompt}</h2>
+        <h2 className="qprompt">
+          <PromptText text={pq.prompt} />
+        </h2>
         <Clues q={pq} />
         <MediaView media={pq.media} revealed={revealed} captions={state.reveal?.captions} />
         <div className={clsx("options", pq.options.length === 2 && "two")}>
@@ -891,15 +980,69 @@ export function RoomJoin({ initial }: { initial?: string }) {
   );
 }
 
-function PlayerLive({ code, name, onLeave }: { code: string; name: string; onLeave: () => void }) {
+function PlayerLive({
+  code,
+  name,
+  onLeave,
+  direct,
+}: {
+  code: string;
+  name: string;
+  onLeave: () => void;
+  /** The host's own device leaves without asking itself. */
+  direct?: (pid: string) => void;
+}) {
+  const { go, toast } = useApp();
+  const [asked, setAsked] = useState(0);
   const pidKey = `gn.pid.${code}`;
   const [error, setError] = useState("");
   const url = useMemo(() => wsUrl(code, { role: "player", name, pid: load(pidKey, "") }), [code, name, pidKey]);
-  const { state, you, conn, send, skew } = useRoomSocket(url, setError, {
-    code,
-    role: "player",
-    pid: () => load(pidKey, ""),
-  });
+  const { state, you, conn, send, skew } = useRoomSocket(
+    url,
+    setError,
+    {
+      code,
+      role: "player",
+      pid: () => load(pidKey, ""),
+    },
+    (m) => {
+      if (m.t === "host") {
+        // The host passed the room to this phone.
+        save("gn.hostroom", { code, hostKey: m.key });
+        save(`gn.hostplay.${code}`, name);
+        save("gn.session", null);
+        toast("You're the host now.");
+        go("/room");
+      } else if (m.t === "left") {
+        save("gn.session", null);
+        save(pidKey, null);
+        toast("You left the room.");
+        onLeave();
+      } else if (m.t === "denied") {
+        setAsked(0);
+        toast("The host asked you to stay for now.");
+      }
+    },
+  );
+  useEffect(() => {
+    if (!asked) return;
+    const t = setTimeout(() => setAsked((a) => (a ? -1 : a)), 12000);
+    return () => clearTimeout(t);
+  }, [asked]);
+  const leave = () => {
+    if (direct) {
+      direct(you ?? "");
+      return onLeave();
+    }
+    setAsked(Date.now());
+    send({ t: "leave" });
+  };
+  const leaveNow = () => {
+    send({ t: "leave", force: true });
+    save("gn.session", null);
+    save(pidKey, null);
+    onLeave();
+  };
   // Remember who I am in this room, so a refresh or a dropped connection drops me straight back in.
   const [mine, setMine] = useState<{ n: number; idx: number; changed: boolean } | null>(null);
   useEffect(() => {
@@ -966,6 +1109,21 @@ function PlayerLive({ code, name, onLeave }: { code: string; name: string; onLea
         </div>
       </div>
       {!state.hostConnected && <p className="banner">Waiting for the host to come back…</p>}
+      {state.offer && state.offer.pid === you && (
+        <div className="panel ask" role="alert">
+          <p className="h3">
+            {state.offer.leaving ? "The host is leaving. Take over as host?" : "The host wants you to be the host."}
+          </p>
+          <div className="actions">
+            <button className="btn small" onClick={() => send({ t: "host-answer", accept: true })}>
+              Yes, I&rsquo;ll host
+            </button>
+            <button className="btn ghost small" onClick={() => send({ t: "host-answer", accept: false })}>
+              No thanks
+            </button>
+          </div>
+        </div>
+      )}
       {state.phase === "lobby" && (
         <div className="empty">
           <p className="eyebrow">You&rsquo;re in!</p>
@@ -975,9 +1133,6 @@ function PlayerLive({ code, name, onLeave }: { code: string; name: string; onLea
           <p className="muted">
             {state.players.length} in the room: {state.players.map((p) => p.name).join(", ")}
           </p>
-          <button className="link" onClick={onLeave}>
-            Leave room
-          </button>
         </div>
       )}
       {(state.phase === "question" || state.phase === "reveal") && q && (
@@ -988,7 +1143,9 @@ function PlayerLive({ code, name, onLeave }: { code: string; name: string; onLea
             </p>
             {state.phase === "question" && <Countdown deadline={q.deadline} skew={skew} />}
           </div>
-          <h2 className="qprompt">{q.prompt}</h2>
+          <h2 className="qprompt">
+            <PromptText text={q.prompt} />
+          </h2>
           <Clues q={q} />
           <MediaView
             media={q.media}
@@ -1053,6 +1210,22 @@ function PlayerLive({ code, name, onLeave }: { code: string; name: string; onLea
       {state.phase === "live" && state.live && you && <LiveGame state={state} me={you} send={send} skew={skew} />}
       {state.phase === "team" && state.team && you && <TeamLadder team={state.team} me={you} send={send} />}
       {state.phase === "ended" && <Leaderboard state={state} title="Final scores" you={you} />}
+      <div className="actions center room-end">
+        {asked === 0 && (
+          <button className="link" onClick={leave}>
+            Leave room
+          </button>
+        )}
+        {asked > 0 && <p className="muted small">Asked the host to let you leave…</p>}
+        {asked < 0 && (
+          <>
+            <p className="muted small">The host hasn&rsquo;t answered yet.</p>
+            <button className="btn ghost small" onClick={leaveNow}>
+              Leave anyway
+            </button>
+          </>
+        )}
+      </div>
     </div>
   );
 }

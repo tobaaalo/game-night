@@ -54,6 +54,10 @@ interface Stored {
   team?: TeamState;
   live?: Live;
   n: number;
+  /** Players waiting for the host to accept their exit. */
+  leaveReq?: string[];
+  /** A host handover in progress: who is being asked, who is next, and when the ask runs out. */
+  offer?: { pid: string; rest: string[]; until: number; leaving: boolean; self?: string; name: string };
 }
 interface Tag {
   role: "host" | "player";
@@ -87,12 +91,19 @@ export class Room extends DurableObject<Env> {
   /** One alarm does two jobs: the next automatic step of the game, and closing an abandoned room. */
   async arm() {
     const idle = (this.s?.touched ?? Date.now()) + IDLE_MS;
-    const at = this.s?.nextAt ? Math.min(this.s.nextAt, idle) : idle;
+    let at = this.s?.nextAt ? Math.min(this.s.nextAt, idle) : idle;
+    if (this.s?.offer) at = Math.min(at, this.s.offer.until);
     await this.ctx.storage.setAlarm(Math.max(at, Date.now() + 20));
   }
 
   async alarm() {
     const s = this.s;
+    if (s?.offer && s.offer.until <= Date.now() + 50) {
+      this.nextOffer();
+      await this.save();
+      this.broadcast();
+      return;
+    }
     if (s?.nextAt && s.nextAt <= Date.now() + 50) {
       this.step();
       await this.save();
@@ -240,6 +251,9 @@ export class Room extends DurableObject<Env> {
         : pub;
     }
     if (s.phase === "reveal" || s.phase === "ended") st.reveal = s.reveal;
+    const nm = (pid: string) => s.players.find((p) => p.pid === pid)?.name ?? "";
+    if (s.leaveReq?.length) st.leaveReq = s.leaveReq.map((pid) => ({ pid, name: nm(pid) }));
+    if (s.offer) st.offer = { pid: s.offer.pid, name: nm(s.offer.pid), leaving: s.offer.leaving };
     if (s.live) st.live = liveView(s.live, viewer);
     if (s.team) {
       st.team = {
@@ -469,6 +483,11 @@ export class Room extends DurableObject<Env> {
       }
       return;
     }
+    if (this.handleRoom(msg, tag)) {
+      await this.save();
+      this.broadcast();
+      return;
+    }
     if (tag.role === "host") {
       if (msg.t === "setup") {
         s.game = msg.game;
@@ -500,6 +519,7 @@ export class Room extends DurableObject<Env> {
         s.reveal = undefined;
       } else if (msg.t === "kick") {
         s.players = s.players.filter((p) => p.pid !== msg.pid);
+        s.leaveReq = s.leaveReq?.filter((x) => x !== msg.pid);
         for (const w of this.ctx.getWebSockets(msg.pid)) w.close(4000, "Removed by host");
       }
     }
@@ -525,6 +545,136 @@ export class Room extends DurableObject<Env> {
     }
     await this.save();
     this.broadcast();
+  }
+
+  /** Leaving a game and passing the host role on. Returns true when the message was one of these. */
+  handleRoom(msg: ClientMsg, tag: Tag): boolean {
+    const s = this.s!;
+    const isHost = tag.role === "host";
+    const removePlayer = (pid: string, ev: ServerMsg) => {
+      for (const w of this.ctx.getWebSockets(pid)) {
+        this.send(w, ev);
+        w.close(1000, "left");
+      }
+      s.players = s.players.filter((p) => p.pid !== pid);
+      s.leaveReq = s.leaveReq?.filter((x) => x !== pid);
+      delete s.answers[pid];
+      if (s.offer) {
+        s.offer.rest = s.offer.rest.filter((x) => x !== pid);
+        if (s.offer.pid === pid) this.nextOffer();
+      }
+    };
+    if (msg.t === "leave" && tag.pid) {
+      const pid = tag.pid;
+      if (!s.players.some((p) => p.pid === pid)) return true;
+      const { host } = this.connectedPids();
+      // Nothing is in play, or the host is not here to answer: no need to ask.
+      if (msg.force || !host || s.phase === "lobby" || s.phase === "ended") removePlayer(pid, { t: "left" });
+      else if (!s.leaveReq?.includes(pid)) s.leaveReq = [...(s.leaveReq ?? []), pid];
+      return true;
+    }
+    if (isHost && msg.t === "leave-ok") {
+      if (s.players.some((p) => p.pid === msg.pid)) removePlayer(msg.pid, { t: "left" });
+      return true;
+    }
+    if (isHost && msg.t === "leave-no") {
+      s.leaveReq = s.leaveReq?.filter((x) => x !== msg.pid);
+      for (const w of this.ctx.getWebSockets(msg.pid)) this.send(w, { t: "denied" });
+      return true;
+    }
+    if (isHost && msg.t === "host-offer") {
+      if (!s.players.some((p) => p.pid === msg.pid)) return true;
+      s.offer = { pid: msg.pid, rest: [], until: Date.now() + 30000, leaving: false, self: msg.self, name: msg.name };
+      return true;
+    }
+    if (isHost && msg.t === "host-leave") {
+      const { set } = this.connectedPids();
+      const order = [...s.players]
+        .filter((p) => p.pid !== msg.self)
+        .sort((a, b) => Number(set.has(b.pid)) - Number(set.has(a.pid)))
+        .map((p) => p.pid);
+      if (!order.length) {
+        // Nobody else is here: closing the room leaves nobody hanging.
+        for (const w of this.ctx.getWebSockets()) w.close(1000, "Room closed");
+        s.phase = "ended";
+        return true;
+      }
+      s.offer = {
+        pid: order[0],
+        rest: order.slice(1),
+        until: Date.now() + 30000,
+        leaving: true,
+        self: msg.self,
+        name: msg.name,
+      };
+      return true;
+    }
+    if (isHost && msg.t === "host-cancel") {
+      s.offer = undefined;
+      return true;
+    }
+    if (msg.t === "host-answer" && tag.pid && s.offer && s.offer.pid === tag.pid) {
+      if (msg.accept) this.handOver(tag.pid);
+      else this.nextOffer();
+      return true;
+    }
+    return false;
+  }
+
+  /** The person asked said no, or did not answer. Ask the next one; if the host already left and nobody said yes, pick the first. */
+  nextOffer() {
+    const s = this.s!;
+    const o = s.offer;
+    if (!o) return;
+    const { set } = this.connectedPids();
+    const rest = o.rest.filter((p) => s.players.some((x) => x.pid === p));
+    if (rest.length) {
+      s.offer = { ...o, pid: rest[0], rest: rest.slice(1), until: Date.now() + 30000 };
+      return;
+    }
+    s.offer = undefined;
+    if (!o.leaving) return;
+    // The host is leaving and nobody accepted: the room still must not be left hanging.
+    const first = s.players.find((p) => p.pid !== o.self && set.has(p.pid)) ?? s.players.find((p) => p.pid !== o.self);
+    if (first) this.handOver(first.pid);
+  }
+
+  /** Gives the host role to a player. The old host becomes a player. */
+  handOver(pid: string) {
+    const s = this.s!;
+    const target = s.players.find((p) => p.pid === pid);
+    if (!target) return;
+    const o = s.offer;
+    s.offer = undefined;
+    // The old host stays in the room as a player (reusing their seat if they were already playing).
+    let oldPid = o?.self && s.players.some((p) => p.pid === o.self) ? o.self : "";
+    if (!oldPid) {
+      const base = (o?.name || "Host").slice(0, 20);
+      let nm = base;
+      for (let i = 2; s.players.some((p) => p.name.toLowerCase() === nm.toLowerCase()); i++)
+        nm = `${base.slice(0, 17)} ${i}`;
+      oldPid = crypto.randomUUID().slice(0, 8);
+      s.players.push({ pid: oldPid, name: nm, score: 0 });
+    }
+    const oldName = s.players.find((p) => p.pid === oldPid)?.name ?? "Host";
+    s.hostKey = crypto.randomUUID();
+    // Word Ladder and live rounds are tied to who the host was, so they go back to the lobby.
+    if (s.phase === "team" || s.phase === "live") {
+      s.team = undefined;
+      s.live = undefined;
+      s.queue = undefined;
+      s.q = undefined;
+      s.reveal = undefined;
+      s.nextAt = undefined;
+      s.phase = "lobby";
+    }
+    for (const w of this.ctx.getWebSockets()) {
+      const t = w.deserializeAttachment() as Tag | null;
+      if (t?.role === "host") {
+        this.send(w, { t: "demote", code: s.code, pid: oldPid, name: oldName });
+        w.close(1000, "handover");
+      } else if (t?.pid === pid) this.send(w, { t: "host", key: s.hostKey });
+    }
   }
 
   async webSocketClose(ws: WebSocket, code: number) {

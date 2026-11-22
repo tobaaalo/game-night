@@ -1,0 +1,204 @@
+1|Who built the ark?|Noah|Moses|Abraham|Jonah
+1|Who was swallowed by a great fish?|Jonah|Peter|Elijah|Daniel
+1|Who killed the giant Goliath?|David|Saul|Samson|Jonathan
+1|Who was thrown into the lions' den?|Daniel|Joseph|Elijah|Shadrach
+1|In which garden were Adam and Eve placed?|Eden|Gethsemane|Nod|Carmel
+1|In which town was Jesus born?|Bethlehem|Nazareth|Jerusalem|Capernaum
+1|In which town did Jesus grow up?|Nazareth|Bethlehem|Jericho|Bethany
+1|Which disciple betrayed Jesus?|Judas Iscariot|Peter|Thomas|Andrew
+1|How many disciples did Jesus choose?|12|7|10|70
+1|Which disciple denied Jesus three times?|Peter|Judas|John|Thomas
+1|Who was the first man God created?|Adam|Noah|Seth|Enoch
+1|Who was Adam and Eve's first son?|Cain|Abel|Seth|Enoch
+1|Who killed his brother Abel?|Cain|Seth|Esau|Lamech
+1|Who led the Israelites out of Egypt?|Moses|Joshua|Aaron|Elijah
+1|Which sea did Moses part?|The Red Sea|The Dead Sea|The Sea of Galilee|The Mediterranean Sea
+1|On which mountain did Moses receive the Ten Commandments?|Mount Sinai|Mount Carmel|Mount Zion|Mount Nebo
+1|How many plagues did God send on Egypt?|10|7|12|40
+1|Who was sold into slavery by his brothers?|Joseph|Benjamin|Reuben|Judah
+1|Whose strength was in his long hair?|Samson|Goliath|Gideon|Saul
+1|Who cut Samson's hair and betrayed him?|Delilah|Jezebel|Ruth|Esther
+1|Which queen saved the Jewish people in Persia?|Esther|Ruth|Deborah|Jezebel
+1|Who stayed loyal to her mother-in-law Naomi?|Ruth|Orpah|Esther|Rahab
+1|Which king of Israel was famous for his wisdom?|Solomon|David|Saul|Hezekiah
+1|Who built the first temple in Jerusalem?|Solomon|David|Moses|Nehemiah
+1|Who was the first king of Israel?|Saul|David|Solomon|Samuel
+1|Which shepherd boy became king of Israel?|David|Saul|Solomon|Joshua
+1|Which city's walls fell after the Israelites marched around it?|Jericho|Babylon|Nineveh|Ai
+1|Which prophet was taken up to heaven in a chariot of fire?|Elijah|Elisha|Isaiah|Enoch
+1|How many days and nights did the great flood rain fall?|40|7|12|3
+1|What sign did God give Noah that he would never flood the earth again?|A rainbow|A dove|An olive branch|A star
+1|Which disciple walked on water towards Jesus?|Peter|John|Andrew|Thomas
+1|In which town did Jesus turn water into wine?|Cana|Nazareth|Bethany|Capernaum
+1|Who did Jesus raise from the dead after four days?|Lazarus|Nicodemus|Bartimaeus|Zacchaeus
+1|What did Jesus use to feed the crowd of 5,000?|Five loaves and two fish|Seven loaves and a few fish|Manna from heaven|Twelve baskets of bread
+1|Which tax collector climbed a tree to see Jesus?|Zacchaeus|Matthew|Nicodemus|Bartimaeus
+1|Which disciple doubted that Jesus had risen?|Thomas|Peter|Philip|Andrew
+1|Who baptised Jesus?|John the Baptist|Peter|Paul|Andrew
+1|In which river was Jesus baptised?|The Jordan|The Nile|The Euphrates|The Tigris
+1|How many days was Jesus tempted in the wilderness?|40|7|3|12
+1|Which Roman governor sentenced Jesus to be crucified?|Pontius Pilate|Herod|Caesar Augustus|Festus
+1|What is the name of the hill where Jesus was crucified?|Golgotha|Gethsemane|Sinai|Carmel
+1|On which day did Jesus rise from the dead?|The third day|The first day|The seventh day|The fortieth day
+1|Who was the first person to see the risen Jesus?|Mary Magdalene|Peter|John|Thomas
+1|On the road to which city did Paul see a blinding light?|Damascus|Jerusalem|Antioch|Rome
+1|Who was the mother of Jesus?|Mary|Martha|Elizabeth|Ruth
+1|Who was the mother of John the Baptist?|Elizabeth|Mary|Anna|Hannah
+1|Who followed a star to bring gifts to baby Jesus?|The wise men|The shepherds|The angels|The Pharisees
+1|Which three gifts did the wise men bring?|Gold, frankincense and myrrh|Gold, silver and bronze|Wine, bread and oil|Spices, silk and incense
+1|Which angel told Mary she would have a son?|Gabriel|Michael|Raphael|Uriel
+1|Which king ordered the killing of baby boys in Bethlehem?|Herod|Pharaoh|Nebuchadnezzar|Saul
+1|What did God create on the first day?|Light|The sun and moon|Birds and fish|Man
+1|On which day did God rest from creating?|The seventh|The sixth|The first|The third
+1|What did God make Eve from?|Adam's rib|The dust of the ground|A breath of wind|Water
+1|What creature tempted Eve in the garden?|A serpent|A lion|An eagle|A dragon
+1|Who was Jacob's twin brother?|Esau|Isaac|Laban|Ishmael
+1|Who sold his birthright for a bowl of stew?|Esau|Jacob|Reuben|Isaac
+1|Who was Abraham's wife?|Sarah|Rebekah|Rachel|Leah
+1|Who was told by God to sacrifice his son Isaac?|Abraham|Jacob|Noah|Moses
+1|Who was the son born to Abraham and Sarah in their old age?|Isaac|Ishmael|Jacob|Esau
+1|Who wrestled with an angel through the night?|Jacob|Esau|Isaac|Joseph
+1|Which country was Joseph taken to as a slave?|Egypt|Babylon|Assyria|Persia
+1|Who explained Pharaoh's dreams?|Joseph|Daniel|Moses|Aaron
+1|What did Moses see that burned but was not used up?|A bush|A tree|A mountain|An altar
+1|Who was Moses' brother and helper?|Aaron|Joshua|Caleb|Levi
+1|What food fell from heaven for the Israelites in the desert?|Manna|Honey|Dates|Barley loaves
+1|Who became leader of Israel after Moses?|Joshua|Caleb|Aaron|Samuel
+1|Which judge led Israel together with Barak?|Deborah|Esther|Ruth|Miriam
+1|Which man defeated an army with 300 men, trumpets and jars?|Gideon|Samson|Joshua|David
+1|Which prophet anointed David as king?|Samuel|Nathan|Elijah|Isaiah
+1|Who was Saul's son and David's closest friend?|Jonathan|Absalom|Solomon|Joab
+1|Which prophet challenged the prophets of Baal on Mount Carmel?|Elijah|Elisha|Isaiah|Jeremiah
+1|Which three men were thrown into a blazing furnace?|Shadrach, Meshach and Abednego|Peter, James and John|Matthew, Mark and Luke|Moses, Aaron and Hur
+1|Which prophet was sent to preach in Nineveh?|Jonah|Amos|Hosea|Micah
+1|Which woman prayed for a son and gave birth to Samuel?|Hannah|Sarah|Rachel|Ruth
+1|Who was the first Christian martyr?|Stephen|Peter|Paul|Barnabas
+1|Which book is the first book of the Bible?|Genesis|Exodus|Psalms|Matthew
+1|How many books are in the Protestant Bible?|66|39|27|73
+1|How many books are in the New Testament?|27|39|66|12
+1|Which book is the last in the Bible?|Revelation|Jude|Malachi|Acts
+1|Who wrote most of the Psalms?|David|Solomon|Moses|Isaiah
+1|Which Gospel comes first in the New Testament?|Matthew|Mark|Luke|John
+1|Who was Jesus' earthly father?|Joseph|Zechariah|Eli|Simeon
+1|What was Jesus' job before he began his ministry?|Carpenter|Fisherman|Tax collector|Shepherd
+1|Who was Simon Peter's brother?|Andrew|James|John|Thomas
+1|Which disciple was a tax collector?|Matthew|Peter|Thomas|Philip
+1|Who washed his hands to show he was innocent of Jesus' death?|Pilate|Herod|Judas|Barabbas
+1|How much money did Judas receive for betraying Jesus?|30 pieces of silver|10 pieces of gold|12 pieces of silver|100 pieces of silver
+1|In which garden did Jesus pray before his arrest?|Gethsemane|Eden|Bethany|Nod
+1|Which prisoner was released instead of Jesus?|Barabbas|Pilate|Judas|Caiaphas
+1|Who helped carry Jesus' cross?|Simon of Cyrene|Joseph of Arimathea|Nicodemus|Peter
+1|Who gave his own tomb for the burial of Jesus?|Joseph of Arimathea|Nicodemus|Lazarus|Peter
+1|What animal did Jesus ride into Jerusalem?|A donkey|A horse|A camel|An ox
+1|Which meal did Jesus share with his disciples the night before he died?|The Passover|The Feast of Weeks|The Sabbath supper|The Feast of Tabernacles
+1|In what form did the Holy Spirit come down on Jesus at his baptism?|A dove|An eagle|A flame|A cloud
+1|What name did God give Abram?|Abraham|Israel|Isaac|Jacob
+1|What name did God give Jacob?|Israel|Abraham|Judah|Joseph
+1|On which mountain did Noah's ark come to rest?|Mount Ararat|Mount Sinai|Mount Zion|Mount Carmel
+1|What did the dove bring back to Noah?|An olive leaf|A flower|A seed|A fish
+1|What did the people of Babel try to build?|A tower|A palace|A bridge|A ship
+1|Which city was destroyed by fire along with Gomorrah?|Sodom|Babel|Nineveh|Jericho
+1|What happened to Lot's wife when she looked back?|She became a pillar of salt|The earth swallowed her|She was struck blind|She turned into a tree
+1|How many commandments did God give Moses on the tablets?|10|7|12|5
+1|What were the Ten Commandments written on?|Stone tablets|Scrolls|Clay jars|Bronze plates
+1|What did Moses' staff turn into when he threw it down?|A snake|A crocodile|A frog|A locust
+1|Where was baby Moses hidden?|In a basket on the Nile|In a cave|In a tent|In a well
+1|What weapon did David use to defeat Goliath?|A sling and a stone|A sword|A spear|A bow
+1|Who visited Solomon to test his wisdom?|The Queen of Sheba|Queen Esther|Jezebel|Cleopatra
+1|Which wicked queen was married to King Ahab?|Jezebel|Athaliah|Delilah|Herodias
+1|Who lost his children, health and wealth but stayed faithful to God?|Job|Jonah|Jeremiah|Joel
+1|In which parable is a beaten traveller helped by a man from Samaria?|The Good Samaritan|The Prodigal Son|The Sower|The Talents
+1|In which parable does a son leave home and waste his inheritance?|The Prodigal Son|The Lost Sheep|The Good Samaritan|The Sower
+1|What did the wise man build his house on in Jesus' parable?|Rock|Sand|Mud|Wood
+1|Which sea did Peter fish in?|The Sea of Galilee|The Dead Sea|The Red Sea|The Mediterranean Sea
+1|What were Paul and Silas doing in prison at midnight?|Singing hymns and praying|Sleeping|Writing letters|Arguing with the guards
+1|How many tribes of Israel were there?|12|10|7|40
+1|Who was the Roman emperor when Jesus was born?|Caesar Augustus|Nero|Tiberius|Claudius
+2|Which prophet was fed by ravens by the brook Cherith?|Elijah|Elisha|Jonah|Daniel
+2|Which woman hid the Israelite spies in Jericho?|Rahab|Deborah|Jael|Ruth
+2|Which blind man begged by the road at Jericho and was healed by Jesus?|Bartimaeus|Zacchaeus|Lazarus|Nicodemus
+2|Which prophet saw a valley of dry bones come to life?|Ezekiel|Isaiah|Jeremiah|Daniel
+2|What was the home town of the apostle Paul?|Tarsus|Damascus|Antioch|Corinth
+2|Which of David's sons led a rebellion against him?|Absalom|Solomon|Jonathan|Joab
+2|Which king dreamed of a statue of gold, silver, bronze and iron?|Nebuchadnezzar|Darius|Cyrus|Herod
+2|Who was Moses' father-in-law?|Jethro|Laban|Eli|Aaron
+2|Who was Moses' older sister?|Miriam|Deborah|Rahab|Zipporah
+2|Who was Moses' wife?|Zipporah|Miriam|Rachel|Leah
+2|Which army commander was healed of leprosy by washing in the Jordan?|Naaman|Gehazi|Elisha|Job
+2|Which prophet followed Elijah as his successor?|Elisha|Isaiah|Samuel|Jeremiah
+2|Who was Isaac's wife?|Rebekah|Rachel|Leah|Sarah
+2|Which two sisters did Jacob marry?|Leah and Rachel|Sarah and Hagar|Martha and Mary|Ruth and Naomi
+2|Who was Jacob's father-in-law who tricked him?|Laban|Jethro|Isaac|Esau
+2|Who was Joseph's youngest brother?|Benjamin|Reuben|Judah|Simeon
+2|Who was Joseph's Egyptian master?|Potiphar|Pharaoh|Laban|Jethro
+2|Which priest raised the young Samuel in the temple?|Eli|Aaron|Zadok|Abiathar
+2|Which king committed adultery with Bathsheba?|David|Solomon|Saul|Ahab
+2|Who was Bathsheba's husband whom David had killed?|Uriah|Joab|Nathan|Abner
+2|Which prophet confronted David about his sin with Bathsheba?|Nathan|Samuel|Elijah|Isaiah
+2|Who was David's father?|Jesse|Saul|Samuel|Obed
+2|Who married Ruth and bought back Naomi's family land?|Boaz|Obed|Elimelech|Jesse
+2|Who was Ruth's mother-in-law?|Naomi|Orpah|Hannah|Elizabeth
+2|Who plotted to destroy the Jews in the book of Esther?|Haman|Mordecai|Nebuchadnezzar|Pharaoh
+2|Who was Esther's cousin who raised her?|Mordecai|Haman|Daniel|Nehemiah
+2|Who led the rebuilding of the walls of Jerusalem?|Nehemiah|Ezra|Zerubbabel|Joshua
+2|Which Pharisee visited Jesus at night?|Nicodemus|Joseph of Arimathea|Gamaliel|Caiaphas
+2|Which region did Jesus pass through when he met a woman at a well?|Samaria|Galilee|Judea|Egypt
+2|Which two sisters hosted Jesus in Bethany?|Martha and Mary|Leah and Rachel|Ruth and Naomi|Mary and Elizabeth
+2|Which apostle was chosen to replace Judas?|Matthias|Barnabas|Silas|Timothy
+2|Who were the sons of Zebedee?|James and John|Peter and Andrew|Philip and Nathanael|Matthew and Thomas
+2|Which Gospel writer was a doctor?|Luke|Mark|Matthew|John
+2|Who is traditionally said to have written Revelation?|John|Paul|Peter|Luke
+2|Who was shipwrecked on Malta?|Paul|Peter|Barnabas|Silas
+2|Which man walked with God and did not die?|Enoch|Noah|Methuselah|Lamech
+2|Who was the oldest man in the Bible?|Methuselah|Noah|Adam|Enoch
+2|Who were Noah's three sons?|Shem, Ham and Japheth|Cain, Abel and Seth|Isaac, Jacob and Esau|Reuben, Simeon and Levi
+2|Which of Abraham's sons was born to Hagar?|Ishmael|Isaac|Esau|Jacob
+2|Who was Abraham's nephew?|Lot|Laban|Esau|Ishmael
+2|On which mountain did Elijah face the prophets of Baal?|Mount Carmel|Mount Sinai|Mount Zion|Mount Hermon
+2|Which sea is called the Salt Sea in the Bible?|The Dead Sea|The Red Sea|The Sea of Galilee|The Black Sea
+2|Which city was the capital of the Assyrian empire that Jonah visited?|Nineveh|Babylon|Damascus|Tyre
+2|Which city was the capital of the Babylonian empire?|Babylon|Nineveh|Susa|Persepolis
+2|In which city did Paul speak at the Areopagus (Mars Hill)?|Athens|Corinth|Rome|Ephesus
+2|Which village did Jesus visit on the road after rising from the dead?|Emmaus|Bethany|Nazareth|Cana
+2|Which village was the home of Mary, Martha and Lazarus?|Bethany|Bethlehem|Nain|Cana
+2|Which town on the Sea of Galilee was the base of much of Jesus' ministry?|Capernaum|Jericho|Bethlehem|Hebron
+2|Which city was Zacchaeus the tax collector from?|Jericho|Capernaum|Nain|Sychar
+2|Which two men appeared with Jesus at the transfiguration?|Moses and Elijah|Abraham and Isaac|David and Solomon|Peter and Paul
+2|Which three disciples were with Jesus at the transfiguration?|Peter, James and John|Peter, Andrew and Philip|Matthew, Thomas and Judas|James, Andrew and Thomas
+2|For how many days did Jesus appear to his followers before he went up to heaven?|40|3|7|50
+2|For how many years did Israel wander in the wilderness?|40|12|7|70
+2|How many fat cows appeared in Pharaoh's dream?|7|3|12|10
+2|How many men did Gideon take into battle against Midian?|300|1,000|10,000|32,000
+2|Which river did Naaman wash in to be healed?|The Jordan|The Nile|The Jabbok|The Euphrates
+3|Which tribe of Israel did Jesus come from?|Judah|Levi|Benjamin|Joseph
+3|Which tribe of Israel served as the priests?|Levi|Judah|Dan|Benjamin
+3|Who was the oldest son of Jacob?|Reuben|Simeon|Judah|Levi
+3|Which wife of Jacob was the mother of Joseph?|Rachel|Leah|Bilhah|Zilpah
+3|Who was the mother of Ishmael?|Hagar|Keturah|Zilpah|Bilhah
+3|Which city was Goliath from?|Gath|Gaza|Ashdod|Ekron
+3|What did Gideon use to test God's promise?|A fleece of wool|A stone altar|A shepherd's staff|A burning torch
+3|How many people were on Noah's ark?|8|2|7|12
+3|How many years did the exile in Babylon last, according to Jeremiah?|70|40|7|400
+3|Which Persian king let the Jews return to Jerusalem?|Cyrus|Darius|Xerxes|Nebuchadnezzar
+3|What was Daniel's Babylonian name?|Belteshazzar|Abednego|Meshach|Shadrach
+3|What appeared at Belshazzar's feast and wrote on the wall?|A hand|A voice|A fire|An angel
+3|Which prophet married Gomer as a sign to Israel?|Hosea|Amos|Joel|Micah
+3|Who was the Roman centurion whose household first received the Spirit among the Gentiles?|Cornelius|Julius|Festus|Felix
+3|On which island did John receive the visions of Revelation?|Patmos|Crete|Malta|Cyprus
+3|Who did Peter raise from the dead in Joppa?|Tabitha (Dorcas)|Eutychus|Lazarus|Jairus' daughter
+3|Which young man fell from a window while Paul preached?|Eutychus|Timothy|Silas|Titus
+3|Which short letter of Paul is about a runaway slave named Onesimus?|Philemon|Titus|Jude|Philippians
+3|Who was the seller of purple cloth who became Paul's first convert in Europe?|Lydia|Priscilla|Phoebe|Dorcas
+3|Which married couple were tentmakers who worked with Paul?|Priscilla and Aquila|Ananias and Sapphira|Zechariah and Elizabeth|Joachim and Anna
+3|Which married couple lied about money to the apostles and died?|Ananias and Sapphira|Priscilla and Aquila|Zechariah and Elizabeth|Joachim and Anna
+3|In which city did a riot break out over the temple of Artemis?|Ephesus|Corinth|Philippi|Thessalonica
+3|In which town did Jesus raise a widow's son?|Nain|Cana|Capernaum|Bethany
+3|Who was the high priest... which city was the home of the Philistine giant's people?|Gath|Gaza|Ashdod|Ekron
+4|Which prophet was a herdsman from Tekoa?|Amos|Hosea|Micah|Nahum
+4|Who was the husband of Hannah?|Elkanah|Eli|Boaz|Uriah
+4|Which king of Judah found the Book of the Law and led a great reform?|Josiah|Hezekiah|Uzziah|Manasseh
+4|Which king of Judah was given fifteen more years of life?|Hezekiah|Josiah|Asa|Jehoshaphat
+4|Who was the first judge of Israel after Joshua?|Othniel|Gideon|Deborah|Samson
+4|Who was the commander of David's army?|Joab|Abner|Uriah|Benaiah
+4|Which tribe was Paul from?|Benjamin|Judah|Levi|Dan
+4|Which tribe was King Saul from?|Benjamin|Judah|Levi|Ephraim

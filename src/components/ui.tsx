@@ -336,3 +336,21 @@ export function WhoGotIt({
     </div>
   );
 }
+
+/** A question prompt where anything in “quotes” (a Bible verse, a quote) shows in gold so it stands out from the question. */
+export function PromptText({ text }: { text: string }) {
+  const parts = text.split(/(“[^”]*”)/);
+  return (
+    <span className="ptext">
+      {parts.map((p, i) =>
+        p.startsWith("“") && p.endsWith("”") ? (
+          <span className="quote" key={i}>
+            {p}
+          </span>
+        ) : (
+          p
+        ),
+      )}
+    </span>
+  );
+}

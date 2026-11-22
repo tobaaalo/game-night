@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import clsx from "clsx";
-import { Choice } from "../components/ui";
+import { Choice, PromptText } from "../components/ui";
 import { nameOf, useApp } from "../lib/app";
 import { shuffle } from "../lib/deck";
 import { BOT_DELAY, botRight, pick } from "../lib/bot";
@@ -294,7 +294,9 @@ export function QuizRun({ questions, onAgain }: { questions: HostQuestion[]; onA
           {q.label ? ` · ${q.label}` : ""} · {q.points} {q.points === 1 ? "pt" : "pts"}
         </p>
       </div>
-      <h2 className={clsx("qprompt", q.prompt.length > 150 ? "xlong" : q.prompt.length > 85 && "long")}>{q.prompt}</h2>
+      <h2 className={clsx("qprompt", q.prompt.length > 150 ? "xlong" : q.prompt.length > 85 && "long")}>
+        <PromptText text={q.prompt} />
+      </h2>
       {canSpeak() && (
         <button
           className="link small"
