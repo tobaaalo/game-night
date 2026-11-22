@@ -1,3 +1,4 @@
+import { BOT_DELAY, botFindsWord, botRemembers, botRight, pick as pickOne, type Skill } from "../lib/bot";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import clsx from "clsx";
 import { TimerDial, WhoGotIt, useCountdown } from "../components/ui";
@@ -38,10 +39,9 @@ export function CharadesBingo({ seconds, onAgain }: { seconds: number; onAgain: 
     setActing(null);
     setTurn((t) => t + 1);
   };
-  const got = () => {
-    if (acting === null) return;
+  const claim = (at: number) => {
     const o = owner.slice();
-    o[acting] = cur.id;
+    o[at] = cur.id;
     setOwner(o);
     award(cur.id, 1);
     if (LINES.some((l) => l.every((i) => o[i] === cur.id))) {
@@ -49,6 +49,18 @@ export function CharadesBingo({ seconds, onAgain }: { seconds: number; onAgain: 
       setWinner(cur.id);
       setActing(null);
     } else next();
+  };
+  const got = () => {
+    if (acting === null) return;
+    claim(acting);
+  };
+  // The computer picks a free square and acts it out. Whether you guess it is down to how good it is.
+  const botGo = () => {
+    const free = owner.map((o, i) => (o ? -1 : i)).filter((i) => i >= 0);
+    if (!free.length) return;
+    const at = pickOne(free);
+    if (botRight(cur.skill, 2)) claim(at);
+    else next();
   };
   if (winner || full) {
     const w = winner ? players[idxOf(winner)] : null;
@@ -63,8 +75,19 @@ export function CharadesBingo({ seconds, onAgain }: { seconds: number; onAgain: 
   }
   return (
     <div className="qcard stack">
-      <p className="turn">{nameOf(cur, turn % players.length)}, pick a square to act</p>
-      {acting !== null && (
+      <p className="turn">
+        {cur.bot
+          ? `${nameOf(cur, turn % players.length)}'s turn`
+          : `${nameOf(cur, turn % players.length)}, pick a square to act`}
+      </p>
+      {cur.bot && (
+        <div className="actions center">
+          <button className="btn" onClick={botGo}>
+            Let the computer go
+          </button>
+        </div>
+      )}
+      {acting !== null && !cur.bot && (
         <div className="stack center-text">
           <Clock key={acting} seconds={seconds} onEnd={next} />
           <p className="h3">Act: {cells[acting]}</p>
@@ -95,7 +118,7 @@ export function CharadesBingo({ seconds, onAgain }: { seconds: number; onAgain: 
             <button
               key={c}
               className={clsx("bingo-cell", o && "taken", acting === i && "now")}
-              disabled={!!o || acting !== null}
+              disabled={!!o || acting !== null || !!cur.bot}
               onClick={() => setActing(i)}
             >
               {o ? <b>{nameOf(players[idxOf(o)], idxOf(o)).slice(0, 2)}</b> : <span>{c}</span>}
@@ -154,6 +177,29 @@ export function WordChain({ seconds, onAgain }: { seconds: number; onAgain: () =
       setDone(true);
     }
   }
+  // The computer plays a word from a list of everyday words. Easy knows fewer words and gives up sooner.
+  useEffect(() => {
+    if (done || !cur.bot) return;
+    let live = true;
+    const t = setTimeout(
+      async () => {
+        const all = (await import("../content/botwords.json")).default as string[];
+        if (!live) return;
+        const pool = all.slice(0, [2500, 6000, 12000][(cur.skill ?? 2) - 1]);
+        const l = last[last.length - 1];
+        const ok = pool.filter((w) => w[0] === l && !chain.includes(w));
+        const fail = chain.length > 3 && !botFindsWord(cur.skill as Skill);
+        if (!ok.length || fail) return knockOut();
+        setChain((c) => [...c, pickOne(ok.slice(0, 40))]);
+        setTurn((n) => n + 1);
+      },
+      BOT_DELAY + Math.random() * 700,
+    );
+    return () => {
+      live = false;
+      clearTimeout(t);
+    };
+  }, [chain.length, out.length, done]); // eslint-disable-line react-hooks/exhaustive-deps
   const submit = () => {
     const w = text.trim().toLowerCase();
     if (!/^[a-z]+$/.test(w)) return setErr("Letters only, please.");
@@ -191,14 +237,24 @@ export function WordChain({ seconds, onAgain }: { seconds: number; onAgain: () =
           &rsquo;s turn
         </p>
       )}
-      <Clock key={`${chain.length}-${out.length}`} seconds={seconds} onEnd={knockOut} />
+      {!cur.bot && <Clock key={`${chain.length}-${out.length}`} seconds={seconds} onEnd={knockOut} />}
       <p className="bigtext">{last}</p>
+      {cur.bot && (
+        <p className="hint">
+          {nameOf(
+            cur,
+            players.findIndex((p) => p.id === cur.id),
+          )}{" "}
+          is thinking&hellip;
+        </p>
+      )}
       <p className="hint">
         Say a word starting with “{last[last.length - 1].toUpperCase()}”. Type it to lock it in. Words must be at least{" "}
         {MIN_WORD} letters long.
       </p>
       <form
         className="stack"
+        hidden={!!cur.bot}
         onSubmit={(e) => {
           e.preventDefault();
           submit();
@@ -267,8 +323,12 @@ export function MemoryMatch({
   const lock = useRef(false);
   const cur = players[turn % players.length];
   const finished = found.length === pairs.length;
-  const flip = (i: number) => {
+  // What the computer remembers: cards it has seen, and whether each one stuck. Easy forgets a lot.
+  const memory = useRef(new Map<number, boolean>());
+  const flip = (i: number, byBot = false) => {
+    if (cur.bot && !byBot) return;
     if (lock.current || open.includes(i) || found.includes(cards[i].pair)) return;
+    if (!memory.current.has(i)) memory.current.set(i, botRemembers(players.find((p) => p.bot)?.skill));
     const o = [...open, i];
     setOpen(o);
     if (o.length < 2) return;
@@ -285,6 +345,28 @@ export function MemoryMatch({
     }, 900);
   };
   useEffect(() => () => void (lock.current = false), []);
+  useEffect(() => {
+    if (!cur.bot || finished || open.length >= 2 || lock.current) return;
+    const t = setTimeout(() => {
+      const hidden = cards.map((_, i) => i).filter((i) => !found.includes(cards[i].pair) && !open.includes(i));
+      const known = (i: number) => memory.current.get(i) === true;
+      let at: number | undefined;
+      if (open.length === 1) {
+        at = hidden.find((i) => known(i) && cards[i].pair === cards[open[0]].pair);
+        at ??= pickOne(
+          hidden
+            .filter((i) => !memory.current.has(i))
+            .concat(hidden.filter((i) => !known(i) && memory.current.has(i) && cards[i].pair !== cards[open[0]].pair)),
+        );
+      } else {
+        const seen = hidden.filter(known);
+        const pair = seen.find((i) => seen.some((j) => j !== i && cards[j].pair === cards[i].pair));
+        at = pair ?? pickOne(hidden.filter((i) => !memory.current.has(i)).concat([]));
+      }
+      flip(at ?? pickOne(hidden), true);
+    }, 850);
+    return () => clearTimeout(t);
+  }, [turn, open.length, found.length]); // eslint-disable-line react-hooks/exhaustive-deps
   if (finished)
     return (
       <div className="qcard stack center-text">
@@ -295,7 +377,8 @@ export function MemoryMatch({
   return (
     <div className="qcard stack">
       <p className="turn">
-        {nameOf(cur, turn % players.length)}&rsquo;s turn · {moves} {moves === 1 ? "move" : "moves"}
+        {nameOf(cur, turn % players.length)}&rsquo;s turn{cur.bot ? " (thinking)" : ""} · {moves}{" "}
+        {moves === 1 ? "move" : "moves"}
       </p>
       <div className="memgrid" style={{ "--c": cols } as CSSProperties}>
         {cards.map((c, i) => {
@@ -350,7 +433,9 @@ export function DrawGuess({
   const [ink, setInk] = useState(INKS[0]);
   const cv = useRef<HTMLCanvasElement>(null);
   const strokes = useRef<{ c: string; p: [number, number][] }[]>([]);
-  const cur = players[turn % players.length];
+  // The computer can't draw, so only people take the pen. It still tries to guess.
+  const drawers = players.filter((p) => !p.bot);
+  const cur = drawers[turn % drawers.length];
   const redraw = () => {
     const c = cv.current;
     const g = c?.getContext("2d");
@@ -399,7 +484,7 @@ export function DrawGuess({
     );
   return (
     <div className="qcard stack center-text">
-      <p className="turn">{nameOf(cur, turn % players.length)} draws</p>
+      <p className="turn">{nameOf(cur, players.indexOf(cur))} draws</p>
       {phase === "ready" && (
         <>
           <p className="hint">Only the drawer should look. Everyone else, eyes away!</p>
@@ -687,6 +772,7 @@ export function WordLadder({ puzzles, onAgain }: { puzzles: Puzzle[]; onAgain: (
   const [msg, setMsg] = useState("");
   const [hints, setHints] = useState(0);
   const [state, setState] = useState<"play" | "won" | "gave">("play");
+  const [botNote, setBotNote] = useState("");
   const [shown, setShown] = useState<string[]>([]);
   const [score, setScore] = useState(0);
   const [lv, start, goal, par] = puzzles[n] ?? puzzles[0];
@@ -717,7 +803,21 @@ export function WordLadder({ puzzles, onAgain }: { puzzles: Puzzle[]; onAgain: (
       setMsg(`Try “${r[1].toUpperCase()}” next.`);
     }
   };
+  // The computer's ladder solves itself, or gets stuck, depending on how good it is.
+  const botGo = () => {
+    const path = route(start, goal);
+    if (path.length > 1 && botRight(player.skill, lv)) {
+      const pts = Math.max(0, lv + (path.length - 1 <= par ? 1 : 0));
+      award(player.id, pts);
+      setScore((x) => x + pts);
+      setBotNote(
+        `${player.name} solved it in ${path.length - 1} moves: ${path.map((w) => w.toUpperCase()).join(" → ")}`,
+      );
+    } else setBotNote(`${player.name} got stuck on this one.`);
+    setState("gave");
+  };
   const next = () => {
+    setBotNote("");
     const k = n + 1;
     setN(k);
     if (k < puzzles.length) setLadder([puzzles[k][1]]);
@@ -745,6 +845,13 @@ export function WordLadder({ puzzles, onAgain }: { puzzles: Puzzle[]; onAgain: (
         Change one letter at a time to turn <b>{start.toUpperCase()}</b> into <b>{goal.toUpperCase()}</b>. Par is {par}{" "}
         moves.
       </p>
+      {player.bot && state === "play" && (
+        <div className="actions center">
+          <button className="btn" onClick={botGo}>
+            Let the computer try
+          </button>
+        </div>
+      )}
       <ol className="ladder">
         {ladder.slice(0, -1).map((w) => (
           <li key={w}>{w.toUpperCase()}</li>
@@ -755,7 +862,7 @@ export function WordLadder({ puzzles, onAgain }: { puzzles: Puzzle[]; onAgain: (
           <button
             key={i}
             className={clsx("ltile", pick === i && "on")}
-            disabled={state !== "play"}
+            disabled={state !== "play" || !!player.bot}
             onClick={() => setPick(pick === i ? null : i)}
             aria-label={`Letter ${i + 1}: ${c}`}
           >
@@ -780,7 +887,7 @@ export function WordLadder({ puzzles, onAgain }: { puzzles: Puzzle[]; onAgain: (
           {msg}
         </p>
       )}
-      {state === "play" && (
+      {state === "play" && !player.bot && (
         <div className="actions center">
           <button
             className="btn ghost small"
@@ -819,7 +926,7 @@ export function WordLadder({ puzzles, onAgain }: { puzzles: Puzzle[]; onAgain: (
       )}
       {state === "gave" && (
         <>
-          <p className="hint">One way through: {shown.map((w) => w.toUpperCase()).join(" → ")}</p>
+          <p className="hint">{botNote || `One way through: ${shown.map((w) => w.toUpperCase()).join(" → ")}`}</p>
           <button className="btn" onClick={next}>
             {n + 1 < puzzles.length ? "Next ladder" : "See results"}
           </button>

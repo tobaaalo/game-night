@@ -30,7 +30,9 @@ function Header() {
           >
             <Icon.people />
             <span>
-              {players.length} · {group === "couple" ? "Couple" : "Friends"}
+              {players.some((p) => p.bot)
+                ? "vs Computer"
+                : `${players.length} · ${group === "couple" ? "Couple" : "Friends"}`}
             </span>
           </button>
         )}

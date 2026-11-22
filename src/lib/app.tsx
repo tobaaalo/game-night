@@ -8,6 +8,10 @@ export interface Player {
   score: number;
   /** 1 or 2 when playing in teams. */
   team?: 1 | 2;
+  /** The computer opponent. Takes turns like a person. */
+  bot?: boolean;
+  /** How good the computer is: 1 easy, 2 medium, 3 hard. */
+  skill?: 1 | 2 | 3;
 }
 export interface Toast {
   id: number;
@@ -39,6 +43,12 @@ interface AppCtx {
 }
 
 const Ctx = createContext<AppCtx | null>(null);
+/** Lets a game see only some of the players (for example, the computer sits out). */
+export function WithPlayers({ filter, children }: { filter: (p: Player[]) => Player[]; children: ReactNode }) {
+  const c = useApp();
+  const value = useMemo(() => ({ ...c, players: filter(c.players) }), [c, filter]);
+  return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
+}
 export const useApp = () => {
   const c = useContext(Ctx);
   if (!c) throw new Error("useApp outside provider");
@@ -126,7 +136,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       setGroupState(g);
       save("gn.group", g);
       setPlayers((prev) => {
-        const named = prev.filter((p) => p.name.trim());
+        const named = prev.filter((p) => !p.bot && p.name.trim());
         if (g === "couple")
           return named.length >= 2 ? named.slice(0, 2) : defaultPlayers(g).map((d, i) => named[i] ?? d);
         const base = named.length ? named : [];

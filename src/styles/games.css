@@ -110,8 +110,25 @@
 }
 @media (min-width: 720px) {
   .doors {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
   }
+}
+.door.bot .door-art {
+  background: var(--chrome);
+  color: var(--stage-1, #1b1020);
+  box-shadow:
+    0 5px 0 #6b6272,
+    inset 0 -6px 0 rgba(0, 0, 0, 0.12);
+}
+.door-art .vs {
+  font-family: var(--font-display);
+  font-size: 0.7em;
+  letter-spacing: 0.04em;
+}
+.botname {
+  display: flex;
+  align-items: center;
+  opacity: 0.85;
 }
 .door {
   position: relative;
@@ -2285,7 +2302,8 @@
 }
 
 /* Memory Match: small cards sized from the board width so every pair fits on one screen. */
-.memgrid, .mem-grid {
+.memgrid,
+.mem-grid {
   container-type: inline-size;
   display: grid;
   grid-template-columns: repeat(var(--c, 4), minmax(0, 1fr));
@@ -2294,7 +2312,8 @@
   max-width: calc(var(--c, 4) * 84px);
   margin-inline: auto;
 }
-.memcard, .mem-card {
+.memcard,
+.mem-card {
   --cw: calc((100cqw - (var(--c, 4) - 1) * 6px) / var(--c, 4));
   width: 100%;
   height: auto;
@@ -2309,15 +2328,67 @@
   place-items: center;
   overflow: hidden;
 }
-.memcard span, .mem-card span { font-size: inherit; line-height: 1; }
-.memcard span.name { font-size: calc(var(--cw) * 0.165); line-height: 1.1; padding: 0 2px; overflow-wrap: anywhere; text-align: center; }
-.memcard img { object-fit: cover; }
-.memcard.flag img { object-fit: contain; }
-.memcard .img, .memcard .img.square { width: 100%; height: 100%; display: block; }
+.memcard span,
+.mem-card span {
+  font-size: inherit;
+  line-height: 1;
+}
+.memcard span.name {
+  font-size: calc(var(--cw) * 0.165);
+  line-height: 1.1;
+  padding: 0 2px;
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+.memcard img {
+  object-fit: cover;
+}
+.memcard.flag img {
+  object-fit: contain;
+}
+.memcard .img,
+.memcard .img.square {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
 
-.host-play { display: grid; gap: 8px; margin: 12px 0; }
-.host-play .row-form { display: flex; gap: 8px; flex-wrap: wrap; }
-.host-play .row-form .input { flex: 1 1 160px; min-width: 0; }
-.host-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin: 10px 0; position: sticky; top: 0; z-index: 5; }
-.host-tabs button { min-height: 48px; border-radius: 12px; border: 2px solid var(--line, #5a1a33); background: transparent; color: inherit; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding: 0 10px; }
-.host-tabs button.on { background: var(--bulb, #f2b84b); color: #1c0610; }
+.host-play {
+  display: grid;
+  gap: 8px;
+  margin: 12px 0;
+}
+.host-play .row-form {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.host-play .row-form .input {
+  flex: 1 1 160px;
+  min-width: 0;
+}
+.host-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin: 10px 0;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+.host-tabs button {
+  min-height: 48px;
+  border-radius: 12px;
+  border: 2px solid var(--line, #5a1a33);
+  background: transparent;
+  color: inherit;
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 0 10px;
+}
+.host-tabs button.on {
+  background: var(--bulb, #f2b84b);
+  color: #1c0610;
+}

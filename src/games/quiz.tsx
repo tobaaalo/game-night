@@ -3,6 +3,7 @@ import clsx from "clsx";
 import { Choice } from "../components/ui";
 import { nameOf, useApp } from "../lib/app";
 import { shuffle } from "../lib/deck";
+import { BOT_DELAY, botRight, pick } from "../lib/bot";
 import { canSpeak, sfx, speak, speakAuto, stopSpeaking } from "../lib/sound";
 import { load, save } from "../lib/store";
 import type { HostQuestion } from "../shared/protocol";
@@ -195,7 +196,9 @@ export function QuizRun({ questions, onAgain }: { questions: HostQuestion[]; onA
   const q = questions[i];
   const current = players[turn % players.length];
   const leader = Math.max(...players.map((p) => p.score));
+  const botTurn = !!current.bot;
   const canHint =
+    !botTurn &&
     picked == null &&
     !!q &&
     q.options.length >= 4 &&
@@ -203,8 +206,9 @@ export function QuizRun({ questions, onAgain }: { questions: HostQuestion[]; onA
     !hinted.current.has(current.id) &&
     leader - current.score >= 2;
 
-  const choose = (idx: number) => {
+  const choose = (idx: number, byBot = false) => {
     if (picked != null || !q || removed.includes(idx)) return;
+    if (current.bot && !byBot) return;
     setPicked(idx);
     stopSpeaking();
     if (idx === q.correct) {
@@ -239,9 +243,21 @@ export function QuizRun({ questions, onAgain }: { questions: HostQuestion[]; onA
     setTurn((t) => (t + 1) % players.length);
     setI((x) => x + 1);
   };
+  // The computer thinks for a moment, then answers: right or wrong depending on how good it is.
+  useEffect(() => {
+    if (!botTurn || picked != null || !q) return;
+    const t = setTimeout(
+      () => {
+        const wrong = q.options.map((_, k) => k).filter((k) => k !== q.correct);
+        choose(botRight(current.skill, q.points) || !wrong.length ? q.correct : pick(wrong), true);
+      },
+      BOT_DELAY + Math.random() * 900,
+    );
+    return () => clearTimeout(t);
+  }, [i, turn, picked]); // eslint-disable-line react-hooks/exhaustive-deps
   useKeys(
     (k, e) => {
-      if (picked == null && /^[1-9]$/.test(k) && q && +k <= q.options.length) choose(+k - 1);
+      if (picked == null && !botTurn && /^[1-9]$/.test(k) && q && +k <= q.options.length) choose(+k - 1);
       else if (picked != null && (k === " " || k === "Enter")) {
         e.preventDefault();
         next();
@@ -302,7 +318,7 @@ export function QuizRun({ questions, onAgain }: { questions: HostQuestion[]; onA
               picked === idx && idx !== q.correct && "wrong",
             )}
             onClick={() => choose(idx)}
-            aria-disabled={picked != null || removed.includes(idx)}
+            aria-disabled={picked != null || removed.includes(idx) || botTurn}
             hidden={removed.includes(idx)}
           >
             <kbd>{idx + 1}</kbd>
@@ -316,12 +332,17 @@ export function QuizRun({ questions, onAgain }: { questions: HostQuestion[]; onA
         </button>
       )}
       <div aria-live="polite" className="reveal-line">
+        {botTurn && picked == null && (
+          <p className="hint center-text">{nameOf(current, turn % players.length)} is thinking&hellip;</p>
+        )}
         {picked != null && (
           <>
             <p className={clsx("verdict", right ? "good" : "bad")}>
               {right
                 ? `Correct! +${q.points} for ${nameOf(current, turn % players.length)}. ${streakNote}`
-                : "Not quite."}{" "}
+                : botTurn
+                  ? `${nameOf(current, turn % players.length)} got it wrong.`
+                  : "Not quite."}{" "}
               {q.explain}
             </p>
             <button id="next-btn" className="btn" onClick={next}>

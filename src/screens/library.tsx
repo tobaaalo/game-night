@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import clsx from "clsx";
 import { Icon, Scoreboard } from "../components/ui";
-import { useApp } from "../lib/app";
+import { WithPlayers, useApp } from "../lib/app";
+import { NEEDS, botMode, hasBot, humans } from "../lib/bot";
 import { pick } from "../lib/deck";
 import { SECTIONS, gamesFor, gameById, type GameDef, type Section } from "../games/registry";
 import { GameFrame } from "../games/frame";
@@ -291,7 +292,29 @@ export function PlayRoute({ id }: { id: string }) {
         </button>
       </div>
     );
-  if (g.minPlayers && players.length < g.minPlayers)
+  const mode = hasBot(players) ? botMode(g.id) : "play";
+  const people = humans(players).length;
+  if (mode === "people" && people < (NEEDS[g.id] ?? 2))
+    return (
+      <div className="screen empty">
+        <h1 className="h2" tabIndex={-1}>
+          {g.name} needs other people
+        </h1>
+        <p className="lede">
+          The computer can&rsquo;t play this one because it&rsquo;s all about the people in the room. Pick another game,
+          or switch to a group.
+        </p>
+        <div className="actions center">
+          <button className="btn" onClick={() => go("/games")}>
+            Pick another game
+          </button>
+          <button className="btn ghost" onClick={() => go("/who")}>
+            Change who&rsquo;s playing
+          </button>
+        </div>
+      </div>
+    );
+  if (mode === "play" && g.minPlayers && players.length < g.minPlayers)
     return (
       <div className="screen empty">
         <h1 className="h2" tabIndex={-1}>
@@ -304,8 +327,14 @@ export function PlayRoute({ id }: { id: string }) {
       </div>
     );
   return (
-    <GameFrame title={g.name} how={g.how} scores={g.scores !== false}>
-      <g.Play />
+    <GameFrame title={g.name} how={g.how} scores={g.scores !== false && mode !== "solo"}>
+      {mode === "play" ? (
+        <g.Play />
+      ) : (
+        <WithPlayers filter={humans}>
+          <g.Play />
+        </WithPlayers>
+      )}
     </GameFrame>
   );
 }

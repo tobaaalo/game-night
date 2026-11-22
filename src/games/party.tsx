@@ -5,6 +5,7 @@ import { nameOf, useApp } from "../lib/app";
 import { draw, startIndex } from "../lib/deck";
 import { Finish, Img, Turn, useKeys } from "./frame";
 import { keep } from "../lib/scrapbook";
+import { botCount, botRight } from "../lib/bot";
 
 /* ---------- Reveal rounds: show a prompt, reveal, award whoever got it first ---------- */
 export interface RevealItem {
@@ -297,6 +298,17 @@ export function TimedRun<T>({
     if (oneShot) setPhase("done");
     else setItem(draw(id, items));
   };
+  // The computer's turn plays itself: it gets through a number of words that depends on how good it is.
+  const botGo = () => {
+    let n = 0;
+    if (oneShot) {
+      const it = draw(id, items);
+      if (botRight(cur.skill, pointsOf(it))) n = pointsOf(it);
+    } else n = botCount(cur.skill, seconds);
+    if (n) award(cur.id, n);
+    setGot(n);
+    setPhase("done");
+  };
   const [taken, setTaken] = useState(0);
   const nextPlayer = () => {
     setTaken((x) => x + 1);
@@ -307,8 +319,10 @@ export function TimedRun<T>({
     (k, e) => {
       if (k === " " || k === "Enter") {
         e.preventDefault();
-        if (phase === "ready") start();
-        else if (phase === "go") hit();
+        if (phase === "ready") {
+          if (cur.bot) botGo();
+          else start();
+        } else if (phase === "go") hit();
         else nextPlayer();
       }
       if (phase === "go" && (k === "s" || k === "ArrowRight")) skip();
@@ -328,7 +342,18 @@ export function TimedRun<T>({
         <Turn id={cur.id} />
         {phase === "go" && <TimerDial left={left} total={seconds} />}
       </div>
-      {phase === "ready" && (
+      {phase === "ready" && cur.bot && (
+        <div className="stack center-text">
+          <h2 className="qprompt">{nameOf(cur, turn % players.length)}&rsquo;s turn</h2>
+          <p className="lede center-text">The computer takes its turn on its own. Tap to see how it did.</p>
+          <div className="actions center">
+            <button className="btn" onClick={botGo} autoFocus>
+              Let the computer go
+            </button>
+          </div>
+        </div>
+      )}
+      {phase === "ready" && !cur.bot && (
         <div className="stack center-text">
           <h2 className="qprompt">Get ready, {nameOf(cur, turn % players.length)}</h2>
           <p className="lede center-text">{intro}</p>

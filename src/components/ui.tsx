@@ -1,6 +1,7 @@
 import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 import clsx from "clsx";
 import { nameOf, useApp, type Player } from "../lib/app";
+import { botFirst } from "../lib/bot";
 
 /* ---------- Icons (inline, 24px grid, stroke) ---------- */
 const P = {
@@ -293,10 +294,16 @@ export function WhoGotIt({
 }) {
   const { players } = useApp();
   const [sel, setSel] = useState<string[]>([]);
-  const list = players.filter((p) => p.id !== exclude);
+  // The computer is only offered when it beat you to the answer. How often depends on how good it is.
+  const bot = players.find((p) => p.bot);
+  const [botGot] = useState(() => (bot ? botFirst(bot.skill) : false));
+  const list = players.filter((p) => p.id !== exclude && (!p.bot || botGot));
   return (
     <div className="whogot">
       <p className="h3">{label}</p>
+      {bot && (
+        <p className="hint">{botGot ? `${bot.name} says it knew that one.` : `${bot.name} didn't get that one.`}</p>
+      )}
       <div className="givers" role="group" aria-label={label}>
         {list.map((p) => {
           const i = players.indexOf(p);

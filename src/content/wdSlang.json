@@ -1,550 +1,131 @@
 {
-"ng": [
-[
-"Wahala",
-"trouble"
-],
-[
-"Japa",
-"to move abroad"
-],
-[
-"Abeg",
-"please"
-],
-[
-"Oga",
-"boss"
-],
-[
-"Chop",
-"to eat"
-],
-[
-"Gist",
-"chat or gossip"
-],
-[
-"Sabi",
-"to know"
-],
-[
-"Shine your eye",
-"be alert"
-],
-[
-"No wahala",
-"no problem"
-],
-[
-"Yarn",
-"to talk"
-]
-],
-"gb": [
-[
-"Innit",
-"isn't it"
-],
-[
-"Gutted",
-"really disappointed"
-],
-[
-"Knackered",
-"very tired"
-],
-[
-"Cuppa",
-"a cup of tea"
-],
-[
-"Skint",
-"having no money"
-],
-[
-"Chuffed",
-"very pleased"
-],
-[
-"Mate",
-"friend"
-],
-[
-"Cheers",
-"thanks"
-],
-[
-"Bloke",
-"a man"
-]
-],
-"us": [
-[
-"Y'all",
-"you all"
-],
-[
-"Dude",
-"a man or friend"
-],
-[
-"Bummer",
-"something disappointing"
-],
-[
-"Chill",
-"relax"
-],
-[
-"Buck",
-"a dollar"
-],
-[
-"Sneakers",
-"trainers"
-]
-],
-"au": [
-[
-"Arvo",
-"afternoon"
-],
-[
-"Brekkie",
-"breakfast"
-],
-[
-"Servo",
-"petrol station"
-],
-[
-"Thongs",
-"flip-flops"
-],
-[
-"G'day",
-"hello"
-],
-[
-"Barbie",
-"a barbecue"
-]
-],
-"jm": [
-[
-"Wah gwaan",
-"what's going on"
-],
-[
-"Irie",
-"all good"
-],
-[
-"Likkle",
-"little"
-],
-[
-"Yard",
-"home"
-],
-[
-"Nuff",
-"a lot"
-]
-],
-"gh": [
-[
-"Chale",
-"mate, friend"
-],
-[
-"Charley",
-"friend"
-],
-[
-"Akwaaba",
-"welcome"
-],
-[
-"Ɛte sɛn",
-"how are you"
-],
-[
-"Medaase",
-"thank you"
-]
-],
-"ke": [
-[
-"Sasa",
-"hey, what's up"
-],
-[
-"Sheng",
-"Nairobi street slang"
-],
-[
-"Poa",
-"cool"
-],
-[
-"Karibu",
-"welcome"
-],
-[
-"Mambo",
-"what is up"
-],
-[
-"Asante",
-"thank you"
-]
-],
-"za": [
-[
-"Lekker",
-"nice, great"
-],
-[
-"Howzit",
-"hello, how is it going"
-],
-[
-"Braai",
-"a barbecue"
-],
-[
-"Eish",
-"an expression of surprise"
-],
-[
-"Sharp",
-"okay or goodbye"
-],
-[
-"Ja",
-"yes"
-]
-],
-"ie": [
-[
-"Craic",
-"fun, good times"
-],
-[
-"Grand",
-"fine"
-],
-[
-"Eejit",
-"a fool"
-],
-[
-"Banjaxed",
-"broken"
-],
-[
-"Sound",
-"good"
-]
-],
-"ca": [
-[
-"Double-double",
-"a coffee with two creams and two sugars"
-],
-[
-"Toque",
-"a woolly hat"
-],
-[
-"Loonie",
-"a one dollar coin"
-],
-[
-"Eh",
-"a question tag"
-],
-[
-"Washroom",
-"toilet"
-]
-],
-"fr": [
-[
-"Bof",
-"meh, whatever"
-]
-],
-"es": [
-[
-"Vale",
-"OK"
-]
-],
-"mx": [
-[
-"¿Qué onda?",
-"what's up?"
-]
-],
-"br": [
-[
-"Beleza",
-"cool, all good"
-]
-],
-"ar": [
-[
-"Che",
-"hey, mate"
-]
-],
-"jp": [
-[
-"Kawaii",
-"cute"
-]
-],
-"kr": [
-[
-"Daebak",
-"awesome"
-]
-],
-"nl": [
-[
-"Gezellig",
-"cosy, fun together"
-]
-],
-"se": [
-[
-"Fika",
-"a coffee-and-cake break"
-]
-],
-"dk": [
-[
-"Hygge",
-"cosiness"
-]
-],
-"fi": [
-[
-"Sisu",
-"grit, determination"
-]
-],
-"in": [
-[
-"Jugaad",
-"a clever low-cost fix"
-]
-],
-"ph": [
-[
-"Kilig",
-"butterflies in your stomach"
-]
-],
-"nz": [
-[
-"Kia ora",
-"hello"
-]
-],
-"tz": [
-[
-"Pole pole",
-"slowly, slowly"
-]
-],
-"il": [
-[
-"Sababa",
-"cool, great"
-]
-],
-"eg": [
-[
-"Maalesh",
-"never mind, sorry"
-]
-],
-"tr": [
-[
-"Kolay gelsin",
-"may your work be easy"
-]
-],
-"ru": [
-[
-"Davai",
-"come on, let's go"
-]
-],
-"pl": [
-[
-"Na zdrowie",
-"cheers, to your health"
-]
-],
-"gr": [
-[
-"Opa!",
-"a cheer at parties"
-]
-],
-"pt": [
-[
-"Saudade",
-"a deep longing for someone or something"
-]
-],
-"cu": [
-[
-"Asere",
-"mate"
-]
-],
-"co": [
-[
-"Parcero",
-"mate"
-]
-],
-"sn": [
-[
-"Teranga",
-"hospitality"
-]
-],
-"ug": [
-[
-"Webale",
-"thank you"
-]
-],
-"rw": [
-[
-"Murakoze",
-"thank you"
-]
-],
-"et": [
-[
-"Konjo",
-"beautiful"
-]
-],
-"zw": [
-[
-"Shamwari",
-"friend"
-]
-],
-"th": [
-[
-"Mai pen rai",
-"no worries"
-]
-],
-"id": [
-[
-"Jam karet",
-"rubber time, running late"
-]
-],
-"cn": [
-[
-"Jiayou",
-"keep going, you can do it"
-]
-],
-"ma": [
-[
-"Wakha",
-"OK"
-]
-],
-"ir": [
-[
-"Taarof",
-"the art of polite refusing"
-]
-],
-"ch": [
-[
-"Grüezi",
-"hello"
-]
-],
-"at": [
-[
-"Servus",
-"hi, bye"
-]
-],
-"cz": [
-[
-"Ahoj",
-"hi"
-]
-],
-"ro": [
-[
-"Noroc",
-"cheers, good luck"
-]
-],
-"lk": [
-[
-"Ayubowan",
-"may you live long, hello"
-]
-],
-"np": [
-[
-"Dal bhat power, 24 hour",
-"lentils and rice keep you going"
-]
-],
-"bw": [
-[
-"Pula",
-"rain, also a toast and the currency"
-]
-],
-"it": [
-[
-"Mamma mia",
-"wow, good heavens"
-]
-],
-"de": [
-[
-"Feierabend",
-"the end of the working day"
-]
-],
-"hu": [
-[
-"Egészségedre",
-"cheers, to your health"
-]
-],
-"mn": [
-[
-"Sain baina uu",
-"hello"
-]
-],
-"zm": [
-[
-"Muli shani",
-"how are you"
-]
-]
+  "ng": [
+    ["Wahala", "trouble"],
+    ["Japa", "to move abroad"],
+    ["Abeg", "please"],
+    ["Oga", "boss"],
+    ["Chop", "to eat"],
+    ["Gist", "chat or gossip"],
+    ["Sabi", "to know"],
+    ["Shine your eye", "be alert"],
+    ["No wahala", "no problem"],
+    ["Yarn", "to talk"]
+  ],
+  "gb": [
+    ["Innit", "isn't it"],
+    ["Gutted", "really disappointed"],
+    ["Knackered", "very tired"],
+    ["Cuppa", "a cup of tea"],
+    ["Skint", "having no money"],
+    ["Chuffed", "very pleased"],
+    ["Mate", "friend"],
+    ["Cheers", "thanks"],
+    ["Bloke", "a man"]
+  ],
+  "us": [
+    ["Y'all", "you all"],
+    ["Dude", "a man or friend"],
+    ["Bummer", "something disappointing"],
+    ["Chill", "relax"],
+    ["Buck", "a dollar"],
+    ["Sneakers", "trainers"]
+  ],
+  "au": [
+    ["Arvo", "afternoon"],
+    ["Brekkie", "breakfast"],
+    ["Servo", "petrol station"],
+    ["Thongs", "flip-flops"],
+    ["G'day", "hello"],
+    ["Barbie", "a barbecue"]
+  ],
+  "jm": [
+    ["Wah gwaan", "what's going on"],
+    ["Irie", "all good"],
+    ["Likkle", "little"],
+    ["Yard", "home"],
+    ["Nuff", "a lot"]
+  ],
+  "gh": [
+    ["Chale", "mate, friend"],
+    ["Charley", "friend"],
+    ["Akwaaba", "welcome"],
+    ["Ɛte sɛn", "how are you"],
+    ["Medaase", "thank you"]
+  ],
+  "ke": [
+    ["Sasa", "hey, what's up"],
+    ["Sheng", "Nairobi street slang"],
+    ["Poa", "cool"],
+    ["Karibu", "welcome"],
+    ["Mambo", "what is up"],
+    ["Asante", "thank you"]
+  ],
+  "za": [
+    ["Lekker", "nice, great"],
+    ["Howzit", "hello, how is it going"],
+    ["Braai", "a barbecue"],
+    ["Eish", "an expression of surprise"],
+    ["Sharp", "okay or goodbye"],
+    ["Ja", "yes"]
+  ],
+  "ie": [
+    ["Craic", "fun, good times"],
+    ["Grand", "fine"],
+    ["Eejit", "a fool"],
+    ["Banjaxed", "broken"],
+    ["Sound", "good"]
+  ],
+  "ca": [
+    ["Double-double", "a coffee with two creams and two sugars"],
+    ["Toque", "a woolly hat"],
+    ["Loonie", "a one dollar coin"],
+    ["Eh", "a question tag"],
+    ["Washroom", "toilet"]
+  ],
+  "fr": [["Bof", "meh, whatever"]],
+  "es": [["Vale", "OK"]],
+  "mx": [["¿Qué onda?", "what's up?"]],
+  "br": [["Beleza", "cool, all good"]],
+  "ar": [["Che", "hey, mate"]],
+  "jp": [["Kawaii", "cute"]],
+  "kr": [["Daebak", "awesome"]],
+  "nl": [["Gezellig", "cosy, fun together"]],
+  "se": [["Fika", "a coffee-and-cake break"]],
+  "dk": [["Hygge", "cosiness"]],
+  "fi": [["Sisu", "grit, determination"]],
+  "in": [["Jugaad", "a clever low-cost fix"]],
+  "ph": [["Kilig", "butterflies in your stomach"]],
+  "nz": [["Kia ora", "hello"]],
+  "tz": [["Pole pole", "slowly, slowly"]],
+  "il": [["Sababa", "cool, great"]],
+  "eg": [["Maalesh", "never mind, sorry"]],
+  "tr": [["Kolay gelsin", "may your work be easy"]],
+  "ru": [["Davai", "come on, let's go"]],
+  "pl": [["Na zdrowie", "cheers, to your health"]],
+  "gr": [["Opa!", "a cheer at parties"]],
+  "pt": [["Saudade", "a deep longing for someone or something"]],
+  "cu": [["Asere", "mate"]],
+  "co": [["Parcero", "mate"]],
+  "sn": [["Teranga", "hospitality"]],
+  "ug": [["Webale", "thank you"]],
+  "rw": [["Murakoze", "thank you"]],
+  "et": [["Konjo", "beautiful"]],
+  "zw": [["Shamwari", "friend"]],
+  "th": [["Mai pen rai", "no worries"]],
+  "id": [["Jam karet", "rubber time, running late"]],
+  "cn": [["Jiayou", "keep going, you can do it"]],
+  "ma": [["Wakha", "OK"]],
+  "ir": [["Taarof", "the art of polite refusing"]],
+  "ch": [["Grüezi", "hello"]],
+  "at": [["Servus", "hi, bye"]],
+  "cz": [["Ahoj", "hi"]],
+  "ro": [["Noroc", "cheers, good luck"]],
+  "lk": [["Ayubowan", "may you live long, hello"]],
+  "np": [["Dal bhat power, 24 hour", "lentils and rice keep you going"]],
+  "bw": [["Pula", "rain, also a toast and the currency"]],
+  "it": [["Mamma mia", "wow, good heavens"]],
+  "de": [["Feierabend", "the end of the working day"]],
+  "hu": [["Egészségedre", "cheers, to your health"]],
+  "mn": [["Sain baina uu", "hello"]],
+  "zm": [["Muli shani", "how are you"]]
 }
