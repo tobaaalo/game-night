@@ -64,6 +64,20 @@ export function CharadesBingo({ seconds, onAgain }: { seconds: number; onAgain: 
   return (
     <div className="qcard stack">
       <p className="turn">{nameOf(cur, turn % players.length)}, pick a square to act</p>
+      {acting !== null && (
+        <div className="stack center-text">
+          <Clock key={acting} seconds={seconds} onEnd={next} />
+          <p className="h3">Act: {cells[acting]}</p>
+          <div className="actions center">
+            <button className="btn" onClick={got}>
+              Guessed
+            </button>
+            <button className="btn ghost" onClick={next}>
+              Missed
+            </button>
+          </div>
+        </div>
+      )}
       <details className="howto">
         <summary>How to play</summary>
         <ol>
@@ -89,20 +103,6 @@ export function CharadesBingo({ seconds, onAgain }: { seconds: number; onAgain: 
           );
         })}
       </div>
-      {acting !== null && (
-        <div className="stack center-text">
-          <Clock key={acting} seconds={seconds} onEnd={() => undefined} />
-          <p className="h3">Act: {cells[acting]}</p>
-          <div className="actions center">
-            <button className="btn" onClick={got}>
-              Guessed
-            </button>
-            <button className="btn ghost" onClick={next}>
-              Missed
-            </button>
-          </div>
-        </div>
-      )}
       <p className="hint center-text">Get three in a row to win. Miss and the next player goes.</p>
     </div>
   );

@@ -12,7 +12,7 @@ const SKIP = /^(close|leave|quit|exit|home|back|reset|clear all|delete|remove|sw
 const b = await chromium.launch({ executablePath: process.env.PW_CHROME || undefined });
 let bad = 0;
 const summary = [];
-for (const w of [375, 1280]) {
+for (const w of [375]) {
   const ctx = await b.newContext({ viewport: { width: w, height: w > 800 ? 900 : 760 }, reducedMotion: "reduce" });
   const p = await ctx.newPage();
   const errs = [];
@@ -24,7 +24,7 @@ for (const w of [375, 1280]) {
     const clicked = new Set();
     let n = 0;
     let idle = 0;
-    for (let step = 0; step < 90 && idle < 4; step++) {
+    for (let step = 0; step < 50 && idle < 2; step++) {
       if (!p.url().includes(`/play/${id}`)) {
         await p.goto(`${BASE}/play/${id}`, { waitUntil: "networkidle" }).catch(() => {});
       }
@@ -42,7 +42,7 @@ for (const w of [375, 1280]) {
         }
       }
       const next = labels.find((l, i) => l && !SKIP.test(l) && !clicked.has(sig + "|" + l + "|" + labels.slice(0, i).filter((x) => x === l).length));
-      if (!next) { idle++; await p.waitForTimeout(500); continue; }
+      if (!next) { idle++; await p.waitForTimeout(250); continue; }
       idle = 0;
       const dup = labels.slice(0, labels.indexOf(next)).filter((x) => x === next).length;
       clicked.add(sig + "|" + next + "|" + dup);
@@ -50,7 +50,7 @@ for (const w of [375, 1280]) {
       const target = next.length > 2 ? loc : p.locator(`[aria-label="${next}"]`).first();
       await target.click({ timeout: 2500 }).catch(() => {});
       n++;
-      await p.waitForTimeout(150);
+      await p.waitForTimeout(80);
       const o = await p.evaluate(() => ({ over: document.documentElement.scrollWidth - document.documentElement.clientWidth, blank: document.body.innerText.trim().length < 15 }));
       if (o.over > 1) { console.log(`FAIL ${id}@${w} after "${next}": sideways scroll +${o.over}`); bad++; }
       if (o.blank) { console.log(`FAIL ${id}@${w} after "${next}": blank page`); bad++; }

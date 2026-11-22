@@ -16,7 +16,7 @@ const mate = await phone();
 await mate.goto(`${BASE}/join/${code}`);
 await mate.locator("#jname").fill("Femi");
 await mate.getByRole("button", { name: "Join" }).click();
-await host.getByText("2 in the room").waitFor({ timeout: 10000 }).catch(() => fail("host player not counted: " + 0));
+await host.getByText("2 in the room").first().waitFor({ timeout: 10000 }).catch(async () => fail("host player not counted: " + (await host.locator("main").innerText()).replace(/\n+/g, " | ").slice(0, 500)));
 // start Higher or Lower style quick game: Would You Rather is talk-only; use Name 5 shout
 await host.locator(".ticket", { hasText: "Name 5 in 10" }).first().click();
 await host.getByRole("button", { name: /Start with/ }).click();
