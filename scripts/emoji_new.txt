@@ -1,0 +1,467 @@
+film|1|🦈🌊😱|Jaws
+film|1|👻🚫📞|Ghostbusters
+film|1|🧊👸❄️⛄|Frozen
+film|1|🐠🔍|Finding Nemo
+film|1|🕷️🧑🕸️|Spider-Man
+film|1|🦇🃏|The Dark Knight
+film|1|🧙‍♂️💍🌋|The Lord of the Rings
+film|1|⚡👓🧙|Harry Potter
+film|1|🚢🧊💑|Titanic
+film|1|🦖🏝️|Jurassic Park
+film|1|🤖🚗|Transformers
+film|1|🧸🤠🚀|Toy Story
+film|1|🐀👨‍🍳🍝|Ratatouille
+film|1|🏠🎈👴|Up
+film|1|👹💚🏰|Shrek
+film|1|🥶👸🏼⛄|Frozen
+film|1|🐒👑🦁|The Lion King
+film|2|🛸🚲🌕|E.T.
+film|2|🧛‍♂️🦇🏰|Dracula
+film|2|🥊🇺🇸🏃|Rocky
+film|2|🧟🚂|Train to Busan
+film|2|🌌⚔️🧑‍🚀|Star Wars
+film|2|🦸‍♂️🔨⚡|Thor
+film|2|🛡️🇺🇸🦸|Captain America
+film|2|🐍✈️|Snakes on a Plane
+film|2|🏴‍☠️🦜⚓|Pirates of the Caribbean
+film|2|👸🧹🎃|Cinderella
+film|2|🍎🥀👸💤|Snow White
+film|2|🧞‍♂️🪔🐒|Aladdin
+film|2|🐘🪶|Dumbo
+film|2|🐕🐩🍝|Lady and the Tramp
+film|2|🧚‍♀️🌙🏴‍☠️🪝|Peter Pan
+film|2|👧🌪️🏠👠|The Wizard of Oz
+film|2|🚗⚡🏁|Cars
+film|2|🐟😢🏊|Finding Dory
+film|2|🦸‍♂️👨‍👩‍👧‍👦💥|The Incredibles
+film|2|😀😢😡🤢|Inside Out
+film|2|🚪👹🏢|Monsters, Inc.
+film|2|🤖🌱🗑️|WALL-E
+film|2|🐧🕺🧊|Happy Feet
+film|2|🦁🦓🦒🚢|Madagascar
+film|2|🧓🏠🎈|Up
+film|2|🔮🧙‍♂️⚔️|Merlin
+film|2|🕵️‍♂️🔎🎩|Sherlock Holmes
+film|2|🏎️💨🏁|Fast and Furious
+film|2|👩‍🚀🌌😱|Gravity
+film|2|🌹🐺👸|Beauty and the Beast
+film|2|🧜‍♀️🦀🌊|The Little Mermaid
+film|2|🐻🍯🎈|Winnie the Pooh
+film|2|🦌🔥🌲|Bambi
+film|2|🌺🏄‍♀️🐠|Moana
+film|2|👩‍🦰🏹🐻|Brave
+film|2|🧬🦖🌍|Jurassic World
+film|3|🔫🍸🕴️|James Bond
+film|3|🎹🌆💃☕|La La Land
+film|3|🧠🌀🏙️|Inception
+film|3|🐟🔪👨‍🍳|Ratatouille
+film|3|🚀🌽🌌|Interstellar
+film|3|🔴💊🔵💊|The Matrix
+film|3|🧑‍🔬🤖💥|Ex Machina
+film|3|⏳🧑‍🚀🌍|Interstellar
+film|3|👁️🚪🔒|The Shining
+film|3|🪓❄️🏨|The Shining
+film|3|🐑🔇🔪|The Silence of the Lambs
+film|3|📞💀🔪|Scream
+film|3|🦇🧛🌃|Batman
+film|3|👶💼🎩|The Boss Baby
+film|3|🧍‍♂️🏜️🪐|Dune
+film|3|🍫🏭🎟️|Charlie and the Chocolate Factory
+film|3|🎻🔪🚿|Psycho
+film|3|🐟🧜‍♂️🤿|The Shape of Water
+film|3|🚌💥📉|Speed
+film|3|🥷🐢🍕|Teenage Mutant Ninja Turtles
+film|3|🪖🏖️🇫🇷|Saving Private Ryan
+film|3|🏇⚔️👑|Gladiator
+film|3|🏛️⚔️💪🔱|300
+film|3|🧌🦵🛌|Pan's Labyrinth
+film|3|🧳👨🏿‍🦲💎|Black Panther
+film|3|🍷🐑🏃|Babe
+film|3|🔦🪐🤝|Close Encounters of the Third Kind
+film|3|💣🔇🎬|A Quiet Place
+film|3|🥛🔪🏠|Home Alone
+film|3|🏫👦🏻⚡|Harry Potter
+film|3|🗽🐒🌍|Planet of the Apes
+film|3|🌹💘🚢|Titanic
+film|3|🛏️😴🔪🧑|A Nightmare on Elm Street
+film|3|🚀🧸🐝|Buzz Lightyear
+film|3|📺👁️🧒|Poltergeist
+film|3|🤡🎈🚰|It
+film|3|🏀🐰🕴️|Space Jam
+film|3|🦍🏙️🏢|King Kong
+film|3|🧑‍🚒🔥🏢|The Towering Inferno
+film|3|🥋🧒🪰|The Karate Kid
+film|3|🔪💀🏕️🍁|Friday the 13th
+film|4|🧓🧒🎻🐄|Fiddler on the Roof
+film|4|🎩👨‍🦲🏎️🍟|Mr. Bean
+film|4|🌃🚕🔫🇺🇸|Taxi Driver
+film|4|🎥🔴🧠|Memento
+film|4|💍🌋🧝|The Return of the King
+film|4|🎭🕵️‍♂️🏨|The Grand Budapest Hotel
+film|4|🛁🧪💀🇺🇸|Breaking Bad
+film|4|🛹🔙⏱️🚗|Back to the Future
+film|4|🥃🤵🎰|Casino
+film|4|🪞🦢🩰|Black Swan
+film|4|🍝👴🔫|The Godfather
+film|4|🐴🔪🏙️|The Godfather
+film|4|🏜️🧙🐛🪱|Dune
+film|4|🔫🍔🕶️|Pulp Fiction
+film|4|🔒💎🐶|Reservoir Dogs
+film|4|🕳️🏃🐇|Alice in Wonderland
+film|4|🚫🤝📚|Schindler's List
+film|4|⚖️🧑‍💼🧑‍💼|12 Angry Men
+film|4|🧳🌉🇬🇧🇮🇳|The Best Exotic Marigold Hotel
+film|4|🛶🧔🐅|Life of Pi
+film|4|🏋️‍♂️🥋🧓|Million Dollar Baby
+film|4|🪆🧠📺|Being John Malkovich
+film|4|🍷🏎️🇫🇷|Ferrari
+film|4|🌃🎬🕴️🎷|Whiplash
+film|4|🏃‍♂️🪶🍫|Forrest Gump
+film|4|🥷🗡️👰|Kill Bill
+film|4|🏝️📖🐯|Life of Pi
+nolly|1|💔👑🇳🇬|King of Boys
+nolly|2|🎊👰🇳🇬|The Wedding Party
+nolly|2|💍⚰️🇳🇬|Living in Bondage
+nolly|3|🪘🔥🇳🇬|Figurine
+nolly|3|🕊️⚖️🇳🇬|Anikulapo
+tv|1|🧊👑🐉|Game of Thrones
+tv|1|🧟🔫🌆|The Walking Dead
+tv|1|🕵️🔍🍺🇬🇧|Sherlock
+tv|1|🏠🛋️👫👫|Friends
+tv|1|🦸‍♂️💚🏹|Arrow
+tv|1|🐱🐶🏠🇬🇧|Pets at Home
+tv|1|🧑‍🍳🔪🍽️|MasterChef
+tv|1|🧁🥣🇬🇧|The Great British Bake Off
+tv|1|🌆💎💃👠|Sex and the City
+tv|1|👨‍⚕️🏥🚑|Grey's Anatomy
+tv|1|🏰👑🇬🇧|The Crown
+tv|1|🧪💎🥦|Breaking Bad
+tv|1|👽🔦🚲🧒|Stranger Things
+tv|1|🎤🌟👩‍⚖️|The X Factor
+tv|1|🎬🏠🛌|Big Brother
+tv|2|🦑🟢🎲|Squid Game
+tv|2|🏘️🔍🎩|Midsomer Murders
+tv|2|📞🇬🇧👮|The Bill
+tv|2|🤵🔫🏙️🇬🇧|Peaky Blinders
+tv|2|🍳🧪🧑‍🏫|Breaking Bad
+tv|2|🪓🏰🇬🇧|The Last Kingdom
+tv|2|🛋️💼📈🇺🇸|Succession
+tv|2|🥼🔬🏥🇺🇸|House
+tv|2|🧙‍♀️🌿🏫|Sabrina the Teenage Witch
+tv|2|🐺🏰👑|Game of Thrones
+tv|2|🚔🇬🇧🎶|Line of Duty
+tv|2|🎓🏫🇬🇧💥|Skins
+tv|2|🍸🕶️🇺🇸📺|Mad Men
+tv|2|🦖🚂📺|Dinosaur Train
+tv|2|🚢🏝️🛶🔮|Lost
+tv|2|🎯🥊🏆📺|Gladiators
+tv|2|🏠🔧🧰👷|Bob the Builder
+tv|2|🐷👨‍👩‍👧‍👦🌧️|Peppa Pig
+tv|2|🚒🐶🏡|Paw Patrol
+tv|3|🕶️💼🚬🍸|Mad Men
+tv|3|🧑‍🚀🌌🛋️🔬|The Big Bang Theory
+tv|3|🏝️💣🛶|Lost
+tv|3|🕯️🏥🔪|Chernobyl
+tv|3|🗡️🕊️🏰🇬🇧|The Witcher
+tv|3|👽🦉🏜️|The Mandalorian
+tv|3|🤖🏜️🤠|Westworld
+tv|3|🔦🌀🧠👧|Stranger Things
+tv|3|🗼💍👩‍🎤|Eurovision
+tv|3|🧛‍♂️🌙🐺🧑|The Vampire Diaries
+tv|3|🎻🏺🔍🇬🇧|Sherlock
+tv|3|👨‍🍳🐻🔥|The Bear
+tv|3|🎰💰🧠🇺🇸|Money Heist
+tv|3|🏫🏀🇺🇸🦁|Friday Night Lights
+tv|3|🥩👨‍🍳🔪🍽️|Hell's Kitchen
+tv|3|🎃🏚️👻🇬🇧|Ghosts
+tv|3|🐊🔪🏞️🇺🇸|Dexter
+tv|3|🏥🇬🇧🧑‍⚕️|Casualty
+tv|4|📝🔪🕵️🇺🇸📺|True Detective
+tv|4|🏚️🍂🧛🇺🇸|American Horror Story
+tv|4|🎬🐒🏙️|Planet Earth
+tv|4|🧓🏀🏘️🇺🇸|The Wire
+tv|4|🌍🐘🎙️🇬🇧|Blue Planet
+tv|4|🪖🇬🇧🎖️|Band of Brothers
+tv|4|🏘️🎶📺🇬🇧|Coronation Street
+tv|4|🔪🐀🕵️‍♂️|Mindhunter
+tv|4|🥃🚗🏁📺|Top Gear
+tv|4|🧑‍💻🔐💼🖥️|Mr. Robot
+tv|4|🧑‍⚖️🏛️🇺🇸📺|Suits
+tv|4|🥩🔥🔪📺|The Chef
+bible|1|🍎🐍🌳|Adam and Eve
+bible|1|🌊🚪👨‍🦳|Moses parts the Red Sea
+bible|1|⭐🐪👑🎁|The three wise men
+bible|1|🐋🧔|Jonah and the whale
+bible|1|🦁🕳️🙏|Daniel in the lions' den
+bible|1|🔥🌿🧔|The burning bush
+bible|1|🪨🧒🧌|David and Goliath
+bible|1|🍞🐟👥|Feeding the five thousand
+bible|1|✝️🌅🪨|The resurrection
+bible|1|👶🐴⭐|The birth of Jesus
+bible|1|🍷💧🎉|Water into wine
+bible|1|🌈🕊️🚢|Noah's Ark
+bible|1|🏗️🗼🗣️|Tower of Babel
+bible|1|🌳🍎🙈|Adam and Eve
+bible|2|👴🐏⛰️|Abraham and Isaac
+bible|2|🪜😴☁️|Jacob's ladder
+bible|2|🌈🧥👦|Joseph's coat of many colours
+bible|2|🔥🏙️🧂|Sodom and Gomorrah
+bible|2|🧂👩🔙|Lot's wife
+bible|2|🐸🦟🩸|The ten plagues
+bible|2|🐍🪄🏜️|Moses' staff
+bible|2|🪙🧑🌳|Zacchaeus
+bible|2|🐑🤲🧔|The Good Shepherd
+bible|2|🍷🍞🪑🧑‍🤝‍🧑|The Last Supper
+bible|2|👑💇‍♂️✂️|Samson and Delilah
+bible|2|🌾👩🧔|Ruth and Boaz
+bible|2|🐟🐟🕸️🛶|The miraculous catch of fish
+bible|2|🧎‍♂️🌿🌙|Gethsemane
+bible|2|👣🌊🧑🚶|Jesus walks on water
+bible|2|👁️🧑‍🦯🤲|Jesus heals the blind
+bible|2|🕊️🔥👥|Pentecost
+bible|2|🏺🌿🥣|The widow's offering
+bible|3|🔔🧑🏠👥|The house built on the rock
+bible|3|🍇🍷👨‍🌾|The workers in the vineyard
+bible|3|🌱🌤️🌾|The parable of the sower
+bible|3|🧑‍🦱🪙🧎|The prodigal son
+bible|3|🏔️📜🧔|The Ten Commandments
+bible|3|🔊🏙️🧱|The walls of Jericho
+bible|3|🌿🐑🧔🐺|The Good Shepherd
+bible|3|🤴🏗️⛪|Solomon builds the temple
+bible|3|👶⚖️👩👩|The judgment of Solomon
+bible|3|🗡️👑🌑|Saul
+bible|3|🕳️🧔🪣|Joseph in the well
+bible|3|⚡☀️🛑🧔|The sun stands still
+bible|3|🌀🔥🐴🧔|Elijah and the chariot of fire
+bible|3|🧔💧🐦|Jesus' baptism
+bible|3|🍞🥩☁️🏜️|Manna and quail
+bible|3|👸🤴🍷🥂|Esther
+bible|3|⛓️🚪🔓🙏|Paul and Silas in prison
+bible|3|🧔⚡🛣️🙈|Saul on the road to Damascus
+bible|4|🪨🌊🔨🏜️|Moses strikes the rock
+bible|4|👴👵👶🌟|Sarah laughs
+bible|4|🧔🍞🐦🏔️|Elijah fed by ravens
+bible|4|🦅🪶🐑🏔️|Isaiah 40:31
+bible|4|🧔🔥🔨🐂|Elijah and the prophets of Baal
+bible|4|🔥🕳️👥👥👥|Shadrach, Meshach and Abednego
+bible|4|✋✍️🧱👑|The writing on the wall
+bible|4|🌿🕊️🛶🧔|Noah sends out the dove
+bible|4|🚪🩸🐑🏠|The Passover
+bible|4|🌑🧔🌩️🏔️|Moses on Mount Sinai
+bible|4|🌾🧔🐂🧑|Elisha called by Elijah
+bible|4|📜🧔🐟🏝️|Jonah
+bible|4|🧔🔥👥🏔️|Mount Carmel
+bible|4|🤴🌿🚫🐄|Nebuchadnezzar eats grass
+say|1|🐱🌧️🐶|It's raining cats and dogs
+say|1|🍰🥧👌|A piece of cake
+say|1|🧊🥶🚫|Break the ice
+say|1|🐘🏠🚫|The elephant in the room
+say|1|🍎🌳➡️|The apple doesn't fall far from the tree
+say|1|🌙🟢🧀|The moon is made of cheese
+say|1|🐦🪨🪨|Kill two birds with one stone
+say|1|💰🌳🚫|Money doesn't grow on trees
+say|1|🐶😴🛑|Let sleeping dogs lie
+say|1|🔪🧈|Smooth as butter
+say|1|🎭🤥🔥|Liar, liar, pants on fire
+say|2|🥚🧺🚫|Don't put all your eggs in one basket
+say|2|🐎🛒🔙|Put the cart before the horse
+say|2|🐴🚪🏃|Close the stable door after the horse has bolted
+say|2|🐻🍯😠|Like a bear with a sore head
+say|2|🧠🌧️⚡|Brainstorm
+say|2|🫖🌊|A storm in a teacup
+say|2|🌙🔵|Once in a blue moon
+say|2|🏠🪟🪨🚫|People in glass houses shouldn't throw stones
+say|2|🐴🚶‍♂️💧🚫|You can lead a horse to water
+say|2|🐕🐾🐱|Let the cat out of the bag
+say|2|🧊🗻|The tip of the iceberg
+say|2|🥶🦶|Cold feet
+say|2|💡💭|A bright idea
+say|2|🌟🦵|Break a leg
+say|2|🐴🔭|Straight from the horse's mouth
+say|3|🐟🥶🌊|A fish out of water
+say|3|🔪🍞🗡️🔙|Stab in the back
+say|3|🏃‍♂️⏰🔚|Beat the clock
+say|3|🦆🦆🦆|Get your ducks in a row
+say|3|🐎🎁👄🚫|Don't look a gift horse in the mouth
+say|3|🔥🍳🥘|Out of the frying pan into the fire
+say|3|🌹🏠🌾|Home sweet home
+say|3|🐜🌱🏔️|Make a mountain out of a molehill
+say|3|🐕🦴🏃|Barking up the wrong tree
+say|3|🧈🧈🍞🧑‍🍳|Butter someone up
+say|3|🚢🕳️🫢|Jump ship
+say|3|🪑🥔🛋️|Couch potato
+say|3|🐑🐺🧥|A wolf in sheep's clothing
+say|3|🐦🐛🌅|The early bird catches the worm
+say|3|🤲💰🧊🔥|Hot potato
+say|4|🌳🔥🌲👀|Can't see the wood for the trees
+say|4|🕐🔔🌓|At the eleventh hour
+say|4|🐒🙈🙉🙊|See no evil, hear no evil, speak no evil
+say|4|🐴🌾🏗️|Beat a dead horse
+say|4|🪙🔄🪙|Two sides of the same coin
+say|4|🍯🪰🍃|You catch more flies with honey than with vinegar
+say|4|🧵⏰🔀|A stitch in time saves nine
+say|4|🏠🍎🥧🇺🇸|As American as apple pie
+say|4|🔪🏺🍯|Land of milk and honey
+job|1|👩‍⚕️💉🏥|Nurse
+job|1|👨‍🚒🔥🚒|Firefighter
+job|1|👮‍♂️🚓|Police officer
+job|1|👨‍🍳🍳|Chef
+job|1|👩‍🏫📚|Teacher
+job|1|✈️👨‍✈️|Pilot
+job|1|🧑‍🌾🚜|Farmer
+job|1|🧑‍🔧🔧🚗|Mechanic
+job|1|👨‍⚕️🩺|Doctor
+job|1|🧑‍🎨🖌️|Artist
+job|2|📮🚲👨|Postman
+job|2|✂️💇‍♀️|Hairdresser
+job|2|🪒💈🧔|Barber
+job|2|🧑‍⚖️🔨🏛️|Judge
+job|2|🧑‍🚀🌌|Astronaut
+job|2|🦷🪥🧑‍⚕️|Dentist
+job|2|🧑‍🔬🧪|Scientist
+job|2|🎤🎶🧑‍🎤|Singer
+job|2|🪠🔧🚿|Plumber
+job|2|⚡🔌👷|Electrician
+job|2|🧱🏗️👷|Builder
+job|2|📷🧑|Photographer
+job|2|🛒🧑‍💼🏪|Shopkeeper
+job|2|🚕🧑|Taxi driver
+job|2|🐄🧑‍⚕️🩺|Vet
+job|3|💼🏦📈|Banker
+job|3|⚖️👩‍💼🗂️|Lawyer
+job|3|🧑‍💻🕵️🔒|Cybersecurity analyst
+job|3|🧪👩‍🔬🧬|Biologist
+job|3|🧑‍🏫🔢📐|Mathematician
+job|3|🕵️‍♂️🔍🗂️|Detective
+job|3|🧑‍💼📊🧾|Accountant
+job|3|🧑‍🏭⚙️🏭|Engineer
+job|3|🧑‍🌾🐝🍯|Beekeeper
+job|3|✍️📰🗞️|Journalist
+job|3|🎬🎥🧑‍🎤|Film director
+job|3|🛠️🪵🪑|Carpenter
+job|3|🧑‍🎓📚🔬|Professor
+job|3|🏗️📐🏠|Architect
+job|3|🎙️📻🎧|Radio presenter
+job|4|📈🐂🐻💹|Stockbroker
+job|4|🧑‍💻📊🧮|Data scientist
+job|4|🦴🔍🏜️🧑‍🔬|Archaeologist
+job|4|🌦️🎙️🗺️|Weather forecaster
+job|4|🔭⭐🧑‍🔬|Astronomer
+job|4|🪙🧑‍💼🏛️📉|Economist
+job|4|🧑‍⚕️🧠🛋️|Psychiatrist
+job|4|🧑‍🏫🗣️📖🌍|Linguist
+job|4|⛏️💎🏔️|Geologist
+job|4|🧑‍🍳🍷🍽️⭐|Sommelier
+food|1|🍕🧀🍅|Pizza
+food|1|🍔🍟🥤|Burger meal
+food|1|🍝🍅🧀|Spaghetti
+food|1|🥞🍁🧈|Pancakes
+food|1|🍳🥓🍞|Full English breakfast
+food|1|🐟🍟📰|Fish and chips
+food|1|🍦🍫🍓|Ice cream
+food|1|🥪🧀🥬|Sandwich
+food|1|🌮🥑🌶️|Tacos
+food|1|🍣🍚🐟|Sushi
+food|2|🍛🍚🌶️🇳🇬|Jollof rice
+food|2|🥘🦐🥬|Paella
+food|2|🍜🥚🍖🇯🇵|Ramen
+food|2|🥟🥢🇨🇳|Dumplings
+food|2|🥐☕🇫🇷|Croissant
+food|2|🍲🥬🍖🇳🇬|Egusi soup
+food|2|🌯🥩🌶️|Burrito
+food|2|🥗🍅🫒🧀🇬🇷|Greek salad
+food|2|🍤🍚🥢🇯🇵|Tempura
+food|2|🥧🍎🍨|Apple pie
+food|2|🍫🥛🍰|Chocolate cake
+food|2|🧇🍓🍦|Waffles
+food|3|🍠🔥🇳🇬|Roasted plantain
+food|3|🌽🍵🇳🇬|Pap
+food|3|🍚🥛🍯🇮🇳|Kheer
+food|3|🥩🥬🫘🇳🇬|Moi moi
+food|3|🍗🍚🥜🇳🇬|Suya
+food|3|🧆🫓🥙|Falafel
+food|3|🥞🫘🇳🇬|Akara
+food|3|🍲🫘🍞|Cassoulet
+food|3|🍝🥚🥓🧀|Carbonara
+food|3|🍞🐑🥬🇹🇷|Doner kebab
+food|3|🥭🥛🇮🇳|Mango lassi
+food|3|🫓🥩🧅🇮🇳|Biryani
+food|4|🍖🔥🥬🇰🇷|Korean barbecue
+food|4|🍲🐟🍅🇫🇷|Bouillabaisse
+food|4|🍮🥛🥚🍯|Crème brûlée
+food|4|🥩🍷🍄🇫🇷|Beef bourguignon
+food|4|🧀🥔🔥🇨🇭|Raclette
+food|4|🍚🐟🥬🇰🇷|Kimbap
+food|4|🥩🍙🥢🇯🇵|Gyudon
+food|4|🍲🌶️🥥🇹🇭|Tom kha gai
+place|1|🗼🥖🇫🇷|Paris
+place|1|🗽🍎🌆|New York
+place|1|🕌🏜️🐪|Dubai
+place|1|🎡🇬🇧🌉|London
+place|1|🏔️🧀🇨🇭|Switzerland
+place|1|🍕🏛️🇮🇹|Rome
+place|1|🐨🦘🇦🇺|Australia
+place|1|🍁🏒🇨🇦|Canada
+place|2|🏯🌸🗻|Japan
+place|2|🏝️🌴☀️|Maldives
+place|2|🧱🐉🇨🇳|The Great Wall of China
+place|2|🏛️🏺🇬🇷|Athens
+place|2|🌋🍕🏛️|Pompeii
+place|2|🇪🇬🔺🐪|The Pyramids of Giza
+place|2|🛕🐘🇮🇳|India
+place|2|🌆🌉🔴|San Francisco
+place|2|🎰💡🏜️|Las Vegas
+place|2|🌷🚲🧀🇳🇱|Amsterdam
+place|2|🇧🇷⛪🙌🌆|Rio de Janeiro
+place|2|🏰🐉🏴󠁧󠁢󠁷󠁬󠁳󠁿|Wales
+place|3|🏔️🎿🇦🇹|Austria
+place|3|🦁🌍🦓🇰🇪|Kenya
+place|3|🌴🏙️🇳🇬|Lagos
+place|3|🏜️🇲🇦🕌|Marrakech
+place|3|🌋🧊🇮🇸|Iceland
+place|3|🏔️🕉️🇳🇵|Nepal
+place|3|🏛️🍷🇦🇹|Vienna
+place|3|🕍🌅🇮🇱|Jerusalem
+place|3|🚋🛕🌉🇵🇹|Lisbon
+place|3|🏙️🎭🎡🇨🇿|Prague
+place|3|🇿🇦🏔️🍷|Cape Town
+place|4|🌉🎶🇭🇺|Budapest
+place|4|🇳🇬🪨🏔️|Zuma Rock
+place|4|🏔️🦙🇵🇪|Machu Picchu
+place|4|🏖️🌅🐢🇲🇺|Mauritius
+place|4|🏞️💧🇿🇲|Victoria Falls
+place|4|🌆🕌🌉🇹🇷|Istanbul
+place|4|🧱🏛️🇮🇹🏛️|The Colosseum
+sport|1|⚽🥅🧤|Football
+sport|1|🏀🏀🥅|Basketball
+sport|1|🎾🏆🍓|Wimbledon
+sport|1|🏈🇺🇸🏟️|American football
+sport|1|🏏🇮🇳🇬🇧|Cricket
+sport|1|🏊‍♂️🏅|Swimming
+sport|1|🥊🏆|Boxing
+sport|2|⛳🏌️‍♂️🟢|Golf
+sport|2|🏉🇳🇿|Rugby
+sport|2|🏒🧊🥅|Ice hockey
+sport|2|🎳🧍‍♂️|Bowling
+sport|2|🏄‍♂️🌊|Surfing
+sport|2|🎿⛷️🏔️|Skiing
+sport|2|🤺⚔️|Fencing
+sport|2|🏋️‍♂️🏅|Weightlifting
+sport|2|🏇🏁|Horse racing
+sport|2|🚴‍♂️🏁|Cycling
+sport|3|🏅🏃‍♂️🇯🇲|Usain Bolt
+sport|3|🎯🍺🇬🇧|Darts
+sport|3|🎱🟢🧑|Snooker
+sport|3|🏎️🏁🇬🇧|Formula 1
+sport|3|🥋🇯🇵|Judo
+sport|3|🤸‍♀️🏅|Gymnastics
+sport|3|🏸🪶|Badminton
+sport|3|🏓🇨🇳|Table tennis
+sport|3|🚣‍♂️🌊🏆|Rowing
+sport|3|🏹🎯🥇|Archery
+sport|4|🛷🧊⏱️|Bobsleigh
+sport|4|🥌🧊🇨🇦|Curling
+sport|4|🏊‍♂️🚴‍♂️🏃‍♂️|Triathlon
+sport|4|🏇🏌️🇬🇧|Polo
+sport|4|🚣‍♀️🏰🇬🇧🎓|The Boat Race
+sport|4|🤾‍♂️🥅🇩🇰|Handball
