@@ -75,10 +75,10 @@ function Board({
     cur.current = keepLast ? s.slice(-2) : null;
   };
   return (
-    <div className="board-wrap">
+    <div className="sketch-wrap">
       <canvas
         ref={ref}
-        className="board"
+        className="sketch"
         width={800}
         height={600}
         aria-label={canDraw ? "Drawing area" : "The drawing"}
@@ -132,7 +132,19 @@ function Board({
   );
 }
 
-function Results({ v, nm, judge }: { v: LiveView; nm: (p: string) => string; judge?: (pid: string) => void }) {
+function Results({
+  v,
+  nm,
+  judge,
+  flag,
+  me,
+}: {
+  v: LiveView;
+  nm: (p: string) => string;
+  judge?: (pid: string) => void;
+  flag?: (pid: string, i: number) => void;
+  me?: string;
+}) {
   if (!v.results) return null;
   const sorted = [...v.results].sort((a, b) => b.total - a.total);
   return (
@@ -157,6 +169,15 @@ function Results({ v, nm, judge }: { v: LiveView; nm: (p: string) => string; jud
                 <span key={i} className={clsx("chip", it.bad && "bad", it.p > 0 && "good")}>
                   {it.t || "·"}
                   {it.p > 0 && <b> +{it.p}</b>}
+                  {flag && it.t && me && me !== r.pid && me !== "host" && (
+                    <button
+                      className="chip-flag"
+                      aria-label={`Say ${it.t} is not valid`}
+                      onClick={() => flag(r.pid, i)}
+                    >
+                      {it.bad ? "Removed" : "Not valid"}
+                    </button>
+                  )}
                 </span>
               ))}
             </p>
@@ -333,7 +354,8 @@ export function LiveGame({ state, me, send, skew }: Props) {
         <h2 className="qprompt">{v.prompt}</h2>
         {v.step === "reveal" ? (
           <>
-            <Results v={v} nm={nm} />
+            <Results v={v} nm={nm} me={me} flag={(pid, i) => send({ t: "live", a: "flag", pid, i })} />
+            <p className="muted small">Tap "Not valid" on any answer that does not fit. Most players agreeing removes it.</p>
             {next}
           </>
         ) : isHost ? (
@@ -342,6 +364,40 @@ export function LiveGame({ state, me, send, skew }: Props) {
           </p>
         ) : (
           <WordsInput key={v.round} v={v} send={send} locked={mineLocked} />
+        )}
+      </div>
+    );
+
+  /* ---------- Name it out loud, others keep count ---------- */
+  if (v.kind === "shout")
+    return (
+      <div className="qcard live">
+        {head}
+        <p className="turn">{isActor ? "Your turn: shout them out" : `${nm(v.actor)} is shouting`}</p>
+        <h2 className="qprompt">{v.prompt}</h2>
+        <p className="shout-tally" aria-live="polite">
+          <span className="mono">{v.tally ?? 0}</span> / {v.wordLen}
+        </p>
+        {v.step === "reveal" ? (
+          <>
+            <p className="muted">{v.note}</p>
+            {next}
+          </>
+        ) : isActor ? (
+          <div className="actions center">
+            <button className="btn big" onClick={() => send({ t: "live", a: "tick" })}>
+              That is one
+            </button>
+            <button className="btn ghost small" onClick={() => send({ t: "live", a: "done" })}>
+              Done
+            </button>
+          </div>
+        ) : (
+          <div className="actions center">
+            <button className="btn ghost" onClick={() => send({ t: "live", a: "veto" })}>
+              Not valid, take one off
+            </button>
+          </div>
         )}
       </div>
     );
@@ -427,7 +483,8 @@ export function LiveGame({ state, me, send, skew }: Props) {
             onSubmit={(e) => {
               e.preventDefault();
               const w = text.trim().toLowerCase();
-              if (w.length < 2 || !/^[a-z]+$/.test(w)) return setErr("Letters only, at least two.");
+              if (!/^[a-z]+$/.test(w)) return setErr("Letters only, please.");
+              if (w.length < 5) return setErr("Words need at least 5 letters.");
               if (w[0] !== need.toLowerCase()) return setErr(`It must start with ${need}.`);
               if (v.chain?.includes(w)) return setErr("That word has been used.");
               setErr("");
@@ -449,6 +506,7 @@ export function LiveGame({ state, me, send, skew }: Props) {
             </button>
           </form>
         )}
+        <p className="hint">Words must be at least 5 letters long.</p>
         {err && isActor && <p className="error-text">{err}</p>}
         {v.out && v.out.length > 0 && <p className="muted">Out: {v.out.map((p) => nm(p)).join(", ")}</p>}
       </div>

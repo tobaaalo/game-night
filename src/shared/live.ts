@@ -13,6 +13,8 @@ export type LiveCfg =
       lo: number;
       pool: boolean;
     }
+  /** One player says the answers out loud and taps one for each; the others can say "not valid". */
+  | { kind: "shout"; prompts: string[]; seconds: number; max: number }
   | { kind: "draw"; words: string[]; seconds: number }
   | { kind: "chain"; start: string; seconds: number }
   | { kind: "memory"; symbols: string[] }
@@ -25,12 +27,14 @@ export type LiveMsg =
   | { t: "live"; a: "submit" | "guess" | "word" | "secret"; v: string | string[] }
   | { t: "live"; a: "stroke"; s: number[] }
   | { t: "live"; a: "flip"; i: number }
-  | { t: "live"; a: "judge"; pid: string };
+  | { t: "live"; a: "judge"; pid: string }
+  | { t: "live"; a: "flag"; pid: string; i: number }
+  | { t: "live"; a: "tick" | "veto" };
 
 export interface LiveResult {
   pid: string;
   /** Words: what each slot scored. Know Me: one entry with the guess. */
-  items: { t: string; p: number; bad?: boolean }[];
+  items: { t: string; p: number; bad?: boolean; flags?: number }[];
   total: number;
   ok?: boolean;
 }
@@ -79,6 +83,9 @@ export interface Live {
   wi: number;
   subs: Record<string, string[]>;
   locked: string[];
+  /** "pid:slot" to the players who said that answer is not valid. */
+  flags: Record<string, string[]>;
+  scored: boolean;
   results?: LiveResult[];
   note?: string;
   strokes: number[][];
@@ -93,10 +100,12 @@ export interface Live {
   pairs: Record<string, number>;
   secret?: string;
   names: Record<string, string>;
+  /** Random first player, then everyone in turn. */
+  off: number;
 }
 
 const PERFORM_REVEAL = 4000;
-const WORDS_REVEAL = 9000;
+const WORDS_REVEAL = 22000;
 const DRAW_REVEAL = 5000;
 const KNOW_REVEAL = 16000;
 const KNOW_SECRET = 40000;
@@ -130,6 +139,8 @@ export function liveStart(cfg: LiveCfg, names: Record<string, string>, ctx: Ctx)
     wi: 0,
     subs: {},
     locked: [],
+    flags: {},
+    scored: false,
     strokes: [],
     guesses: [],
     guessed: [],
@@ -140,16 +151,18 @@ export function liveStart(cfg: LiveCfg, names: Record<string, string>, ctx: Ctx)
     done: [],
     pairs: {},
     names,
+    off: Math.floor(Math.random() * Math.max(1, pids.length)),
   };
   if (cfg.kind === "perform") l.rounds = cfg.turns;
   else if (cfg.kind === "words") l.rounds = cfg.rounds.length;
   else if (cfg.kind === "draw") l.rounds = cfg.words.length;
+  else if (cfg.kind === "shout") l.rounds = cfg.prompts.length;
   else if (cfg.kind === "knowme") l.rounds = cfg.questions.length;
   else if (cfg.kind === "chain") {
     l.rounds = 1;
     l.chain = [cfg.start];
     l.round = 0;
-    l.actor = pids[0];
+    l.actor = pids[l.off];
     l.deadline = ctx.now + cfg.seconds * 1000 + 3000;
     l.at = l.deadline;
     return l;
@@ -157,7 +170,7 @@ export function liveStart(cfg: LiveCfg, names: Record<string, string>, ctx: Ctx)
     l.rounds = 1;
     l.cards = ctx.shuffle([...cfg.symbols, ...cfg.symbols]);
     l.round = 0;
-    l.actor = pids[0];
+    l.actor = pids[l.off];
     pids.forEach((p) => (l.pairs[p] = 0));
     return l;
   }
@@ -167,14 +180,20 @@ export function liveStart(cfg: LiveCfg, names: Record<string, string>, ctx: Ctx)
 
 /** Returns true when the whole game is over. */
 function nextRound(l: Live, ctx: Ctx): boolean {
+  if (l.cfg.kind === "words" && l.round >= 0 && !l.scored && l.step === "reveal") {
+    l.scored = true;
+    scoreWords(l, l.cfg, ctx, true);
+  }
   l.round++;
   if (l.round >= l.rounds) return true;
   const c = l.cfg;
   const live = l.pids.filter(ctx.here);
   const pool = live.length ? live : l.pids;
-  l.actor = pool[l.round % pool.length];
+  l.actor = pool[(l.round + l.off) % pool.length];
   l.subs = {};
   l.locked = [];
+  l.flags = {};
+  l.scored = false;
   l.results = undefined;
   l.note = undefined;
   l.tally = 0;
@@ -191,6 +210,10 @@ function nextRound(l: Live, ctx: Ctx): boolean {
     l.deadline = ctx.now + c.seconds * 1000;
     l.at = l.deadline;
     l.prompt = c.rounds[l.round].prompt;
+  } else if (c.kind === "shout") {
+    l.prompt = c.prompts[l.round];
+    l.deadline = ctx.now + c.seconds * 1000;
+    l.at = l.deadline;
   } else if (c.kind === "draw") {
     l.word = c.words[l.round];
     l.deadline = ctx.now + c.seconds * 1000;
@@ -205,12 +228,21 @@ function nextRound(l: Live, ctx: Ctx): boolean {
   return false;
 }
 
-function scoreWords(l: Live, c: Extract<LiveCfg, { kind: "words" }>, ctx: Ctx) {
+/** Answers most of the other players said were wrong. */
+function removed(l: Live): Set<string> {
+  const out = new Set<string>();
+  const others = Math.max(1, l.pids.length - 1);
+  for (const [k, who] of Object.entries(l.flags)) if (who.length * 2 > others) out.add(k);
+  return out;
+}
+
+function scoreWords(l: Live, c: Extract<LiveCfg, { kind: "words" }>, ctx: Ctx, apply: boolean) {
   const rd = c.rounds[l.round];
+  const gone = removed(l);
   const letter = rd.letter?.toLowerCase();
-  const ok = (t: string) => {
+  const ok = (t: string, pid: string, slot: number) => {
     const w = t.trim();
-    if (!w || w.length > 40) return false;
+    if (!w || w.length > 40 || gone.has(`${pid}:${slot}`)) return false;
     if (letter) {
       const first = w.toLowerCase().replace(/[^a-z]/g, "")[0];
       if (first !== letter) return false;
@@ -223,7 +255,7 @@ function scoreWords(l: Live, c: Extract<LiveCfg, { kind: "words" }>, ctx: Ctx) {
   for (const pid of l.pids) {
     mine[pid] = new Set();
     (l.subs[pid] ?? []).forEach((t, i) => {
-      if (!ok(t)) return;
+      if (!ok(t, pid, i)) return;
       const k = key(i, t);
       if (mine[pid].has(k)) return;
       mine[pid].add(k);
@@ -242,16 +274,17 @@ function scoreWords(l: Live, c: Extract<LiveCfg, { kind: "words" }>, ctx: Ctx) {
         continue;
       }
       const k = key(i, t);
-      if (!ok(t) || seen.has(k)) {
-        items.push({ t: t.trim(), p: 0, bad: true });
+      const fl = l.flags[`${pid}:${i}`]?.length ?? 0;
+      if (!ok(t, pid, i) || seen.has(k)) {
+        items.push({ t: t.trim(), p: 0, bad: true, flags: fl });
         continue;
       }
       seen.add(k);
       const p = (count.get(k) ?? 1) > 1 ? c.lo : c.hi;
-      items.push({ t: t.trim(), p });
+      items.push({ t: t.trim(), p, flags: fl });
       total += p;
     }
-    if (total) ctx.score(pid, total);
+    if (apply && total) ctx.score(pid, total);
     res.push({ pid, items, total });
   }
   l.results = res;
@@ -265,8 +298,14 @@ function enterReveal(l: Live, ctx: Ctx): void {
     l.note = `${l.names[l.actor ?? ""] ?? "They"} got ${l.tally}.`;
     l.at = ctx.now + PERFORM_REVEAL;
   } else if (c.kind === "words") {
-    scoreWords(l, c, ctx);
+    scoreWords(l, c, ctx, false);
     l.at = ctx.now + WORDS_REVEAL;
+  } else if (c.kind === "shout") {
+    const n = Math.max(0, l.tally);
+    const bonus = n >= c.max ? 2 : 0;
+    if (l.actor) ctx.score(l.actor, n * 2 + bonus);
+    l.note = `${l.names[l.actor ?? ""] ?? "They"} got ${n} of ${c.max}${bonus ? ". Full house, +2 bonus!" : "."}`;
+    l.at = ctx.now + PERFORM_REVEAL;
   } else if (c.kind === "draw") {
     l.note = `The word was ${l.word}.`;
     l.at = ctx.now + DRAW_REVEAL;
@@ -393,6 +432,40 @@ export function liveApply(l: Live, m: LiveMsg, who: string, isHost: boolean, ctx
     return {};
   }
 
+  if (c.kind === "shout") {
+    if (l.step !== "play") return {};
+    if (m.a === "tick" && isActor) {
+      if (l.tally >= c.max) return {};
+      l.tally++;
+      if (l.tally >= c.max) l.at = ctx.now + 800;
+      return { changed: true };
+    }
+    if (m.a === "veto" && player && !isActor) {
+      const used = l.guessed.filter((p) => p === who).length;
+      if (l.tally > 0 && used < c.max) {
+        l.tally--;
+        l.guessed.push(who);
+        l.note = `${l.names[who] ?? "Someone"} said that one was not valid.`;
+        return { changed: true };
+      }
+      return {};
+    }
+    if (m.a === "done" && isActor) {
+      l.at = ctx.now;
+      return { changed: true };
+    }
+    return {};
+  }
+  if (c.kind === "words" && m.a === "flag") {
+    if (l.step !== "reveal" || !player || m.pid === who) return {};
+    const k = `${m.pid}:${m.i}`;
+    const arr = (l.flags[k] ??= []);
+    const at = arr.indexOf(who);
+    if (at >= 0) arr.splice(at, 1);
+    else arr.push(who);
+    scoreWords(l, c, ctx, false);
+    return { changed: true };
+  }
   if (c.kind === "words") {
     if (l.step !== "play" || !player) return {};
     if (m.a === "submit") {
@@ -452,7 +525,8 @@ export function liveApply(l: Live, m: LiveMsg, who: string, isHost: boolean, ctx
     if (m.a !== "word" || !isActor) return {};
     const w = String(m.v).trim().toLowerCase();
     const last = l.chain[l.chain.length - 1];
-    if (w.length < 2 || !/^[a-z]+$/.test(w)) return { error: "Letters only, at least two." };
+    if (!/^[a-z]+$/.test(w)) return { error: "Letters only, please." };
+    if (w.length < 5) return { error: "Words need at least 5 letters." };
     if (w[0] !== last[last.length - 1]) return { error: `It must start with ${last[last.length - 1].toUpperCase()}.` };
     if (l.chain.includes(w)) return { error: "That word has been used." };
     l.chain.push(w);
@@ -532,6 +606,9 @@ export function liveView(l: Live, viewer: string | undefined): LiveView {
       v.secret = it.w;
       v.banned = it.ban;
     }
+  } else if (c.kind === "shout") {
+    v.prompt = l.prompt;
+    v.wordLen = c.max;
   } else if (c.kind === "words") {
     const rd = c.rounds[Math.max(0, l.round)];
     v.prompt = rd.prompt;

@@ -653,14 +653,22 @@ function Leaderboard({
   you?: string;
 }) {
   const ranked = [...state.players].sort((a, b) => b.score - a.score);
+  const topScore = ranked[0]?.score ?? 0;
+  const leaders = ranked.filter((p) => p.score === topScore);
+  const headline =
+    topScore <= 0
+      ? "Game over"
+      : leaders.length > 1
+        ? `It's a tie: ${leaders.map((p) => p.name).join(" and ")}`
+        : `${leaders[0].name} wins!`;
   return (
     <div className="stack">
-      {title && <h2 className="h1 center-text">{ranked[0] ? `${ranked[0].name} wins!` : title}</h2>}
+      {title && <h2 className="h1 center-text">{ranked[0] ? headline : title}</h2>}
       <ol className={clsx("podium", compact && "compact")}>
         {ranked.map((p, i) => {
           const g = state.reveal?.picks[p.pid]?.gained;
           return (
-            <li key={p.pid} className={clsx(i === 0 && !compact && "first", p.pid === you && "you")}>
+            <li key={p.pid} className={clsx(i === 0 && !compact && topScore > 0 && leaders.length === 1 && "first", p.pid === you && "you")}>
               <span className="place">{i + 1}</span>
               <span className="nm">
                 {p.name}

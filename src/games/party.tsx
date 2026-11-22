@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import clsx from "clsx";
 import { TimerDial, WhoGotIt, useCountdown } from "../components/ui";
 import { nameOf, useApp } from "../lib/app";
-import { draw } from "../lib/deck";
+import { draw, startIndex } from "../lib/deck";
 import { Finish, Img, Turn, useKeys } from "./frame";
 import { keep } from "../lib/scrapbook";
 
@@ -144,7 +144,7 @@ export function CardDeck({
 /* ---------- How Well Do You Know Me? ---------- */
 export function KnowMe({ questions }: { questions: string[] }) {
   const { players, award, go, toast } = useApp();
-  const [seat, setSeat] = useState(0);
+  const [seat, setSeat] = useState(() => startIndex(players.length));
   const [kept, setKept] = useState(false);
   const [round, setRound] = useState(1);
   const [step, setStep] = useState<"type" | "guess" | "reveal">("type");
@@ -272,7 +272,7 @@ export function TimedRun<T>({
   intro: string;
 }) {
   const { players, award } = useApp();
-  const [turn, setTurn] = useState(0);
+  const [turn, setTurn] = useState(() => startIndex(players.length));
   const [phase, setPhase] = useState<"ready" | "go" | "done">("ready");
   const [item, setItem] = useState<T | null>(null);
   const [got, setGot] = useState(0);

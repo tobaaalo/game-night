@@ -463,6 +463,25 @@ const name5Fields: Field[] = [
   },
 ];
 
+const name5RoomFields: Field[] = [
+  ...name5Fields.slice(0, 3),
+  {
+    key: "how",
+    legend: "How to answer",
+    options: [
+      { value: "shout", label: "Shout it out" },
+      { value: "type", label: "Type it" },
+    ],
+    def: "shout",
+  },
+  {
+    key: "s",
+    legend: "Seconds on the clock",
+    options: [10, 15, 20, 30, 45, 60].map((n) => ({ value: n, label: `${n}s` })),
+    def: 10,
+  },
+];
+
 const CLUE_FAMILY: Record<string, string> = {
   person: "p",
   character: "p",
@@ -819,7 +838,7 @@ export const GAMES: GameDef[] = [
     id: "wordchain",
     name: "Word Chain",
     blurb: "Start your word with the last letter.",
-    how: "Say a word that starts with the last letter of the previous word. Type it in to lock it. No repeats. Run out of time and you are out. In a group the last player standing wins; alone, build the longest chain.",
+    how: "Say a word that starts with the last letter of the previous word. Type it in to lock it. Words must be at least 5 letters long. No repeats. Run out of time and you are out. In a group the last player standing wins; alone, build the longest chain.",
     section: "party",
     groups: ["couple", "friends"],
     stat: "Beat the clock",
@@ -1287,17 +1306,24 @@ export const GAMES: GameDef[] = [
     groups: ["couple", "friends"],
     stat: "Beat the clock",
     room: true,
-    roomFields: name5Fields,
+    roomFields: name5RoomFields,
     liveBuild: (v) => {
       const th = v.th as string[];
       const pool = NAME5.filter((x) => th.includes(x[1]) && (!num(v.level) || x[0] === num(v.level)));
+      if (v.how === "shout")
+        return {
+          kind: "shout",
+          prompts: drawMany("name5", pool, num(v.count) || 10).map((x) => `Name 5: ${x[2]}`),
+          seconds: num(v.s) || 10,
+          max: 5,
+        };
       return {
         kind: "words",
         rounds: drawMany("name5", pool, num(v.count) || 10).map((x) => ({
           prompt: `Name 5: ${x[2]}`,
           labels: ["1", "2", "3", "4", "5"],
         })),
-        seconds: Math.max(30, num(v.s) * 3),
+        seconds: num(v.s) || 10,
         hi: 2,
         lo: 1,
         pool: true,

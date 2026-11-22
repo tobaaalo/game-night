@@ -1,3 +1,4 @@
+import { sameStarter, setSameStarter } from "../lib/deck";
 import { useState } from "react";
 import { Choice, Icon } from "../components/ui";
 import { useApp } from "../lib/app";
@@ -303,6 +304,7 @@ export function Settings() {
   };
   const pct = save.total ? Math.round((save.done / save.total) * 100) : 0;
   const [sound, setSound] = useState(soundOn);
+  const [same, setSame] = useState(sameStarter);
   const [aloud, setAloud] = useState(speakAuto);
   const [large, setLarge] = useState(largeText);
   return (
@@ -329,6 +331,17 @@ export function Settings() {
             }}
           />
           <span>Game sounds</span>
+        </label>
+        <label className="switch">
+          <input
+            type="checkbox"
+            checked={same}
+            onChange={(e) => {
+              setSame(e.target.checked);
+              setSameStarter(e.target.checked);
+            }}
+          />
+          <span>Same player starts every game (off means a random starter)</span>
         </label>
         <label className="switch">
           <input

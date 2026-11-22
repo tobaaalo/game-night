@@ -59,3 +59,10 @@ export const draw = <T>(bank: string, items: readonly T[]): T => drawFresh(bank,
 export const drawMany = <T>(bank: string, items: readonly T[], n: number): T[] => drawFresh(bank, items, n);
 
 export const pick = <T>(a: readonly T[]): T => a[Math.floor(Math.random() * a.length)];
+
+/** Who goes first. Random by default; Settings can switch it to "always the first player". */
+export const sameStarter = () => load<boolean>("gn.samestarter", false);
+export const setSameStarter = (v: boolean) => save("gn.samestarter", v);
+export function startIndex(n: number): number {
+  return n > 1 && !sameStarter() ? Math.floor(Math.random() * n) : 0;
+}

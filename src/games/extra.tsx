@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import clsx from "clsx";
 import { TimerDial, WhoGotIt, useCountdown } from "../components/ui";
 import { nameOf, useApp } from "../lib/app";
-import { draw, drawFresh, shuffle } from "../lib/deck";
+import { draw, drawFresh, shuffle, startIndex } from "../lib/deck";
 import { load, save } from "../lib/store";
 import { BINGO, BUCKET, LADDER } from "../content";
 import { Finish, Img } from "./frame";
@@ -28,7 +28,7 @@ export function CharadesBingo({ seconds, onAgain }: { seconds: number; onAgain: 
   const { players, award } = useApp();
   const [cells] = useState(() => drawFresh("bingo", BINGO, 9));
   const [owner, setOwner] = useState<(string | null)[]>(() => Array<string | null>(9).fill(null));
-  const [turn, setTurn] = useState(0);
+  const [turn, setTurn] = useState(() => startIndex(players.length));
   const [acting, setActing] = useState<number | null>(null);
   const [winner, setWinner] = useState<string | null>(null);
   const cur = players[turn % players.length];
@@ -99,6 +99,7 @@ export function CharadesBingo({ seconds, onAgain }: { seconds: number; onAgain: 
 }
 
 /* ---------- Word Chain ---------- */
+export const MIN_WORD = 5;
 export const STARTS = [
   "apple",
   "river",
@@ -122,7 +123,7 @@ export function WordChain({ seconds, onAgain }: { seconds: number; onAgain: () =
   const [start] = useState(() => draw("chainstart", STARTS));
   const [chain, setChain] = useState<string[]>([start]);
   const [out, setOut] = useState<string[]>([]);
-  const [turn, setTurn] = useState(0);
+  const [turn, setTurn] = useState(() => startIndex(players.length));
   const [text, setText] = useState("");
   const [err, setErr] = useState("");
   const [done, setDone] = useState(false);
@@ -145,7 +146,8 @@ export function WordChain({ seconds, onAgain }: { seconds: number; onAgain: () =
   }
   const submit = () => {
     const w = text.trim().toLowerCase();
-    if (w.length < 2) return;
+    if (!/^[a-z]+$/.test(w)) return setErr("Letters only, please.");
+    if (w.length < MIN_WORD) return setErr(`Words need at least ${MIN_WORD} letters.`);
     if (w[0] !== last[last.length - 1]) return setErr(`It must start with “${last[last.length - 1].toUpperCase()}”.`);
     if (chain.includes(w)) return setErr("That word has been used.");
     setErr("");
@@ -181,7 +183,7 @@ export function WordChain({ seconds, onAgain }: { seconds: number; onAgain: () =
       )}
       <Clock key={`${chain.length}-${out.length}`} seconds={seconds} onEnd={knockOut} />
       <p className="bigtext">{last}</p>
-      <p className="hint">Say a word starting with “{last[last.length - 1].toUpperCase()}”. Type it to lock it in.</p>
+      <p className="hint">Say a word starting with “{last[last.length - 1].toUpperCase()}”. Type it to lock it in. Words must be at least {MIN_WORD} letters long.</p>
       <form
         className="stack"
         onSubmit={(e) => {
@@ -246,7 +248,7 @@ export function MemoryMatch({
   });
   const [open, setOpen] = useState<number[]>([]);
   const [found, setFound] = useState<number[]>([]);
-  const [turn, setTurn] = useState(0);
+  const [turn, setTurn] = useState(() => startIndex(players.length));
   const [moves, setMoves] = useState(0);
   const lock = useRef(false);
   const cur = players[turn % players.length];
@@ -315,7 +317,7 @@ export function DrawGuess({
   onAgain: () => void;
 }) {
   const { players, award } = useApp();
-  const [turn, setTurn] = useState(0);
+  const [turn, setTurn] = useState(() => startIndex(players.length));
   const [phase, setPhase] = useState<"ready" | "peek" | "draw" | "judge">("ready");
   const [word, setWord] = useState<[number, string]>(() => draw("drawwords", words));
   const [ink, setInk] = useState(INKS[0]);
@@ -652,6 +654,7 @@ export function route(a: string, b: string): string[] {
 export function WordLadder({ puzzles, onAgain }: { puzzles: Puzzle[]; onAgain: () => void }) {
   const { players, award } = useApp();
   const [n, setN] = useState(0);
+  const [off] = useState(() => startIndex(players.length));
   const [ladder, setLadder] = useState<string[]>([puzzles[0][1]]);
   const [pick, setPick] = useState<number | null>(null);
   const [msg, setMsg] = useState("");
@@ -660,7 +663,7 @@ export function WordLadder({ puzzles, onAgain }: { puzzles: Puzzle[]; onAgain: (
   const [shown, setShown] = useState<string[]>([]);
   const [score, setScore] = useState(0);
   const [lv, start, goal, par] = puzzles[n] ?? puzzles[0];
-  const player = players[n % players.length];
+  const player = players[(n + off) % players.length];
   const cur = ladder[ladder.length - 1];
   const moves = ladder.length - 1;
   const finished = n >= puzzles.length;
@@ -709,7 +712,7 @@ export function WordLadder({ puzzles, onAgain }: { puzzles: Puzzle[]; onAgain: (
   return (
     <div className="qcard stack center-text">
       <p className="turn">
-        {nameOf(player, n % players.length)} · ladder {n + 1} of {puzzles.length}
+        {nameOf(player, (n + off) % players.length)} · ladder {n + 1} of {puzzles.length}
       </p>
       <p className="hint">
         Change one letter at a time to turn <b>{start.toUpperCase()}</b> into <b>{goal.toUpperCase()}</b>. Par is {par}{" "}
