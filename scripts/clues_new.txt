@@ -1,0 +1,249 @@
+1|animal|Giraffe|I am the tallest animal in the world.|I have a very long neck and spots.|I eat leaves from the tops of trees in Africa.
+1|animal|Penguin|I am a bird that cannot fly.|I waddle and I live in cold places like Antarctica.|I wear what looks like a black and white tuxedo.
+1|animal|Kangaroo|I am famous in Australia.|I hop on strong back legs.|Baby joeys ride in my pouch.
+1|animal|Dolphin|I live in the sea but I am a mammal.|I am very clever and I click and whistle to talk.|I often jump out of the water and swim with boats.
+1|animal|Lion|I am called the king of the jungle.|I live in groups called prides.|The males have a big mane and I roar.
+1|animal|Panda|I come from China.|I am black and white and I eat mostly bamboo.|I am a giant bear.
+1|animal|Owl|I come out mostly at night.|I can turn my head almost all the way round.|I say twit twoo and have big round eyes.
+1|animal|Camel|I live in hot, dry deserts.|I can go a long time without drinking.|I have one or two humps on my back.
+1|animal|Shark|I live in the ocean.|I have rows of sharp teeth and a famous fin.|A famous film from 1975 was named after one of my kind.
+1|animal|Monkey|I swing through trees.|I love to eat bananas.|I am a primate with a long tail, and chimps are my cousins.
+1|animal|Tortoise|I have a hard shell I can hide in.|I move very slowly.|I raced a hare in a famous fable and won.
+1|animal|Bee|I make something sweet.|I live in a hive with a queen.|I buzz from flower to flower and can sting.
+1|person|Cristiano Ronaldo|I was born on the island of Madeira.|I have won the Ballon d'Or five times.|I am a Portuguese footballer who played for Manchester United and Real Madrid.
+1|person|Lionel Messi|I was born in Argentina.|I spent most of my career at Barcelona.|I captained Argentina to the World Cup in 2022.
+1|person|Barack Obama|I was a lawyer before I went into politics.|I was elected in 2008.|I was the 44th President of the United States.
+1|person|Queen Elizabeth II|I became monarch in 1952.|I was married to Prince Philip.|I was Britain's longest reigning monarch and died in 2022.
+1|person|Albert Einstein|I was born in Germany.|I developed the theory of relativity.|I am famous for the equation E equals mc squared.
+1|person|Nelson Mandela|I spent 27 years in prison.|I fought against apartheid.|I became South Africa's first Black president in 1994.
+1|person|Michael Jackson|I was known as the King of Pop.|I did the moonwalk.|I made the albums Thriller and Bad.
+1|person|Beyoncé|I started in a group called Destiny's Child.|I have won more Grammy awards than any other singer.|I am married to Jay-Z and sang Single Ladies.
+1|person|Elvis Presley|I was known as the King of Rock and Roll.|I lived at Graceland in Memphis.|I sang Hound Dog and Jailhouse Rock.
+1|person|William Shakespeare|I was born in Stratford-upon-Avon.|I wrote about a prince of Denmark and two lovers from Verona.|I wrote Hamlet and Romeo and Juliet.
+1|person|Muhammad Ali|I was a boxer.|I said I would float like a butterfly and sting like a bee.|I was born Cassius Clay.
+1|person|Usain Bolt|I come from Jamaica.|I am the fastest man ever recorded over 100 metres.|I won Olympic sprint gold in 2008, 2012 and 2016.
+1|person|Santa Claus|I wear red and have a white beard.|I live at the North Pole.|I deliver presents on Christmas Eve.
+1|place|Eiffel Tower|I was finished in 1889.|I am made of iron.|I stand in Paris.
+1|place|Big Ben|I am in London.|I am part of the Palace of Westminster.|People often use my name for the clock tower and its bell.
+1|place|Statue of Liberty|I was a gift from France.|I stand on an island in New York harbour.|I hold a torch and a tablet.
+1|place|Great Wall of China|I was built to keep out invaders.|I stretch for thousands of miles.|I am one of the longest structures ever built.
+1|place|Buckingham Palace|I am a royal home.|I have a famous balcony and guards in red coats.|I am in London.
+1|place|Disneyland|I opened in California in 1955.|I am a theme park.|I have a castle and Mickey Mouse.
+1|place|Mount Everest|I am a mountain.|I sit on the border of Nepal and Tibet.|I am the highest mountain above sea level.
+1|place|Sahara|I am hot and sandy.|I cover much of North Africa.|I am the largest hot desert in the world.
+1|place|Niagara Falls|I am on the border of Canada and the United States.|I am a huge waterfall.|Lots of people visit me near Toronto and Buffalo.
+1|country|Nigeria|I am in West Africa.|My largest city is Lagos.|I am the most populous country in Africa.
+1|country|Egypt|I have the pyramids.|The River Nile runs through me.|My capital is Cairo.
+1|country|Italy|I am shaped like a boot.|I gave the world pizza and pasta.|My capital is Rome.
+1|country|Japan|I am an island nation in Asia.|I am known as the land of the rising sun.|My capital is Tokyo.
+1|country|Brazil|I am in South America.|I am famous for football and carnival.|I have the Amazon rainforest and speak Portuguese.
+1|country|France|I am famous for cheese, wine and fashion.|I have the Louvre.|My capital is Paris.
+1|country|India|I have over a billion people.|I have the Taj Mahal.|My capital is New Delhi.
+1|country|Australia|I am both a country and a continent.|I have kangaroos and koalas.|My capital is Canberra, not Sydney.
+1|food|Pizza|I come from Italy.|I am round and baked in an oven.|I am topped with cheese and tomato.
+1|food|Chocolate|I am made from cocoa beans.|I am often given at Easter.|I come in milk, dark and white.
+1|food|Banana|I am a fruit.|I have a yellow skin you peel.|Monkeys love me.
+1|food|Egg|I come from a hen.|I can be boiled, fried or scrambled.|I have a shell, a white and a yolk.
+1|food|Cheese|I am made from milk.|Mice are said to love me.|Cheddar and brie are types of me.
+1|thing|Umbrella|I keep you dry.|You open me when it rains.|I have a handle and a folding canopy.
+1|thing|Bicycle|I have two wheels.|You pedal me.|I have a chain, handlebars and a saddle.
+1|thing|Clock|I tell you something all day.|I have a face and hands.|I tick and show the time.
+1|thing|Toothbrush|I live in the bathroom.|I have bristles.|You use me twice a day to clean your teeth.
+1|thing|Rainbow|I appear after rain and sun together.|I have seven colours.|I am red, orange, yellow, green, blue, indigo and violet.
+1|character|Mickey Mouse|I was created by Walt Disney.|I wear red shorts and white gloves.|My girlfriend is Minnie.
+1|character|Harry Potter|I have a scar on my forehead.|I go to Hogwarts.|I am a young wizard who fights Voldemort.
+1|character|Superman|I come from the planet Krypton.|I wear a cape and a big S on my chest.|I work as Clark Kent and I am weak against kryptonite.
+1|character|Cinderella|I have two unkind stepsisters.|I lose something at a ball at midnight.|A glass slipper helps a prince find me.
+2|animal|Platypus|I am an Australian mammal.|I lay eggs.|I have a bill like a duck and a tail like a beaver.
+2|animal|Octopus|I live in the sea.|I have three hearts.|I have eight arms and can squirt ink.
+2|animal|Chameleon|I am a reptile.|My eyes can look in two directions at once.|I can change my colour.
+2|animal|Hippopotamus|I spend much of my day in water.|My name means river horse.|I am huge, with a very wide mouth, and live in Africa.
+2|animal|Blue whale|I am the largest animal ever known to have lived.|I eat tiny shrimp-like animals called krill.|I am a mammal that lives in the ocean.
+2|animal|Peacock|I come from India.|The males are very colourful.|I fan out a huge tail covered in eye patterns.
+2|animal|Cheetah|I live in Africa.|I have spots and a lean body.|I am the fastest land animal.
+2|animal|Polar bear|I live in the Arctic.|My fur looks white but my skin is black.|I hunt seals on the ice.
+2|animal|Armadillo|I live mainly in the Americas.|My name is Spanish for little armoured one.|I have a shell made of bony plates and can roll into a ball.
+2|animal|Koala|I live in Australia.|I sleep for around 20 hours a day.|I eat eucalyptus leaves and I am not actually a bear.
+2|animal|Bat|I am the only mammal that can truly fly.|I sleep upside down.|I use echolocation to find insects in the dark.
+2|animal|Flamingo|I am a bird.|I often stand on one leg.|I am pink because of what I eat, and I live in shallow lakes.
+2|person|Marie Curie|I was born in Poland.|I won Nobel Prizes in two different sciences.|I discovered polonium and radium and studied radioactivity.
+2|person|Isaac Newton|I was an English mathematician and physicist.|I wrote the Principia.|I described gravity and the laws of motion.
+2|person|Leonardo da Vinci|I was born in Italy in 1452.|I invented machines on paper and studied anatomy.|I painted the Mona Lisa and The Last Supper.
+2|person|Martin Luther King Jr.|I was a Baptist minister.|I led the civil rights movement.|I gave the I Have a Dream speech in 1963.
+2|person|Mahatma Gandhi|I was a lawyer who trained in London.|I led a peaceful struggle for freedom.|I led India to independence from Britain.
+2|person|Winston Churchill|I was Britain's leader during the Second World War.|I smoked cigars and made famous speeches.|I was Prime Minister of the United Kingdom.
+2|person|Florence Nightingale|I worked in the Crimean War.|I was known as the Lady with the Lamp.|I am regarded as the founder of modern nursing.
+2|person|Wole Soyinka|I am a playwright from Nigeria.|I was jailed during the civil war.|I was the first African to win the Nobel Prize in Literature.
+2|person|Chinua Achebe|I was born in Nigeria in 1930.|I wrote about life before and after colonial rule.|I wrote Things Fall Apart.
+2|person|Serena Williams|I am an American tennis player.|My sister is also a champion.|I won 23 Grand Slam singles titles.
+2|person|Rosa Parks|I lived in Alabama.|In 1955 I refused to give up my seat on a bus.|I am called the mother of the civil rights movement.
+2|person|Charles Darwin|I sailed on HMS Beagle.|I visited the Galapagos Islands.|I wrote On the Origin of Species.
+2|person|Napoleon Bonaparte|I was born on the island of Corsica.|I was exiled to Elba and then Saint Helena.|I became Emperor of the French and lost at Waterloo.
+2|person|Pelé|I come from Brazil.|I scored over a thousand goals in my career.|I won the World Cup three times.
+2|place|Taj Mahal|I was built in the 1600s.|I am made of white marble.|I was built in Agra, India, by Shah Jahan for his wife.
+2|place|Colosseum|I am an ancient arena.|Gladiators fought in me.|I am in Rome.
+2|place|Pyramids of Giza|I was built as tombs.|I am among the oldest of the ancient wonders.|I stand near Cairo with the Sphinx.
+2|place|Sydney Opera House|I am famous for my sail-like roof.|I stand on a harbour.|I am in Australia.
+2|place|Machu Picchu|I am an Inca site.|I sit high in the Andes.|I am in Peru.
+2|place|Stonehenge|I am a ring of standing stones.|I am thousands of years old.|I am on Salisbury Plain in England.
+2|place|Grand Canyon|I was carved by a river.|I am a huge gorge.|I am in Arizona and the Colorado River made me.
+2|place|Lagos|I am on the coast.|I used to be the capital of my country.|I am Nigeria's biggest city.
+2|place|Times Square|I am famous for bright lights.|A ball drops on me every New Year.|I am in New York City.
+2|place|Amazon rainforest|I am the world's largest tropical rainforest.|I am home to jaguars and countless insects.|I mostly lie in Brazil.
+2|country|Kenya|I am in East Africa.|My capital is Nairobi.|I have the Maasai Mara and great wildebeest migrations.
+2|country|Ghana|I am in West Africa.|I was the first sub-Saharan country to gain independence from Britain.|My capital is Accra.
+2|country|Canada|I have maple leaves on my flag.|I share the world's longest land border.|My capital is Ottawa.
+2|country|Mexico|I am in North America.|I invented tacos and tequila.|I was home to the Aztecs and Mayans.
+2|country|Germany|I was once split into East and West.|I am famous for cars and bratwurst.|My capital is Berlin.
+2|country|Spain|I am in Europe.|I am famous for paella and flamenco.|My capital is Madrid.
+2|country|Turkey|I sit in both Europe and Asia.|I have the Bosphorus.|My capital is Ankara.
+2|country|South Africa|I am at the tip of Africa.|I have three capital cities.|I am home to Table Mountain and Kruger Park.
+2|food|Sushi|I come from Japan.|I often include raw fish.|I am made with vinegared rice and can be wrapped in seaweed.
+2|food|Pasta|I come from Italy.|I come in shapes like penne and fusilli.|Spaghetti and lasagne are types of me.
+2|food|Suya|I am a street food in West Africa.|I am grilled on sticks.|I am a spicy skewered meat coated in peanut powder.
+2|food|Hummus|I am a dip.|I come from the Middle East.|I am made of chickpeas and tahini.
+2|food|Avocado|I am a fruit with a big stone.|I am used in guacamole.|I am green and creamy and often spread on toast.
+2|food|Curry|I am a dish with spices and sauce.|I am often served with rice or naan.|I am very popular in India and Britain.
+2|food|Champagne|I am a drink.|I am a sparkling wine.|I am made in a region of France and pop open to celebrate.
+2|thing|Compass|I help you find your way.|My needle is magnetic.|I point north.
+2|thing|Telescope|I help you see far away.|Galileo improved me.|I help you look at stars and planets.
+2|thing|Piano|I have 88 keys.|I have black and white keys.|You press my keys to hit little hammers on strings.
+2|thing|Microscope|I make small things look bigger.|Scientists use me in labs.|I let you see cells and bacteria.
+2|thing|Parachute|I save you when you fall.|I open as a big canopy.|You wear me when jumping out of a plane.
+2|thing|Passport|I am a small book.|I have your photo and stamps from other countries.|You show me at the airport to travel abroad.
+2|thing|Lighthouse|I stand on the coast.|I warn ships of danger.|I shine a bright light at night.
+2|character|Sherlock Holmes|I live at 221B Baker Street.|I use deduction.|My friend is Dr Watson.
+2|character|Simba|I am a lion cub.|My father is Mufasa.|I am the Lion King and my uncle is Scar.
+2|character|Elsa|I live in a cold kingdom.|I have magical powers over snow and ice.|I sing Let It Go in Frozen.
+2|character|Spider-Man|I was bitten by a radioactive spider.|I swing between buildings.|My name is Peter Parker.
+2|character|Winnie the Pooh|I live in the Hundred Acre Wood.|I love honey.|My friends are Piglet and Eeyore.
+2|character|Pinocchio|My nose grows when I lie.|I was carved from wood.|Geppetto made me.
+3|animal|Axolotl|I am an amphibian from Mexico.|I can regrow limbs.|I stay in my larval form and have feathery gills.
+3|animal|Narwhal|I live in the Arctic.|I am a whale.|I have a long spiralled tusk, and I am called the unicorn of the sea.
+3|animal|Aardvark|I live in Africa.|I eat ants and termites.|My name means earth pig in Afrikaans.
+3|animal|Komodo dragon|I live on a few Indonesian islands.|I have venom.|I am the largest living lizard.
+3|animal|Pangolin|I am a mammal that eats ants.|I am covered in scales made of keratin.|I roll into a ball when scared and I am heavily trafficked.
+3|animal|Okapi|I live in the rainforests of the Democratic Republic of Congo.|I have stripes on my legs like a zebra.|I am the only living relative of the giraffe.
+3|animal|Albatross|I am a seabird.|I spend years at sea and can glide for hours.|I have the largest wingspan of any bird and a famous poem is about one of us.
+3|animal|Mantis shrimp|I live in tropical seas.|I can punch with great speed.|I have some of the most complex eyes in the animal kingdom.
+3|animal|Tardigrade|I am microscopic.|I can survive in space.|I am also called the water bear.
+3|animal|Sloth|I live in Central and South American trees.|I move very slowly.|I spend most of my life hanging upside down.
+3|animal|Kakapo|I live in New Zealand.|I am a parrot.|I cannot fly and I am critically endangered.
+3|animal|Manatee|I am a large aquatic mammal.|I am called the sea cow.|I live in warm shallow waters and eat seagrass.
+3|person|Cleopatra|I was born in the first century before Christ.|I ruled Egypt.|I allied myself with Julius Caesar and Mark Antony.
+3|person|Genghis Khan|I was born as Temujin.|I united the Mongol tribes.|I founded the Mongol Empire.
+3|person|Ada Lovelace|I was born in 1815.|My father was the poet Lord Byron.|I wrote what is considered the first computer program.
+3|person|Nikola Tesla|I was born in what is now Croatia.|I worked in the United States and helped develop alternating current.|A famous electric car company is named after me.
+3|person|Frida Kahlo|I was a Mexican painter.|I often painted self-portraits.|My husband was the muralist Diego Rivera.
+3|person|Alexander the Great|I was tutored by Aristotle.|I was king of Macedonia.|I conquered much of the known world before I was 33.
+3|person|Galileo Galilei|I was an Italian astronomer.|I observed the moons of Jupiter.|I was put under house arrest for saying the Earth moves around the Sun.
+3|person|Queen Amina|I was a warrior queen of Zazzau in what is now northern Nigeria.|I am said to have built walled cities.|I am remembered as a great Hausa leader.
+3|person|Haile Selassie|I was a ruler of Ethiopia.|I addressed the League of Nations in 1936.|I was the last emperor of Ethiopia.
+3|person|Kwame Nkrumah|I led a country to independence in 1957.|I was a pan-Africanist.|I was the first prime minister and president of Ghana.
+3|person|Yuri Gagarin|I was born in Russia.|I made history in 1961.|I was the first human in space.
+3|person|Neil Armstrong|I was a test pilot.|I flew on Apollo 11.|I was the first person to walk on the Moon.
+3|person|Amelia Earhart|I was an American aviator.|I was the first woman to fly solo across the Atlantic.|I disappeared in 1937 while trying to fly around the world.
+3|person|Confucius|I was a Chinese philosopher.|I taught about respect and family.|My sayings are collected in the Analects.
+3|person|Joan of Arc|I was a French peasant girl.|I heard voices and led an army.|I was burned at the stake in 1431 and became a saint.
+3|person|Fela Kuti|I was born in Abeokuta.|I created a style of music mixing jazz, funk and highlife.|I am the Nigerian musician who pioneered Afrobeat.
+3|person|Ngozi Okonjo-Iweala|I am a Nigerian economist.|I was Nigeria's finance minister.|I became Director-General of the World Trade Organization in 2021.
+3|place|Petra|I am an ancient city carved into rock.|I am known as the Rose City.|I am in Jordan.
+3|place|Angkor Wat|I am a temple complex.|I am on a national flag.|I am in Cambodia and the largest religious monument in the world.
+3|place|Chichen Itza|I was a Maya city.|I have a stepped pyramid called El Castillo.|I am in Mexico on the Yucatan Peninsula.
+3|place|Victoria Falls|I am on a river.|I am called the smoke that thunders.|I lie on the border of Zambia and Zimbabwe.
+3|place|Mount Kilimanjaro|I am the highest peak in Africa.|I am a dormant volcano.|I am in Tanzania.
+3|place|Serengeti|I am a vast savannah.|I host a huge annual migration of wildebeest.|I am in Tanzania.
+3|place|Zuma Rock|I am a giant monolith.|I am near Abuja.|I am known as the Gateway to Abuja.
+3|place|Timbuktu|I was a centre of learning in the Middle Ages.|I am famed for my manuscripts.|I am a city in Mali on the edge of the Sahara.
+3|place|Alhambra|I am a palace and fortress.|I was built by Moorish rulers.|I stand in Granada, Spain.
+3|place|Sagrada Familia|I have been under construction for over 100 years.|I was designed by Antoni Gaudí.|I am a large church in Barcelona.
+3|place|Great Barrier Reef|I am the largest coral reef system.|I am visible from space.|I lie off the coast of Queensland.
+3|country|Ethiopia|I am in the Horn of Africa.|I have my own ancient calendar and alphabet.|My capital is Addis Ababa.
+3|country|Morocco|I am in North Africa.|I have the cities of Marrakech and Fez.|My capital is Rabat.
+3|country|Peru|I am in South America.|I have Machu Picchu.|My capital is Lima.
+3|country|Vietnam|I am in Southeast Asia.|I am shaped like an S.|My capital is Hanoi.
+3|country|Norway|I have long fjords.|I have the midnight sun in summer.|My capital is Oslo.
+3|country|Senegal|I am in West Africa.|I have the city of Dakar.|I am the westernmost country on the African mainland.
+3|country|Rwanda|I am in East Africa.|I am called the land of a thousand hills.|My capital is Kigali.
+3|country|Madagascar|I am an island nation.|I have lemurs found nowhere else.|I am off the east coast of Africa.
+3|food|Jollof rice|I am a famous West African dish.|People argue over who makes me best.|I am rice cooked in tomato sauce.
+3|food|Fufu|I am a staple in West and Central Africa.|You eat me with soup, using your hand.|I am a soft dough made by pounding starchy foods like cassava or yam.
+3|food|Kimchi|I am a Korean side dish.|I am fermented.|I am spicy cabbage and radish.
+3|food|Haggis|I am a Scottish dish.|I am traditionally served on Burns Night.|I am a savoury pudding with sheep's offal, oats and spices.
+3|food|Tagine|I come from North Africa.|I am named after a pot.|I am a slow-cooked stew in a conical clay dish.
+3|food|Ceviche|I come from Latin America.|I am popular in Peru.|I am raw fish cured in citrus juice.
+3|food|Baklava|I am a sweet pastry.|I am made with layers of filo.|I am filled with nuts and soaked in syrup.
+3|food|Moussaka|I am a baked dish.|I am popular in Greece.|I am layered with aubergine and mince beneath a creamy topping.
+3|thing|Sundial|I tell the time without batteries.|I need the Sun.|My shadow falls on marks.
+3|thing|Abacus|I was used before calculators.|I have beads on rods.|I help you count and calculate.
+3|thing|Astrolabe|I was used by ancient astronomers.|Sailors used me to navigate.|I measure the height of stars above the horizon.
+3|thing|Sextant|I am a navigation instrument.|Sailors used me at sea.|I measure the angle between the horizon and a star.
+3|thing|Hourglass|I measure time.|I have two bulbs.|Sand runs from the top to the bottom.
+3|thing|Printing press|I was perfected by Gutenberg.|I changed how information spread.|I made books cheaper to produce in the 15th century.
+3|thing|Kalimba|I am a small instrument from Africa.|You play me with your thumbs.|I have metal tines on a wooden board and am also called a thumb piano.
+3|character|Anansi|I am a trickster from West African stories.|I am often a spider.|I am the god of stories in Akan folklore.
+3|character|Sherlock Holmes|I am a detective.|I play the violin.|My arch-enemy is Professor Moriarty.
+3|character|Don Quixote|I am a character from Spain.|I attack windmills.|My squire is Sancho Panza.
+3|character|Captain Ahab|I am a ship's captain.|I lost a leg.|I hunt Moby Dick.
+3|character|Odysseus|I am a Greek hero.|I took ten years to return home.|I devised the Trojan Horse.
+4|animal|Ayeaye|I live in Madagascar.|I have a long thin middle finger.|I am a lemur that taps on trees to find grubs.
+4|animal|Saiga|I live in the steppes of Central Asia.|I am a type of antelope.|I have a very large, bulbous, flexible nose.
+4|animal|Dugong|I am a marine mammal.|I am related to the manatee.|I graze on seagrass in the Indian and Pacific oceans.
+4|animal|Quokka|I live in Australia.|I live on Rottnest Island.|I am a small wallaby famed for looking as if I am smiling.
+4|animal|Echidna|I lay eggs.|I live in Australia and New Guinea.|I am a spiny mammal and a monotreme with a long sticky tongue.
+4|animal|Capybara|I live in South America.|I like to be near water.|I am the largest rodent in the world.
+4|animal|Lyrebird|I live in Australia.|I am named for the shape of the male's tail.|I can imitate other birds and even chainsaws.
+4|animal|Gharial|I live in rivers in the Indian subcontinent.|I have a very thin snout.|I am a fish-eating crocodilian with a bulb on the male's snout.
+4|animal|Pika|I am small and round.|I live on mountains and in rocky places.|I am related to rabbits and I store dried grass in haypiles.
+4|animal|Secretary bird|I live in the African savannah.|I have long legs.|I am a bird of prey that stamps on snakes.
+4|animal|Coelacanth|I was thought to be extinct for millions of years.|I was found alive in 1938.|I am a fish with lobe-like fins off the coast of South Africa.
+4|person|Mansa Musa|I ruled in the 1300s.|I am often called one of the richest people in history.|I was emperor of Mali and made a famous pilgrimage to Mecca.
+4|person|Hypatia|I lived in Alexandria.|I taught mathematics and philosophy.|I was killed in 415 by a mob.
+4|person|Ibn Battuta|I was born in Tangier in 1304.|I travelled for nearly thirty years.|I am a Moroccan explorer who wrote the Rihla.
+4|person|Sundiata Keita|I am a figure in West African oral tradition.|I overcame illness as a child.|I founded the Mali Empire.
+4|person|Funmilayo Ransome-Kuti|I was an educator and activist from Abeokuta.|I led women against unfair taxes.|I am the mother of Fela Kuti.
+4|person|Shaka Zulu|I was a leader in Southern Africa.|I changed the way my army fought.|I was king of the Zulu Kingdom.
+4|person|Marcus Aurelius|I ruled from 161 to 180.|I wrote notes to myself in Greek.|I was a Roman emperor and Stoic who wrote Meditations.
+4|person|Ada Yonath|I am an Israeli scientist.|I won the Nobel Prize in Chemistry in 2009.|I studied the structure of ribosomes.
+4|person|Alan Turing|I was born in London in 1912.|I helped break a famous German cipher in the Second World War.|I proposed a test for machine intelligence.
+4|person|Emmeline Pankhurst|I was born in Manchester.|I founded the Women's Social and Political Union.|I led the British suffragettes.
+4|person|Toussaint Louverture|I was born into slavery.|I became a general and leader.|I led the Haitian Revolution.
+4|person|Hannibal|I was from Carthage.|I fought Rome.|I crossed the Alps with elephants.
+4|person|Zheng He|I was a Chinese admiral.|I commanded large fleets in the 1400s.|I led treasure voyages to the Indian Ocean and East Africa.
+4|person|Chimamanda Ngozi Adichie|I am a Nigerian writer.|I gave a TED talk called The Danger of a Single Story.|I wrote Half of a Yellow Sun and Americanah.
+4|place|Great Zimbabwe|I am an ancient stone city.|I was built between the 11th and 15th centuries.|I give my name to a modern country.
+4|place|Lalibela|I am a town in the highlands.|I have churches carved from rock.|I am in Ethiopia.
+4|place|Bagan|I am an ancient city.|I have thousands of temples and pagodas.|I am in Myanmar.
+4|place|Cappadocia|I am a region with fairy chimneys.|People take hot-air balloon rides over me.|I am in central Turkey.
+4|place|Mount Fuji|I am a volcano.|I am considered sacred.|I am the highest mountain in Japan.
+4|place|Okavango Delta|I am an inland delta.|I flood each year in a dry land.|I am in Botswana.
+4|place|Galapagos Islands|I am a volcanic archipelago.|Darwin visited me.|I belong to Ecuador.
+4|place|Easter Island|I am one of the most remote inhabited islands.|I have giant stone heads called moai.|I belong to Chile.
+4|place|Ngorongoro Crater|I am a volcanic caldera.|I hold a dense concentration of wildlife.|I am in Tanzania.
+4|place|Cairo|I am on the Nile.|I am called the city of a thousand minarets.|I am the capital of Egypt.
+4|place|Olumo Rock|I am a natural fortress.|The Egba people used me to hide from attackers.|I am in Abeokuta.
+4|country|Bhutan|I am in the Himalayas.|I measure national success with Gross National Happiness.|My capital is Thimphu.
+4|country|Mongolia|I am landlocked between Russia and China.|I have the Gobi desert.|My capital is Ulaanbaatar.
+4|country|Malawi|I am in southeast Africa.|I have a famous lake.|My capital is Lilongwe.
+4|country|Eswatini|I am in southern Africa.|I was formerly called Swaziland.|I am one of the last absolute monarchies in Africa.
+4|country|Uzbekistan|I am in Central Asia.|I was on the Silk Road.|My capital is Tashkent.
+4|country|Burkina Faso|I am in West Africa.|My name means land of honest people.|My capital is Ouagadougou.
+4|country|Suriname|I am in South America.|I used to be a Dutch colony.|My capital is Paramaribo.
+4|country|Namibia|I am in southern Africa.|I have the Namib desert.|My capital is Windhoek.
+4|food|Injera|I am a flatbread.|I am spongy and sour.|I am made from teff and eaten in Ethiopia.
+4|food|Poutine|I am a Canadian dish.|I come from Quebec.|I am fries with gravy and cheese curds.
+4|food|Pho|I am a Vietnamese soup.|I am eaten for breakfast.|I contain rice noodles and herbs in a beef or chicken broth.
+4|food|Gnocchi|I am Italian.|I am small dumplings.|I am commonly made from potato.
+4|food|Kimchi jjigae|I am a Korean stew.|I am spicy.|I am made with fermented cabbage.
+4|food|Akara|I am a West African snack.|I am deep-fried.|I am made from ground black-eyed peas.
+4|food|Dolma|I am eaten in the Middle East and Mediterranean.|I am a stuffed vegetable.|I am often stuffed vine leaves.
+4|thing|Rosetta Stone|I was found in 1799.|I helped scholars read ancient Egyptian hieroglyphs.|I carry the same text in three scripts.
+4|thing|Enigma machine|I was used in the Second World War.|I was broken at Bletchley Park.|I am a German cipher machine.
+4|thing|Dead Sea Scrolls|I was found in caves in the 1940s.|I am ancient manuscripts.|I include some of the oldest known copies of Hebrew Bible texts.
+4|thing|Antikythera mechanism|I was found in a shipwreck in 1901.|I am more than 2,000 years old.|I am an ancient Greek device that tracked astronomical cycles.
+4|thing|Gutenberg Bible|I was printed in the 1450s.|I am one of the first major books printed with movable type.|I was printed in Mainz.
+4|thing|Talking drum|I am a West African instrument.|I can mimic the tones of speech.|I am an hourglass-shaped drum played with a curved stick.
+4|character|Sisyphus|I am from Greek myth.|I was punished by the gods.|I roll a boulder uphill forever.
+4|character|Scheherazade|I am from The Arabian Nights.|I told stories to survive.|I told a king a story each night for 1001 nights.
+4|character|Gilgamesh|I am a king from ancient Mesopotamia.|I seek immortality.|My friend is Enkidu.
+4|character|Prometheus|I am a Titan.|I stole something from the gods.|I gave fire to humans.
