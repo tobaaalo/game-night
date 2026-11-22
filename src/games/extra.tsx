@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import clsx from "clsx";
 import { TimerDial, WhoGotIt, useCountdown } from "../components/ui";
 import { nameOf, useApp } from "../lib/app";
@@ -242,6 +242,7 @@ export function MemoryMatch({
   onAgain: () => void;
 }) {
   const { players, award } = useApp();
+  const cols = pairs.length * 2 > 16 ? 6 : 4;
   const [cards] = useState<MatchCard[]>(() => {
     const base = pairs.flatMap(([key, img, text], i): MatchCard[] => [
       { id: `${key}-a`, pair: i, img, text: img ? undefined : key },
@@ -252,7 +253,7 @@ export function MemoryMatch({
       const at = new Map<number, number[]>();
       list.forEach((c, i) => at.set(c.pair, [...(at.get(c.pair) ?? []), i]));
       return [...at.values()].every(
-        ([i, j]) => Math.abs((i % 4) - (j % 4)) + Math.abs(Math.floor(i / 4) - Math.floor(j / 4)) >= 3,
+        ([i, j]) => Math.abs((i % cols) - (j % cols)) + Math.abs(Math.floor(i / cols) - Math.floor(j / cols)) >= 3,
       );
     };
     let best = shuffle(base);
@@ -296,17 +297,30 @@ export function MemoryMatch({
       <p className="turn">
         {nameOf(cur, turn % players.length)}&rsquo;s turn · {moves} {moves === 1 ? "move" : "moves"}
       </p>
-      <div className={clsx("memgrid", cards.length > 12 && "big")}>
+      <div className="memgrid" style={{ "--c": cols } as CSSProperties}>
         {cards.map((c, i) => {
           const up = open.includes(i) || found.includes(c.pair);
           return (
             <button
               key={c.id}
-              className={clsx("memcard", up && "up", found.includes(c.pair) && "won")}
+              className={clsx(
+                "memcard",
+                up && "up",
+                found.includes(c.pair) && "won",
+                c.img?.startsWith("/flags/") && "flag",
+              )}
               onClick={() => flip(i)}
               aria-label={up ? (c.text ?? "Picture") : "Hidden card"}
             >
-              {up ? c.img ? <Img src={c.img} alt="Card" square /> : <span>{c.text}</span> : <span>?</span>}
+              {up ? (
+                c.img ? (
+                  <Img src={c.img} alt="Card" square />
+                ) : (
+                  <span className={/\p{Extended_Pictographic}/u.test(c.text ?? "") ? undefined : "name"}>{c.text}</span>
+                )
+              ) : (
+                <span>?</span>
+              )}
             </button>
           );
         })}

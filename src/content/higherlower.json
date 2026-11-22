@@ -1,580 +1,157 @@
 {
-"Mountain height (metres)": [
-[
-"Mount Everest",
-8849
-],
-[
-"K2",
-8611
-],
-[
-"Kangchenjunga",
-8586
-],
-[
-"Kilimanjaro",
-5895
-],
-[
-"Mont Blanc",
-4806
-],
-[
-"The Matterhorn",
-4478
-],
-[
-"Ben Nevis",
-1345
-],
-[
-"Mount Fuji",
-3776
-],
-[
-"Denali",
-6190
-],
-[
-"Aconcagua",
-6961
-],
-[
-"Mount Kenya",
-5199
-],
-[
-"Table Mountain",
-1086
-],
-[
-"Snowdon",
-1085
-],
-[
-"Mount Elbrus",
-5642
-],
-[
-"Lhotse",
-8516
-],
-[
-"Makalu",
-8485
-],
-[
-"Cho Oyu",
-8188
-],
-[
-"Dhaulagiri",
-8167
-],
-[
-"Manaslu",
-8163
-],
-[
-"Annapurna",
-8091
-],
-[
-"Mount Kilimanjaro",
-5895
-]
-],
-"River length (km)": [
-[
-"The Nile",
-6650
-],
-[
-"The Amazon",
-6400
-],
-[
-"The Yangtze",
-6300
-],
-[
-"The Congo",
-4700
-],
-[
-"The Niger",
-4180
-],
-[
-"The Thames",
-346
-],
-[
-"The Volga",
-3531
-],
-[
-"The Danube",
-2850
-],
-[
-"The Rhine",
-1230
-],
-[
-"The Zambezi",
-2574
-],
-[
-"The Mekong",
-4350
-],
-[
-"The Seine",
-777
-],
-[
-"The Tiber",
-406
-],
-[
-"The Ganges",
-2525
-],
-[
-"The Mississippi",
-3730
-],
-[
-"The Murray",
-2508
-],
-[
-"The Orange River",
-2200
-]
-],
-"Population (millions, roughly)": [
-[
-"India",
-1430
-],
-[
-"China",
-1410
-],
-[
-"The USA",
-340
-],
-[
-"Indonesia",
-278
-],
-[
-"Nigeria",
-224
-],
-[
-"Brazil",
-216
-],
-[
-"Japan",
-124
-],
-[
-"Ethiopia",
-126
-],
-[
-"Egypt",
-112
-],
-[
-"The UK",
-68
-],
-[
-"South Africa",
-63
-],
-[
-"Kenya",
-55
-],
-[
-"Ghana",
-34
-],
-[
-"Canada",
-40
-],
-[
-"Australia",
-27
-],
-[
-"Norway",
-5.5
-],
-[
-"Ireland",
-5.3
-],
-[
-"Germany",
-84
-],
-[
-"Mexico",
-128
-],
-[
-"France",
-65
-],
-[
-"Iceland",
-0.4
-]
-],
-"Land area (thousand sq km)": [
-[
-"Russia",
-17098
-],
-[
-"Canada",
-9985
-],
-[
-"China",
-9597
-],
-[
-"Brazil",
-8516
-],
-[
-"Australia",
-7692
-],
-[
-"India",
-3287
-],
-[
-"Argentina",
-2780
-],
-[
-"Nigeria",
-924
-],
-[
-"Egypt",
-1002
-],
-[
-"Ghana",
-239
-],
-[
-"The UK",
-243
-],
-[
-"Japan",
-378
-],
-[
-"Kenya",
-580
-],
-[
-"South Africa",
-1221
-],
-[
-"France",
-551
-],
-[
-"Germany",
-358
-],
-[
-"Italy",
-301
-],
-[
-"Spain",
-506
-],
-[
-"Iceland",
-103
-]
-],
-"Height (metres)": [
-[
-"The Burj Khalifa",
-828
-],
-[
-"Shanghai Tower",
-632
-],
-[
-"The CN Tower",
-553
-],
-[
-"Taipei 101",
-508
-],
-[
-"The Empire State Building",
-443
-],
-[
-"The Eiffel Tower",
-330
-],
-[
-"The Shard",
-310
-],
-[
-"The Great Pyramid of Giza",
-139
-],
-[
-"Big Ben's tower",
-96
-],
-[
-"The Statue of Liberty",
-93
-],
-[
-"The Leaning Tower of Pisa",
-56
-],
-[
-"Tokyo Skytree",
-634
-],
-[
-"Petronas Towers",
-452
-],
-[
-"Big Ben",
-96
-],
-[
-"Christ the Redeemer",
-30
-],
-[
-"The Space Needle",
-184
-],
-[
-"The Washington Monument",
-169
-],
-[
-"Niagara Falls",
-51
-],
-[
-"Angel Falls",
-979
-],
-[
-"A giraffe",
-5.5
-],
-[
-"An elephant",
-3.3
-]
-],
-"Top speed (km/h)": [
-[
-"A cheetah",
-110
-],
-[
-"A peregrine falcon",
-390
-],
-[
-"A lion",
-80
-],
-[
-"A racehorse",
-70
-],
-[
-"A greyhound",
-72
-],
-[
-"Usain Bolt",
-44
-],
-[
-"An elephant",
-40
-],
-[
-"A giraffe",
-60
-],
-[
-"A pronghorn antelope",
-88
-],
-[
-"An ostrich",
-70
-],
-[
-"A sailfish",
-110
-],
-[
-"A domestic cat",
-48
-],
-[
-"A rabbit",
-56
-],
-[
-"A tortoise",
-0.3
-],
-[
-"A horse",
-88
-],
-[
-"A house cat",
-48
-],
-[
-"A bottlenose dolphin",
-60
-],
-[
-"A kangaroo",
-70
-],
-[
-"A grizzly bear",
-56
-],
-[
-"A sprinting human (Usain Bolt)",
-44
-],
-[
-"A bullet train (Shinkansen)",
-320
-],
-[
-"A Formula 1 car",
-370
-],
-[
-"A commercial jet",
-900
-],
-[
-"A hummingbird",
-50
-]
-],
-"Diameter (km)": [
-[
-"Jupiter",
-139820
-],
-[
-"Saturn",
-116460
-],
-[
-"Uranus",
-50724
-],
-[
-"Neptune",
-49244
-],
-[
-"Earth",
-12742
-],
-[
-"Venus",
-12104
-],
-[
-"Mars",
-6779
-],
-[
-"Mercury",
-4879
-],
-[
-"The Moon",
-3474
-],
-[
-"Pluto",
-2377
-],
-[
-"The Sun",
-1391400
-],
-[
-"Ganymede",
-5268
-],
-[
-"Titan",
-5150
-],
-[
-"Europa",
-3122
-],
-[
-"Ceres",
-940
-],
-[
-"Io",
-3643
-],
-[
-"Callisto",
-4821
-],
-[
-"Triton",
-2707
-]
-]
+  "Mountain height (metres)": [
+    ["Mount Everest", 8849],
+    ["K2", 8611],
+    ["Kangchenjunga", 8586],
+    ["Kilimanjaro", 5895],
+    ["Mont Blanc", 4806],
+    ["The Matterhorn", 4478],
+    ["Ben Nevis", 1345],
+    ["Mount Fuji", 3776],
+    ["Denali", 6190],
+    ["Aconcagua", 6961],
+    ["Mount Kenya", 5199],
+    ["Table Mountain", 1086],
+    ["Snowdon", 1085],
+    ["Mount Elbrus", 5642],
+    ["Lhotse", 8516],
+    ["Makalu", 8485],
+    ["Cho Oyu", 8188],
+    ["Dhaulagiri", 8167],
+    ["Manaslu", 8163],
+    ["Annapurna", 8091],
+    ["Mount Kilimanjaro", 5895]
+  ],
+  "River length (km)": [
+    ["The Nile", 6650],
+    ["The Amazon", 6400],
+    ["The Yangtze", 6300],
+    ["The Congo", 4700],
+    ["The Niger", 4180],
+    ["The Thames", 346],
+    ["The Volga", 3531],
+    ["The Danube", 2850],
+    ["The Rhine", 1230],
+    ["The Zambezi", 2574],
+    ["The Mekong", 4350],
+    ["The Seine", 777],
+    ["The Tiber", 406],
+    ["The Ganges", 2525],
+    ["The Mississippi", 3730],
+    ["The Murray", 2508],
+    ["The Orange River", 2200]
+  ],
+  "Population (millions, roughly)": [
+    ["India", 1430],
+    ["China", 1410],
+    ["The USA", 340],
+    ["Indonesia", 278],
+    ["Nigeria", 224],
+    ["Brazil", 216],
+    ["Japan", 124],
+    ["Ethiopia", 126],
+    ["Egypt", 112],
+    ["The UK", 68],
+    ["South Africa", 63],
+    ["Kenya", 55],
+    ["Ghana", 34],
+    ["Canada", 40],
+    ["Australia", 27],
+    ["Norway", 5.5],
+    ["Ireland", 5.3],
+    ["Germany", 84],
+    ["Mexico", 128],
+    ["France", 65],
+    ["Iceland", 0.4]
+  ],
+  "Land area (thousand sq km)": [
+    ["Russia", 17098],
+    ["Canada", 9985],
+    ["China", 9597],
+    ["Brazil", 8516],
+    ["Australia", 7692],
+    ["India", 3287],
+    ["Argentina", 2780],
+    ["Nigeria", 924],
+    ["Egypt", 1002],
+    ["Ghana", 239],
+    ["The UK", 243],
+    ["Japan", 378],
+    ["Kenya", 580],
+    ["South Africa", 1221],
+    ["France", 551],
+    ["Germany", 358],
+    ["Italy", 301],
+    ["Spain", 506],
+    ["Iceland", 103]
+  ],
+  "Height (metres)": [
+    ["The Burj Khalifa", 828],
+    ["Shanghai Tower", 632],
+    ["The CN Tower", 553],
+    ["Taipei 101", 508],
+    ["The Empire State Building", 443],
+    ["The Eiffel Tower", 330],
+    ["The Shard", 310],
+    ["The Great Pyramid of Giza", 139],
+    ["Big Ben's tower", 96],
+    ["The Statue of Liberty", 93],
+    ["The Leaning Tower of Pisa", 56],
+    ["Tokyo Skytree", 634],
+    ["Petronas Towers", 452],
+    ["Big Ben", 96],
+    ["Christ the Redeemer", 30],
+    ["The Space Needle", 184],
+    ["The Washington Monument", 169],
+    ["Niagara Falls", 51],
+    ["Angel Falls", 979],
+    ["A giraffe", 5.5],
+    ["An elephant", 3.3]
+  ],
+  "Top speed (km/h)": [
+    ["A cheetah", 110],
+    ["A peregrine falcon", 390],
+    ["A lion", 80],
+    ["A racehorse", 70],
+    ["A greyhound", 72],
+    ["Usain Bolt", 44],
+    ["An elephant", 40],
+    ["A giraffe", 60],
+    ["A pronghorn antelope", 88],
+    ["An ostrich", 70],
+    ["A sailfish", 110],
+    ["A domestic cat", 48],
+    ["A rabbit", 56],
+    ["A tortoise", 0.3],
+    ["A horse", 88],
+    ["A house cat", 48],
+    ["A bottlenose dolphin", 60],
+    ["A kangaroo", 70],
+    ["A grizzly bear", 56],
+    ["A sprinting human (Usain Bolt)", 44],
+    ["A bullet train (Shinkansen)", 320],
+    ["A Formula 1 car", 370],
+    ["A commercial jet", 900],
+    ["A hummingbird", 50]
+  ],
+  "Diameter (km)": [
+    ["Jupiter", 139820],
+    ["Saturn", 116460],
+    ["Uranus", 50724],
+    ["Neptune", 49244],
+    ["Earth", 12742],
+    ["Venus", 12104],
+    ["Mars", 6779],
+    ["Mercury", 4879],
+    ["The Moon", 3474],
+    ["Pluto", 2377],
+    ["The Sun", 1391400],
+    ["Ganymede", 5268],
+    ["Titan", 5150],
+    ["Europa", 3122],
+    ["Ceres", 940],
+    ["Io", 3643],
+    ["Callisto", 4821],
+    ["Triton", 2707]
+  ]
 }

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import clsx from "clsx";
 import type { ClientMsg, RoomState } from "../shared/protocol";
 import type { LiveView } from "../shared/live";
@@ -520,10 +520,7 @@ export function LiveGame({ state, me, send, skew }: Props) {
       <div className="qcard live">
         {head}
         <p className="turn">{isActor ? "Your turn. Flip two cards." : `${nm(v.actor)} is flipping`}</p>
-        <div
-          className="mem-grid"
-          style={{ gridTemplateColumns: `repeat(${cards.length > 16 ? 5 : 4}, minmax(0, 1fr))` }}
-        >
+        <div className="mem-grid" style={{ "--c": cards.length > 16 ? 6 : 4 } as CSSProperties}>
           {cards.map((c, i) => (
             <button
               key={i}

@@ -49,7 +49,7 @@ import { ClueRun } from "./clues";
 import { WordLadder, BucketList, CharadesBingo, DrawGuess, MemoryMatch, WordChain } from "./extra";
 import { CLUES, DRAWWORDS, LADDER } from "../content";
 import type { LiveCfg } from "../shared/live";
-import { EMOJI_THEMES, emojiPool } from "./emojisets";
+import { emojiPool } from "./emojisets";
 import { STARTS } from "./extra";
 import { loadCustom, customToGame } from "../lib/custom";
 
@@ -351,7 +351,7 @@ const matchFields: Field[] = [
       { value: "faces", label: "Famous faces" },
       { value: "sports", label: "Sports stars" },
       { value: "flags", label: "Flags" },
-      ...EMOJI_THEMES.map(([k, l]) => ({ value: `e-${k}`, label: `Emoji: ${l}` })),
+      { value: "emoji", label: "Emoji" },
     ],
     def: "flags",
   },
@@ -359,9 +359,10 @@ const matchFields: Field[] = [
     "pairs",
     "How many pairs",
     [
-      [4, "4"],
       [6, "6"],
       [8, "8"],
+      [10, "10"],
+      [12, "12"],
     ],
     6,
   ),
@@ -385,11 +386,7 @@ async function matchPairs(v: SetupValues): Promise<[string, string | undefined, 
       ]);
     }
     default:
-      return drawMany(`match-${String(v.theme)}`, emojiPool(String(v.theme).replace(/^e-/, "")), n).map(([e, t]) => [
-        e,
-        undefined,
-        t,
-      ]);
+      return drawMany("match-emoji", emojiPool("mixed"), n).map(([e, t]) => [e, undefined, t]);
   }
 }
 
@@ -890,12 +887,6 @@ export const GAMES: GameDef[] = [
     room: true,
     roomName: "Memory Match (shared board)",
     roomFields: [
-      {
-        key: "theme",
-        legend: "Pictures",
-        options: EMOJI_THEMES.map(([value, label]) => ({ value, label })),
-        def: "mixed",
-      },
       timeField(
         "pairs",
         "How many pairs",
@@ -910,9 +901,7 @@ export const GAMES: GameDef[] = [
     ],
     liveBuild: (v) => ({
       kind: "memory",
-      symbols: drawMany(`match-room-${String(v.theme)}`, emojiPool(String(v.theme || "mixed")), num(v.pairs) || 8).map(
-        (p) => p[0],
-      ),
+      symbols: drawMany("match-room", emojiPool("mixed"), num(v.pairs) || 8).map((p) => p[0]),
     }),
     Play: () => (
       <SetupThen
