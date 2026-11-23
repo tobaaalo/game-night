@@ -178,5 +178,59 @@
     "name": "Mount Fuji",
     "src": "View_of_Mount_Fuji_from_Ōwakudani_20211202.jpg",
     "aiTool": "Figma AI (Gemini)"
+  },
+  {
+    "id": "peacock",
+    "name": "Peacock",
+    "src": "Peacock_Plumage.jpg",
+    "aiTool": "Figma AI (Gemini)"
+  },
+  {
+    "id": "polar-bear",
+    "name": "Polar bear",
+    "src": "Polar_Bear_-_Alaska_%28cropped%29.jpg",
+    "aiTool": "Figma AI (Gemini)"
+  },
+  {
+    "id": "pyramids-giza",
+    "name": "Pyramids of Giza",
+    "src": "Pyramids_of_the_Giza_Necropolis.jpg",
+    "aiTool": "Figma AI (Gemini)"
+  },
+  {
+    "id": "rabbit",
+    "name": "Rabbit",
+    "src": "Oryctolagus_cuniculus_Rcdo.jpg",
+    "aiTool": "Figma AI (Gemini)"
+  },
+  {
+    "id": "red-panda",
+    "name": "Red panda",
+    "src": "Red_Panda_(24986761703).jpg",
+    "aiTool": "Figma AI (Gemini)"
+  },
+  {
+    "id": "sheep",
+    "name": "Sheep",
+    "src": "Flock_of_sheep.jpg",
+    "aiTool": "Figma AI (Gemini)"
+  },
+  {
+    "id": "statue-of-liberty",
+    "name": "Statue of Liberty",
+    "src": "Front_view_of_Statue_of_Liberty_%28cropped%29.jpg",
+    "aiTool": "Figma AI (Gemini)"
+  },
+  {
+    "id": "stonehenge",
+    "name": "Stonehenge",
+    "src": "Stonehenge2007_07_30.jpg",
+    "aiTool": "Figma AI (Gemini)"
+  },
+  {
+    "id": "strawberry",
+    "name": "Strawberry",
+    "src": "Garden_strawberry_(Fragaria_×_ananassa)_single2.jpg",
+    "aiTool": "Figma AI (Gemini)"
   }
 ]
