@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type CSSProperties } from "react";
 import clsx from "clsx";
 import type { ClientMsg, RoomState } from "../shared/protocol";
 import type { LiveView } from "../shared/live";
+import { DuelBoard } from "../games/duel";
 
 type Props = { state: RoomState; me: string; send: (m: ClientMsg) => void; skew: number };
 
@@ -266,6 +267,41 @@ export function LiveGame({ state, me, send, skew }: Props) {
       </button>
     </div>
   );
+
+  /* ---------- Tic-Tac-Toe, Connect Four, Dots and Boxes, Rock Paper Scissors, Battleship ---------- */
+  if (v.kind === "duel" && v.match) {
+    const m = v.match;
+    const side = v.side ?? null;
+    const names: [string, string] = [nm(m.sides[0]), nm(m.sides[1])];
+    const who = m.sides.map((id) => state.players.find((p) => p.pid === id));
+    const left = who.findIndex((p) => !p);
+    const away = who.findIndex((p) => p && !p.connected);
+    const problem =
+      left >= 0
+        ? `${names[left]} has left the room. The host can end the game.`
+        : away >= 0
+          ? `${names[away]} lost connection. Waiting for them to come back…`
+          : "";
+    return (
+      <div className="stack">
+        {problem && !m.duel.over && (
+          <p className="hint center-text" role="status">
+            {problem}
+          </p>
+        )}
+        <DuelBoard
+          m={m}
+          side={side}
+          names={names}
+          canNext={side !== null || isHost}
+          onMove={(i) => send({ t: "live", a: "move", i })}
+          onShuffle={() => send({ t: "live", a: "shuffle" })}
+          onReady={() => send({ t: "live", a: "lock" })}
+          onNext={() => send({ t: "live", a: "next" })}
+        />
+      </div>
+    );
+  }
 
   /* ---------- Charades Sprint, Don't Say It, Charades Bingo ---------- */
   if (v.kind === "perform")

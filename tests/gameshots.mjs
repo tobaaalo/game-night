@@ -8,7 +8,11 @@ mkdirSync(OUT, { recursive: true });
 const src = readFileSync(new URL("../src/games/registry.tsx", import.meta.url), "utf8");
 const ids = [...new Set([...src.matchAll(/^    id: "([a-z0-9]+)",$/gm)].map((m) => m[1]))];
 const b = await chromium.launch({ executablePath: process.env.PW_CHROME || undefined });
-const ctx = await b.newContext({ viewport: { width: 375, height: 700 }, deviceScaleFactor: 1, reducedMotion: "reduce" });
+const ctx = await b.newContext({
+  viewport: { width: 375, height: 700 },
+  deviceScaleFactor: 1,
+  reducedMotion: "reduce",
+});
 const p = await ctx.newPage();
 for (const id of ids) {
   await p.goto(`${BASE}/play/${id}`, { waitUntil: "networkidle" }).catch(() => {});

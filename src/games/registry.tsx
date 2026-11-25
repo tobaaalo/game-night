@@ -28,7 +28,7 @@ import {
   levelName,
   loadWorld,
 } from "../content";
-import type { Group } from "../lib/app";
+import { useApp, type Group } from "../lib/app";
 import { draw, drawFresh, drawMany, shuffle } from "../lib/deck";
 import {
   bibleQuestions,
@@ -46,17 +46,24 @@ import {
 import { QuizRun, Setup, type Field, type SetupValues } from "./quiz";
 import { CardDeck, KnowMe, NPAT, RevealRun, TimedRun, type RevealItem } from "./party";
 import { ClueRun } from "./clues";
+import { DuelLocal } from "./duel";
+import { Hangman, Spy, WordGuess } from "./wordgames";
+import type { DuelGame } from "../shared/duel";
 import { WordLadder, BucketList, CharadesBingo, DrawGuess, MemoryMatch, WordChain } from "./extra";
 import { CLUES, DRAWWORDS, LADDER } from "../content";
 import type { LiveCfg } from "../shared/live";
 import { emojiPool } from "./emojisets";
 import { STARTS } from "./extra";
 import { loadCustom, customToGame } from "../lib/custom";
+import { HOW } from "./how";
+import { GAME_NAMES } from "../shared/duel";
 
-export type Section = "pictures" | "quiz" | "talk" | "party" | "yours";
+export type Section = "pictures" | "quiz" | "words" | "duel" | "talk" | "party" | "yours";
 export const SECTIONS: Record<Section, { title: string; blurb: string }> = {
   pictures: { title: "Picture rounds", blurb: "Faces, flags and fakes" },
   quiz: { title: "Quiz show", blurb: "Four options, one right answer" },
+  words: { title: "Word games", blurb: "Letters, guesses and puzzles" },
+  duel: { title: "Head to head", blurb: "Two players, one board" },
   talk: { title: "Talk & tell", blurb: "Questions that get people talking" },
   party: { title: "On the clock", blurb: "Timers, acting and shouting" },
   yours: { title: "Your own games", blurb: "Made on this phone" },
@@ -70,6 +77,8 @@ export interface GameDef {
   section: Section;
   groups: Group[];
   minPlayers?: number;
+  /** Most players the game can take. Above this it is hidden, on one phone and in a room. */
+  maxPlayers?: number;
   room?: boolean;
   scores?: boolean;
   stat: string;
@@ -510,12 +519,50 @@ const proverbFields: Field[] = [levelField(1, PROVERB_RULES), countField(10)];
 const proverbPool = (v: SetupValues) => PROVERBS.filter((p) => !num(v.level) || p[0] === num(v.level));
 const cluePool = (v: SetupValues) => CLUES.filter((c) => !num(v.level) || c[0] === num(v.level));
 
+/** How many games make a match. Rock Paper Scissors is a single throw, so its matches are longer. */
+const bestField = (def: number, opts: number[]): Field => ({
+  key: "best",
+  legend: "How long",
+  options: opts.map((n) => ({ value: n, label: n === 1 ? "One game" : `Best of ${n}` })),
+  def,
+});
+
+/** Head to head games are for two. On one phone they need two players or the computer; some need the computer or a room. */
+function DuelPlay({ game, def, opts, hidden }: { game: DuelGame; def: number; opts: number[]; hidden?: boolean }) {
+  const { players, go } = useApp();
+  const bot = players.some((p) => p.bot);
+  if (hidden && !bot)
+    return (
+      <div className="stack center-text">
+        <p className="h3">{GAME_NAMES[game]} has secrets</p>
+        <p className="lede">
+          Each player keeps something hidden, so it needs two phones or the computer. Start a room with a friend, or
+          play against the computer.
+        </p>
+        <div className="actions center">
+          <button className="btn" onClick={() => go("/who")}>
+            Play the computer
+          </button>
+        </div>
+      </div>
+    );
+  return (
+    <SetupThen
+      id={game}
+      fields={[bestField(def, opts)]}
+      build={(v) => num(v.best) || def}
+      run={(best, again) => <DuelLocal game={game} best={best} onAgain={again} />}
+    />
+  );
+}
+const DUEL_ROOM = (def: number, opts: number[]) => [bestField(def, opts)];
+
 export const GAMES: GameDef[] = [
   {
     id: "faces",
     name: "Famous Faces",
     blurb: "Who's this? Leaders, actors, singers and thinkers.",
-    how: "A famous face appears. In 'Shout it out', whoever names them first gets the points. On Medium and harder you can show their initials for one point less. In 'Pick from four', players take turns choosing the right name. Less famous people are worth more.",
+    how: HOW.faces,
     section: "pictures",
     groups: ["couple", "friends"],
     room: true,
@@ -574,7 +621,7 @@ export const GAMES: GameDef[] = [
     id: "sports",
     name: "Sports Stars",
     blurb: "Name the footballer, boxer, sprinter or driver.",
-    how: "A sports star appears. In 'Shout it out', whoever names them first gets the points. On Medium and harder you can show their initials for one point less. In 'Pick from four', players take turns choosing the right name. Less famous people are worth more.",
+    how: HOW.sports,
     section: "pictures",
     groups: ["couple", "friends"],
     room: true,
@@ -628,7 +675,7 @@ export const GAMES: GameDef[] = [
     id: "realai",
     name: "Real or AI?",
     blurb: "Two pictures. One is fake. Can you tell?",
-    how: "Two pictures (or two short texts) side by side. One is real, the other was made by AI to copy it. Each round asks either which one is AI or which one is real. Green shows the right answer.",
+    how: HOW.realai,
     section: "pictures",
     groups: ["couple", "friends"],
     room: true,
@@ -643,7 +690,7 @@ export const GAMES: GameDef[] = [
     id: "world",
     name: "World Decoder",
     blurb: "Flags, shapes, capitals, facts and slang.",
-    how: "Work out the country from its flag, its outline, its capital, a famous fact about it, or a word of local slang. Harder countries are worth more points.",
+    how: HOW.world,
     section: "pictures",
     groups: ["couple", "friends"],
     room: true,
@@ -659,7 +706,7 @@ export const GAMES: GameDef[] = [
     id: "emoji",
     name: "Emoji Decode",
     blurb: "Films, Bible stories, sayings and more, in emoji.",
-    how: "Guess the film, show, Bible story, saying, place, food, job or sport from the emojis. First to shout the right answer gets the points; harder levels score more.",
+    how: HOW.emoji,
     section: "pictures",
     groups: ["couple", "friends"],
     stat: "Guess from emojis",
@@ -709,7 +756,7 @@ export const GAMES: GameDef[] = [
     id: "bible",
     name: "Bible Trivia",
     blurb: "From Noah's ark to the judge with thirty donkeys.",
-    how: "Players take turns answering. Pick a level from Easy to Extremely hard. Harder questions are worth more points.",
+    how: HOW.bible,
     section: "quiz",
     groups: ["couple", "friends"],
     room: true,
@@ -722,7 +769,7 @@ export const GAMES: GameDef[] = [
     id: "trivia",
     name: "General Knowledge",
     blurb: "Capitals, science, history, sport.",
-    how: "Players take turns answering. Pick a level from Easy to Extremely hard. Harder questions are worth more points.",
+    how: HOW.trivia,
     section: "quiz",
     groups: ["couple", "friends"],
     room: true,
@@ -738,7 +785,7 @@ export const GAMES: GameDef[] = [
     id: "hol",
     name: "Higher or Lower",
     blurb: "Is the next one bigger or smaller?",
-    how: "You see one thing and its number, like a mountain and how tall it is. Then you are asked about a second thing: is it taller or shorter, bigger or smaller? Harder levels use numbers that are close.",
+    how: HOW.hol,
     section: "quiz",
     groups: ["couple", "friends"],
     room: true,
@@ -751,7 +798,7 @@ export const GAMES: GameDef[] = [
     id: "oddone",
     name: "Odd One Out",
     blurb: "Four things. One doesn't belong.",
-    how: "Read the four options and name the one that doesn't fit. Harder levels hide the link better.",
+    how: HOW.oddone,
     section: "quiz",
     groups: ["couple", "friends"],
     room: true,
@@ -764,7 +811,7 @@ export const GAMES: GameDef[] = [
     id: "years",
     name: "Guess the Year",
     blurb: "When did it happen?",
-    how: "An event appears with four possible years. Pick the right one. Harder levels put the years closer together.",
+    how: HOW.years,
     section: "quiz",
     groups: ["couple", "friends"],
     room: true,
@@ -777,7 +824,7 @@ export const GAMES: GameDef[] = [
     id: "nhie",
     name: "Never Have I Ever",
     blurb: "Clean confessions. Keep a finger down.",
-    how: "Read the card. Anyone who HAS done it puts a finger down, or takes a point if you are keeping score. Everyone with fingers left at the end wins.",
+    how: HOW.nhie,
     section: "talk",
     groups: ["couple", "friends"],
     scores: false,
@@ -796,7 +843,7 @@ export const GAMES: GameDef[] = [
     id: "bingo",
     name: "Charades Bingo",
     blurb: "Act out squares to claim a line.",
-    how: "A 3x3 card of things to act out. On your turn, pick a square and act it out without speaking. If the others guess it before time runs out, the square is yours. Three in a row wins bonus points.",
+    how: HOW.bingo,
     section: "party",
     groups: ["couple", "friends"],
     stat: "Three in a row",
@@ -847,8 +894,8 @@ export const GAMES: GameDef[] = [
     id: "wordchain",
     name: "Word Chain",
     blurb: "Start your word with the last letter.",
-    how: "Say a word that starts with the last letter of the previous word. Type it in to lock it. Words must be at least 5 letters long. No repeats. Run out of time and you are out. In a group the last player standing wins; alone, build the longest chain.",
-    section: "party",
+    how: HOW.wordchain,
+    section: "words",
     groups: ["couple", "friends"],
     stat: "Beat the clock",
     room: true,
@@ -889,7 +936,7 @@ export const GAMES: GameDef[] = [
     id: "match",
     name: "Memory Match",
     blurb: "Match each picture to its name.",
-    how: "Flip two cards. If a picture and its name match, you keep them and go again. If not, they flip back and the next player goes. Most pairs wins.",
+    how: HOW.match,
     section: "pictures",
     groups: ["couple", "friends"],
     stat: "Find the pairs",
@@ -925,7 +972,7 @@ export const GAMES: GameDef[] = [
     id: "draw",
     name: "Draw and Guess",
     blurb: "Sketch it on the screen. Others guess.",
-    how: "The drawer taps to see a secret word, then draws it with a finger. No letters or numbers. Everyone else shouts guesses. Whoever guesses right scores a point and so does the drawer.",
+    how: HOW.draw,
     section: "party",
     groups: ["couple", "friends"],
     stat: "Draw on the phone",
@@ -986,7 +1033,7 @@ export const GAMES: GameDef[] = [
     id: "bucket",
     name: "Couples Bucket List",
     blurb: "Vote in secret and find what you both want.",
-    how: "Each of you secretly votes Yes, Maybe or Not for me on 12 ideas, passing the phone between you. The app shows what you both said yes to, and you can save those to your own list and tick them off.",
+    how: HOW.bucket,
     section: "talk",
     groups: ["couple"],
     scores: false,
@@ -1012,8 +1059,8 @@ export const GAMES: GameDef[] = [
     id: "ladder",
     name: "Word Ladder",
     blurb: "Turn FAST into SLOW, one letter at a time.",
-    how: "Change one letter at a time, and every step must be a real word, to turn the first word into the last. Finish at or under par for a bonus point. Hints cost a point.",
-    section: "party",
+    how: HOW.ladder,
+    section: "words",
     groups: ["couple", "friends"],
     stat: "Change one letter",
     room: true,
@@ -1048,7 +1095,7 @@ export const GAMES: GameDef[] = [
     id: "clues",
     name: "Three Clues",
     blurb: "Three clues, one word. The fewer clues you need, the more you score.",
-    how: "Hear the first clue and guess. Right on clue 1 is 3 points, clue 2 is 2 points, clue 3 is 1 point. The answer can be a person, a place, an animal, a thing, anything at all.",
+    how: HOW.clues,
     section: "quiz",
     groups: ["couple", "friends"],
     room: true,
@@ -1087,7 +1134,7 @@ export const GAMES: GameDef[] = [
     id: "proverbs",
     name: "Finish the Proverb",
     blurb: "African, English and Bible sayings.",
-    how: "Read the first half aloud. Whoever finishes it correctly first gets the point.",
+    how: HOW.proverbs,
     section: "quiz",
     groups: ["couple", "friends"],
     stat: "Finish the saying",
@@ -1124,7 +1171,7 @@ export const GAMES: GameDef[] = [
     id: "knowme",
     name: "How Well Do You Know Me?",
     blurb: "One person secretly answers, everyone guesses.",
-    how: "One person is in the hot seat. They secretly type their real answer, then pass the phone. Everyone else guesses out loud. Reveal, then tap who got it right. The hot seat moves round each time, and questions never repeat within five rounds.",
+    how: HOW.knowme,
     section: "talk",
     groups: ["couple", "friends"],
     minPlayers: 2,
@@ -1138,7 +1185,7 @@ export const GAMES: GameDef[] = [
     id: "couple",
     name: "Couple Questions",
     blurb: "Conversation cards for the two of you.",
-    how: "Take turns reading a card to each other and answering honestly. No points, just good conversation. Skip any card you like.",
+    how: HOW.couple,
     section: "talk",
     groups: ["couple"],
     scores: false,
@@ -1157,7 +1204,7 @@ export const GAMES: GameDef[] = [
     id: "wyr",
     name: "Would You Rather",
     blurb: "Pick a side and defend it.",
-    how: "Read it out. On three, everyone says their pick. Defend your choice in one sentence.",
+    how: HOW.wyr,
     section: "talk",
     groups: ["couple", "friends"],
     scores: false,
@@ -1176,7 +1223,7 @@ export const GAMES: GameDef[] = [
     id: "likely",
     name: "Who's Most Likely To…",
     blurb: "Point at the guilty party.",
-    how: "Read the card. On three, everyone points at someone. Whoever gets the most fingers has to explain themselves.",
+    how: HOW.likely,
     section: "talk",
     groups: ["friends"],
     minPlayers: 3,
@@ -1196,7 +1243,7 @@ export const GAMES: GameDef[] = [
     id: "hotseat",
     name: "Hot Seat",
     blurb: "Rapid-fire questions for one person.",
-    how: "One person sits in the hot seat for two minutes while everyone else fires questions from the cards.",
+    how: HOW.hotseat,
     section: "talk",
     groups: ["friends"],
     scores: false,
@@ -1215,7 +1262,7 @@ export const GAMES: GameDef[] = [
     id: "twotruths",
     name: "Two Truths and a Lie",
     blurb: "Spot the fib.",
-    how: "Draw a topic. Tell two true things and one lie about yourself on it. Everyone guesses the lie.",
+    how: HOW.twotruths,
     section: "talk",
     groups: ["couple", "friends"],
     scores: false,
@@ -1234,7 +1281,7 @@ export const GAMES: GameDef[] = [
     id: "charades",
     name: "Charades Sprint",
     blurb: "Act it out, no talking, 60 seconds.",
-    how: "Act out each word without talking while everyone else guesses. You have 60 seconds to get through as many as you can. A point per word guessed.",
+    how: HOW.charades,
     section: "party",
     groups: ["friends"],
     minPlayers: 2,
@@ -1271,7 +1318,7 @@ export const GAMES: GameDef[] = [
     id: "taboo",
     name: "Don't Say It",
     blurb: "Describe the word without the banned ones.",
-    how: "Describe the word without saying it or any of the banned words. 60 seconds, a point for each one guessed.",
+    how: HOW.taboo,
     section: "party",
     groups: ["friends"],
     minPlayers: 2,
@@ -1317,7 +1364,7 @@ export const GAMES: GameDef[] = [
     id: "name5",
     name: "Name 5 in 10",
     blurb: "Five things, ten seconds. Go!",
-    how: "You get a category and a few seconds to name five things in it out loud. Manage it and you score; harder levels score more.",
+    how: HOW.name5,
     section: "party",
     groups: ["couple", "friends"],
     stat: "Beat the clock",
@@ -1381,7 +1428,7 @@ export const GAMES: GameDef[] = [
     id: "npat",
     name: "Name, Place, Animal, Thing",
     blurb: "One letter, pen and paper, 60 seconds.",
-    how: "Everyone needs pen and paper. Get a letter and write a name, place, animal, thing and food starting with it before time runs out. Unique answers score 10, shared ones 5.",
+    how: HOW.npat,
     section: "party",
     groups: ["couple", "friends"],
     stat: "Pen & paper",
@@ -1402,6 +1449,159 @@ export const GAMES: GameDef[] = [
       pool: false,
     }),
     Play: () => <NPAT />,
+  },
+  {
+    id: "ttt",
+    name: "Tic-Tac-Toe",
+    blurb: "Three in a row wins.",
+    how: HOW.ttt,
+    section: "duel",
+    groups: ["couple", "friends"],
+    minPlayers: 2,
+    maxPlayers: 2,
+    stat: "Two players",
+    room: true,
+    roomName: "Tic-Tac-Toe",
+    roomBlurb: "Three in a row wins. Two players.",
+    roomFields: DUEL_ROOM(1, [1, 3, 5]),
+    liveBuild: (v) => ({ kind: "duel", game: "ttt", best: num(v.best) || 1 }),
+    Play: () => <DuelPlay game="ttt" def={1} opts={[1, 3, 5]} />,
+  },
+  {
+    id: "c4",
+    name: "Connect Four",
+    blurb: "Drop discs. Four in a row wins.",
+    how: HOW.c4,
+    section: "duel",
+    groups: ["couple", "friends"],
+    minPlayers: 2,
+    maxPlayers: 2,
+    stat: "Two players",
+    room: true,
+    roomName: "Connect Four",
+    roomBlurb: "Drop discs. Four in a row wins. Two players.",
+    roomFields: DUEL_ROOM(1, [1, 3, 5]),
+    liveBuild: (v) => ({ kind: "duel", game: "c4", best: num(v.best) || 1 }),
+    Play: () => <DuelPlay game="c4" def={1} opts={[1, 3, 5]} />,
+  },
+  {
+    id: "dots",
+    name: "Dots and Boxes",
+    blurb: "Draw lines. Close a box and it's yours.",
+    how: HOW.dots,
+    section: "duel",
+    groups: ["couple", "friends"],
+    minPlayers: 2,
+    maxPlayers: 2,
+    stat: "Two players",
+    room: true,
+    roomName: "Dots and Boxes",
+    roomBlurb: "Draw lines. Close a box and it's yours. Two players.",
+    roomFields: DUEL_ROOM(1, [1, 3, 5]),
+    liveBuild: (v) => ({ kind: "duel", game: "dots", best: num(v.best) || 1 }),
+    Play: () => <DuelPlay game="dots" def={1} opts={[1, 3, 5]} />,
+  },
+  {
+    id: "rps",
+    name: "Rock Paper Scissors",
+    blurb: "Pick together. Rock, paper or scissors.",
+    how: HOW.rps,
+    section: "duel",
+    groups: ["couple", "friends"],
+    minPlayers: 2,
+    maxPlayers: 2,
+    stat: "Two players",
+    room: true,
+    roomName: "Rock Paper Scissors",
+    roomBlurb: "Pick together. Rock, paper or scissors. Two players.",
+    roomFields: DUEL_ROOM(3, [3, 5, 7]),
+    liveBuild: (v) => ({ kind: "duel", game: "rps", best: num(v.best) || 3 }),
+    Play: () => <DuelPlay game="rps" def={3} opts={[3, 5, 7]} hidden />,
+  },
+  {
+    id: "ship",
+    name: "Battleship",
+    blurb: "Find and sink the hidden fleet.",
+    how: HOW.ship,
+    section: "duel",
+    groups: ["couple", "friends"],
+    minPlayers: 2,
+    maxPlayers: 2,
+    stat: "Two players",
+    room: true,
+    roomName: "Battleship",
+    roomBlurb: "Find and sink the hidden fleet. Two players.",
+    roomFields: DUEL_ROOM(1, [1, 3, 5]),
+    liveBuild: (v) => ({ kind: "duel", game: "ship", best: num(v.best) || 1 }),
+    Play: () => <DuelPlay game="ship" def={1} opts={[1, 3, 5]} hidden />,
+  },
+  {
+    id: "hangman",
+    name: "Hangman",
+    blurb: "Guess the hidden word, one letter at a time.",
+    how: HOW.hangman,
+    section: "words",
+    groups: ["couple", "friends"],
+    stat: "Take turns on one phone",
+    Play: () => {
+      const fields = [levelField(1), countField(5, [3, 5, 8], "words", "How many words", "words")];
+      return (
+        <SetupThen
+          id="hangman"
+          fields={fields}
+          build={(v) => ({ lv: num(v.level), n: num(v.words) || 5 })}
+          run={(d, again) => (
+            <Hangman words={DRAWWORDS.filter((w) => !d.lv || w[0] === d.lv)} total={d.n} onAgain={again} />
+          )}
+        />
+      );
+    },
+  },
+  {
+    id: "wordguess",
+    name: "Word Guess",
+    blurb: "Find the 5-letter word in six tries.",
+    how: HOW.wordguess,
+    section: "words",
+    groups: ["couple", "friends"],
+    stat: "Take turns on one phone",
+    Play: () => (
+      <SetupThen
+        id="wordguess"
+        fields={[countField(3, [1, 3, 5], "words", "How many words", "words")]}
+        build={(v) => num(v.words) || 3}
+        run={(n, again) => <WordGuess total={n} onAgain={again} />}
+      />
+    ),
+  },
+  {
+    id: "spy",
+    name: "Find the Spy",
+    blurb: "Everyone knows the place except one.",
+    how: HOW.spy,
+    section: "talk",
+    groups: ["friends"],
+    minPlayers: 3,
+    stat: "Pass the phone",
+    Play: () => (
+      <SetupThen
+        id="spy"
+        fields={[
+          timeField(
+            "sec",
+            "Time to ask questions",
+            [
+              [180, "3 min"],
+              [300, "5 min"],
+              [480, "8 min"],
+            ],
+            300,
+          ),
+        ]}
+        build={(v) => num(v.sec) || 300}
+        run={(sec, again) => <Spy seconds={sec} onAgain={again} />}
+      />
+    ),
   },
 ];
 

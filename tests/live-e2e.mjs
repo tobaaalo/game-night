@@ -31,7 +31,7 @@ async function room(names) {
   return { host, mates };
 }
 async function start(host, game, pick = {}) {
-  const t = host.locator(".ticket", { hasText: game }).first();
+  const t = host.locator(".ticket, .tile", { hasText: game }).first();
   if (!(await t.count())) fail(`${game} missing from rooms`);
   await t.click();
   for (const [legend, idx] of Object.entries(pick))

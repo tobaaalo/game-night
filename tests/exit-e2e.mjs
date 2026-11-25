@@ -1,6 +1,7 @@
 // Leaving a game, host handover and rejoining. Usage: node tests/exit-e2e.mjs <baseUrl> [shotsDir]
 import { chromium } from "playwright";
-const BASE = process.argv[2], SH = process.argv[3] || "tests/screens";
+const BASE = process.argv[2],
+  SH = process.argv[3] || "tests/screens";
 const b = await chromium.launch({ executablePath: process.env.PW_CHROME || undefined });
 const mk = async (w = 375, h = 812) => {
   const ctx = await b.newContext({ viewport: { width: w, height: h }, reducedMotion: "reduce" });
@@ -8,7 +9,10 @@ const mk = async (w = 375, h = 812) => {
   p.on("pageerror", (e) => fail("page error " + e.message));
   return p;
 };
-const fail = (m) => { console.log("FAIL", m); process.exit(1); };
+const fail = (m) => {
+  console.log("FAIL", m);
+  process.exit(1);
+};
 const ok = (m) => console.log("ok", m);
 const shot = (p, n) => p.screenshot({ path: `${SH}/exit-${n}.png`, fullPage: true });
 const join = async (code, name) => {

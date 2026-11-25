@@ -2,8 +2,12 @@
 import { chromium } from "playwright";
 const BASE = process.argv[2];
 const b = await chromium.launch({ executablePath: process.env.PW_CHROME || undefined });
-const phone = async () => (await (await b.newContext({ viewport: { width: 375, height: 812 }, reducedMotion: "reduce" })).newPage());
-const fail = (m) => { console.log("FAIL", m); process.exit(1); };
+const phone = async () =>
+  await (await b.newContext({ viewport: { width: 375, height: 812 }, reducedMotion: "reduce" })).newPage();
+const fail = (m) => {
+  console.log("FAIL", m);
+  process.exit(1);
+};
 const ok = (m) => console.log("ok", m);
 async function room(names) {
   const host = await phone();
@@ -19,7 +23,10 @@ async function room(names) {
     await p.getByRole("button", { name: "Join" }).click();
     mates.push(p);
   }
-  await host.locator(".joined li").nth(names.length - 1).waitFor();
+  await host
+    .locator(".joined li")
+    .nth(names.length - 1)
+    .waitFor();
   return { host, mates, code };
 }
 
@@ -34,9 +41,14 @@ async function room(names) {
   const q1 = await d.locator(".qprompt").textContent();
   await d.locator(".option").nth(0).click();
   await d.locator(".option").nth(1).click(); // change once
-  if ((await d.locator(".option.mine").count()) !== 1 || !(await d.locator(".option").nth(1).getAttribute("class")).includes("mine")) fail("change once did not move my pick");
+  if (
+    (await d.locator(".option.mine").count()) !== 1 ||
+    !(await d.locator(".option").nth(1).getAttribute("class")).includes("mine")
+  )
+    fail("change once did not move my pick");
   await d.locator(".option").nth(2).click({ force: true }); // second change must be ignored
-  if (!(await d.locator(".option").nth(1).getAttribute("class")).includes("mine")) fail("second change should be ignored");
+  if (!(await d.locator(".option").nth(1).getAttribute("class")).includes("mine"))
+    fail("second change should be ignored");
   ok("answer can be changed once");
   await f.locator(".option").nth(0).click();
   // both answered: reveal should come by itself (no host tap), then next question by itself
@@ -80,12 +92,20 @@ async function room(names) {
       const diff = [...before].findIndex((c, i) => c !== hint[i]);
       await p.locator(".ltile").nth(diff).click();
       await p.locator(".lkey", { hasText: new RegExp(`^${hint[diff]}$`, "i") }).click();
-      await p.waitForFunction((w) => [...document.querySelectorAll(".ltile")].map((x) => x.textContent).join("").toLowerCase() !== w || !!document.querySelector(".tally"), before, { timeout: 5000 });
+      await p.waitForFunction(
+        (w) =>
+          [...document.querySelectorAll(".ltile")]
+            .map((x) => x.textContent)
+            .join("")
+            .toLowerCase() !== w || !!document.querySelector(".tally"),
+        before,
+        { timeout: 5000 },
+      );
       if (await p.locator(".tally").count()) return;
     }
   };
   await play(host, 1);
-  const dayoStart = (await d.locator(".ladder li").count());
+  const dayoStart = await d.locator(".ladder li").count();
   if (dayoStart !== 0) fail("Dayo's board changed when the host moved (race boards must be independent)");
   ok("race boards are independent");
   await play(host, 8);

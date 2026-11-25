@@ -2,8 +2,12 @@
 import { chromium } from "playwright";
 const BASE = process.argv[2];
 const b = await chromium.launch({ executablePath: process.env.PW_CHROME || undefined });
-const phone = async () => (await (await b.newContext({ viewport: { width: 375, height: 812 }, reducedMotion: "reduce" })).newPage());
-const fail = (m) => { console.log("FAIL", m); process.exit(1); };
+const phone = async () =>
+  await (await b.newContext({ viewport: { width: 375, height: 812 }, reducedMotion: "reduce" })).newPage();
+const fail = (m) => {
+  console.log("FAIL", m);
+  process.exit(1);
+};
 const ok = (m) => console.log("ok", m);
 async function room(names) {
   const host = await phone();
@@ -19,10 +23,12 @@ async function room(names) {
     await p.getByRole("button", { name: "Join" }).click();
     mates.push(p);
   }
-  await host.locator(".joined li").nth(names.length - 1).waitFor();
+  await host
+    .locator(".joined li")
+    .nth(names.length - 1)
+    .waitFor();
   return { host, mates, code };
 }
-
 
 // Talking games in rooms: everyone answers on their own phone, the host sees how the room voted.
 const cases = [
@@ -35,7 +41,7 @@ const cases = [
 ];
 for (const [game, nOpts, first] of cases) {
   const { host, mates } = await room(["Dayo", "Femi", "Kemi"]);
-  const t = host.locator(".ticket", { hasText: game });
+  const t = host.locator(".ticket, .tile", { hasText: game });
   if (!(await t.count())) fail(`${game} missing from rooms`);
   await t.click();
   await host.getByRole("group", { name: "How many cards" }).locator(".chip").first().click();
@@ -44,7 +50,8 @@ for (const [game, nOpts, first] of cases) {
   await d.locator(".option").first().waitFor({ timeout: 10000 });
   const n = await d.locator(".option").count();
   if (n !== nOpts) fail(`${game}: expected ${nOpts} options, saw ${n}`);
-  if (first && (await d.locator(".option").first().innerText()).indexOf(first) < 0) fail(`${game}: first option is not "${first}"`);
+  if (first && (await d.locator(".option").first().innerText()).indexOf(first) < 0)
+    fail(`${game}: first option is not "${first}"`);
   for (const m of mates) await m.locator(".option").first().click();
   await host.locator(".votes").first().waitFor({ timeout: 10000 });
   const votes = await host.locator(".votes").allInnerTexts();

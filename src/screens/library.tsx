@@ -52,11 +52,20 @@ export function Library() {
     if (!group) go("/who", { replace: true });
   }, [group, go]);
   const games = useMemo(
-    () => gamesFor(group).filter((g) => !g.minPlayers || players.length >= g.minPlayers || g.section === "yours"),
+    () =>
+      gamesFor(group).filter(
+        (g) =>
+          g.section === "yours" ||
+          ((!g.minPlayers || players.length >= g.minPlayers) && (!g.maxPlayers || players.length <= g.maxPlayers)),
+      ),
     [group, players.length],
   );
   const hidden = useMemo(
     () => gamesFor(group).filter((g) => g.minPlayers && players.length < g.minPlayers),
+    [group, players.length],
+  );
+  const tooMany = useMemo(
+    () => gamesFor(group).filter((g) => g.maxPlayers && players.length > g.maxPlayers && g.section !== "yours"),
     [group, players.length],
   );
   const sections = (Object.keys(SECTIONS) as Section[])
@@ -210,6 +219,12 @@ export function Library() {
           </button>
         </div>
       </section>
+      {tooMany.length > 0 && (
+        <p className="hint center-text">
+          {tooMany.map((g) => g.name).join(", ")} {tooMany.length === 1 ? "is" : "are"} for exactly 2 players, so{" "}
+          {tooMany.length === 1 ? "it is" : "they are"} hidden with {players.length} playing.
+        </p>
+      )}
       {hidden.length > 0 && (
         <p className="hint center-text">
           {hidden.map((g) => g.name).join(", ")} need{hidden.length === 1 ? "s" : ""} at least{" "}

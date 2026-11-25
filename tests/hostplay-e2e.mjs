@@ -2,8 +2,12 @@
 import { chromium } from "playwright";
 const BASE = process.argv[2];
 const b = await chromium.launch({ executablePath: process.env.PW_CHROME || undefined });
-const phone = async () => await (await b.newContext({ viewport: { width: 375, height: 812 }, reducedMotion: "reduce" })).newPage();
-const fail = (m) => { console.log("FAIL", m); process.exit(1); };
+const phone = async () =>
+  await (await b.newContext({ viewport: { width: 375, height: 812 }, reducedMotion: "reduce" })).newPage();
+const fail = (m) => {
+  console.log("FAIL", m);
+  process.exit(1);
+};
 const host = await phone();
 await host.goto(BASE + "/room");
 await host.getByRole("button", { name: "Open a room" }).click();
@@ -17,7 +21,13 @@ const mate = await phone();
 await mate.goto(`${BASE}/join/${code}`);
 await mate.locator("#jname").fill("Femi");
 await mate.getByRole("button", { name: "Join" }).click();
-await host.getByText("2 in the room").first().waitFor({ timeout: 10000 }).catch(async () => fail("host player not counted: " + (await host.locator("main").innerText()).replace(/\n+/g, " | ").slice(0, 500)));
+await host
+  .getByText("2 in the room")
+  .first()
+  .waitFor({ timeout: 10000 })
+  .catch(async () =>
+    fail("host player not counted: " + (await host.locator("main").innerText()).replace(/\n+/g, " | ").slice(0, 500)),
+  );
 // start Higher or Lower style quick game: Would You Rather is talk-only; use Name 5 shout
 await host.locator(".ticket, .tile", { hasText: "Name 5 in 10" }).first().click();
 await host.getByRole("button", { name: /Start with/ }).click();
@@ -31,5 +41,7 @@ const over = await host.evaluate(() => document.documentElement.scrollWidth - do
 if (over > 1) fail("sideways scroll on host device " + over);
 // back to the controls
 await host.getByRole("button", { name: /End the game for everyone/ }).waitFor();
-console.log("ok host plays too: joined with one tap, counted as a player, auto-switched to play, can flip back to controls");
+console.log(
+  "ok host plays too: joined with one tap, counted as a player, auto-switched to play, can flip back to controls",
+);
 await b.close();

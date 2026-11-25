@@ -1,5 +1,17 @@
 // Live room games: the server holds one small shared state and moves it along by itself.
 // Used by the Durable Object and by the phones, so the types and rules live here.
+import {
+  duelMove,
+  duelReady,
+  duelShuffle,
+  matchNew,
+  matchNext,
+  matchSettle,
+  matchView,
+  type DuelGame,
+  type Match,
+  type Side,
+} from "./duel";
 
 export type LiveCfg =
   /** One player acts or describes, the rest guess. Charades Sprint, Don't Say It, Charades Bingo. */
@@ -18,12 +30,15 @@ export type LiveCfg =
   | { kind: "draw"; words: string[]; seconds: number }
   | { kind: "chain"; start: string; seconds: number }
   | { kind: "memory"; symbols: string[] }
-  | { kind: "knowme"; questions: string[] };
+  | { kind: "knowme"; questions: string[] }
+  /** Two players, one board, the server keeps score. Tic-Tac-Toe, Connect Four, Dots and Boxes, Rock Paper Scissors, Battleship. */
+  | { kind: "duel"; game: DuelGame; best: number };
 
 export type LiveMsg =
   | { t: "live-start"; game: string; cfg: LiveCfg }
   | { t: "live"; a: "got"; pid: string }
-  | { t: "live"; a: "skip" | "buzz" | "done" | "next" | "clear" | "undo" | "lock" }
+  | { t: "live"; a: "skip" | "buzz" | "done" | "next" | "clear" | "undo" | "lock" | "shuffle" }
+  | { t: "live"; a: "move"; i: number }
   | { t: "live"; a: "submit" | "guess" | "word" | "secret"; v: string | string[] }
   | { t: "live"; a: "stroke"; s: number[] }
   | { t: "live"; a: "flip"; i: number }
@@ -64,6 +79,9 @@ export interface LiveView {
   out?: string[];
   board?: { cards: (string | null)[]; done: number[] };
   pairs?: Record<string, number>;
+  /** Head to head games: the match as this viewer is allowed to see it, and which side they are (-1 when watching). */
+  match?: Match;
+  side?: Side | null;
   results?: LiveResult[];
   note?: string;
   word?: string;
@@ -102,6 +120,7 @@ export interface Live {
   names: Record<string, string>;
   /** Random first player, then everyone in turn. */
   off: number;
+  match?: Match;
 }
 
 const PERFORM_REVEAL = 4000;
@@ -153,6 +172,14 @@ export function liveStart(cfg: LiveCfg, names: Record<string, string>, ctx: Ctx)
     names,
     off: Math.floor(Math.random() * Math.max(1, pids.length)),
   };
+  if (cfg.kind === "duel") {
+    // The first two players are the two sides. Anyone else just watches.
+    const sides = ctx.shuffle(pids.slice(0, 2)) as [string, string];
+    l.rounds = 1;
+    l.round = 0;
+    l.match = matchNew(cfg.game, cfg.best, sides, Math.random() < 0.5 ? 0 : 1);
+    return l;
+  }
   if (cfg.kind === "perform") l.rounds = cfg.turns;
   else if (cfg.kind === "words") l.rounds = cfg.rounds.length;
   else if (cfg.kind === "draw") l.rounds = cfg.words.length;
@@ -334,6 +361,7 @@ function enterReveal(l: Live, ctx: Ctx): void {
 export function liveStep(l: Live, ctx: Ctx): boolean {
   l.at = undefined;
   const c = l.cfg;
+  if (c.kind === "duel") return false;
   if (c.kind === "chain") {
     if (l.actor) l.out.push(l.actor);
     const alive = l.pids.filter((p) => !l.out.includes(p));
@@ -399,6 +427,39 @@ export function liveApply(l: Live, m: LiveMsg, who: string, isHost: boolean, ctx
   const finishEarly = () => {
     l.at = Math.min(l.at ?? Infinity, ctx.now + 1500);
   };
+
+  if (c.kind === "duel" && l.match) {
+    const mt = l.match;
+    const side = mt.sides.indexOf(who);
+    const me: Side | null = side === 0 ? 0 : side === 1 ? 1 : null;
+    const settle = () => {
+      matchSettle(mt, (s) => ctx.score(mt.sides[s], 1));
+      l.step = mt.duel.over ? "reveal" : "play";
+    };
+    if (m.a === "next") {
+      if (!mt.duel.over || (me === null && !isHost)) return {};
+      if (mt.done) return { end: true, changed: true };
+      matchNext(mt, Math.random);
+      l.step = "play";
+      return { changed: true };
+    }
+    if (me === null) return {};
+    if (m.a === "move") {
+      const err = duelMove(mt.duel, me, m.i);
+      if (err) return { error: err };
+      settle();
+      return { changed: true };
+    }
+    if (m.a === "shuffle") {
+      const err = duelShuffle(mt.duel, me);
+      return err ? { error: err } : { changed: true };
+    }
+    if (m.a === "lock") {
+      const err = duelReady(mt.duel, me);
+      return err ? { error: err } : { changed: true };
+    }
+    return {};
+  }
 
   if (m.a === "next") {
     if (l.step !== "reveal") return {};
@@ -603,6 +664,12 @@ export function liveView(l: Live, viewer: string | undefined): LiveView {
     tally: l.tally,
   };
   const mine = viewer && viewer === l.actor;
+  if (c.kind === "duel" && l.match) {
+    const side = viewer ? l.match.sides.indexOf(viewer) : -1;
+    v.side = side === 0 ? 0 : side === 1 ? 1 : null;
+    v.match = matchView(l.match, v.side);
+    return v;
+  }
   if (c.kind === "perform") {
     const it = c.items[l.wi % c.items.length];
     if (mine && l.step === "play") {

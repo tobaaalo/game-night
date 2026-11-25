@@ -12,6 +12,9 @@ export const SKILLS: { value: Skill; label: string; rule: string }[] = [
 export type BotMode = "play" | "solo" | "people";
 const MODE: Record<string, BotMode> = {
   nhie: "solo",
+  hangman: "solo",
+  wordguess: "solo",
+  spy: "people",
   wyr: "solo",
   knowme: "people",
   likely: "people",
@@ -34,6 +37,7 @@ export const SPOKEN = new Set(["emoji", "proverbs", "clues", "charades", "taboo"
 export const botMode = (id: string): BotMode => MODE[id] ?? "play";
 /** Games where the computer cannot join in: how many people they need. */
 export const NEEDS: Record<string, number> = {
+  spy: 3,
   knowme: 2,
   likely: 3,
   twotruths: 2,

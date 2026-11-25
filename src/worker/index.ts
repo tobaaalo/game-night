@@ -445,6 +445,10 @@ export class Room extends DurableObject<Env> {
       return;
     }
     if (msg.t === "live-start" && tag.role === "host") {
+      if (msg.cfg.kind === "duel" && s.players.length !== 2) {
+        reply({ t: "error", message: "This game is for exactly two players." });
+        return;
+      }
       const names: Record<string, string> = {};
       s.players.forEach((p) => (names[p.pid] = p.name));
       s.game = msg.game;

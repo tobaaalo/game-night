@@ -261,7 +261,10 @@ const jobs = {
       await sleep(400);
     }
     const ended = await vis(page.getByText(/wins!/), 300);
-    ok(plays >= 3 || (ended && plays >= 1), `wordchain: you and the computer traded words (${plays} of yours accepted${ended ? ", game ended" : ""})`);
+    ok(
+      plays >= 3 || (ended && plays >= 1),
+      `wordchain: you and the computer traded words (${plays} of yours accepted${ended ? ", game ended" : ""})`,
+    );
     if (!ended) ok((await page.locator(".bigtext").innerText()).length >= 5, "wordchain: bot's word shown");
   },
   ladder: async () => {

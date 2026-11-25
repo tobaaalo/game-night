@@ -105,7 +105,10 @@ for (const w of WIDTHS) {
   await step("19-wyr", async () => page.goto(BASE + "/play/wyr"));
   await step("20-finish", async () => {
     await page.goto(BASE + "/play/trivia");
-    await page.getByText(/^[3-6]$/).first().click();
+    await page
+      .getByText(/^[3-6]$/)
+      .first()
+      .click();
     await click(page, "Start");
     for (let i = 0; i < 5; i++) {
       await page.locator(".option").first().click();

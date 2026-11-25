@@ -38,6 +38,10 @@ export function GameFrame({
           <Icon.help />
         </button>
       </div>
+      <details className="howto">
+        <summary>How to play</summary>
+        <p>{how}</p>
+      </details>
       <div className={clsx("stage marquee", live && "live")}>{children}</div>
       {scores && (
         <div className="game-foot">

@@ -185,7 +185,8 @@ function useRoomSocket(
 const wsUrl = (code: string, q: Record<string, string>) =>
   `${location.protocol === "https:" ? "wss" : "ws"}://${location.host}/api/rooms/${code}/ws?${new URLSearchParams(q)}`;
 
-const ROOM_GAMES = () => gamesFor(null).filter((g) => g.room);
+/** Games the room can run. Two-player games drop out of the list once a third person joins. */
+const ROOM_GAMES = (count: number) => gamesFor(null).filter((g) => g.room && (!g.maxPlayers || count <= g.maxPlayers));
 
 function ConnBanner({ conn }: { conn: Conn }) {
   if (conn === "open") return null;
@@ -362,6 +363,12 @@ function HostLive({
     );
   }, [joinUrl]);
 
+  // A third person joining takes a two-player game off the list, and off the screen if it was picked.
+  const joined = state?.players.length ?? 0;
+  useEffect(() => {
+    if (game?.maxPlayers && joined > game.maxPlayers) setGame(null);
+  }, [game, joined, setGame]);
+
   if (error && conn === "closed")
     return (
       <div className="screen empty">
@@ -376,6 +383,9 @@ function HostLive({
     );
   const players = state?.players ?? [];
   const phase = state?.phase ?? "lobby";
+  const needTwo = !!game?.maxPlayers && players.length !== game.maxPlayers;
+  // When the host is one of the two players, the board is in their own panel below, so it isn't drawn twice.
+  const hostInDuel = !!selfPid && !!state?.live?.match?.sides.includes(selfPid);
   const others = players.filter((p) => p.pid !== selfPid);
   const endRoom = () => {
     let undone = false;
@@ -574,7 +584,7 @@ function HostLive({
               <h2 className="h3" id="pickg">
                 Pick a game
               </h2>
-              <RoomPicker game={game} setGame={setGame} />
+              <RoomPicker game={game} setGame={setGame} count={players.length} />
             </section>
             {!game ? (
               <div className="dock">
@@ -584,18 +594,24 @@ function HostLive({
               </div>
             ) : (
               <section className="stack" aria-label={`${game.name} settings`}>
+                <div className="panel howto">
+                  <p className="h3">How to play {game.roomName ?? game.name}</p>
+                  <p>{game.how}</p>
+                </div>
                 <Setup
                   id={`room-${game.id}`}
                   fields={game.roomFields ?? []}
                   players={players.length}
-                  disabled={!players.length}
+                  disabled={!players.length || needTwo}
                   startLabel={
-                    players.length
-                      ? `Start with ${players.length} ${players.length === 1 ? "player" : "players"}`
-                      : "Waiting for someone to join…"
+                    needTwo
+                      ? `${game.name} needs exactly 2 players (${players.length} here)`
+                      : players.length
+                        ? `Start with ${players.length} ${players.length === 1 ? "player" : "players"}`
+                        : "Waiting for someone to join…"
                   }
                   onStart={async (v) => {
-                    if (!players.length) return;
+                    if (!players.length || needTwo) return;
                     if (game.teamBuild) {
                       const puzzles = game.teamBuild(v);
                       send({
@@ -638,7 +654,7 @@ function HostLive({
           />
         )}
 
-        {phase === "live" && state?.live && (
+        {phase === "live" && state?.live && !hostInDuel && (
           <div className="stack">
             <LiveGame state={state} me="host" send={send} skew={skew} />
             <ul className="live-scores" aria-label="Scores">
@@ -719,7 +735,7 @@ function HostLive({
       </div>
       {play && (
         <div className="host-player" hidden={phase === "lobby" || phase === "ended"}>
-          <h2 className="h3">Your answers</h2>
+          <h2 className="h3">{state?.live?.kind === "duel" ? "Your game" : "Your answers"}</h2>
           <PlayerLive
             code={room.code}
             name={play}
@@ -1240,7 +1256,7 @@ function PlayerLive({
   );
 }
 
-function RoomPicker({ game, setGame }: { game: GameDef | null; setGame: (g: GameDef) => void }) {
+function RoomPicker({ game, setGame, count }: { game: GameDef | null; setGame: (g: GameDef) => void; count: number }) {
   const [view, setViewState] = useState<"list" | "grid">(() =>
     load<"list" | "grid">("gn.libview", matchMedia("(max-width: 600px)").matches ? "grid" : "list"),
   );
@@ -1255,7 +1271,8 @@ function RoomPicker({ game, setGame }: { game: GameDef | null; setGame: (g: Game
       save("gn.libshut", n);
       return n;
     });
-  const all = ROOM_GAMES();
+  const all = ROOM_GAMES(count);
+  const hiddenN = gamesFor(null).filter((g) => g.room && g.maxPlayers && count > g.maxPlayers).length;
   const sections = (Object.keys(SECTIONS) as Section[])
     .map((s) => ({ s, list: all.filter((g) => g.section === s) }))
     .filter((x) => x.list.length);
@@ -1270,6 +1287,12 @@ function RoomPicker({ game, setGame }: { game: GameDef | null; setGame: (g: Game
           List
         </button>
       </div>
+      {hiddenN > 0 && (
+        <p className="hint">
+          {hiddenN} game{hiddenN === 1 ? " is" : "s are"} hidden because {hiddenN === 1 ? "it is" : "they are"} for 2
+          players only.
+        </p>
+      )}
       {sections.map(({ s, list }) => (
         <section key={s} className="lib-section" aria-labelledby={`rsec-${s}`}>
           <h3 id={`rsec-${s}`} className="sec-sign h3">

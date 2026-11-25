@@ -2,8 +2,12 @@
 import { chromium } from "playwright";
 const BASE = process.argv[2];
 const b = await chromium.launch({ executablePath: process.env.PW_CHROME || undefined });
-const phone = async () => await (await b.newContext({ viewport: { width: 375, height: 812 }, reducedMotion: "reduce" })).newPage();
-const fail = (m) => { console.log("FAIL", m); process.exit(1); };
+const phone = async () =>
+  await (await b.newContext({ viewport: { width: 375, height: 812 }, reducedMotion: "reduce" })).newPage();
+const fail = (m) => {
+  console.log("FAIL", m);
+  process.exit(1);
+};
 const host = await phone();
 await host.goto(BASE + "/room");
 await host.getByRole("button", { name: "Open a room" }).click();
@@ -18,7 +22,7 @@ for (const n of ["Dayo", "Femi"]) {
   mates.push(p);
 }
 await host.locator(".joined li").nth(1).waitFor();
-await host.locator(".ticket", { hasText: "Word Ladder" }).click();
+await host.locator(".ticket, .tile", { hasText: "Word Ladder" }).click();
 await host.getByText("2 teams").click();
 await host.getByText("Take turns").click();
 await host.screenshot({ path: "tests/screens/team-setup2.png", fullPage: true });
@@ -26,7 +30,11 @@ await host.getByRole("button", { name: /Start with/ }).click();
 const all = [host, ...mates];
 for (const p of all) await p.locator(".ladder-now").waitFor({ timeout: 10000 });
 const info = [];
-for (const p of all) info.push({ p, t: (await p.getByText(/You are in Team/).count()) ? await p.getByText(/You are in Team/).textContent() : "" });
+for (const p of all)
+  info.push({
+    p,
+    t: (await p.getByText(/You are in Team/).count()) ? await p.getByText(/You are in Team/).textContent() : "",
+  });
 const pair = info.filter((x) => x.t);
 if (pair.length !== 2) fail(`expected 2 teammates, got ${pair.length}`);
 console.log("ok teams:", pair.map((x) => x.t).join(" | "));
