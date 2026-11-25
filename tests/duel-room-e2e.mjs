@@ -184,7 +184,16 @@ for (const [id, name] of [
     await d.getByRole("button", { name: "Shuffle" }).click();
     ok((await d.locator(".sea .ship").count()) === 7, "Battleship: shuffle keeps a full fleet");
     await d.getByRole("button", { name: "Ready" }).click();
-    ok(/Waiting for/.test(await d.locator(".duel-status").innerText()), "Battleship: waits for the other player");
+    ok(
+      await d
+        .locator(".duel-status", { hasText: /Waiting for/ })
+        .waitFor({ timeout: 6000 })
+        .then(
+          () => true,
+          () => false,
+        ),
+      "Battleship: waits for the other player",
+    );
     await f.getByRole("button", { name: "Ready" }).click();
     await d.locator(".sea.live, .sea").first().waitFor();
     await d.waitForTimeout(500);
