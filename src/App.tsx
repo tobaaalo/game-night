@@ -10,7 +10,7 @@ import { Names, Welcome, Who } from "./screens/start";
 function Header() {
   const { go, group, players, path } = useApp();
   const [menu, setMenu] = useState(false);
-  const minimal = path === "/" || path === "/welcome";
+  const minimal = path === "/" || path === "/welcome" || path === "/room" || path.startsWith("/join");
   const nav = (to: string) => {
     setMenu(false);
     go(to);

@@ -14,6 +14,7 @@ import {
   type World,
 } from "../content";
 import { draw, drawFresh, drawMany, pick, shuffle } from "../lib/deck";
+import { load, save } from "../lib/store";
 
 export type WorldMode = "flag" | "shape" | "cap" | "fact" | "slang" | "mix";
 
@@ -381,15 +382,24 @@ export function higherLowerQuestions(s: QuizSetup): HostQuestion[] {
       }
   let pool = all.filter((p) => !s.level || p.lv === s.level);
   if (pool.length < 20) pool = all;
+  // A pair is the same pair whichever way round it is asked, and things used in the last few games rest for a while.
+  const pairId = (x: P) => [x.a[0], x.b[0]].sort().join("|");
+  const half = pool.filter((x) => x.a[0] < x.b[0]);
+  const RECENT_KEY = "gn.holrecent";
+  const recentThings = new Set(load<string[]>(RECENT_KEY, []));
+  const rested = half.filter((x) => !recentThings.has(x.a[0]) && !recentThings.has(x.b[0]));
+  const source = rested.length >= s.count * 4 ? rested : half;
   const seen = new Set<string>();
   const picked: P[] = [];
-  for (const p of drawFresh("hol", pool, Math.min(pool.length, s.count * 6), (x) => `${x.a[0]}|${x.b[0]}`)) {
+  for (const p0 of drawFresh("hol2", source, Math.min(source.length, s.count * 6), pairId)) {
     if (picked.length >= s.count) break;
-    if (seen.has(p.a[0]) || seen.has(p.b[0])) continue;
-    seen.add(p.a[0]);
-    seen.add(p.b[0]);
-    picked.push(p);
+    if (seen.has(p0.a[0]) || seen.has(p0.b[0])) continue;
+    seen.add(p0.a[0]);
+    seen.add(p0.b[0]);
+    // Which one is shown and which one is asked about is random.
+    picked.push(Math.random() < 0.5 ? p0 : { ...p0, a: p0.b, b: p0.a });
   }
+  save(RECENT_KEY, [...recentThings, ...seen].slice(-Math.max(40, s.count * 6)));
   return picked.map((p) => {
     const w = HOLWORDS[p.cat] ?? { hi: "Higher", lo: "Lower", unit: "" };
     const higher = p.b[1] > p.a[1];

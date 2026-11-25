@@ -230,7 +230,7 @@ for (const w of WIDTHS) {
     }
   });
   await step("41-room-close", async () =>
-    page.getByRole("button", { name: "End the game for everyone" }).first().click(),
+    page.getByRole("button", { name: "End this game for everyone" }).first().click(),
   );
   await pctx.close();
   for (const e of errors) problems.push(`${w} console: ${e.slice(0, 160)}`);

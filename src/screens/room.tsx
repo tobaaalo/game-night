@@ -384,16 +384,14 @@ function HostLive({
   const players = state?.players ?? [];
   const phase = state?.phase ?? "lobby";
   const needTwo = !!game?.maxPlayers && players.length !== game.maxPlayers;
-  // When the host is one of the two players, the board is in their own panel below, so it isn't drawn twice.
-  const hostInDuel = !!selfPid && !!state?.live?.match?.sides.includes(selfPid);
+  // When the host plays too, the board is in their own panel, so the spectator view is not drawn as well.
   const others = players.filter((p) => p.pid !== selfPid);
   const endRoom = () => {
     let undone = false;
-    toast("Ending the game for everyone…", () => (undone = true));
+    toast("Ending this game for everyone…", () => (undone = true));
     setTimeout(() => {
       if (undone) return;
       send({ t: "end" });
-      onClose();
     }, 6000);
   };
   const copy = async () => {
@@ -654,7 +652,7 @@ function HostLive({
           />
         )}
 
-        {phase === "live" && state?.live && !hostInDuel && (
+        {phase === "live" && state?.live && !selfPid && (
           <div className="stack">
             <LiveGame state={state} me="host" send={send} skew={skew} />
             <ul className="live-scores" aria-label="Scores">
@@ -685,11 +683,27 @@ function HostLive({
           />
         )}
 
-        <div className="actions center room-end">
-          <button className="link" onClick={endRoom}>
-            End the game for everyone
-          </button>
-        </div>
+        {play && (
+          <div className="host-player" hidden={phase === "lobby" || phase === "ended"}>
+            <h2 className="h3">{state?.live ? "Your game" : "Your answers"}</h2>
+            <PlayerLive
+              code={room.code}
+              name={play}
+              direct={(pid) => pid && send({ t: "kick", pid })}
+              onLeave={() => {
+                save(playKey, null);
+                setPlay(null);
+              }}
+            />
+          </div>
+        )}
+        {phase !== "lobby" && phase !== "ended" && (
+          <div className="actions center room-end">
+            <button className="link" onClick={endRoom}>
+              End this game for everyone
+            </button>
+          </div>
+        )}
         {others.length > 0 && (
           <div className="actions center">
             {!confirmLeave ? (
@@ -733,20 +747,6 @@ function HostLive({
           </div>
         )}
       </div>
-      {play && (
-        <div className="host-player" hidden={phase === "lobby" || phase === "ended"}>
-          <h2 className="h3">{state?.live?.kind === "duel" ? "Your game" : "Your answers"}</h2>
-          <PlayerLive
-            code={room.code}
-            name={play}
-            direct={(pid) => pid && send({ t: "kick", pid })}
-            onLeave={() => {
-              save(playKey, null);
-              setPlay(null);
-            }}
-          />
-        </div>
-      )}
     </div>
   );
 }

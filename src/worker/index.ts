@@ -58,6 +58,8 @@ interface Stored {
   leaveReq?: string[];
   /** A host handover in progress: who is being asked, who is next, and when the ask runs out. */
   offer?: { pid: string; rest: string[]; until: number; leaving: boolean; self?: string; name: string };
+  /** When the host went away without handing over: the next connected player takes over after this time. */
+  hostAway?: number;
 }
 interface Tag {
   role: "host" | "player";
@@ -93,11 +95,22 @@ export class Room extends DurableObject<Env> {
     const idle = (this.s?.touched ?? Date.now()) + IDLE_MS;
     let at = this.s?.nextAt ? Math.min(this.s.nextAt, idle) : idle;
     if (this.s?.offer) at = Math.min(at, this.s.offer.until);
+    if (this.s?.hostAway) at = Math.min(at, this.s.hostAway);
     await this.ctx.storage.setAlarm(Math.max(at, Date.now() + 20));
   }
 
   async alarm() {
     const s = this.s;
+    if (s?.hostAway && s.hostAway <= Date.now() + 50) {
+      s.hostAway = undefined;
+      const { set, host } = this.connectedPids();
+      // The host is gone and did not hand over: the next person who is here takes over, so the room is never stuck.
+      const next = host ? undefined : s.players.find((p) => set.has(p.pid));
+      if (next) this.handOver(next.pid, true);
+      await this.save();
+      this.broadcast();
+      return;
+    }
     if (s?.offer && s.offer.until <= Date.now() + 50) {
       this.nextOffer();
       await this.save();
@@ -161,6 +174,8 @@ export class Room extends DurableObject<Env> {
       if (b.role === "host") {
         if (b.key !== this.s.hostKey) return json({ error: "Only the host can do that." }, 403);
         tag = { role: "host" };
+        this.hostSeen = Date.now();
+        this.s.hostAway = undefined;
       } else {
         if (!this.s.players.some((p) => p.pid === b.pid))
           return json({ error: "You're not in this room any more." }, 404);
@@ -178,6 +193,7 @@ export class Room extends DurableObject<Env> {
       if (role === "host") {
         if (url.searchParams.get("key") !== this.s.hostKey) return json({ error: "Only the host can do that." }, 403);
         tag = { role: "host" };
+        this.s.hostAway = undefined;
       } else {
         const name = (url.searchParams.get("name") ?? "").trim().slice(0, 20);
         let pid = url.searchParams.get("pid") ?? "";
@@ -205,6 +221,7 @@ export class Room extends DurableObject<Env> {
 
   /** Players on the plain-request fallback count as connected for a little while. */
   seen = new Map<string, number>();
+  hostSeen = 0;
   markSeen(pid: string) {
     this.seen.set(pid, Date.now());
   }
@@ -218,6 +235,7 @@ export class Room extends DurableObject<Env> {
       if (t?.pid) set.add(t.pid);
     }
     for (const [pid, at] of this.seen) if (Date.now() - at < 12000) set.add(pid);
+    if (Date.now() - this.hostSeen < 12000) host = true;
     return { set, host };
   }
 
@@ -644,7 +662,7 @@ export class Room extends DurableObject<Env> {
   }
 
   /** Gives the host role to a player. The old host becomes a player. */
-  handOver(pid: string) {
+  handOver(pid: string, auto = false) {
     const s = this.s!;
     const target = s.players.find((p) => p.pid === pid);
     if (!target) return;
@@ -652,7 +670,7 @@ export class Room extends DurableObject<Env> {
     s.offer = undefined;
     // The old host stays in the room as a player (reusing their seat if they were already playing).
     let oldPid = o?.self && s.players.some((p) => p.pid === o.self) ? o.self : "";
-    if (!oldPid) {
+    if (!oldPid && !auto) {
       const base = (o?.name || "Host").slice(0, 20);
       let nm = base;
       for (let i = 2; s.players.some((p) => p.name.toLowerCase() === nm.toLowerCase()); i++)
@@ -661,6 +679,7 @@ export class Room extends DurableObject<Env> {
       s.players.push({ pid: oldPid, name: nm, score: 0 });
     }
     const oldName = s.players.find((p) => p.pid === oldPid)?.name ?? "Host";
+    s.hostAway = undefined;
     s.hostKey = crypto.randomUUID();
     // Word Ladder and live rounds are tied to who the host was, so they go back to the lobby.
     if (s.phase === "team" || s.phase === "live") {
@@ -681,7 +700,13 @@ export class Room extends DurableObject<Env> {
     }
   }
 
-  async webSocketClose(ws: WebSocket, code: number) {
+  async webSocketClose(ws: WebSocket, code: number, reason?: string) {
+    const t = ws.deserializeAttachment() as Tag | null;
+    if (t?.role === "host" && this.s && reason !== "handover") {
+      // Give the host a moment to come back (a screen lock or a bad signal), then the next person takes over.
+      this.s.hostAway = Date.now() + 25000;
+      await this.save();
+    }
     try {
       ws.close(code === 1005 ? 1000 : code, "bye");
     } catch {

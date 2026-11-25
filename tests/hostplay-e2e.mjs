@@ -32,7 +32,7 @@ await host
 await host.locator(".ticket, .tile", { hasText: "Name 5 in 10" }).first().click();
 await host.getByRole("button", { name: /Start with/ }).click();
 // host device flips to the player view by itself
-await host.getByRole("heading", { name: "Your answers" }).waitFor({ timeout: 10000 });
+await host.getByRole("heading", { name: /Your (answers|game)/ }).waitFor({ timeout: 10000 });
 await host.waitForTimeout(1500);
 const txt = await host.locator("[hidden]").count();
 const sees = (await host.locator("main").innerText()).match(/Name 5|shout|Your turn|is shouting|Name five/i);
@@ -40,7 +40,7 @@ if (!sees) fail("player view not showing the game on the host device");
 const over = await host.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
 if (over > 1) fail("sideways scroll on host device " + over);
 // back to the controls
-await host.getByRole("button", { name: /End the game for everyone/ }).waitFor();
+await host.getByRole("button", { name: /End this game for everyone/ }).waitFor();
 console.log(
   "ok host plays too: joined with one tap, counted as a player, auto-switched to play, can flip back to controls",
 );
