@@ -42,7 +42,7 @@ for (const w of [320, 390]) {
   const p = await phone(w, w === 320 ? 640 : 800);
   await solo(p);
   await p.goto(BASE + "/play/hangman");
-  ok(await p.locator("details.howto summary").isVisible(), `Hangman ${w}px: has How to play`);
+  ok(await p.getByRole("button", { name: "How to play" }).first().isVisible(), `Hangman ${w}px: has How to play`);
   await p.getByRole("button", { name: /^Start$/ }).click();
   await p.locator(".hang").waitFor();
   await p.evaluate(() => document.fonts.ready);
@@ -125,7 +125,7 @@ for (const w of [320, 390]) {
   const p = await phone(w, w === 320 ? 640 : 800);
   await solo(p);
   await p.goto(BASE + "/play/wordguess");
-  ok(await p.locator("details.howto summary").isVisible(), `Word Guess ${w}px: has How to play`);
+  ok(await p.getByRole("button", { name: "How to play" }).first().isVisible(), `Word Guess ${w}px: has How to play`);
   await p.getByRole("group", { name: "How many words" }).locator(".chip").first().click();
   await p.getByRole("button", { name: /^Start$/ }).click();
   await p.locator(".wguess").waitFor();

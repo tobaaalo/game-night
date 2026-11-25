@@ -71,7 +71,7 @@ for (const [id, name] of GAMES) {
       .click();
     await p.goto(BASE + "/play/" + id);
     // The how-to line is on the page.
-    ok(await p.locator("details.howto summary").isVisible(), `${name} ${w}px: has How to play`);
+    ok(await p.getByRole("button", { name: "How to play" }).first().isVisible(), `${name} ${w}px: has How to play`);
     await p.getByRole("button", { name: /^Start$/ }).click();
     await p.locator(".duel").waitFor();
     ok((await over(p)) <= 0, `${name} ${w}px: no sideways scroll at start`);

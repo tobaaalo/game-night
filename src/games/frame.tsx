@@ -38,10 +38,6 @@ export function GameFrame({
           <Icon.help />
         </button>
       </div>
-      <details className="howto">
-        <summary>How to play</summary>
-        <p>{how}</p>
-      </details>
       <div className={clsx("stage marquee", live && "live")}>{children}</div>
       {scores && (
         <div className="game-foot">
@@ -118,12 +114,12 @@ export function MediaView({
       );
     case "big":
       return (
-        <>
+        <div className="bigwrap">
           {media.sub && <p className="bigsub">{media.sub}</p>}
           <p className="bigtext" style={fitLen(media.text)}>
             {media.text}
           </p>
-        </>
+        </div>
       );
     case "pair":
       return (
