@@ -295,8 +295,6 @@ export function LiveGame({ state, me, send, skew }: Props) {
           names={names}
           canNext={side !== null || isHost}
           onMove={(i) => send({ t: "live", a: "move", i })}
-          onShuffle={() => send({ t: "live", a: "shuffle" })}
-          onReady={() => send({ t: "live", a: "lock" })}
           onNext={() => send({ t: "live", a: "next" })}
         />
       </div>

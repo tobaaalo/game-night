@@ -30,6 +30,7 @@ import {
 } from "../content";
 import { useApp, type Group } from "../lib/app";
 import { draw, drawFresh, drawMany, shuffle } from "../lib/deck";
+import { NEEDS, SPOKEN, botMode } from "../lib/bot";
 import {
   bibleQuestions,
   faceQuestions,
@@ -48,6 +49,10 @@ import { CardDeck, KnowMe, NPAT, RevealRun, TimedRun, type RevealItem } from "./
 import { ClueRun } from "./clues";
 import { DuelLocal } from "./duel";
 import { Hangman, Spy, WordGuess } from "./wordgames";
+import { Mafia } from "./mafia";
+import { Boggle } from "./boggle";
+import { TapRace } from "./taprace";
+import { Buzzer } from "./buzzer";
 import type { DuelGame } from "../shared/duel";
 import { WordLadder, BucketList, CharadesBingo, DrawGuess, MemoryMatch, WordChain } from "./extra";
 import { CLUES, DRAWWORDS, LADDER } from "../content";
@@ -195,7 +200,10 @@ function SetupThen<T>({
             const d = await build(v);
             if (Array.isArray(d) && d.length === 0)
               setErr("Nothing matches that mix yet. Try another level or more categories.");
-            else setData(d);
+            else {
+              window.scrollTo(0, 0);
+              setData(d);
+            }
           } catch {
             setErr("Couldn't load this game. Check your connection and try again.");
           } finally {
@@ -1519,23 +1527,6 @@ export const GAMES: GameDef[] = [
     Play: () => <DuelPlay game="rps" def={3} opts={[3, 5, 7]} hidden />,
   },
   {
-    id: "ship",
-    name: "Battleship",
-    blurb: "Find and sink the hidden fleet.",
-    how: HOW.ship,
-    section: "duel",
-    groups: ["couple", "friends"],
-    minPlayers: 2,
-    maxPlayers: 2,
-    stat: "Two players",
-    room: true,
-    roomName: "Battleship",
-    roomBlurb: "Find and sink the hidden fleet. Two players.",
-    roomFields: DUEL_ROOM(1, [1, 3, 5]),
-    liveBuild: (v) => ({ kind: "duel", game: "ship", best: num(v.best) || 1 }),
-    Play: () => <DuelPlay game="ship" def={1} opts={[1, 3, 5]} hidden />,
-  },
-  {
     id: "hangman",
     name: "Hangman",
     blurb: "Guess the hidden word, one letter at a time.",
@@ -1580,7 +1571,7 @@ export const GAMES: GameDef[] = [
     blurb: "Everyone knows the place except one.",
     how: HOW.spy,
     section: "talk",
-    groups: ["friends"],
+    groups: ["couple", "friends"],
     minPlayers: 3,
     stat: "Pass the phone",
     Play: () => (
@@ -1603,6 +1594,96 @@ export const GAMES: GameDef[] = [
       />
     ),
   },
+  {
+    id: "mafia",
+    name: "Mafia",
+    blurb: "Find the Mafia before they take over the town.",
+    how: HOW.mafia,
+    section: "talk",
+    groups: ["couple", "friends"],
+    minPlayers: 4,
+    stat: "4+ players, pass the phone",
+    Play: () => <SetupThen id="mafia" fields={[]} build={() => true} run={(_, again) => <Mafia onAgain={again} />} />,
+  },
+  {
+    id: "boggle",
+    name: "Boggle",
+    blurb: "Find words in a grid of letters.",
+    how: HOW.boggle,
+    section: "words",
+    groups: ["couple", "friends"],
+    stat: "Word hunt, one phone",
+    Play: () => (
+      <SetupThen
+        id="boggle"
+        fields={[
+          timeField(
+            "sec",
+            "Time each",
+            [
+              [60, "1 min"],
+              [90, "90 sec"],
+              [120, "2 min"],
+            ],
+            90,
+          ),
+        ]}
+        build={(v) => num(v.sec) || 90}
+        run={(sec, again) => <Boggle seconds={sec} onAgain={again} />}
+      />
+    ),
+  },
+  {
+    id: "taprace",
+    name: "Tap Race",
+    blurb: "Tap your colour faster than everyone else.",
+    how: HOW.taprace,
+    section: "party",
+    groups: ["couple", "friends"],
+    minPlayers: 2,
+    maxPlayers: 4,
+    stat: "2 to 4 players, one screen",
+    Play: () => (
+      <SetupThen
+        id="taprace"
+        fields={[
+          {
+            key: "taps",
+            legend: "Taps to win a round",
+            options: [20, 30, 50].map((n) => ({ value: n, label: String(n) })),
+            def: 30,
+          },
+          {
+            key: "rounds",
+            legend: "Rounds",
+            options: [1, 3, 5].map((n) => ({ value: n, label: n === 1 ? "One round" : `${n} rounds` })),
+            def: 3,
+          },
+        ]}
+        build={(v) => ({ taps: num(v.taps) || 30, rounds: num(v.rounds) || 3 })}
+        run={(c, again) => <TapRace taps={c.taps} rounds={c.rounds} onAgain={again} />}
+      />
+    ),
+  },
+  {
+    id: "buzzer",
+    name: "Trivia Buzzer",
+    blurb: "Buzz in first. Wrong answers lock you out.",
+    how: HOW.buzzer,
+    section: "quiz",
+    groups: ["couple", "friends"],
+    minPlayers: 2,
+    maxPlayers: 6,
+    stat: "2 to 6 players, one screen",
+    Play: () => (
+      <SetupThen
+        id="buzzer"
+        fields={triviaFields}
+        build={(v) => triviaQuestions({ level: num(v.level), count: num(v.count), cats: v.cats as string[] })}
+        run={(qs, again) => <Buzzer questions={qs} onAgain={again} />}
+      />
+    ),
+  },
 ];
 
 export const gameById = (id: string): GameDef | undefined => {
@@ -1611,6 +1692,22 @@ export const gameById = (id: string): GameDef | undefined => {
   const c = loadCustom().find((x) => `custom-${x.id}` === id);
   return c ? customToGame(c) : undefined;
 };
+
+/** Why a game can't be played with this many people, or "" when it can. Shown on the greyed-out game. */
+export function whyNot(g: GameDef, count: number, opts: { humans?: number; computer?: boolean } = {}): string {
+  if (g.section === "yours") return "";
+  if (g.minPlayers && count < g.minPlayers) return `Needs ${g.minPlayers} or more players`;
+  if (g.maxPlayers && count > g.maxPlayers)
+    return g.maxPlayers === g.minPlayers
+      ? `For exactly ${g.maxPlayers} players`
+      : `For ${g.maxPlayers} players or fewer`;
+  if (opts.computer && botMode(g.id) === "people") {
+    const need = NEEDS[g.id] ?? 2;
+    if ((opts.humans ?? 0) < need)
+      return SPOKEN.has(g.id) ? "Played out loud, so not against the computer" : "Needs other people, not the computer";
+  }
+  return "";
+}
 
 export const gamesFor = (group: Group | null) => [
   ...GAMES.filter((g) => !group || g.groups.includes(group)),

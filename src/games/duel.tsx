@@ -9,11 +9,8 @@ import {
   DOT_H,
   GAME_NAMES,
   RPS_NAMES,
-  SHIP_N,
   duelBot,
   duelMove,
-  duelReady,
-  duelShuffle,
   matchNew,
   matchNext,
   matchSettle,
@@ -33,8 +30,6 @@ export interface BoardProps {
   side: Side | null;
   names: [string, string];
   onMove: (i: number) => void;
-  onShuffle?: () => void;
-  onReady?: () => void;
   onNext: () => void;
   /** Two people share one phone, so the board always belongs to whoever's turn it is. */
   hot?: boolean;
@@ -47,23 +42,11 @@ export interface BoardProps {
 }
 
 /** The score line, the status line and the board. The same screen runs on one phone and in a room. */
-export function DuelBoard({
-  m,
-  side,
-  names,
-  onMove,
-  onShuffle,
-  onReady,
-  onNext,
-  hot,
-  thinking,
-  canNext = true,
-  note,
-}: BoardProps) {
+export function DuelBoard({ m, side, names, onMove, onNext, hot, thinking, canNext = true, note }: BoardProps) {
   const d = m.duel;
   const g = d.game;
   const viewer: Side | null = hot && !d.over ? d.turn : side;
-  const mine = viewer !== null && d.turn === viewer && !d.over && !d.placing && !thinking;
+  const mine = viewer !== null && d.turn === viewer && !d.over && !thinking;
   // Sharing one phone, everyone is called by name. Otherwise you are "You".
   const you: Side | null = hot ? null : viewer;
   const who = (s: Side) => (you === s ? "You" : names[s]);
@@ -77,9 +60,6 @@ export function DuelBoard({
       const w = matchWinner(m);
       status = w === -1 ? "The match is a draw." : you === w ? "You won the match!" : `${names[w]} won the match.`;
     }
-  } else if (g === "ship" && d.placing) {
-    status =
-      you !== null && d.ready[you] ? `Waiting for ${names[you === 0 ? 1 : 0]}…` : "Set up your fleet, then tap Ready.";
   } else if (g === "rps") {
     status =
       you !== null && d.pick[you] === -1
@@ -93,10 +73,7 @@ export function DuelBoard({
     <div className="qcard duel stack center-text" data-game={g}>
       <div className="duel-score" aria-label="Score">
         {([0, 1] as Side[]).map((s) => (
-          <div
-            key={s}
-            className={clsx("duel-side", `s${s}`, !d.over && d.turn === s && !(g === "rps" || d.placing) && "on")}
-          >
+          <div key={s} className={clsx("duel-side", `s${s}`, !d.over && d.turn === s && g !== "rps" && "on")}>
             <span className="duel-name">
               {g === "ttt" ? <b aria-hidden="true">{MARK[s]}</b> : <i className={`dot s${s}`} aria-hidden="true" />}
               {who(s)}
@@ -119,9 +96,6 @@ export function DuelBoard({
       {g === "c4" && <Connect m={m} mine={mine} onMove={onMove} />}
       {g === "dots" && <Dots m={m} mine={mine} onMove={onMove} />}
       {g === "rps" && <Rps m={m} viewer={viewer} onMove={onMove} thinking={!!thinking} names={names} />}
-      {g === "ship" && (
-        <Ship m={m} viewer={viewer} mine={mine} onMove={onMove} onShuffle={onShuffle} onReady={onReady} names={names} />
-      )}
       <div className="actions center duel-actions">
         {d.over &&
           (note ? (
@@ -344,137 +318,6 @@ function Rps({
   );
 }
 
-/* --------------------------------------------------------------- Battleship */
-
-function Water({
-  fleet,
-  shots,
-  show,
-  fire,
-  label,
-  small,
-  last,
-}: {
-  fleet: number[];
-  shots: number[];
-  show: boolean;
-  fire?: (i: number) => void;
-  label: string;
-  small?: boolean;
-  last: number;
-}) {
-  return (
-    <div className={clsx("sea", small && "small", fire && "live")} role="grid" aria-label={label}>
-      {Array.from({ length: SHIP_N * SHIP_N }, (_, i) => {
-        const shot = shots[i];
-        const ship = show && fleet[i] > 0;
-        const cls = clsx("sea-cell", ship && "ship", shot === 1 && "miss", shot === 2 && "hit", last === i && "last");
-        const text = shot === 2 ? "✕" : shot === 1 ? "•" : "";
-        const name = `${String.fromCharCode(65 + Math.floor(i / SHIP_N))}${(i % SHIP_N) + 1}`;
-        return fire ? (
-          <button
-            key={i}
-            role="gridcell"
-            className={cls}
-            disabled={!!shot}
-            aria-label={`${name}${shot === 2 ? ", hit" : shot === 1 ? ", miss" : ""}`}
-            onClick={() => fire(i)}
-          >
-            {text}
-          </button>
-        ) : (
-          <span
-            key={i}
-            role="gridcell"
-            className={cls}
-            aria-label={`${name}${ship ? ", ship" : ""}${shot === 2 ? ", hit" : shot === 1 ? ", miss" : ""}`}
-          >
-            {text}
-          </span>
-        );
-      })}
-    </div>
-  );
-}
-
-function Ship({
-  m,
-  viewer,
-  mine,
-  onMove,
-  onShuffle,
-  onReady,
-  names,
-}: {
-  m: Match;
-  viewer: Side | null;
-  mine: boolean;
-  onMove: (i: number) => void;
-  onShuffle?: () => void;
-  onReady?: () => void;
-  names: [string, string];
-}) {
-  const d = m.duel;
-  if (viewer === null)
-    return (
-      <div className="stack">
-        {([0, 1] as Side[]).map((s) => (
-          <div key={s} className="stack">
-            <p className="hint">{names[s]}&rsquo;s waters</p>
-            <Water
-              fleet={d.fleet[s]}
-              shots={d.shots[s]}
-              show={d.over}
-              label={`${names[s]}'s waters`}
-              small
-              last={d.last}
-            />
-          </div>
-        ))}
-      </div>
-    );
-  const foe: Side = viewer === 0 ? 1 : 0;
-  if (d.placing)
-    return (
-      <div className="stack">
-        <p className="hint">Your fleet</p>
-        <Water fleet={d.fleet[viewer]} shots={d.shots[viewer]} show label="Your fleet" last={-1} />
-        {!d.ready[viewer] && (
-          <div className="actions center">
-            <button className="btn ghost" onClick={onShuffle}>
-              Shuffle
-            </button>
-            <button className="btn" onClick={onReady}>
-              Ready
-            </button>
-          </div>
-        )}
-      </div>
-    );
-  return (
-    <div className="stack">
-      <p className="hint">Tap a square to fire at {viewer === 0 ? names[1] : names[0]}</p>
-      <Water
-        fleet={d.fleet[foe]}
-        shots={d.shots[foe]}
-        show={d.over}
-        label={`${names[foe]}'s waters`}
-        fire={mine ? onMove : undefined}
-        last={(d.over ? d.winner === viewer : d.turn === foe) ? d.last : -1}
-      />
-      <p className="hint">Your fleet</p>
-      <Water
-        fleet={d.fleet[viewer]}
-        shots={d.shots[viewer]}
-        show
-        label="Your fleet"
-        small
-        last={(d.over ? d.winner !== viewer : d.turn === viewer) ? d.last : -1}
-      />
-    </div>
-  );
-}
-
 /* ------------------------------------------------------- One phone: local play */
 
 const clone = <T,>(x: T): T => JSON.parse(JSON.stringify(x));
@@ -500,28 +343,20 @@ export function DuelLocal({ game, best, onAgain }: { game: DuelGame; best: numbe
   const human: Side = botIdx === 0 ? 1 : 0;
   const botSide: Side | null = botIdx === 0 ? 0 : botIdx === 1 ? 1 : null;
   const d = m.duel;
-  const botTurn =
-    botSide !== null &&
-    !d.over &&
-    (d.game === "rps"
-      ? d.pick[botSide] === -1
-      : d.game === "ship" && d.placing
-        ? !d.ready[botSide]
-        : !d.placing && d.turn === botSide);
+  const botTurn = botSide !== null && !d.over && (d.game === "rps" ? d.pick[botSide] === -1 : d.turn === botSide);
   useEffect(() => {
     if (!botTurn || botSide === null) return;
     const t = setTimeout(
       () =>
         apply((n) => {
           const dd = n.duel;
-          if (dd.game === "ship" && dd.placing) duelReady(dd, botSide);
-          else duelMove(dd, botSide, duelBot(dd, botSide, skill));
+          duelMove(dd, botSide, duelBot(dd, botSide, skill));
         }),
-      d.game === "ship" && d.placing ? 400 : d.game === "rps" ? 500 : 750,
+      d.game === "rps" ? 500 : 750,
     );
     return () => clearTimeout(t);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [botTurn, d.turn, d.b.join(""), d.e.join(""), d.pick.join(), d.ready.join()]);
+  }, [botTurn, d.turn, d.b.join(""), d.e.join(""), d.pick.join()]);
   if (fin) return <Finish onAgain={onAgain} />;
   return (
     <DuelBoard
@@ -529,10 +364,8 @@ export function DuelLocal({ game, best, onAgain }: { game: DuelGame; best: numbe
       side={botSide !== null ? human : null}
       names={names}
       hot={botSide === null}
-      thinking={botTurn && d.game !== "rps" && !d.placing}
+      thinking={botTurn && d.game !== "rps"}
       onMove={(i) => apply((n) => void duelMove(n.duel, botSide !== null ? human : n.duel.turn, i))}
-      onShuffle={() => apply((n) => void duelShuffle(n.duel, human))}
-      onReady={() => apply((n) => void duelReady(n.duel, human))}
       onNext={() => {
         if (ref.current.done) return setFin(true);
         apply((n) => void matchNext(n));

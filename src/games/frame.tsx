@@ -1,9 +1,12 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { createContext, useEffect, useState, type ReactNode } from "react";
 import type { CSSProperties } from "react";
 import clsx from "clsx";
 import { Icon, Scoreboard, Sheet } from "../components/ui";
 import { nameOf, useApp } from "../lib/app";
 import type { Media } from "../shared/protocol";
+
+/** The how-to text of the game on screen, so its set-up page can show it without anyone scrolling. */
+export const HowContext = createContext("");
 
 export function GameFrame({
   title,
@@ -38,7 +41,9 @@ export function GameFrame({
           <Icon.help />
         </button>
       </div>
-      <div className={clsx("stage marquee", live && "live")}>{children}</div>
+      <div className={clsx("stage marquee", live && "live")}>
+        <HowContext.Provider value={how}>{children}</HowContext.Provider>
+      </div>
       {scores && (
         <div className="game-foot">
           <Scoreboard players={gamePlayers} now={now} />

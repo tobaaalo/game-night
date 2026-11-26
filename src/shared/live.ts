@@ -1,17 +1,6 @@
 // Live room games: the server holds one small shared state and moves it along by itself.
 // Used by the Durable Object and by the phones, so the types and rules live here.
-import {
-  duelMove,
-  duelReady,
-  duelShuffle,
-  matchNew,
-  matchNext,
-  matchSettle,
-  matchView,
-  type DuelGame,
-  type Match,
-  type Side,
-} from "./duel";
+import { duelMove, matchNew, matchNext, matchSettle, matchView, type DuelGame, type Match, type Side } from "./duel";
 
 export type LiveCfg =
   /** One player acts or describes, the rest guess. Charades Sprint, Don't Say It, Charades Bingo. */
@@ -37,7 +26,7 @@ export type LiveCfg =
 export type LiveMsg =
   | { t: "live-start"; game: string; cfg: LiveCfg }
   | { t: "live"; a: "got"; pid: string }
-  | { t: "live"; a: "skip" | "buzz" | "done" | "next" | "clear" | "undo" | "lock" | "shuffle" }
+  | { t: "live"; a: "skip" | "buzz" | "done" | "next" | "clear" | "undo" | "lock" }
   | { t: "live"; a: "move"; i: number }
   | { t: "live"; a: "submit" | "guess" | "word" | "secret"; v: string | string[] }
   | { t: "live"; a: "stroke"; s: number[] }
@@ -439,7 +428,7 @@ export function liveApply(l: Live, m: LiveMsg, who: string, isHost: boolean, ctx
     if (m.a === "next") {
       if (!mt.duel.over || (me === null && !isHost)) return {};
       if (mt.done) return { end: true, changed: true };
-      matchNext(mt, Math.random);
+      matchNext(mt);
       l.step = "play";
       return { changed: true };
     }
@@ -449,14 +438,6 @@ export function liveApply(l: Live, m: LiveMsg, who: string, isHost: boolean, ctx
       if (err) return { error: err };
       settle();
       return { changed: true };
-    }
-    if (m.a === "shuffle") {
-      const err = duelShuffle(mt.duel, me);
-      return err ? { error: err } : { changed: true };
-    }
-    if (m.a === "lock") {
-      const err = duelReady(mt.duel, me);
-      return err ? { error: err } : { changed: true };
     }
     return {};
   }

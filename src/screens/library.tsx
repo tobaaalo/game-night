@@ -4,7 +4,7 @@ import { Icon, Scoreboard } from "../components/ui";
 import { WithPlayers, useApp } from "../lib/app";
 import { NEEDS, SPOKEN, botMode, hasBot, humans } from "../lib/bot";
 import { pick } from "../lib/deck";
-import { SECTIONS, gamesFor, gameById, type GameDef, type Section } from "../games/registry";
+import { SECTIONS, gamesFor, gameById, whyNot, type GameDef, type Section } from "../games/registry";
 import { GameFrame } from "../games/frame";
 import { CUSTOM_TYPES, loadCustom, saveCustom } from "../lib/custom";
 import { load, save } from "../lib/store";
@@ -12,7 +12,7 @@ import { getPublic, getShared, loadCommunity, saveCommunity } from "../lib/share
 import type { SharedGame } from "../shared/protocol";
 
 export function Library() {
-  const { group, players, go, online } = useApp();
+  const { group, players, go, online, toast } = useApp();
   const [spinning, setSpinning] = useState(false);
   const [view, setViewState] = useState<"list" | "grid">(() =>
     load<"list" | "grid">("gn.libview", matchMedia("(max-width: 600px)").matches ? "grid" : "list"),
@@ -51,33 +51,21 @@ export function Library() {
   useEffect(() => {
     if (!group) go("/who", { replace: true });
   }, [group, go]);
-  const games = useMemo(
-    () =>
-      gamesFor(group).filter(
-        (g) =>
-          g.section === "yours" ||
-          ((!g.minPlayers || players.length >= g.minPlayers) && (!g.maxPlayers || players.length <= g.maxPlayers)),
-      ),
-    [group, players.length],
-  );
-  const hidden = useMemo(
-    () => gamesFor(group).filter((g) => g.minPlayers && players.length < g.minPlayers),
-    [group, players.length],
-  );
-  const tooMany = useMemo(
-    () => gamesFor(group).filter((g) => g.maxPlayers && players.length > g.maxPlayers && g.section !== "yours"),
-    [group, players.length],
-  );
+  const withComputer = hasBot(players);
+  const peopleHere = humans(players).length;
+  // Every game stays on the list. The ones that don't fit this many players are greyed out, with the reason.
+  const games = useMemo(() => gamesFor(group), [group]);
+  const why = (g: GameDef) => whyNot(g, players.length, { computer: withComputer, humans: peopleHere });
   const sections = (Object.keys(SECTIONS) as Section[])
     .map((s) => ({ s, list: games.filter((g) => g.section === s) }))
     .filter((x) => x.list.length);
-  const pool = games.filter((x) => x.section !== "yours");
+  const pool = games.filter((x) => x.section !== "yours" && !why(x));
   const daily = pool.length ? pool[Math.floor(Date.now() / 86400000) % pool.length] : null;
   let n = 0;
   const surprise = () => {
     if (spinning) return;
     setSpinning(true);
-    const g = pick(games.filter((x) => x.section !== "yours"));
+    const g = pick(games.filter((x) => x.section !== "yours" && !why(x)));
     setTimeout(() => go(`/play/${g.id}`), matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 650);
   };
   return (
@@ -161,7 +149,14 @@ export function Library() {
               n += 1;
               return (
                 <li key={g.id}>
-                  <Ticket g={g} n={n} view={view} showRoom onOpen={() => go(`/play/${g.id}`)} />
+                  <Ticket
+                    g={g}
+                    n={n}
+                    view={view}
+                    showRoom
+                    off={why(g)}
+                    onOpen={() => (why(g) ? toast(`${g.name}: ${why(g).toLowerCase()}.`) : go(`/play/${g.id}`))}
+                  />
                 </li>
               );
             })}
@@ -219,21 +214,6 @@ export function Library() {
           </button>
         </div>
       </section>
-      {tooMany.length > 0 && (
-        <p className="hint center-text">
-          {tooMany.map((g) => g.name).join(", ")} {tooMany.length === 1 ? "is" : "are"} for exactly 2 players, so{" "}
-          {tooMany.length === 1 ? "it is" : "they are"} hidden with {players.length} playing.
-        </p>
-      )}
-      {hidden.length > 0 && (
-        <p className="hint center-text">
-          {hidden.map((g) => g.name).join(", ")} need{hidden.length === 1 ? "s" : ""} at least{" "}
-          {Math.min(...hidden.map((g) => g.minPlayers ?? 3))} players.{" "}
-          <button className="link" onClick={() => go("/names")}>
-            Add players
-          </button>
-        </p>
-      )}
     </div>
   );
 }
@@ -247,6 +227,7 @@ export function Ticket({
   selected,
   title,
   blurb,
+  off,
 }: {
   g: GameDef;
   n: number;
@@ -256,17 +237,20 @@ export function Ticket({
   selected?: boolean;
   title?: string;
   blurb?: string;
+  /** Why this game can't be played right now. It is greyed out and says so. */
+  off?: string;
 }) {
-  const room = g.room && showRoom;
+  const room = g.room && showRoom && !off;
   if (view === "grid")
     return (
       <button
-        className={clsx("tile", room && "inroom", selected && "selected")}
+        className={clsx("tile", room && "inroom", selected && "selected", off && "off")}
         aria-pressed={selected}
+        aria-disabled={off ? true : undefined}
         onClick={onOpen}
       >
         <span className="tile-title">{title ?? g.name}</span>
-        <span className="tile-stat">{g.stat}</span>
+        <span className="tile-stat">{off || g.stat}</span>
         {room && (
           <span className="tile-room" role="img" aria-label="Can also be played on everyone's phones">
             <Icon.phones />
@@ -276,8 +260,9 @@ export function Ticket({
     );
   return (
     <button
-      className={clsx("ticket", room && "inroom", selected && "selected")}
+      className={clsx("ticket", room && "inroom", selected && "selected", off && "off")}
       aria-pressed={selected}
+      aria-disabled={off ? true : undefined}
       onClick={onOpen}
     >
       <span className="stub" aria-hidden="true">
@@ -288,7 +273,7 @@ export function Ticket({
         <span className="ticket-title">{title ?? g.name}</span>
         <span className="ticket-blurb">{blurb ?? g.blurb}</span>
         <span className="ticket-meta">
-          {g.stat}
+          {off || g.stat}
           {room && <span className="sr-only"> Can also be played in a room</span>}
         </span>
       </span>

@@ -24,14 +24,12 @@ const GAMES = [
   ["c4", "Connect Four"],
   ["dots", "Dots and Boxes"],
   ["rps", "Rock Paper Scissors"],
-  ["ship", "Battleship"],
 ].filter(([id]) => !ONLY || id === ONLY);
 const target = {
   ttt: ".duel-cell:not([disabled])",
   c4: ".c4-col:not([disabled])",
   dots: ".dots .hit",
   rps: ".rps-btn:not([disabled])",
-  ship: ".sea.live .sea-cell:not([disabled])",
 };
 const over = (p) => p.evaluate(() => document.documentElement.scrollWidth - innerWidth);
 
@@ -40,13 +38,6 @@ async function playOut(p, id, limit = 1200) {
   for (let i = 0; i < limit; i++) {
     const done = p.getByRole("button", { name: /See the result|Next game|Go again/ });
     if (await done.isVisible().catch(() => false)) return i;
-    if (id === "ship") {
-      const ready = p.getByRole("button", { name: "Ready" });
-      if (await ready.isVisible().catch(() => false)) {
-        await ready.click();
-        continue;
-      }
-    }
     const t = p.locator(target[id]);
     if (await t.count())
       await t
@@ -118,11 +109,8 @@ for (const [id, name] of GAMES.filter(([id]) => ["ttt", "c4", "dots"].includes(i
   ok(n >= 0, `${name} on one phone: a game finishes`);
   await p.context().close();
 }
-// Rock Paper Scissors and Battleship on one phone with two people: they ask for the computer.
-for (const [id, name] of [
-  ["rps", "Rock Paper Scissors"],
-  ["ship", "Battleship"],
-].filter(([id]) => !ONLY || id === ONLY)) {
+// Rock Paper Scissors on one phone with two people: they ask for the computer.
+for (const [id, name] of [["rps", "Rock Paper Scissors"]].filter(([id]) => !ONLY || id === ONLY)) {
   const p = await phone();
   await p.goto(BASE + "/who");
   await p.getByText("Just the two of us").click();

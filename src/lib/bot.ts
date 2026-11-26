@@ -15,6 +15,10 @@ const MODE: Record<string, BotMode> = {
   hangman: "solo",
   wordguess: "solo",
   spy: "people",
+  mafia: "people",
+  taprace: "people",
+  buzzer: "people",
+  boggle: "solo",
   wyr: "solo",
   knowme: "people",
   likely: "people",
@@ -33,11 +37,25 @@ const MODE: Record<string, BotMode> = {
   npat: "people",
 };
 /** Games that are shouted, acted or drawn out loud, so a computer can't take part. */
-export const SPOKEN = new Set(["emoji", "proverbs", "clues", "charades", "taboo", "name5", "bingo", "draw", "npat"]);
+export const SPOKEN = new Set([
+  "mafia",
+  "emoji",
+  "proverbs",
+  "clues",
+  "charades",
+  "taboo",
+  "name5",
+  "bingo",
+  "draw",
+  "npat",
+]);
 export const botMode = (id: string): BotMode => MODE[id] ?? "play";
 /** Games where the computer cannot join in: how many people they need. */
 export const NEEDS: Record<string, number> = {
   spy: 3,
+  mafia: 4,
+  taprace: 2,
+  buzzer: 2,
   knowme: 2,
   likely: 3,
   twotruths: 2,

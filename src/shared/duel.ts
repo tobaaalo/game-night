@@ -1,12 +1,10 @@
 // Head to head games for two. Pure rules, used by the server, the phones and the computer opponent.
-// Tic-Tac-Toe, Connect Four, Dots and Boxes, Rock Paper Scissors and Battleship.
+// Tic-Tac-Toe, Connect Four and Dots and Boxes, Rock Paper Scissors.
 
-export type DuelGame = "ttt" | "c4" | "dots" | "rps" | "ship";
+export type DuelGame = "ttt" | "c4" | "dots" | "rps";
 export type Side = 0 | 1;
 export type Rnd = () => number;
 
-export const SHIP_N = 6;
-export const SHIP_LENS = [3, 2, 2];
 export const C4_COLS = 7;
 export const C4_ROWS = 6;
 export const DOT_BOXES = 4;
@@ -16,7 +14,7 @@ export const DOT_EDGES = DOT_H * 2;
 
 export interface Duel {
   game: DuelGame;
-  /** Whose move it is. Rock Paper Scissors and the Battleship set-up are played at the same time, so it is ignored there. */
+  /** Whose move it is. Rock Paper Scissors is played at the same time, so it is ignored there. */
   turn: Side;
   /** Who moved first this game. */
   first: Side;
@@ -26,12 +24,6 @@ export interface Duel {
   e: number[];
   /** Rock Paper Scissors: each side's throw (0 rock, 1 paper, 2 scissors). -1 not thrown yet. In a view, 9 means "thrown but hidden". */
   pick: [number, number];
-  /** Battleship: each side's fleet. 0 is water, 1 to 3 is a ship. */
-  fleet: [number[], number[]];
-  /** Battleship: shots fired AT fleet[side]. 0 untouched, 1 miss, 2 hit. */
-  shots: [number[], number[]];
-  ready: [boolean, boolean];
-  placing: boolean;
   over: boolean;
   /** The side that won. -1 means a draw (in Rock Paper Scissors, a tied throw). */
   winner: -1 | 0 | 1;
@@ -48,12 +40,11 @@ export const GAME_NAMES: Record<DuelGame, string> = {
   c4: "Connect Four",
   dots: "Dots and Boxes",
   rps: "Rock Paper Scissors",
-  ship: "Battleship",
 };
 
 /* ---------------------------------------------------------------- New game */
 
-export function duelNew(game: DuelGame, first: Side, rnd: Rnd = Math.random): Duel {
+export function duelNew(game: DuelGame, first: Side): Duel {
   const d: Duel = {
     game,
     turn: first,
@@ -63,45 +54,13 @@ export function duelNew(game: DuelGame, first: Side, rnd: Rnd = Math.random): Du
     ).fill(0),
     e: game === "dots" ? new Array(DOT_EDGES).fill(0) : [],
     pick: [-1, -1],
-    fleet: [[], []],
-    shots: [[], []],
-    ready: [false, false],
-    placing: false,
     over: false,
     winner: -1,
     line: [],
     last: -1,
     note: "",
   };
-  if (game === "ship") {
-    d.placing = true;
-    d.fleet = [placeFleet(rnd), placeFleet(rnd)];
-    d.shots = [new Array(SHIP_N * SHIP_N).fill(0), new Array(SHIP_N * SHIP_N).fill(0)];
-  }
   return d;
-}
-
-/** Random fleet with no overlaps. */
-export function placeFleet(rnd: Rnd): number[] {
-  for (;;) {
-    const f = new Array(SHIP_N * SHIP_N).fill(0);
-    let ok = true;
-    SHIP_LENS.forEach((len, k) => {
-      if (!ok) return;
-      for (let tries = 0; tries < 200; tries++) {
-        const horiz = rnd() < 0.5;
-        const r = Math.floor(rnd() * (horiz ? SHIP_N : SHIP_N - len + 1));
-        const c = Math.floor(rnd() * (horiz ? SHIP_N - len + 1 : SHIP_N));
-        const cells = Array.from({ length: len }, (_, i) => (horiz ? r * SHIP_N + c + i : (r + i) * SHIP_N + c));
-        if (cells.every((x) => f[x] === 0)) {
-          cells.forEach((x) => (f[x] = k + 1));
-          return;
-        }
-      }
-      ok = false;
-    });
-    if (ok) return f;
-  }
 }
 
 /* ----------------------------------------------------------------- Helpers */
@@ -171,8 +130,6 @@ const boxSides = (e: number[], box: number) => boxEdges(box).filter((x) => e[x])
 const rpsBeats = (a: number, b: number) => (a - b + 3) % 3 === 1; // paper (1) beats rock (0), scissors (2) beats paper (1), rock beats scissors
 export const RPS_NAMES = ["Rock", "Paper", "Scissors"];
 
-const shipCells = (f: number[], k: number) => f.reduce<number[]>((a, v, i) => (v === k ? [...a, i] : a), []);
-
 /* -------------------------------------------------------------------- Moves */
 
 /** Plays a move for one side. Returns an error message, or "" when it worked. */
@@ -194,7 +151,6 @@ export function duelMove(d: Duel, side: Side, i: number): string {
     }
     return "";
   }
-  if (d.game === "ship" && d.placing) return "Get your fleet ready first.";
   if (d.turn !== side) return "It's not your turn.";
 
   if (d.game === "ttt") {
@@ -248,43 +204,7 @@ export function duelMove(d: Duel, side: Side, i: number): string {
     return "";
   }
 
-  // Battleship
-  if (i < 0 || i >= SHIP_N * SHIP_N) return "Pick a square.";
-  const foe = other(side);
-  if (d.shots[foe][i]) return "You already fired there.";
-  const k = d.fleet[foe][i];
-  d.shots[foe][i] = k ? 2 : 1;
-  d.last = i;
-  if (k) {
-    const sunk = shipCells(d.fleet[foe], k).every((x) => d.shots[foe][x] === 2);
-    d.note = sunk ? "Hit and sunk!" : "Hit!";
-    if (d.fleet[foe].every((v, x) => !v || d.shots[foe][x] === 2)) {
-      d.over = true;
-      d.winner = side;
-      return "";
-    }
-  } else d.note = "Miss.";
-  d.turn = foe;
-  return "";
-}
-
-/** Battleship: pick a new random fleet before you are ready. */
-export function duelShuffle(d: Duel, side: Side, rnd: Rnd = Math.random): string {
-  if (d.game !== "ship" || !d.placing || d.over) return "Not now.";
-  if (d.ready[side]) return "You are already ready.";
-  d.fleet[side] = placeFleet(rnd);
-  return "";
-}
-
-/** Battleship: ready to fire. The game starts when both sides are ready. */
-export function duelReady(d: Duel, side: Side): string {
-  if (d.game !== "ship" || !d.placing || d.over) return "Not now.";
-  d.ready[side] = true;
-  if (d.ready[0] && d.ready[1]) {
-    d.placing = false;
-    d.turn = d.first;
-  }
-  return "";
+  return "That is not a move.";
 }
 
 /* -------------------------------------------------------------- What you see */
@@ -297,10 +217,6 @@ export function duelView(d: Duel, viewer: Side | null): Duel {
       number,
       number,
     ];
-  }
-  if (d.game === "ship") {
-    const empty = new Array(SHIP_N * SHIP_N).fill(0);
-    v.fleet = [0, 1].map((s) => (d.over || s === viewer ? d.fleet[s] : empty)) as [number[], number[]];
   }
   return v;
 }
@@ -430,54 +346,9 @@ function dotsPick(d: Duel, skill: number, rnd: Rnd): number {
   return best;
 }
 
-function shipPick(d: Duel, side: Side, skill: number, rnd: Rnd): number {
-  const foe = other(side);
-  const sh = d.shots[foe];
-  const free = sh.map((x, i) => (x ? -1 : i)).filter((i) => i >= 0);
-  if (skill === 1) return pickOne(free, rnd);
-  // Finish off a ship that was hit: try the squares next to the hits.
-  const hits = sh.map((x, i) => (x === 2 ? i : -1)).filter((i) => i >= 0);
-  const live = hits.filter((h) => {
-    const k = d.fleet[foe][h];
-    return !shipCells(d.fleet[foe], k).every((x) => sh[x] === 2);
-  });
-  const near = new Set<number>();
-  for (const h of live) {
-    const r = Math.floor(h / SHIP_N);
-    const c = h % SHIP_N;
-    for (const [dr, dc] of [
-      [0, 1],
-      [0, -1],
-      [1, 0],
-      [-1, 0],
-    ]) {
-      const rr = r + dr;
-      const cc = c + dc;
-      if (rr >= 0 && rr < SHIP_N && cc >= 0 && cc < SHIP_N && !sh[rr * SHIP_N + cc]) near.add(rr * SHIP_N + cc);
-    }
-  }
-  if (near.size) {
-    const list = [...near];
-    if (skill === 3 && live.length > 1) {
-      // Two hits in a line: keep going along the line.
-      const [a, b] = live;
-      const step = b - a;
-      const along = list.filter((x) => x === b + step || x === a - step);
-      if (along.length) return pickOne(along, rnd);
-    }
-    return pickOne(list, rnd);
-  }
-  if (skill === 3) {
-    const parity = free.filter((i) => (Math.floor(i / SHIP_N) + (i % SHIP_N)) % 2 === 0);
-    if (parity.length) return pickOne(parity, rnd);
-  }
-  return pickOne(free, rnd);
-}
-
 /** The computer's move. `skill` is 1 easy, 2 medium, 3 hard. */
 export function duelBot(d: Duel, side: Side, skill: 1 | 2 | 3, rnd: Rnd = Math.random): number {
   if (d.game === "rps") return Math.floor(rnd() * 3);
-  if (d.game === "ship") return shipPick(d, side, skill, rnd);
   if (d.game === "dots") return dotsPick(d, skill, rnd);
   const moves = legalMoves(d);
   if (d.game === "ttt") {
@@ -545,13 +416,7 @@ export interface Match {
   duel: Duel;
 }
 
-export function matchNew(
-  game: DuelGame,
-  best: number,
-  sides: [string, string],
-  first: Side,
-  rnd: Rnd = Math.random,
-): Match {
+export function matchNew(game: DuelGame, best: number, sides: [string, string], first: Side): Match {
   return {
     game,
     best,
@@ -561,7 +426,7 @@ export function matchNew(
     played: 0,
     counted: false,
     done: false,
-    duel: duelNew(game, first, rnd),
+    duel: duelNew(game, first),
   };
 }
 
@@ -579,9 +444,9 @@ export function matchSettle(m: Match, score: (side: Side) => void): void {
 }
 
 /** Starts the next game of the match. Nothing happens if the match is over. */
-export function matchNext(m: Match, rnd: Rnd = Math.random): boolean {
+export function matchNext(m: Match): boolean {
   if (!m.duel.over || m.done) return false;
-  m.duel = duelNew(m.game, other(m.duel.first), rnd);
+  m.duel = duelNew(m.game, other(m.duel.first));
   m.counted = false;
   return true;
 }

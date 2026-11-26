@@ -40,10 +40,17 @@ export const HOW: Record<string, string> = {
   c4: "Take turns dropping a disc in a column. It falls to the bottom. Get four in a row to win.",
   dots: "Take turns drawing one line between two dots. Close a box to claim it and go again. Most boxes wins.",
   rps: "You both pick rock, paper or scissors at the same time. Rock beats scissors. Scissors beats paper. Paper beats rock.",
-  ship: "Your ships are hidden. Take turns tapping a square on the other sea to fire. Sink all their ships to win.",
   hangman:
     "A secret word is hidden. Tap letters to guess it. Each wrong letter adds to the drawing. Finish the word before the drawing is complete.",
   wordguess:
     "Guess the secret 5-letter word in six tries. Green means right letter, right place. Yellow means right letter, wrong place. Grey means not in the word.",
   spy: "Everyone sees the same place, except the spy. Take turns asking each other questions about the place. The spy tries to guess it. The others try to find the spy.",
+  mafia:
+    "Pass the phone so everyone sees a secret role. At night the Mafia knock someone out. By day the town votes someone out. The town wins when all the Mafia are gone. The Mafia win when they are as many as everyone else.",
+  boggle:
+    "Everyone gets the same letters. On your turn, tap touching letters to spell words of 3 letters or more, then tap Add word. Longer words score more. Most points wins.",
+  taprace:
+    "Everyone puts a finger on their own colour. Wait for GO, then tap your colour as fast as you can. First to the target wins the round.",
+  buzzer:
+    "Listen to the question and buzz in when you know the answer. The first to buzz picks an answer. Wrong, and you are out for that question.",
 };

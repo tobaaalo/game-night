@@ -4,7 +4,7 @@ import QRCode from "qrcode";
 import { Flaps, Icon, PromptText } from "../components/ui";
 import { useApp } from "../lib/app";
 import { load, save } from "../lib/store";
-import { SECTIONS, gamesFor, type GameDef, type Section } from "../games/registry";
+import { SECTIONS, gamesFor, whyNot, type GameDef, type Section } from "../games/registry";
 import { Ticket } from "./library";
 import { MediaView, useKeys } from "../games/frame";
 import { Setup } from "../games/quiz";
@@ -186,7 +186,7 @@ const wsUrl = (code: string, q: Record<string, string>) =>
   `${location.protocol === "https:" ? "wss" : "ws"}://${location.host}/api/rooms/${code}/ws?${new URLSearchParams(q)}`;
 
 /** Games the room can run. Two-player games drop out of the list once a third person joins. */
-const ROOM_GAMES = (count: number) => gamesFor(null).filter((g) => g.room && (!g.maxPlayers || count <= g.maxPlayers));
+const ROOM_GAMES = () => gamesFor(null).filter((g) => g.room);
 
 function ConnBanner({ conn }: { conn: Conn }) {
   if (conn === "open") return null;
@@ -578,20 +578,8 @@ function HostLive({
                 </ul>
               )}
             </section>
-            <section aria-labelledby="pickg" className="stack">
-              <h2 className="h3" id="pickg">
-                Pick a game
-              </h2>
-              <RoomPicker game={game} setGame={setGame} count={players.length} />
-            </section>
-            {!game ? (
-              <div className="dock">
-                <button className="btn block" disabled>
-                  Pick a game to start
-                </button>
-              </div>
-            ) : (
-              <section className="stack" aria-label={`${game.name} settings`}>
+            {game && (
+              <section id="picked-game" className="stack" aria-label={`${game.name} settings`}>
                 <div className="panel howto">
                   <p className="h3">How to play {game.roomName ?? game.name}</p>
                   <p>{game.how}</p>
@@ -639,6 +627,26 @@ function HostLive({
                   }}
                 />
               </section>
+            )}
+            <section aria-labelledby="pickg" className="stack">
+              <h2 className="h3" id="pickg">
+                Pick a game
+              </h2>
+              <RoomPicker
+                game={game}
+                setGame={(g) => {
+                  setGame(g);
+                  setTimeout(() => document.getElementById("picked-game")?.scrollIntoView({ block: "start" }), 60);
+                }}
+                count={players.length}
+              />
+            </section>
+            {!game && (
+              <div className="dock">
+                <button className="btn block" disabled>
+                  Pick a game to start
+                </button>
+              </div>
             )}
           </div>
         )}
@@ -1257,6 +1265,7 @@ function PlayerLive({
 }
 
 function RoomPicker({ game, setGame, count }: { game: GameDef | null; setGame: (g: GameDef) => void; count: number }) {
+  const { toast } = useApp();
   const [view, setViewState] = useState<"list" | "grid">(() =>
     load<"list" | "grid">("gn.libview", matchMedia("(max-width: 600px)").matches ? "grid" : "list"),
   );
@@ -1271,8 +1280,7 @@ function RoomPicker({ game, setGame, count }: { game: GameDef | null; setGame: (
       save("gn.libshut", n);
       return n;
     });
-  const all = ROOM_GAMES(count);
-  const hiddenN = gamesFor(null).filter((g) => g.room && g.maxPlayers && count > g.maxPlayers).length;
+  const all = ROOM_GAMES();
   const sections = (Object.keys(SECTIONS) as Section[])
     .map((s) => ({ s, list: all.filter((g) => g.section === s) }))
     .filter((x) => x.list.length);
@@ -1287,12 +1295,6 @@ function RoomPicker({ game, setGame, count }: { game: GameDef | null; setGame: (
           List
         </button>
       </div>
-      {hiddenN > 0 && (
-        <p className="hint">
-          {hiddenN} game{hiddenN === 1 ? " is" : "s are"} hidden because {hiddenN === 1 ? "it is" : "they are"} for 2
-          players only.
-        </p>
-      )}
       {sections.map(({ s, list }) => (
         <section key={s} className="lib-section" aria-labelledby={`rsec-${s}`}>
           <h3 id={`rsec-${s}`} className="sec-sign h3">
@@ -1322,7 +1324,10 @@ function RoomPicker({ game, setGame, count }: { game: GameDef | null; setGame: (
                     selected={game?.id === g.id}
                     title={g.roomName}
                     blurb={g.roomBlurb}
-                    onOpen={() => setGame(g)}
+                    off={whyNot(g, count)}
+                    onOpen={() =>
+                      whyNot(g, count) ? toast(`${g.name}: ${whyNot(g, count).toLowerCase()}.`) : setGame(g)
+                    }
                   />
                 </li>
               );

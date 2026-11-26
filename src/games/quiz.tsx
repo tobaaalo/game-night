@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import clsx from "clsx";
 import { Choice, PromptText } from "../components/ui";
 import { nameOf, useApp } from "../lib/app";
@@ -7,7 +7,7 @@ import { BOT_DELAY, botRight, pick } from "../lib/bot";
 import { canSpeak, sfx, speak, speakAuto, stopSpeaking } from "../lib/sound";
 import { load, save } from "../lib/store";
 import type { HostQuestion } from "../shared/protocol";
-import { Finish, MediaView, Turn, useKeys } from "./frame";
+import { Finish, HowContext, MediaView, Turn, useKeys } from "./frame";
 
 export interface Field {
   key: string;
@@ -73,6 +73,7 @@ export function Setup({
   error?: string;
 }) {
   const { players: local } = useApp();
+  const how = useContext(HowContext);
   const n = playerCount ?? local.length;
   const vsBot = playerCount == null && local.some((p) => p.bot);
   // The computer can't take part in "shout it out", so against it only the tap-an-answer mode is offered.
@@ -131,6 +132,11 @@ export function Setup({
         onStart(v);
       }}
     >
+      {how && !id.startsWith("room-") && (
+        <p className="howline">
+          <b>How to play:</b> {how}
+        </p>
+      )}
       {fields.map((f, i) =>
         f.showIf && v[f.showIf.key] !== f.showIf.value ? null : (
           <div key={f.key} className="field">

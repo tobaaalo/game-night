@@ -37,7 +37,6 @@ const target = {
   c4: ".c4-col:not([disabled])",
   dots: ".dots .hit",
   rps: ".rps-btn:not([disabled])",
-  ship: ".sea.live .sea-cell:not([disabled])",
 };
 const resultBtn = (p) => p.getByRole("button", { name: /See the result|Next game|Go again/ });
 async function playBoth(a, c, id, limit = 600) {
@@ -49,13 +48,6 @@ async function playBoth(a, c, id, limit = 600) {
           .catch(() => false)
       )
         return i;
-      if (id === "ship") {
-        const r = p.getByRole("button", { name: "Ready" });
-        if (await r.isVisible().catch(() => false)) {
-          await r.click({ timeout: 1000 }).catch(() => {});
-          continue;
-        }
-      }
       const t = p.locator(target[id]);
       const n = await t.count();
       if (n)
@@ -166,7 +158,6 @@ for (const [id, name] of [
   ["c4", "Connect Four"],
   ["dots", "Dots and Boxes"],
   ["rps", "Rock Paper Scissors"],
-  ["ship", "Battleship"],
 ]) {
   const { host, code } = await openRoom();
   const d = await join(code, "Dayo");
@@ -176,31 +167,6 @@ for (const [id, name] of [
   await host.getByRole("button", { name: "Start with 2 players" }).click();
   await d.locator(".duel").waitFor({ timeout: 10000 });
   await f.locator(".duel").waitFor({ timeout: 10000 });
-  if (id === "ship") {
-    ok(
-      (await d.locator(".sea .ship").count()) === 7 && (await f.locator(".sea .ship").count()) === 7,
-      "Battleship: each phone sees only its own 7 ship squares",
-    );
-    await d.getByRole("button", { name: "Shuffle" }).click();
-    ok((await d.locator(".sea .ship").count()) === 7, "Battleship: shuffle keeps a full fleet");
-    await d.getByRole("button", { name: "Ready" }).click();
-    ok(
-      await d
-        .locator(".duel-status", { hasText: /Waiting for/ })
-        .waitFor({ timeout: 6000 })
-        .then(
-          () => true,
-          () => false,
-        ),
-      "Battleship: waits for the other player",
-    );
-    await f.getByRole("button", { name: "Ready" }).click();
-    await d.locator(".sea.live, .sea").first().waitFor();
-    await d.waitForTimeout(500);
-    const mineD = await d.locator('.sea[aria-label="Your fleet"] .ship').count();
-    const theirsD = await d.locator('.sea[aria-label$="\'s waters"] .ship, .sea.live .ship').count();
-    ok(mineD === 7 && theirsD === 0, `Battleship: enemy ships stay hidden (own ${mineD}, enemy ${theirsD})`);
-  }
   if (id === "rps") {
     await d.locator(".rps-btn").first().click();
     await f.waitForTimeout(500);
