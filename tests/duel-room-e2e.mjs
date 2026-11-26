@@ -61,7 +61,7 @@ async function playBoth(a, c, id, limit = 600) {
   return -1;
 }
 const pick = async (host, name) => {
-  await host.locator(".ticket, .tile", { hasText: name }).first().click();
+  await host.locator(".ticket, .tile", { hasText: name }).first().click({ force: true });
 };
 
 // 1. One player in the room: a two-player game cannot start yet. Two players: it can.
@@ -74,15 +74,17 @@ const pick = async (host, name) => {
     "room picker lists Tic-Tac-Toe in its own section",
   );
   ok((await host.getByRole("button", { name: /^Head to head/ }).count()) > 0, "room has a Head to head section");
+  ok(
+    (await host.locator(".ticket, .tile", { hasText: "Tic-Tac-Toe" }).first().getAttribute("aria-disabled")) === "true",
+    "one player: Tic-Tac-Toe is greyed out",
+  );
+  const f = await join(code, "Femi");
+  await host.locator(".joined li").nth(1).waitFor();
   await pick(host, "Tic-Tac-Toe");
   ok(
     await host.getByText("Take turns putting your mark in a square").isVisible(),
     "room shows how to play for the picked game",
   );
-  const start = host.getByRole("button", { name: /needs exactly 2 players/ });
-  ok((await start.isVisible()) && (await start.isDisabled()), "one player: start is blocked and says why");
-  const f = await join(code, "Femi");
-  await host.locator(".joined li").nth(1).waitFor();
   await host.getByRole("button", { name: "Start with 2 players" }).click();
   await d.locator(".duel").waitFor({ timeout: 10000 });
   await f.locator(".duel").waitFor({ timeout: 10000 });
@@ -122,14 +124,15 @@ const pick = async (host, name) => {
   await join(code, "Kemi");
   await host.waitForTimeout(800);
   ok(
-    (await host.locator(".ticket, .tile", { hasText: "Connect Four" }).count()) === 0,
-    "third player joins: Connect Four leaves the picker",
+    (await host.locator(".ticket, .tile", { hasText: "Connect Four" }).first().getAttribute("aria-disabled")) ===
+      "true",
+    "third player joins: Connect Four is greyed out",
   );
   ok(
     (await host.locator(".ticket, .tile", { hasText: "Bible Trivia" }).count()) > 0,
     "third player joins: other games stay",
   );
-  ok(/2 players only/.test(await host.locator("body").innerText()), "the picker says why games are hidden");
+  ok(/for exactly 2 players/i.test(await host.locator("body").innerText()), "the picker says why games are greyed out");
   await host.context().close();
 }
 

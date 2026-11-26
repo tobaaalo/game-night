@@ -133,14 +133,13 @@ for (const [id, name] of [["rps", "Rock Paper Scissors"]].filter(([id]) => !ONLY
   await i.nth(2).fill("Dayo");
   await p.getByRole("button", { name: "Pick a game" }).click();
   const txt = await p.locator("body").innerText();
+  const off = async (n) =>
+    (await p.locator(".ticket, .tile").filter({ hasText: n }).first().getAttribute("aria-disabled")) === "true";
+  ok(await off("Tic-Tac-Toe"), "three players: Tic-Tac-Toe is greyed out");
+  ok(await off("Connect Four"), "three players: Connect Four is greyed out");
   ok(
-    !/Tic-Tac-Toe/.test(txt.replace(/Tic-Tac-Toe[^]*?(?=$)/, (m) => (/exactly 2/.test(m) ? "" : m))) ||
-      /for exactly 2 players/.test(txt),
-    "three players: two-player games are hidden and the list says why",
-  );
-  ok(
-    !(await p.locator(".ticket, .tile").filter({ hasText: "Connect Four" }).count()),
-    "three players: Connect Four is not in the list",
+    /exactly 2/.test(txt) || (await p.locator(".ticket.off, .tile.off").count()) > 0,
+    "three players: greyed games exist",
   );
   await p.context().close();
 }

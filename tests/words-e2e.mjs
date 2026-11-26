@@ -224,8 +224,9 @@ for (const w of [320, 390]) {
   await i.nth(1).fill("Mimi");
   await p.getByRole("button", { name: "Pick a game" }).click();
   ok(
-    (await p.locator(".ticket, .tile").filter({ hasText: "Find the Spy" }).count()) === 0,
-    "Spy is hidden for two players",
+    (await p.locator(".ticket, .tile").filter({ hasText: "Find the Spy" }).first().getAttribute("aria-disabled")) ===
+      "true",
+    "Spy is greyed out for two players",
   );
   ok(
     (await p.locator(".ticket, .tile").filter({ hasText: "Hangman" }).count()) > 0,
