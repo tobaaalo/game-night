@@ -3801,3 +3801,10 @@
     max-height: 2.8em;
   }
 }
+.lib-feature {
+  grid-template-columns: 1fr;
+}
+.lib-feature .roomcard {
+  width: 100%;
+  max-width: 460px;
+}

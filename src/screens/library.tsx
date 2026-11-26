@@ -59,13 +59,13 @@ export function Library() {
   const sections = (Object.keys(SECTIONS) as Section[])
     .map((s) => ({ s, list: games.filter((g) => g.section === s) }))
     .filter((x) => x.list.length);
-  const pool = games.filter((x) => x.section !== "yours" && !why(x));
-  const daily = pool.length ? pool[Math.floor(Date.now() / 86400000) % pool.length] : null;
   let n = 0;
   const surprise = () => {
     if (spinning) return;
     setSpinning(true);
-    const g = pick(games.filter((x) => x.section !== "yours" && !why(x)));
+    const pool = games.filter((x) => x.section !== "yours" && !why(x));
+    if (!pool.length) return setSpinning(false);
+    const g = pick(pool);
     setTimeout(() => go(`/play/${g.id}`), matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 650);
   };
   return (
@@ -102,17 +102,6 @@ export function Library() {
       </div>
 
       <div className="lib-feature stagger">
-        {daily && (
-          <button className="roomcard" onClick={() => go(`/play/${daily.id}`)}>
-            <span className="roomcard-icon" aria-hidden="true">
-              <Icon.shuffle />
-            </span>
-            <span className="roomcard-text">
-              <span className="roomcard-title">Today&rsquo;s pick</span>
-              <span className="roomcard-sub">{daily.name}</span>
-            </span>
-          </button>
-        )}
         {
           <button className="roomcard" onClick={() => go("/room")} disabled={!online} aria-describedby="room-sub">
             <span className="roomcard-icon" aria-hidden="true">
